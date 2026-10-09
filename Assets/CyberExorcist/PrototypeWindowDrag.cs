@@ -5,7 +5,7 @@ namespace CyberExorcist
 {
     public sealed class PrototypeWindowDrag : MonoBehaviour, IBeginDragHandler, IDragHandler
     {
-        RectTransform window;
+        [SerializeField] RectTransform window;
         Vector2 offset;
         public void Initialize(RectTransform target) { window = target; }
         public void OnBeginDrag(PointerEventData e)

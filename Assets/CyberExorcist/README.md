@@ -18,12 +18,21 @@
 
 ## 구현 범위
 - uGUI + TextMeshPro + Input System.
-- CyberExorcistPrototype.cs: 런타임 UI 생성, 의뢰 상태, 검색, 대화, 조사, 성불 연출.
+- UI는 씬에 미리 배치되어 있으며 Play 진입이나 화면 전환 시 재생성하지 않습니다.
+- CyberExorcistPrototype.cs: 의뢰 상태, 검색, 대화, 조사, 성불 연출.
+- PrototypeSceneUI.cs: 씬 오브젝트 참조, 화면 활성 상태와 상태별 문구 갱신.
 - PrototypeWindowDrag.cs: 창 이동.
-- Editor/PrototypeSetup.cs: 폰트 에셋 및 씬 구성. Tools > Cyber Exorcist 메뉴에서 실행할 수 있습니다.
+- Editor/PrototypeSetup.cs와 PrototypeSceneBuilder.cs: 최초 구성 전용. 기존 UI를 재생성하지 않습니다.
 - 씬의 기존 Main Camera와 test 오브젝트를 유지하고 프로토타입 루트를 추가했습니다.
 - 세이브 파일은 만들지 않습니다. Play를 종료하거나 처음부터 시작하면 진행이 초기화됩니다.
 - 한 의뢰의 조작 흐름 검증용으로 구성했습니다. 다중 의뢰, 서버 연동, 자유 텍스트 검색은 포함하지 않습니다.
+
+## UI 편집
+- Play를 끄고 Hierarchy에서 CyberExorcistPrototype을 선택합니다.
+- Prototype Scene UI 컴포넌트의 '편집할 화면'을 고른 뒤 '화면 미리보기 적용'을 누릅니다.
+- 'Hierarchy에서 현재 화면 선택'으로 이동해 자식 오브젝트의 위치·크기·색·일반 문구를 수정하고 씬을 저장합니다.
+- 상태에 따라 바뀌는 문구는 Prototype Scene UI의 해당 Values 목록에서 수정합니다.
+- 상세 구조와 편집 방법: `Assets/Docs/UI_EDITING.md`.
 
 ## 참고 리소스
 - 사용자가 제공한 index.html의 메일, 대화, 검색, 괴담, 결말을 참고했습니다.
@@ -32,4 +41,6 @@
 - Fonts/Malgun.ttf는 이 PC의 Windows 맑은 고딕이며 한국어 프로토타입 표시용으로 사용했습니다. 배포용 폰트는 별도 라이선스 검토 또는 교체가 필요합니다.
 
 ## 검증
-Unity Play 모드에서 실제 마우스로 연락처 추가를 확인하고, 연결된 UI 버튼 이벤트로 전체 의뢰 흐름을 검증했습니다. 키워드 0개/1개 검색 제한, 단서 확인 전 사이트 잠금, 오답 게시물에서 뒤로 이동, 앱 전환 시 조사 상태 유지, 촬영도구 5개 제거, 대화/성불 애니메이션, 완료 답장, 재시작 취소/확인, 최소화/복원도 확인했습니다.
+2026-10-10부터 게임 테스트는 사용자가 직접 수행하며, 에이전트는 테스트 목록만 제공합니다. 이번 UI 변경의 조작 순서와 기대 결과는 `Assets/Docs/UI_EDITING.md`의 '사용자 테스트 목록'을 참고하세요.
+
+이전 규칙하에서 수행한 검증 이력은 `Assets/Docs/CONTEXT.md`에 보관합니다. 이 기록은 이번 사용자 테스트가 완료되었다는 의미가 아닙니다.

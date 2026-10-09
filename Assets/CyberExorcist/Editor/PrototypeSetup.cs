@@ -16,6 +16,16 @@ namespace CyberExorcist.Editor
         public static void Setup()
         {
             if (EditorApplication.isPlaying) throw new System.InvalidOperationException("Stop Play mode before setup.");
+            var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+            if (scene.path != ScenePath)
+                throw new System.InvalidOperationException("Open " + ScenePath + " before setup.");
+            var existing = Object.FindFirstObjectByType<CyberExorcistPrototype>();
+            if (existing && existing.UI)
+            {
+                Selection.activeGameObject = existing.UI.Window.gameObject;
+                Debug.Log("Scene UI already exists. Edit ExorcistDesktop in the Hierarchy; setup preserves your edits.");
+                return;
+            }
             var source = AssetDatabase.LoadAssetAtPath<Font>("Assets/CyberExorcist/Fonts/Malgun.ttf");
             if (!source) throw new System.InvalidOperationException("Korean source font has not imported yet.");
             const string fontPath = "Assets/CyberExorcist/Fonts/PrototypeKorean.asset";
@@ -27,7 +37,7 @@ namespace CyberExorcist.Editor
                 AssetDatabase.CreateAsset(font, fontPath);
                 AssetDatabase.AddObjectToAsset(font.material, font);
                 foreach (var texture in font.atlasTextures) AssetDatabase.AddObjectToAsset(texture, font);
-                var chars = File.ReadAllText("Assets/CyberExorcist/CyberExorcistPrototype.cs");
+                var chars = File.ReadAllText("Assets/CyberExorcist/Editor/PrototypeSceneBuilder.cs");
                 font.TryAddCharacters(string.Concat(chars.Distinct()), out string missing);
                 EditorUtility.SetDirty(font);
             }
@@ -44,7 +54,8 @@ namespace CyberExorcist.Editor
             EditorUtility.SetDirty(prototype);
             var camera = Camera.main;
             if (camera) { camera.clearFlags = CameraClearFlags.SolidColor; camera.backgroundColor = new Color(.72f,.79f,.94f); }
-            EditorSceneManager.SaveScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene(), ScenePath);
+            PrototypeSceneBuilder.Create();
+            EditorSceneManager.SaveScene(scene);
             var scenes = EditorBuildSettings.scenes.ToList();
             if (!scenes.Any(s => s.path == ScenePath)) scenes.Insert(0, new EditorBuildSettingsScene(ScenePath, true));
             EditorBuildSettings.scenes = scenes.ToArray();
