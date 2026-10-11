@@ -29,7 +29,82 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     public SiteEntry[] siteEntries;
     private int lineIndex;
     private bool callCompleted, bloodyMaryStored, bloodyMarySelected;
+    private int currentSiteIndex = -1;
     public bool HasBloodyMaryKeyword => bloodyMaryStored;
+
+    private void Start() => ExploreProtoSceneTransfer.InitializeScene(this);
+
+    internal ExploreProtoSceneTransfer.DesktopState CaptureDesktop()
+    {
+        return new ExploreProtoSceneTransfer.DesktopState
+        {
+            clueIds = investigation.CollectedClueIds,
+            keywordSelected = bloodyMarySelected,
+            resultsVisible = searchResults.activeSelf,
+            detailVisible = siteDetailPanel.activeSelf,
+            siteIndex = currentSiteIndex,
+            searchHint = searchHint.text,
+            windows = ExploreProtoSceneTransfer.CaptureWindows(DesktopWindows),
+            scrolls = ExploreProtoSceneTransfer.CaptureScrolls(DesktopScrolls)
+        };
+    }
+
+    internal GameObject[] DesktopWindows => new[]
+    {
+        messengerWindow, callWindow, transcriptWindow, memoWindow, internetWindow, keywordPopup
+    };
+    internal UnityEngine.UI.ScrollRect[] DesktopScrolls => new[]
+    {
+        conversationScroll, transcriptScroll, siteArticleScroll, searchResults.GetComponent<UnityEngine.UI.ScrollRect>()
+    };
+
+    internal void RestoreCompletedDesktop(ExploreProtoSceneTransfer.DesktopState state)
+    {
+        investigation.RestoreCompletedInvestigation(state?.clueIds);
+        callCompleted = bloodyMaryStored = true;
+        lineIndex = callLines.Length;
+        callButton.gameObject.SetActive(false);
+        callWindow.SetActive(false);
+        recordingButton.gameObject.SetActive(true);
+        if (linkMessage) linkMessage.gameObject.SetActive(true);
+        linkButtonObject.SetActive(true);
+        memoKeyword.text = "블러디 메리";
+        memoKeyword.gameObject.SetActive(true);
+        addKeywordButton.interactable = false;
+        popupKeywordButton.gameObject.SetActive(true);
+        MarkMessengerRead();
+        var transcript = new StringBuilder();
+        foreach (var line in callLines)
+            transcript.Append("[<b>").Append(line.speaker).Append("</b>] ").Append(line.text).Append("\n\n");
+        transcriptText.text = transcript.ToString();
+
+        bloodyMarySelected = state == null || state.keywordSelected;
+        searchKeywordText.text = bloodyMarySelected ? "블러디 메리" : "키워드를 선택하세요";
+        searchKeywordChip.SetActive(bloodyMarySelected);
+        searchKeywordText.gameObject.SetActive(bloodyMarySelected);
+        searchKeywordPlaceholder.SetActive(!bloodyMarySelected);
+        clearKeywordButton.gameObject.SetActive(bloodyMarySelected);
+        findButton.interactable = bloodyMarySelected;
+        searchHint.text = state?.searchHint ?? "‘블러디 메리’ 검색 결과";
+        currentSiteIndex = state?.siteIndex ?? -1;
+        if (currentSiteIndex >= 0 && currentSiteIndex < siteEntries.Length)
+        {
+            var site = siteEntries[currentSiteIndex];
+            siteCategoryText.text = site.category;
+            siteTitleText.text = site.title;
+            if (articleLinks) articleLinks.SetArticle(site.article);
+            else siteArticleText.text = site.article;
+        }
+        searchResults.SetActive(state == null || state.resultsVisible);
+        siteDetailPanel.SetActive(state != null && state.detailVisible);
+        if (state == null)
+        {
+            messengerWindow.SetActive(true);
+            messengerWindow.transform.SetAsLastSibling();
+            ScrollConversationToLatest();
+        }
+        else ExploreProtoSceneTransfer.RestoreWindows(DesktopWindows, state.windows);
+    }
 
     private void Awake()
     {
@@ -120,6 +195,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
 
     public void StartCall()
     {
+        if (callCompleted) return;
         MarkMessengerRead();
         lineIndex = 0; callCompleted = false; callButton.gameObject.SetActive(false);
         callWindow.SetActive(true); callWindow.transform.SetAsLastSibling(); ShowCallLine();
@@ -227,6 +303,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     {
         if (index < 0 || index >= siteEntries.Length) return;
         var site = siteEntries[index];
+        currentSiteIndex = index;
         siteCategoryText.text = site.category;
         siteTitleText.text = site.title;
         if (articleLinks) articleLinks.SetArticle(site.article);

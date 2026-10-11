@@ -42,17 +42,33 @@ public sealed class ExploreProtoInvestigation : MonoBehaviour
     public bool IsClue(string id) => Array.Exists(clues, clue => clue.id == id);
     public bool IsCollected(string id) => collected.Contains(id);
 
+    public string[] CollectedClueIds => collectionOrder.ToArray();
+
+    // Restore data directly; do not replay collection, monologues or incoming notifications.
+    public void RestoreCompletedInvestigation(string[] orderedIds)
+    {
+        collected.Clear(); collectionOrder.Clear();
+        if (orderedIds != null)
+            foreach (var id in orderedIds)
+                if (IsClue(id) && collected.Add(id)) collectionOrder.Add(id);
+        foreach (var clue in clues)
+            if (collected.Add(clue.id)) collectionOrder.Add(clue.id);
+        RefreshNotes();
+        completionShown = followUpDelivered = followUpRead = true;
+        visibleMessages = followUpMessages.Length;
+        replyStep = replyLabels.Length;
+        foreach (var message in followUpMessages) message.SetActive(true);
+        monologueWindow.SetActive(false);
+        replyButton.gameObject.SetActive(false);
+        contactPreview.text = "함께 강령술을 준비하자.";
+        SetArticleHint(null);
+    }
+
     public bool Collect(string id)
     {
         if (!messenger.HasBloodyMaryKeyword || !IsClue(id) || !collected.Add(id)) return false;
         collectionOrder.Add(id);
-        var notes = new StringBuilder();
-        foreach (var savedId in collectionOrder)
-        {
-            if (notes.Length > 0) notes.Append("\n\n");
-            notes.Append("• ").Append(Array.Find(clues, clue => clue.id == savedId).memoText);
-        }
-        memoNotes.text = notes.ToString();
+        RefreshNotes();
         SetArticleHint(id);
         if (collected.Count == clues.Length && !completionShown)
         {
@@ -61,6 +77,17 @@ public sealed class ExploreProtoInvestigation : MonoBehaviour
             monologueWindow.transform.SetAsLastSibling();
         }
         return true;
+    }
+
+    void RefreshNotes()
+    {
+        var notes = new StringBuilder();
+        foreach (var savedId in collectionOrder)
+        {
+            if (notes.Length > 0) notes.Append("\n\n");
+            notes.Append("• ").Append(Array.Find(clues, clue => clue.id == savedId).memoText);
+        }
+        memoNotes.text = notes.ToString();
     }
 
     public void SetArticleHint(string id)
@@ -95,7 +122,12 @@ public sealed class ExploreProtoInvestigation : MonoBehaviour
 
     public void ReplyToSiyul()
     {
-        if (!followUpDelivered || !followUpRead || visibleMessages >= followUpMessages.Length) return;
+        if (!followUpDelivered || !followUpRead) return;
+        if (visibleMessages >= followUpMessages.Length)
+        {
+            ExploreProtoSceneTransfer.EnterBattle(messenger);
+            return;
+        }
         // Each click adds one player reply and the NPC's answer to the saved conversation.
         int next = Mathf.Min(visibleMessages + 2, followUpMessages.Length);
         while (visibleMessages < next) followUpMessages[visibleMessages++].SetActive(true);
@@ -107,5 +139,7 @@ public sealed class ExploreProtoInvestigation : MonoBehaviour
             contactPreview.text = "함께 강령술을 준비하자.";
         }
         messenger.ScrollConversationToLatest();
+        if (visibleMessages == followUpMessages.Length)
+            ExploreProtoSceneTransfer.EnterBattle(messenger);
     }
 }

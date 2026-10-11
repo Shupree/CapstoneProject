@@ -11,6 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Explore_Proto.unity
+    guid: cc8242d7690c82041959878598c925c7
+  - enabled: 1
+    path: Assets/Scenes/Battle_Proto.unity
+    guid: a0ad3a3abcf11fe4481403fb3e6d1d34
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
