@@ -19,6 +19,7 @@ public sealed class BattleProtoRetrySequence : MonoBehaviour
     public bool HasStarted { get; private set; }
     public bool IsThemeApplied { get; private set; }
     public event Action ThemeApplied;
+    Vector3[] checkpointWindowPositions;
 
     public bool BeginRetry()
     {
@@ -47,6 +48,19 @@ public sealed class BattleProtoRetrySequence : MonoBehaviour
 
         effectsAudio.clip = lightSwitchClip;
         effectsAudio.Play();
+        ApplyBattleTheme();
+        IsThemeApplied = true;
+        ThemeApplied?.Invoke();
+    }
+
+    void ApplyBattleTheme()
+    {
+        if (checkpointWindowPositions == null)
+        {
+            checkpointWindowPositions = new Vector3[windowsToClose.Length];
+            for (int i = 0; i < windowsToClose.Length; i++)
+                checkpointWindowPositions[i] = ((RectTransform)windowsToClose[i].transform).anchoredPosition3D;
+        }
         backgroundMusic.clip = battleMusic;
         backgroundMusic.loop = true;
         backgroundMusic.Play();
@@ -54,8 +68,18 @@ public sealed class BattleProtoRetrySequence : MonoBehaviour
             if (window) window.SetActive(false);
         foreach (var change in spriteChanges)
             change.image.sprite = change.battleSprite;
-        IsThemeApplied = true;
-        ThemeApplied?.Invoke();
+    }
+
+    public void RestoreBattleCheckpoint()
+    {
+        if (!IsThemeApplied) return;
+        StopAllCoroutines();
+        effectsAudio.Stop();
+        var conversation = GetComponent<BattleProtoConversation>();
+        if (conversation && conversation.programmingAudio) conversation.programmingAudio.Stop();
+        for (int i = 0; i < windowsToClose.Length; i++)
+            ((RectTransform)windowsToClose[i].transform).anchoredPosition3D = checkpointWindowPositions[i];
+        ApplyBattleTheme();
     }
 
     IEnumerator PlayEffect(AudioClip clip)

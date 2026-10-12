@@ -18,6 +18,8 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
     public GameObject internetWindow, exorcismContent, keywordPopup;
     public RectTransform clearedInternetWindow;
     public BloodyMaryPhaseTwoController phaseTwo;
+    public BloodyMaryGameOverController gameOver;
+    [Min(.01f)] public float inactivityLimit = 10f;
     [Tooltip("Existing investigation panels to hide after the battle theme has been applied.")]
     public GameObject[] investigationPanels;
     public Sprite normalSprite, attackSprite;
@@ -33,12 +35,34 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
     public int ActiveImageCount { get; private set; }
     public int RemainingAttacks { get; private set; }
     public int BoardRevision { get; private set; }
+    public bool CanInteract => HasEntered && !IsCompleted && gameOver && !gameOver.IsBlocking &&
+        internetWindow && internetWindow.activeInHierarchy && exorcismContent && exorcismContent.activeInHierarchy;
+    public float InactivitySeconds { get; private set; }
 
     int stageIndex = -1, lastInputFrame = -1;
     bool changingBoard, resetScrollWhenOpened;
     bool[] attacks;
     int[] candidates;
     Vector2 closedScrollPosition;
+
+    void Update()
+    {
+        if (!CanInteract) return;
+        InactivitySeconds += Time.unscaledDeltaTime;
+        if (InactivitySeconds >= inactivityLimit) gameOver.FailPhaseOne();
+    }
+
+    public void RestartAfterGameOver()
+    {
+        if (!retrySequence || !retrySequence.IsThemeApplied) return;
+        phaseTwo.ResetForRetry();
+        HasEntered = IsCompleted = false;
+        changingBoard = false;
+        lastInputFrame = -1;
+        InactivitySeconds = 0f;
+        clearedInternetWindow.gameObject.SetActive(false);
+        BeginPhase();
+    }
 
     void Awake()
     {
@@ -70,6 +94,7 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
         attacks = new bool[slots.Length];
         candidates = new int[slots.Length];
         HasEntered = true;
+        InactivitySeconds = 0f;
         foreach (var panel in investigationPanels) panel.SetActive(false);
         if (keywordPopup) keywordPopup.SetActive(false);
         internetWindow.SetActive(false);
@@ -80,7 +105,8 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
 
     bool HasValidConfiguration()
     {
-        if (!internetWindow || !clearedInternetWindow || !exorcismContent || !normalSprite || !attackSprite ||
+        if (!gameOver || !phaseTwo || !(inactivityLimit > 0f) || float.IsInfinity(inactivityLimit) ||
+            !internetWindow || !clearedInternetWindow || !exorcismContent || !normalSprite || !attackSprite ||
             !imageScroll || !imageScroll.content || !imageScroll.viewport ||
             slots == null || slots.Length == 0 || stages == null || stages.Length == 0 ||
             investigationPanels == null) return false;
@@ -138,10 +164,11 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
 
     public void SelectImage(int index, int pressedRevision)
     {
-        if (!HasEntered || IsCompleted || changingBoard || !internetWindow.activeInHierarchy ||
+        if (!CanInteract || changingBoard || !internetWindow.activeInHierarchy ||
             !exorcismContent.activeInHierarchy || pressedRevision != BoardRevision ||
             index < 0 || index >= ActiveImageCount || lastInputFrame == Time.frameCount) return;
         lastInputFrame = Time.frameCount;
+        InactivitySeconds = 0f;
         if (!attacks[index])
         {
             // Reset this phase only. Investigation, memo, battle theme and music are untouched.
@@ -166,7 +193,7 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
 
     public void ToggleInternet()
     {
-        if (!HasEntered) return;
+        if (!HasEntered || (gameOver && gameOver.IsBlocking)) return;
         if (IsCompleted)
         {
             if (phaseTwo && phaseTwo.IsCompleted) return;
@@ -189,7 +216,7 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
 
     public void CloseInternet()
     {
-        if (!HasEntered) return;
+        if (!HasEntered || (gameOver && gameOver.IsBlocking)) return;
         if (IsCompleted)
         {
             clearedInternetWindow.gameObject.SetActive(false);
@@ -197,6 +224,7 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
         }
         if (internetWindow.activeSelf)
         {
+            InactivitySeconds = 0f;
             imageScroll.StopMovement();
             closedScrollPosition = imageScroll.content.anchoredPosition;
         }
