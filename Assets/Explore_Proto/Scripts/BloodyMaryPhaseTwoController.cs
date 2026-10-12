@@ -12,8 +12,10 @@ public sealed class BloodyMaryPhaseTwoController : MonoBehaviour
         public string[] words;
         public Phrase(params string[] values) { words = values; }
     }
-    public enum PhaseState { NotStarted, Running, Completed }
+    public enum PhaseState { NotStarted, Running, Completed, Failed }
     public BloodyMaryPhaseController phaseOne;
+    public BloodyMaryGameOverController gameOver;
+    [Min(.01f)] public float timeLimit = 30f;
     public RectTransform window, phraseArea;
     public TMPro.TMP_InputField inputFrame;
     public UnityEngine.UI.Button submitButton;
@@ -32,10 +34,31 @@ public sealed class BloodyMaryPhaseTwoController : MonoBehaviour
     public UnityEvent onPhaseTwoCompleted = new UnityEvent();
     public PhaseState State { get; private set; }
     public bool IsCompleted => State == PhaseState.Completed;
-    public bool CanInteract => State == PhaseState.Running && window && window.gameObject.activeInHierarchy;
+    public bool CanInteract => State == PhaseState.Running && gameOver && !gameOver.IsBlocking &&
+        window && window.gameObject.activeInHierarchy;
+    public float ElapsedSeconds { get; private set; }
     readonly List<string> selected = new List<string>(4);
     int selectionRevision;
     float spawnClock;
+
+    public void StopForGameOver()
+    {
+        State = PhaseState.Failed;
+        submitButton.interactable = false;
+        foreach (var slot in slots) slot.Clear();
+        foreach (var slot in selectedSlots) slot.Hide();
+    }
+
+    public void ResetForRetry()
+    {
+        State = PhaseState.NotStarted;
+        selected.Clear();
+        spawnClock = ElapsedSeconds = 0f;
+        foreach (var slot in slots) slot.Clear();
+        RefreshSelection();
+        foreach (var slot in selectedSlots) slot.Hide();
+        window.gameObject.SetActive(false);
+    }
 
     void Awake()
     {
@@ -56,12 +79,21 @@ public sealed class BloodyMaryPhaseTwoController : MonoBehaviour
         foreach (var slot in slots) slot.Clear();
         RefreshSelection();
         State = PhaseState.Running;
+        ElapsedSeconds = 0f;
         spawnClock = 0f;
         SpawnPhrase();
     }
 
     void Update()
     {
+        // The overall deadline continues while the window is closed; phrase lifetimes still pause.
+        if (State != PhaseState.Running || !gameOver || gameOver.IsBlocking) return;
+        ElapsedSeconds += Time.unscaledDeltaTime;
+        if (ElapsedSeconds >= timeLimit)
+        {
+            gameOver.FailPhaseTwo();
+            return;
+        }
         if (!CanInteract) return;
         float delta = Time.unscaledDeltaTime;
         // Expire before assigning a new phrase at the four-second boundary.
@@ -135,7 +167,8 @@ public sealed class BloodyMaryPhaseTwoController : MonoBehaviour
     bool ValidateConfiguration(out string error)
     {
         error = "창·입력 프레임·버튼·표시 영역 참조를 확인하세요.";
-        if (!window || !phraseArea || !inputFrame || !submitButton || phaseOne.clearedInternetWindow != window ||
+        if (!gameOver || !(timeLimit > 0f) || float.IsInfinity(timeLimit) ||
+            !window || !phraseArea || !inputFrame || !submitButton || phaseOne.clearedInternetWindow != window ||
             !phraseArea.IsChildOf(window) || !inputFrame.transform.IsChildOf(window) ||
             !submitButton.transform.IsChildOf(window)) return false;
         error = "생성 간격·페이드·수명·풀 용량을 확인하세요.";

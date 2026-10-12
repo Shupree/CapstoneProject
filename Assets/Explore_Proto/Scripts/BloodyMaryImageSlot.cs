@@ -22,7 +22,7 @@ public sealed class BloodyMaryImageSlot : MonoBehaviour, IPointerDownHandler, IP
         // Never call SetNativeSize: both sprites use this slot's fixed scene RectTransform.
     }
 
-    bool CanClick => phase && phase.HasEntered && !phase.IsCompleted && button && button.IsActive() && button.IsInteractable();
+    bool CanClick => phase && phase.CanInteract && button && button.IsActive() && button.IsInteractable();
 
     public void OnPointerDown(PointerEventData data)
     {
