@@ -17,6 +17,7 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
     public BattleProtoRetrySequence retrySequence;
     public GameObject internetWindow, exorcismContent, keywordPopup;
     public RectTransform clearedInternetWindow;
+    public BloodyMaryPhaseTwoController phaseTwo;
     [Tooltip("Existing investigation panels to hide after the battle theme has been applied.")]
     public GameObject[] investigationPanels;
     public Sprite normalSprite, attackSprite;
@@ -168,6 +169,7 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
         if (!HasEntered) return;
         if (IsCompleted)
         {
+            if (phaseTwo && phaseTwo.IsCompleted) return;
             bool open = !clearedInternetWindow.gameObject.activeSelf;
             clearedInternetWindow.gameObject.SetActive(open);
             if (open) clearedInternetWindow.SetAsLastSibling();
