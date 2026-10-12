@@ -17,6 +17,8 @@ public sealed class BattleProtoRetrySequence : MonoBehaviour
     public GameObject[] windowsToClose;
     public SpriteChange[] spriteChanges;
     public bool HasStarted { get; private set; }
+    public bool IsThemeApplied { get; private set; }
+    public event Action ThemeApplied;
 
     public bool BeginRetry()
     {
@@ -52,6 +54,8 @@ public sealed class BattleProtoRetrySequence : MonoBehaviour
             if (window) window.SetActive(false);
         foreach (var change in spriteChanges)
             change.image.sprite = change.battleSprite;
+        IsThemeApplied = true;
+        ThemeApplied?.Invoke();
     }
 
     IEnumerator PlayEffect(AudioClip clip)

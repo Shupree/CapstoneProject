@@ -23,6 +23,8 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     public ScrollRect conversationScroll;
     public ExploreProtoInvestigation investigation;
     public ExploreProtoArticleLinks articleLinks;
+    [Tooltip("Assigned only in Battle_Proto; exploration retains its original app behavior.")]
+    public BloodyMaryPhaseController bloodyMaryPhase;
     public Button addKeywordButton, keywordFieldButton, popupCloseButton, popupKeywordButton, findButton, clearKeywordButton, siteBackButton;
     public TMP_Text linkMessage;
     public CallLine[] callLines;
@@ -31,6 +33,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     private bool callCompleted, bloodyMaryStored, bloodyMarySelected;
     private int currentSiteIndex = -1;
     public bool HasBloodyMaryKeyword => bloodyMaryStored;
+    private bool IsBloodyMaryPhase => bloodyMaryPhase && bloodyMaryPhase.HasEntered;
 
     private void Start() => ExploreProtoSceneTransfer.InitializeScene(this);
 
@@ -151,12 +154,14 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
 
     public void ToggleMessenger()
     {
+        if (IsBloodyMaryPhase) return;
         // A new message brings an already open window to the front instead of closing it.
         if (!messengerWindow.activeSelf || unreadBadge.activeSelf) ShowMessenger();
         else CloseMessenger();
     }
     public void ShowMessenger()
     {
+        if (IsBloodyMaryPhase) return;
         messengerWindow.SetActive(true);
         messengerWindow.transform.SetAsLastSibling();
         MarkMessengerRead();
@@ -182,7 +187,11 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         unreadCount.text = "0";
     }
     public void ToggleMemo() => ToggleWindow(memoWindow);
-    public void ToggleInternet() => ToggleWindow(internetWindow);
+    public void ToggleInternet()
+    {
+        if (IsBloodyMaryPhase) bloodyMaryPhase.ToggleInternet();
+        else ToggleWindow(internetWindow);
+    }
     private static void ToggleWindow(GameObject window)
     {
         bool open = !window.activeSelf;
@@ -191,7 +200,11 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     }
     public void CloseMessenger() => messengerWindow.SetActive(false);
     public void CloseMemo() => memoWindow.SetActive(false);
-    public void CloseInternet() { internetWindow.SetActive(false); keywordPopup.SetActive(false); }
+    public void CloseInternet()
+    {
+        if (IsBloodyMaryPhase) bloodyMaryPhase.CloseInternet();
+        else { internetWindow.SetActive(false); keywordPopup.SetActive(false); }
+    }
 
     public void StartCall()
     {
@@ -244,6 +257,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     }
     public void ToggleKeywordPopup()
     {
+        if (IsBloodyMaryPhase) return;
         keywordPopup.SetActive(!keywordPopup.activeSelf);
         if (keywordPopup.activeSelf)
         {
@@ -268,6 +282,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     }
     public void SelectBloodyMaryKeyword()
     {
+        if (IsBloodyMaryPhase) return;
         if (!bloodyMaryStored) return;
         bloodyMarySelected = true;
         searchKeywordText.text = "블러디 메리";
@@ -281,6 +296,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     }
     public void ClearSearchKeyword()
     {
+        if (IsBloodyMaryPhase) return;
         bloodyMarySelected = false;
         searchKeywordText.text = "키워드를 선택하세요";
         searchKeywordChip.SetActive(false);
@@ -294,6 +310,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     }
     public void Search()
     {
+        if (IsBloodyMaryPhase) return;
         if (!bloodyMarySelected) return;
         keywordPopup.SetActive(false); siteDetailPanel.SetActive(false);
         searchResults.SetActive(true); searchHint.text = "‘블러디 메리’ 검색 결과";
@@ -301,6 +318,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     }
     private void OpenSite(int index)
     {
+        if (IsBloodyMaryPhase) return;
         if (index < 0 || index >= siteEntries.Length) return;
         var site = siteEntries[index];
         currentSiteIndex = index;
@@ -322,6 +340,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     }
     public void BackToResults()
     {
+        if (IsBloodyMaryPhase) return;
         siteDetailPanel.SetActive(false);
         searchResults.SetActive(true);
     }

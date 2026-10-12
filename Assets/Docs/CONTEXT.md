@@ -1,7 +1,7 @@
 # 사이버 퇴마사 개발 맥락
 
 문서 갱신: 2026-10-12 (한국 시간)
-현재 단계: 블러디 메리 조사와 배틀 연결 프로토타입
+현재 단계: 블러디 메리 조사·배틀 연결 및 이미지 판별 페이즈 프로토타입
 
 ## 1. 사용자의 목표와 확정된 조건
 
@@ -29,7 +29,7 @@
 - 현재 블러디 메리 흐름은 `Assets/Scenes/Explore_Proto.unity`에서 시작해 마지막 후속 답장 후 `Assets/Scenes/Battle_Proto.unity`로 이어진다. 배틀을 직접 실행하면 조사 완료 상태로 시작한다. 아래 CyberExorcistPrototype 설명은 기존 민서 의뢰 프로토타입에 해당한다.
 - 프로젝트 상대 경로를 기준으로 설명한다. 다른 컴퓨터에서도 같은 구조를 사용할 수 있다.
 - 2026-10-10 사용자 요청으로 규칙 본문은 `Assets/AGENTS.md`, 맥락·편집 안내는 `Assets/Docs`로 이동했다. 루트 `AGENTS.md`에는 새 규칙 위치를 안내하는 진입점만 남겨 프로젝트 전체 작업에서 같은 규칙을 읽도록 한다.
-- 최초 문서 작성 당시 로컬 루트: `C:\Local\Zol_Project`. 이번 작업에서 확인한 루트: `D:\CWS\Zol_Project`.
+- 최초 문서 작성 당시 로컬 루트: `C:\Local\Zol_Project`. 이전 작업에서는 `D:\CWS\Zol_Project`를 사용했으며, 2026-10-12 이미지 판별 페이즈 작업에서 확인한 루트는 `C:\Local\Zol_Project`다.
 - Unity 버전: `6000.3.23f1` (`ProjectSettings/ProjectVersion.txt`).
 - 실행 씬: `Assets/Scenes/CyberExorcistPrototype.unity`.
 - 씬을 열고 Play를 누른다. Game 뷰를 최대화하면 읽기 편하다.
@@ -69,6 +69,10 @@ Unity MCP는 2026-10-06 작업에서 해당 프로젝트의 Editor 연결과 편
 | `Assets/CyberExorcist/Editor/PrototypeSetup.cs` | 폰트 에셋 구성, 컴포넌트·리소스 연결, 씬 저장과 Build Settings 등록 |
 | `Assets/Scenes/CyberExorcistPrototype.unity` | 실행 루트, 모든 게임 UI 오브젝트, 이벤트와 리소스 참조를 보관하는 씬 |
 | `Assets/Scenes/Explore_Proto.unity` | 참고 이미지에 맞춘 별도 UI 레이아웃 프로토타입 씬 |
+| `Assets/Scenes/Battle_Proto.unity` | 조사 상태 복원, 배틀 통화·재시도 연출 및 이미지 판별 UI 24개 슬롯을 저장한 씬 |
+| `Assets/Explore_Proto/Scripts/BloodyMaryPhaseController.cs` | 테마 전환 완료 후 이미지 판별 단계, 정답/오답, 완료 및 창 상태 관리 |
+| `Assets/Explore_Proto/Scripts/BloodyMaryImageSlot.cs` | 슬롯별 이미지 표시, 클릭 전달 및 드래그와 클릭 구분 |
+| `Assets/Docs/BLOODY_MARY_PHASE_PLAN.md` | 이미지 판별 규칙, 구현 기록·편집 위치 및 사용자 테스트 목록 |
 | `Assets/CyberExorcist/README.md` | 플레이 및 실행 안내 |
 | `Assets/Screenshots/Prototype` | 2026-10-06 검증 중 저장한 화면 자료. 현재 상태를 보장하는 실시간 캡처는 아님 |
 
@@ -310,6 +314,28 @@ Unity MCP는 2026-10-06 작업에서 해당 프로젝트의 Editor 연결과 편
   3. 메모장·인터넷 등을 열어둔 상태로 재시도한다. 노이즈 종료 시 모든 창이 닫히고 배경 및 아이콘 4개가 붉은 테마로 바뀌어야 한다. 아이콘 위치·크기·클릭은 유지되어야 한다.
   4. BGM이 창 닫기와 무관하게 지속·반복되고 효과음과의 음량 균형이 적절한지 확인한다. 새 Play에서는 원래 배경과 처음 대사 상태로 시작해야 한다.
 
+### 2026-10-12 — 블러디 메리 이미지 판별 페이즈 구현
+
+- `BLOODY_MARY_PHASE_PLAN.md`에 따라 구현했다. 작업 시작 시 코드와 씬이 저장된 상태임을 확인했으며 사용자 수정 대사 14개, 마지막 `윽.. 죄송해요, 빨리 분리시켜 드릴게요!`, 기존 TMP 문구와 UI 편집 내용을 보존했다. 통화 대사 코드와 Explore 씬은 변경하지 않았다.
+- `BattleProtoRetrySequence`가 창 닫기와 배경·아이콘 교체를 마친 뒤 `IsThemeApplied`를 설정하고 `ThemeApplied`를 통지한다. 항상 활성 상태인 ExploreProtoMessenger 오브젝트의 `BloodyMaryPhaseController`가 이 시점에만 진입한다. 재시도 시작 상태인 HasStarted로 진입하지 않는다. 기존 음원 순서와 지연은 유지한다.
+- 진입 후 인터넷 아이콘은 기존 프레임의 새 이미지 목록을 연다. 자동으로 열리지 않으며 조사 검색·결과·상세 UI는 숨긴다. 메신저 아이콘은 Button의 클릭 피드백을 유지하면서 메신저 열기만 차단한다. 메모장·더보기는 기존 동작을 유지하며 이 제한은 Explore에 적용하지 않는다.
+- 저장 계층: `ExploreProtoCanvas/InternetWindow/ExorcismContent/ImageScroll/Viewport/Content/MaryImage_01~24`. 슬롯 24개를 미리 배치하고 단계별 앞 12/18/24개만 표시한다. 3열, 셀 663×430, 간격 80×64, 위아래 여백 72이며 일반/공격 Sprite는 Preserve Aspect로 표시한다. 마스크와 세로 ScrollRect를 사용한다. 런타임 UI 생성은 없다.
+- 12장/공격 1개 → 18장/2개 → 24장/3개 순서다. 매 단계 전체 활성 슬롯에서 중복 없이 추출한다. 공격 클릭은 해당 이미지 하나만 일반으로 바꾸고 모두 해제하면 다음 단계로 간다. 일반 클릭(이미 해제한 이미지 포함)은 이 페이즈만 1단계로 초기화한다. 새 단계와 실패 재시작 시 스크롤을 맨 위로 옮긴다.
+- 창 닫기/재열기는 단계·남은 공격·위치·스크롤을 유지한다. 슬롯은 누름 당시 판별판 버전을 기억하며 드래그/스크롤과 클릭을 구분한다. 같은 프레임의 중복 판정과 이전 판별판 입력 전달을 차단한다.
+- 마지막 공격까지 해제하면 24개 일반 이미지를 남기고 판정을 멈춘다. `On Phase Completed`를 한 번 통지하며 현재 후속 연결은 비어 있다. 성공 대사·다음 페이즈·자동 닫기·BGM 변경은 추가하지 않았다.
+- 편집: ExploreProtoMessenger의 Bloody Mary Phase Controller에서 Sprite/Stages/Slots/Scroll 참조, Content의 Grid Layout Group과 RectTransform에서 배치를 수정한다. `AgentScripts/AddBloodyMaryPhase.cs`는 이번 씬 추가에 한 번 사용한 기록이며 재실행을 거부한다. 기존 씬 생성기는 실행하지 않았다.
+- 정적 확인: 기존 씬 블록 중 변경은 새 컴포넌트·참조·자식 연결 3곳뿐이며 기존 대사/텍스트/배치는 동일하다. 슬롯 24개 및 참조, 단계 12/1·18/2·24/3, 마스크·스크롤·숨김 초기 상태를 확인했다. Unity C# 컴파일 오류 0개. 기존 BuildExploreProtoMessenger/ExpandExploreProtoDesktop의 구식 API 경고 6개는 남아 있다.
+- 게임 테스트, Play 진입, 버튼/진행 함수 호출, 입력 시뮬레이션, 음원 청취, 미리보기 순회는 수행하지 않았다. 사용자 테스트는 `Assets/Docs/BLOODY_MARY_PHASE_PLAN.md` 7절에 조작 순서와 기대 결과를 기록했으며 피드백 대기 중이다.
+
+### 2026-10-12 — 이미지 판별 클리어 후 빈 인터넷 창
+
+- 사용자 후속 요청으로 이전의 완료 이미지 유지 동작을 변경했다. 최종 공격을 해제하면 기존 인터넷 창을 닫고 동일한 크기·위치의 빈 인터넷 창을 즉시 연다.
+- Battle 씬의 `ExploreProtoCanvas/ClearedInternetWindow`를 미리 저장했다. 기존 프레임 Image 및 제목 드래그/X를 사용하며 검색·이미지 목록·본문은 없다. 초기 비활성 상태이고 기본 크기는 2680×1500.96이다.
+- `BloodyMaryPhaseController.clearedInternetWindow`에 연결했다. 클리어 시 1페이즈 창의 RectTransform을 복사하여 씬에서 수정한 크기와 이동한 위치도 따른다. 완료 후 인터넷 아이콘은 새 창을 열고 닫으며 X와 드래그도 새 창에 연결했다. 런타임 UI 생성, 대사·BGM 변경은 없다.
+- `AgentScripts/AddClearedInternetWindow.cs`는 이번 추가에 한 번 사용한 씬 편집 기록이며 재실행을 거부한다. 기존 UI를 재생성하지 않았고 사용자 대사를 보존했다.
+- 확인: Unity 컴파일 오류 없음. 저장된 새 창 크기·숨김 초기 상태·참조 및 닫기 이벤트를 정적으로 확인했다. 게임 실행·클리어 함수 호출·입력 테스트는 수행하지 않았다.
+- 사용자 확인: 3단계 마지막 공격 클릭 시 기존 창이 사라지고 같은 크기/위치의 빈 창이 나타나는지, 새 창 드래그/X/인터넷 아이콘 재열기가 되는지, 1·2단계에서는 교체되지 않는지 확인한다. 새 Play 초기에는 빈 창이 숨겨져야 한다. 기존 대사·메모·BGM·한국어 표시와 Play 종료 후 씬 편집 유지도 확인한다.
+
 ## 9. 현재 한계와 다음 작업
 
 2026-10-10 인수인계: 씬 UI 전환 구현과 저장은 완료되어 있다. 이후 게임 테스트는 사용자 담당으로 변경했다. 이번 지시 이후에는 추가 게임 테스트를 수행하지 않았으며, 사용자가 확인할 목록은 `Assets/Docs/UI_EDITING.md`의 '사용자 테스트 목록'에 정리했다. 위 검증 이력은 이 지시 이전에 수행한 기록이다.
@@ -320,7 +346,7 @@ Unity MCP는 2026-10-06 작업에서 해당 프로젝트의 Editor 연결과 편
 - 실제 웹·메일·메신저 서비스와 연결하지 않는다.
 - 진행 로직은 CyberExorcistPrototype, 표시 갱신은 PrototypeSceneUI로 분리했다. 배치와 대부분의 문구는 씬에서 편집하지만 알림과 진행 분기는 아직 코드에 들어 있다.
 
-확정된 다음 개발 기능은 아직 없다. 다음 사용자의 요청을 기준으로 작업 범위를 정한다.
+블러디 메리 이미지 판별 페이즈는 구현 완료했으며 사용자 게임 테스트 피드백을 기다린다. 완료 이후 대사·다음 페이즈·성공 화면은 아직 기획되지 않았다. 확정된 다음 개발 기능은 없으며 다음 사용자의 요청을 기준으로 작업 범위를 정한다.
 
 본 개발 전 검토할 수 있는 항목이며, 아직 승인된 작업 목록은 아니다:
 - 의뢰·메일·대화·검색 결과를 데이터로 분리할지 결정.
