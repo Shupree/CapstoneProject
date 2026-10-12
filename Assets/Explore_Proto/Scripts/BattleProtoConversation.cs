@@ -16,12 +16,19 @@ public sealed class BattleProtoConversation : MonoBehaviour
         public string speaker;
         [TextArea(2, 5)] public string text;
         public bool playProgrammingAfter;
+        [InspectorName("주인공 스프라이트"), Tooltip("비워두면 이전 대사의 이미지를 유지합니다.")]
+        public Sprite heroineSprite;
+        [InspectorName("시율 스프라이트"), Tooltip("비워두면 이전 대사의 이미지를 유지합니다.")]
+        public Sprite clientSprite;
+        [InspectorName("친구 스프라이트"), Tooltip("비워두면 이전 대사의 이미지를 유지합니다.")]
+        public Sprite friendSprite;
     }
     public CallLine[] callLines;
     public TMP_Text callSpeaker, callText, nextLabel;
     public UnityEngine.UI.Button nextButton;
     public AudioSource programmingAudio;
     public BattleProtoRetrySequence retrySequence;
+    public VideoCallPortraits callPortraits;
     bool initialized;
     bool callStarted, waitingForSound;
     int callIndex;
@@ -53,6 +60,7 @@ public sealed class BattleProtoConversation : MonoBehaviour
         {
             callStarted = true;
             callIndex = 0;
+            if (callPortraits) callPortraits.ResetToDefaults();
             ShowLine();
         }
     }
@@ -91,6 +99,7 @@ public sealed class BattleProtoConversation : MonoBehaviour
     {
         if (callLines == null || callLines.Length == 0) return;
         var line = callLines[callIndex];
+        if (callPortraits) callPortraits.Apply(line.heroineSprite, line.clientSprite, line.friendSprite);
         bool named = !string.IsNullOrEmpty(line.speaker) && line.speaker != "나레이션";
         callSpeaker.text = named ? line.speaker : string.Empty;
         callSpeaker.gameObject.SetActive(named);

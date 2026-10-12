@@ -13,17 +13,24 @@ public sealed class BloodyMaryGameOverController : MonoBehaviour
     public GameObject phaseTwoWarning;
     public GameObject[] hands;
     public UnityEngine.UI.Button retryButton, exitButton;
+    public AudioSource handsAudio, signalLostAudio;
+    [Range(0f, 5f)] public float handsVolumeMultiplier = 1f;
+    [Min(.01f)] public float signalFadeSeconds = 1f;
     [Min(0f)] public float failureHoldSeconds = 2f;
     [Min(.01f)] public float handInterval = .07f;
     [Min(0f)] public float handsHoldSeconds = .4f;
     public GameOverState State { get; private set; }
     public bool IsBlocking => State != GameOverState.Idle;
     bool configured;
+    bool signalVolumeCaptured;
+    float signalStartVolume;
 
     void Awake()
     {
         configured = phaseOne && phaseTwo && retrySequence && overlayRoot && dimScreen &&
             centeredAttack && blackout && signalLostScreen && phaseTwoWarning && retryButton && exitButton &&
+            handsAudio && handsAudio.clip && signalLostAudio && signalLostAudio.clip && handsAudio != signalLostAudio &&
+            signalFadeSeconds > 0f && !float.IsInfinity(signalFadeSeconds) &&
             hands != null && hands.Length == 12;
         if (configured)
         {
@@ -33,10 +40,11 @@ public sealed class BloodyMaryGameOverController : MonoBehaviour
         }
         if (!configured)
         {
-            Debug.LogError("게임 오버 씬 참조 또는 손 이미지 12개를 확인하세요.", this);
+            Debug.LogError("게임 오버 씬 참조, 효과음 또는 손 이미지 12개를 확인하세요.", this);
             return;
         }
         HidePresentation();
+        StopGameOverAudio();
     }
 
     public void FailPhaseOne()
@@ -54,6 +62,7 @@ public sealed class BloodyMaryGameOverController : MonoBehaviour
     void BeginFailure(bool secondPhase)
     {
         State = GameOverState.PhaseFailure; // Lock gameplay before activating any overlay.
+        StopGameOverAudio();
         if (EventSystem.current) EventSystem.current.SetSelectedGameObject(null);
         overlayRoot.SetActive(true);
         retryButton.interactable = false;
@@ -83,13 +92,23 @@ public sealed class BloodyMaryGameOverController : MonoBehaviour
         centeredAttack.SetActive(false);
         phaseTwoWarning.SetActive(false);
         State = GameOverState.Hands;
-        foreach (var hand in hands)
+        yield return new WaitForSecondsRealtime(handInterval);
+        double handsStarted = Time.unscaledTimeAsDouble;
+        for (int i = 0; i < hands.Length; i++)
         {
-            yield return new WaitForSecondsRealtime(handInterval);
-            hand.SetActive(true); // Position, size, rotation and opacity remain as authored in the scene.
+            // Use one timeline so frame rounding does not accumulate between the twelve images.
+            while (Time.unscaledTimeAsDouble < handsStarted + i * (double)handInterval) yield return null;
+            hands[i].SetActive(true); // Position, size, rotation and opacity remain as authored in the scene.
+            if (i == 0) handsAudio.PlayOneShot(handsAudio.clip, Mathf.Clamp(handsVolumeMultiplier, 0f, 5f));
         }
-        yield return new WaitForSecondsRealtime(handsHoldSeconds);
+        double redAt = handsStarted + (hands.Length - 1) * (double)handInterval + handsHoldSeconds;
+        while (Time.unscaledTimeAsDouble < redAt) yield return null;
+        handsAudio.Stop();
         signalLostScreen.SetActive(true);
+        signalStartVolume = signalLostAudio.volume;
+        signalVolumeCaptured = true;
+        signalLostAudio.Play();
+        StartCoroutine(FadeSignalEnding());
         State = GameOverState.SignalLost;
         retryButton.interactable = true;
         exitButton.interactable = true;
@@ -99,6 +118,7 @@ public sealed class BloodyMaryGameOverController : MonoBehaviour
     {
         if (!configured || State != GameOverState.SignalLost) return;
         StopAllCoroutines();
+        StopGameOverAudio();
         if (EventSystem.current) EventSystem.current.SetSelectedGameObject(null);
         retrySequence.RestoreBattleCheckpoint();
         phaseOne.RestartAfterGameOver();
@@ -109,6 +129,40 @@ public sealed class BloodyMaryGameOverController : MonoBehaviour
     public void Exit()
     {
         // Reserved for the later exit flow.
+    }
+
+    IEnumerator FadeSignalEnding()
+    {
+        // Wait for playback to start, then use the actual sample position, including MP3 playback.
+        yield return null;
+        float fadeDuration = Mathf.Min(signalFadeSeconds, signalLostAudio.clip.length);
+        while (signalLostAudio.isPlaying)
+        {
+            float secondsLeft = (signalLostAudio.clip.samples - signalLostAudio.timeSamples) /
+                (float)signalLostAudio.clip.frequency;
+            signalLostAudio.volume = signalStartVolume * Mathf.Clamp01(secondsLeft / fadeDuration);
+            yield return null;
+        }
+        RestoreSignalVolume();
+    }
+
+    void RestoreSignalVolume()
+    {
+        if (signalVolumeCaptured && signalLostAudio) signalLostAudio.volume = signalStartVolume;
+        signalVolumeCaptured = false;
+    }
+
+    void StopGameOverAudio()
+    {
+        if (handsAudio) handsAudio.Stop();
+        if (signalLostAudio) signalLostAudio.Stop();
+        RestoreSignalVolume();
+    }
+
+    void OnDisable()
+    {
+        StopAllCoroutines();
+        StopGameOverAudio();
     }
 
     void HidePresentation()

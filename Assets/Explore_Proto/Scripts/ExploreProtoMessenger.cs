@@ -7,7 +7,17 @@ using UnityEngine.UI;
 /// <summary>State and click behavior for the prebuilt Explore_Proto desktop apps.</summary>
 public sealed class ExploreProtoMessenger : MonoBehaviour
 {
-    [Serializable] public struct CallLine { public string speaker; [TextArea] public string text; }
+    [Serializable] public struct CallLine
+    {
+        public string speaker;
+        [TextArea] public string text;
+        [InspectorName("주인공 스프라이트"), Tooltip("비워두면 이전 대사의 이미지를 유지합니다.")]
+        public Sprite heroineSprite;
+        [InspectorName("시율 스프라이트"), Tooltip("비워두면 이전 대사의 이미지를 유지합니다.")]
+        public Sprite clientSprite;
+        [InspectorName("친구 스프라이트"), Tooltip("친구 영상이 있는 통화에서 사용합니다. 비워두면 이전 이미지를 유지합니다.")]
+        public Sprite friendSprite;
+    }
     [Serializable] public struct SiteEntry { public string category, title, summary; [TextArea] public string article; public Button button; }
 
     public GameObject messengerWindow, callWindow, transcriptWindow, memoWindow, internetWindow;
@@ -28,6 +38,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     public Button addKeywordButton, keywordFieldButton, popupCloseButton, popupKeywordButton, findButton, clearKeywordButton, siteBackButton;
     public TMP_Text linkMessage;
     public CallLine[] callLines;
+    public VideoCallPortraits callPortraits;
     public SiteEntry[] siteEntries;
     private int lineIndex;
     private bool callCompleted, bloodyMaryStored, bloodyMarySelected;
@@ -211,6 +222,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         if (callCompleted) return;
         MarkMessengerRead();
         lineIndex = 0; callCompleted = false; callButton.gameObject.SetActive(false);
+        if (callPortraits) callPortraits.ResetToDefaults();
         callWindow.SetActive(true); callWindow.transform.SetAsLastSibling(); ShowCallLine();
     }
     public void CloseCall() => callWindow.SetActive(false);
@@ -232,6 +244,8 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     }
     private void ShowCallLine()
     {
+        if (callPortraits) callPortraits.Apply(callLines[lineIndex].heroineSprite,
+            callLines[lineIndex].clientSprite, callLines[lineIndex].friendSprite);
         callSpeaker.text = callLines[lineIndex].speaker;
         callLineText.text = callLines[lineIndex].text;
     }
