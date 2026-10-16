@@ -1,0 +1,10 @@
+﻿SceneID,Order,SpeakerID,Dialogue,Image,EventID
+Explore_FirstCall,1,시율,안녕하세요. 갑자기 연락드려서 죄송해요. 인터넷 퇴마사님 맞으시죠?,Client_1,
+Explore_FirstCall,2,주인공,"네, 맞아요! 첫 의뢰라 조금 긴장되지만 제가 도와드릴게요.",Heroine_1,
+Explore_FirstCall,3,주인공 속마음,"(괜찮아, 밝게 말하자. 그런데 귀신은커녕 괴이를 본 적도 없는데… 정말 할 수 있을까?)",Heroine_1,
+Explore_FirstCall,4,시율,친구들이랑 심심풀이로 블러디 메리 강령회를 했어요. 거울 앞에서 이름을 세 번 불렀거든요.,Client_1,
+Explore_FirstCall,5,시율,"그날 이후 친구가 완전히 달라졌어요. 밤마다 혼잣말을 하고, 오늘은 저희를 해치려 들었어요.",Client_1,
+Explore_FirstCall,6,주인공,블러디 메리… 인터넷 괴담으로만 봤는데 실제로 그런 일이 생기다니.,Heroine_1,
+Explore_FirstCall,7,주인공 속마음,(무서워. 화면 너머인데도 손이 떨려. 그래도 지금 물러서면 안 돼.),Heroine_1,
+Explore_FirstCall,8,주인공,"시율 씨, 혼자 해결하려 하지 말고 안전한 곳으로 대피해 주세요. 제가 원인을 찾아볼게요.",Heroine_1,
+Explore_FirstCall,9,시율,고마워요. 강령회 때 접속했던 인터넷 창 링크를 보낼게요. 그곳에서 뭔가 찾을 수 있을지도 몰라요.,Client_1,

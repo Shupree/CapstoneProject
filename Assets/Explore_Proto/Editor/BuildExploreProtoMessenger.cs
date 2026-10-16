@@ -37,8 +37,10 @@ public static class BuildExploreProtoMessenger
         if(root.Find("MessengerWindow")) throw new System.Exception("Messenger UI already exists. Edit the saved scene instead of rebuilding it.");
         var font=AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/CyberExorcist/Fonts/PrototypeKorean.asset");
         if(!font) throw new System.Exception("PrototypeKorean font missing");
-        var player=AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprite/ProtoType/MainCharacter_01.png");
-        var caller=AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprite/ProtoType/ExtraCharacter.png");
+        var player=AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprite/ProtoType/SpriteNew/Heroine_1.png");
+        var caller=AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprite/ProtoType/SpriteNew/Client_1.png");
+        var callCsv=AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Explore_Proto/Data/Explore_FirstCall.csv");
+        if(!player || !caller || !callCsv) throw new System.Exception("First call sprites or CSV are missing.");
         var ctrlGo=new GameObject("ExploreProtoMessenger"); var ctrl=ctrlGo.AddComponent<ExploreProtoMessenger>();
         var badge=Make(root,"MessengerUnreadBadge",new Vector2(255, -137),new Vector2(84,84),new Color(.95f,.23f,.12f),null,false);
         Text(badge,"UnreadCount","2",Vector2.zero,new Vector2(80,78),48,Color.white,TextAlignmentOptions.Center);
@@ -92,17 +94,15 @@ public static class BuildExploreProtoMessenger
         ctrl.messengerWindow=msg.gameObject;ctrl.callWindow=call.gameObject;ctrl.transcriptWindow=transcript.gameObject;ctrl.unreadBadge=badge.gameObject;ctrl.linkButtonObject=link.gameObject;
         ctrl.unreadCount=badge.GetChild(0).GetComponent<TMP_Text>();ctrl.callSpeaker=speaker;ctrl.callLineText=line;ctrl.transcriptText=transcriptBody;
         ctrl.messengerButton=mb;ctrl.callAdvanceButton=advance;ctrl.callButton=callBtn;ctrl.recordingButton=recording;ctrl.transcriptCloseButton=transClose;ctrl.messengerCloseButton=close;ctrl.linkMessage=linkText;
-        ctrl.callLines=new ExploreProtoMessenger.CallLine[]{
-          new(){speaker="시율",text="안녕하세요. 갑자기 연락드려서 죄송해요. 인터넷 퇴마사님 맞으시죠?"},
-          new(){speaker="주인공",text="네, 맞아요! 첫 의뢰라 조금 긴장되지만 제가 도와드릴게요."},
-          new(){speaker="주인공 속마음",text="(괜찮아, 밝게 말하자. 그런데 귀신은커녕 괴이를 본 적도 없는데… 정말 할 수 있을까?)"},
-          new(){speaker="시율",text="친구들이랑 심심풀이로 블러디 메리 강령회를 했어요. 거울 앞에서 이름을 세 번 불렀거든요."},
-          new(){speaker="시율",text="그날 이후 친구가 완전히 달라졌어요. 밤마다 혼잣말을 하고, 오늘은 저희를 해치려 들었어요."},
-          new(){speaker="주인공",text="블러디 메리… 인터넷 괴담으로만 봤는데 실제로 그런 일이 생기다니."},
-          new(){speaker="주인공 속마음",text="(무서워. 화면 너머인데도 손이 떨려. 그래도 지금 물러서면 안 돼.)"},
-          new(){speaker="주인공",text="시율 씨, 혼자 해결하려 하지 말고 안전한 곳으로 대피해 주세요. 제가 원인을 찾아볼게요."},
-          new(){speaker="시율",text="고마워요. 강령회 때 접속했던 인터넷 창 링크를 보낼게요. 그곳에서 뭔가 찾을 수 있을지도 몰라요."}
-        };
+        var reader=ctrlGo.AddComponent<DialogueCsvReader>();
+        var readerData=new SerializedObject(reader);
+        readerData.FindProperty("dialogueCsv").objectReferenceValue=callCsv;
+        readerData.ApplyModifiedPropertiesWithoutUndo();
+        ctrl.callDialogueReader=reader;
+        ctrl.heroineCallImageId="Heroine_1";
+        ctrl.siyulCallImageId="Client_1";
+        ctrl.heroineCallSprite=player;
+        ctrl.siyulCallSprite=caller;
         EditorUtility.SetDirty(ctrl);
         EditorSceneManager.MarkSceneDirty(sc);EditorSceneManager.SaveScene(sc);
         Debug.Log("Explore_Proto messenger UI built and saved.");

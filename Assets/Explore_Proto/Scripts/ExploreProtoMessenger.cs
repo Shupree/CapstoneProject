@@ -37,12 +37,17 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     public BloodyMaryPhaseController bloodyMaryPhase;
     public Button addKeywordButton, keywordFieldButton, popupCloseButton, popupKeywordButton, findButton, clearKeywordButton, siteBackButton;
     public TMP_Text linkMessage;
-    public CallLine[] callLines;
+    [Header("첫 화상통화 CSV")]
+    public DialogueCsvReader callDialogueReader;
+    public string heroineCallImageId = "Heroine_1", siyulCallImageId = "Client_1";
+    public Sprite heroineCallSprite, siyulCallSprite;
+    private CallLine[] callLines = Array.Empty<CallLine>();
     public VideoCallPortraits callPortraits;
     public SiteEntry[] siteEntries;
     private int lineIndex;
     private bool callCompleted, bloodyMaryStored, bloodyMarySelected;
     private int currentSiteIndex = -1;
+    private const string FirstCallSceneId = "Explore_FirstCall";
     public bool HasBloodyMaryKeyword => bloodyMaryStored;
     private bool IsBloodyMaryPhase => bloodyMaryPhase && bloodyMaryPhase.HasEntered;
 
@@ -122,6 +127,8 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
 
     private void Awake()
     {
+        var callDataReady = LoadCallLinesFromCsv();
+        callButton.interactable = callDataReady;
         messengerButton.onClick.AddListener(ToggleMessenger);
         emojiButton.onClick.AddListener(ToggleMemo);
         internetButton.onClick.AddListener(ToggleInternet);
@@ -219,7 +226,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
 
     public void StartCall()
     {
-        if (callCompleted) return;
+        if (callCompleted || callLines.Length == 0) return;
         MarkMessengerRead();
         lineIndex = 0; callCompleted = false; callButton.gameObject.SetActive(false);
         if (callPortraits) callPortraits.ResetToDefaults();
@@ -248,6 +255,49 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
             callLines[lineIndex].clientSprite, callLines[lineIndex].friendSprite);
         callSpeaker.text = callLines[lineIndex].speaker;
         callLineText.text = callLines[lineIndex].text;
+    }
+
+    /// <summary>첫 통화의 화자·대사·이미지 이름을 CSV에서 가져와 기존 통화 UI 형식으로 변환한다.</summary>
+    private bool LoadCallLinesFromCsv()
+    {
+        // 씬에 예전에 저장된 배열보다 CSV를 우선한다. 실패했을 때도 오래된 대사를 표시하지 않는다.
+        callLines = Array.Empty<CallLine>();
+        if (!callDialogueReader || !callDialogueReader.TryGetScene(FirstCallSceneId, out var csvLines))
+        {
+            Debug.LogError($"첫 화상통화 대사 '{FirstCallSceneId}'를 CSV에서 찾지 못했습니다.", this);
+            return false;
+        }
+
+        if (!heroineCallSprite || !siyulCallSprite ||
+            string.IsNullOrEmpty(heroineCallImageId) || string.IsNullOrEmpty(siyulCallImageId) ||
+            heroineCallImageId == siyulCallImageId)
+        {
+            Debug.LogError("첫 화상통화의 주인공·시율 이미지와 CSV 이미지 이름을 확인해 주세요.", this);
+            return false;
+        }
+
+        var loadedLines = new CallLine[csvLines.Count];
+        for (var i = 0; i < csvLines.Count; i++)
+        {
+            var csvLine = csvLines[i];
+            var imageName = csvLine.Image;
+            if (imageName.Length > 0 && imageName != heroineCallImageId && imageName != siyulCallImageId)
+            {
+                Debug.LogError($"CSV {csvLine.SourceLine}행: 첫 화상통화 이미지 '{imageName}'를 찾지 못했습니다.", this);
+                return false;
+            }
+
+            loadedLines[i] = new CallLine
+            {
+                speaker = csvLine.SpeakerID,
+                text = csvLine.Dialogue,
+                heroineSprite = imageName == heroineCallImageId ? heroineCallSprite : null,
+                clientSprite = imageName == siyulCallImageId ? siyulCallSprite : null
+            };
+        }
+
+        callLines = loadedLines;
+        return callLines.Length > 0;
     }
     public void ShowTranscript()
     {

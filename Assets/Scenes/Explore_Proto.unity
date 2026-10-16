@@ -714,6 +714,7 @@ GameObject:
   - component: {fileID: 38694932}
   - component: {fileID: 38694934}
   - component: {fileID: 38694935}
+  - component: {fileID: 38694936}
   m_Layer: 0
   m_Name: ExploreProtoMessenger
   m_TagString: Untagged
@@ -781,67 +782,11 @@ MonoBehaviour:
   clearKeywordButton: {fileID: 601714503}
   siteBackButton: {fileID: 1484538031}
   linkMessage: {fileID: 1600259604}
-  callLines:
-  - speaker: "\uC2DC\uC728"
-    text: "\uC548\uB155\uD558\uC138\uC694. \uAC11\uC790\uAE30 \uC5F0\uB77D\uB4DC\uB824\uC11C
-      \uC8C4\uC1A1\uD574\uC694. \uC778\uD130\uB137 \uD1F4\uB9C8\uC0AC\uB2D8 \uB9DE\uC73C\uC2DC\uC8E0?"
-    heroineSprite: {fileID: 0}
-    clientSprite: {fileID: 0}
-    friendSprite: {fileID: 0}
-  - speaker: "\uC8FC\uC778\uACF5"
-    text: "\uB124, \uB9DE\uC544\uC694! \uCCAB \uC758\uB8B0\uB77C \uC870\uAE08 \uAE34\uC7A5\uB418\uC9C0\uB9CC
-      \uC81C\uAC00 \uB3C4\uC640\uB4DC\uB9B4\uAC8C\uC694."
-    heroineSprite: {fileID: 0}
-    clientSprite: {fileID: 0}
-    friendSprite: {fileID: 0}
-  - speaker: "\uC8FC\uC778\uACF5 \uC18D\uB9C8\uC74C"
-    text: "(\uAD1C\uCC2E\uC544, \uBC1D\uAC8C \uB9D0\uD558\uC790. \uADF8\uB7F0\uB370
-      \uADC0\uC2E0\uC740\uCEE4\uB155 \uAD34\uC774\uB97C \uBCF8 \uC801\uB3C4 \uC5C6\uB294\uB370\u2026
-      \uC815\uB9D0 \uD560 \uC218 \uC788\uC744\uAE4C?)"
-    heroineSprite: {fileID: 0}
-    clientSprite: {fileID: 0}
-    friendSprite: {fileID: 0}
-  - speaker: "\uC2DC\uC728"
-    text: "\uCE5C\uAD6C\uB4E4\uC774\uB791 \uC2EC\uC2EC\uD480\uC774\uB85C \uBE14\uB7EC\uB514
-      \uBA54\uB9AC \uAC15\uB839\uD68C\uB97C \uD588\uC5B4\uC694. \uAC70\uC6B8 \uC55E\uC5D0\uC11C
-      \uC774\uB984\uC744 \uC138 \uBC88 \uBD88\uB800\uAC70\uB4E0\uC694."
-    heroineSprite: {fileID: 0}
-    clientSprite: {fileID: 0}
-    friendSprite: {fileID: 0}
-  - speaker: "\uC2DC\uC728"
-    text: "\uADF8\uB0A0 \uC774\uD6C4 \uCE5C\uAD6C\uAC00 \uC644\uC804\uD788 \uB2EC\uB77C\uC84C\uC5B4\uC694.
-      \uBC24\uB9C8\uB2E4 \uD63C\uC7A3\uB9D0\uC744 \uD558\uACE0, \uC624\uB298\uC740
-      \uC800\uD76C\uB97C \uD574\uCE58\uB824 \uB4E4\uC5C8\uC5B4\uC694."
-    heroineSprite: {fileID: 0}
-    clientSprite: {fileID: 0}
-    friendSprite: {fileID: 0}
-  - speaker: "\uC8FC\uC778\uACF5"
-    text: "\uBE14\uB7EC\uB514 \uBA54\uB9AC\u2026 \uC778\uD130\uB137 \uAD34\uB2F4\uC73C\uB85C\uB9CC
-      \uBD24\uB294\uB370 \uC2E4\uC81C\uB85C \uADF8\uB7F0 \uC77C\uC774 \uC0DD\uAE30\uB2E4\uB2C8."
-    heroineSprite: {fileID: 0}
-    clientSprite: {fileID: 0}
-    friendSprite: {fileID: 0}
-  - speaker: "\uC8FC\uC778\uACF5 \uC18D\uB9C8\uC74C"
-    text: "(\uBB34\uC11C\uC6CC. \uD654\uBA74 \uB108\uBA38\uC778\uB370\uB3C4 \uC190\uC774
-      \uB5A8\uB824. \uADF8\uB798\uB3C4 \uC9C0\uAE08 \uBB3C\uB7EC\uC11C\uBA74 \uC548
-      \uB3FC.)"
-    heroineSprite: {fileID: 0}
-    clientSprite: {fileID: 0}
-    friendSprite: {fileID: 0}
-  - speaker: "\uC8FC\uC778\uACF5"
-    text: "\uC2DC\uC728 \uC528, \uD63C\uC790 \uD574\uACB0\uD558\uB824 \uD558\uC9C0
-      \uB9D0\uACE0 \uC548\uC804\uD55C \uACF3\uC73C\uB85C \uB300\uD53C\uD574 \uC8FC\uC138\uC694.
-      \uC81C\uAC00 \uC6D0\uC778\uC744 \uCC3E\uC544\uBCFC\uAC8C\uC694."
-    heroineSprite: {fileID: 0}
-    clientSprite: {fileID: 0}
-    friendSprite: {fileID: 0}
-  - speaker: "\uC2DC\uC728"
-    text: "\uACE0\uB9C8\uC6CC\uC694. \uAC15\uB839\uD68C \uB54C \uC811\uC18D\uD588\uB358
-      \uC778\uD130\uB137 \uCC3D \uB9C1\uD06C\uB97C \uBCF4\uB0BC\uAC8C\uC694. \uADF8\uACF3\uC5D0\uC11C
-      \uBB54\uAC00 \uCC3E\uC744 \uC218 \uC788\uC744\uC9C0\uB3C4 \uBAB0\uB77C\uC694."
-    heroineSprite: {fileID: 0}
-    clientSprite: {fileID: 0}
-    friendSprite: {fileID: 0}
+  callDialogueReader: {fileID: 38694936}
+  heroineCallImageId: Heroine_1
+  siyulCallImageId: Client_1
+  heroineCallSprite: {fileID: -1587681010093017276, guid: 40e472643562b5847aaf89d2224dc0db, type: 3}
+  siyulCallSprite: {fileID: 8447392308922861121, guid: aaee4f8164d951e41a1b1fc780c908f6, type: 3}
   callPortraits: {fileID: 38694935}
   siteEntries:
   - category: "\uAD34\uB2F4 \uAC8C\uC2DC\uD310"
@@ -1052,6 +997,20 @@ MonoBehaviour:
   heroineImage: {fileID: 18195018}
   clientImage: {fileID: 1612067842}
   friendImage: {fileID: 0}
+--- !u!114 &38694936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 38694931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1924e0f681164bc7a0592a27522663ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueCsvReader
+  dialogueCsv: {fileID: 4900000, guid: dd25d5c9652c3c445a5dc5145ee1e271, type: 3}
+  loadOnAwake: 0
 --- !u!1 &39882513
 GameObject:
   m_ObjectHideFlags: 0
@@ -19965,6 +19924,7 @@ GameObject:
   - component: {fileID: 2092915399}
   - component: {fileID: 2092915398}
   - component: {fileID: 2092915397}
+  - component: {fileID: 2092915400}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -20046,6 +20006,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2092915400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092915396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &2102736017
 GameObject:
   m_ObjectHideFlags: 0
