@@ -40,3 +40,7 @@
 
 ## CSV 대사 작업
 - CSV 대사를 다루기 전에 `Assets/Docs/DIALOGUE_CSV_GUIDE.md`를 읽는다.
+
+## 하단 대화창 작업
+- 하단 대화창을 사용하거나 수정하기 전에 `Assets/Docs/HowToUseScripts/BOTTOM_DIALOGUE_USAGE.txt`를 읽는다.
+- CSV 가이드는 현재 `Assets/Docs/HowToUseScripts/DIALOGUE_CSV_GUIDE.md`에 있다.

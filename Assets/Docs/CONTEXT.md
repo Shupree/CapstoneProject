@@ -1,6 +1,6 @@
 # 사이버 퇴마사 개발 맥락
 
-문서 갱신: 2026-10-16 (한국 시간)
+문서 갱신: 2026-10-18 (한국 시간)
 
 ## 플레이 흐름
 
@@ -24,6 +24,10 @@
 - 2026-10-12 사용자가 정리한 최종 자산 `GameOver_Hands.wav`(1.17초)와 `No_signal.mp3`(7.08초)를 배틀 씬에 연결했다. 첫 손 등장 때 손 효과음, 붉은 화면 전환 때 No_signal을 한 번 재생하며 No_signal 마지막 1초는 샘플 재생 위치 기준 페이드 아웃한다. 손 표시는 하나의 경과 시간 기준으로 계산해 대기 오차 누적을 줄였다. 별도 AudioSource 두 개를 씬에 저장했으며 Retry/비활성화 시 음원을 중단하고 페이드 전 볼륨을 복원한다. 컴파일 오류 없음·음원 참조/길이·1초 설정·반복/자동 재생 비활성·씬 저장·기존 대사/오디오 설정 보존을 정적으로 확인했다. 직접 재생이나 게임 테스트는 하지 않았다. 다음 작업은 사용자의 두 페이즈 실패 시 음원 시작 타이밍·마지막 1초 페이드·재생 도중 Retry·반복 실패 시 볼륨 보존 확인이다.
 
 ## 개발 흐름
+
+- 2026-10-18 사용자가 이번 작업의 직접 플레이 테스트를 명시적으로 요청하여 `Explore_Proto`에서 하단 대화창 예시 `BottomDialogue_Reference`를 실행했다. 프레임 진행을 확인했고 초기 UI 숨김 → 첫 줄 린(오른쪽 밝음) → 화면 클릭 후 유미나(왼쪽 밝음) → 다음 클릭 후 창 닫힘을 Game 화면과 실행 상태로 확인했다. 대화 중 메신저 아이콘 클릭은 대화 진행으로 처리되고 메신저 창은 열리지 않았으며, 종료 후 같은 아이콘 클릭으로 메신저가 열렸다. 완료 이벤트가 해당 SceneID를 전달했고 테스트 중 새 콘솔 경고·오류는 없었다. 배틀 씬과 다른 CSV는 실행하지 않았다. Play 모드를 종료하고 임시 캡처 파일과 임시 배경 실행 설정을 정리했다.
+
+- 2026-10-18 재사용 가능한 하단 대화창을 `Assets/Prefabs/BottomDialogueSystem.prefab`으로 만들고 탐색·배틀 씬의 `ExploreProtoCanvas`에 배치했다. `BottomDialogueController`가 기존 `DialogueCsvReader.TryGetScene`으로 SceneID의 대사를 읽고, `BottomDialogueView`는 저장된 이미지·텍스트 오브젝트만 갱신한다. `BottomDialoguePortraitLibrary`에 CSV Image ID별 Sprite와 SpeakerID별 좌우 위치를 연결했다. 화면 암전 40%, 이름·대사 바 80%, 비화자 RGB 밝기 50%로 구성했다. 예시 CSV와 사용·확장 가이드는 `Assets/Docs/HowToUseScripts/BOTTOM_DIALOGUE_USAGE.txt`에 정리했다. 자동 시작 트리거는 미연결 상태다. Unity 컴파일 오류 없음과 프리팹/씬 연결을 정적으로 확인했으며 게임 테스트는 수행하지 않았다. 다음 사용자 확인: 트리거 연결 후 한국어·이미지 밝기·대화 클릭 진행·종료·기존 UI 입력과 씬 재열기 시 배치 보존.
 
 - 2026-10-16 `Assets/Scripts/DialogueReader/DialogueCsvReader.cs`에 CSV 대사 읽기 컴포넌트를 추가했다. Inspector에 지정한 CSV `TextAsset`을 한 번 파싱해 `SceneID`별로 `Order` 순서의 대사를 제공한다. 필수 헤더는 `SceneID`, `Order`, `SpeakerID`, `Dialogue`, `Image`, `EventID`이며 나머지 열은 무시한다. 빈 `SceneID`는 이전 값을 이어받고, `Order`가 없는 설명 행은 건너뛴다. 각 장면의 `Order`는 1부터 중복·누락 없이 이어져야 한다. 쉼표·큰따옴표·줄바꿈이 들어간 CSV 필드와 잘못된 형식의 행 번호 오류를 처리한다.
 - 2026-10-16 탐색 씬의 첫 화상통화 9줄을 `Assets/Explore_Proto/Data/Explore_FirstCall.csv`로 옮겼다. 화자·대사·현재 이미지 이름(`Heroine_1`, `Client_1`)을 저장하고 `ExploreProtoMessenger`가 `DialogueCsvReader`로 읽어 통화 UI와 녹음본에 사용한다. `Explore_Proto`와 `Battle_Proto`의 메신저 컴포넌트에 같은 CSV 및 스프라이트 참조를 연결했으며 씬의 중복 첫 통화 배열을 제거했다. 배틀의 별도 3인 통화 14줄과 창 배치는 유지했다. 기존 초기 배치 코드도 첫 통화 데이터를 CSV에서 연결하도록 바꿨다. Unity 스크립트 재컴파일 결과 오류·경고 0건과 씬 참조를 정적으로 확인했으며 게임 테스트는 수행하지 않았다. Excel에서 직접 열 때 한글이 깨지는 문제를 줄이기 위해 CSV를 UTF-8 BOM 형식으로 저장했다. 리더는 첫 헤더의 BOM을 제거한다. 사용자 확인: 탐색에서 첫 통화 9줄의 순서·이름·이미지·녹음본·통화 후 진행을 확인하고, 배틀 진입 후 메신저 복원 및 별도 3인 통화 동작을 확인한다. 향후 여러 인물 이미지를 한 대사에서 동시에 바꿀 필요가 생기면 CSV 이미지 열 구조를 확장한다.

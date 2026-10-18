@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2efb6a712bd47974c8109e96a7bb50d6, type: 3}
+  m_Name: BottomDialoguePortraitLibrary
+  m_EditorClassIdentifier: Assembly-CSharp::BottomDialoguePortraitLibrary
+  portraits:
+  - imageId: MainCharacter_01
+    sprite: {fileID: -6292403917834369284, guid: eae808c2fa283a44a81daff606faccbf, type: 3}
+  - imageId: MainCharacter_02
+    sprite: {fileID: -1755664118546333238, guid: 3e4305ff6e08d2b498f3059cab735eda, type: 3}
+  - imageId: SubCharacter_01
+    sprite: {fileID: 7400029296958443148, guid: 3030e3ca2bdb57445bbb95fdd8fda002, type: 3}
+  - imageId: Heroine_1
+    sprite: {fileID: -1587681010093017276, guid: 40e472643562b5847aaf89d2224dc0db, type: 3}
+  - imageId: Heroine_2
+    sprite: {fileID: -4688621724305585555, guid: 6b2412a03d3dff0499fa3b6e1c9c105b, type: 3}
+  - imageId: Heroine_3
+    sprite: {fileID: -3959970560505042261, guid: caf7acfffa5e517499bf92f2a5b79b4a, type: 3}
+  - imageId: Heroine_4
+    sprite: {fileID: -3620185260700499192, guid: 107010583df372947a39d2100bd1bd0f, type: 3}
+  - imageId: Heroine_5
+    sprite: {fileID: -6457432029195240350, guid: ef769314d909bc24da43db1589b9f916, type: 3}
+  - imageId: Heroine_6
+    sprite: {fileID: -5160884619348918230, guid: 002368f07073c45489b60396cfc7c597, type: 3}
+  - imageId: Client_1
+    sprite: {fileID: 8447392308922861121, guid: aaee4f8164d951e41a1b1fc780c908f6, type: 3}
+  - imageId: Client_2
+    sprite: {fileID: 5075553010557511337, guid: 51e3aa499fd714c469505a083dc737fe, type: 3}
+  - imageId: Client_3
+    sprite: {fileID: -1979181424647811347, guid: 84e5317be86306f4c98574acda0f557e, type: 3}
+  - imageId: Client_4
+    sprite: {fileID: -3841064094940622532, guid: 264c32bd249930e44b4fdc39831253cd, type: 3}
+  - imageId: Client_5
+    sprite: {fileID: -5399074941445189657, guid: 176b193a24502994b936f9d0de529b71, type: 3}
+  - imageId: Friend_1
+    sprite: {fileID: 3912635942180888099, guid: bcd3c02f8ce33cd4fb951b65b9b689cc, type: 3}
+  - imageId: Friend_2
+    sprite: {fileID: 546792415115546137, guid: bda5640c29ae7d54aba7eebc85724a71, type: 3}
+  - imageId: Friend_3
+    sprite: {fileID: -2961155057103358869, guid: fde7270ee909239478789411a1ec0f06, type: 3}
+  - imageId: Friend_4
+    sprite: {fileID: -2117693698037928619, guid: 8a9412ebc2f94c244ad1464089d2290f, type: 3}
+  - imageId: Merry
+    sprite: {fileID: 5532063963601143732, guid: 3e27c092115912444a7719414e0eee91, type: 3}
+  speakers:
+  - speakerId: "\uC720\uBBF8\uB098"
+    side: 1
+    defaultImageId: MainCharacter_01
+  - speakerId: "\uB9B0"
+    side: 2
+    defaultImageId: SubCharacter_01
+  - speakerId: "\uB0AF\uC120 \uC0AC\uB78C"
+    side: 2
+    defaultImageId: SubCharacter_01
+  - speakerId: "\uC8FC\uC778\uACF5"
+    side: 1
+    defaultImageId: Heroine_1
+  - speakerId: "\uC8FC\uC778\uACF5 \uC18D\uB9C8\uC74C"
+    side: 1
+    defaultImageId: Heroine_1
+  - speakerId: "\uC2DC\uC728"
+    side: 2
+    defaultImageId: Client_1
+  - speakerId: "\uBA54\uB9AC"
+    side: 2
+    defaultImageId: Merry
