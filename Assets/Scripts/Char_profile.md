@@ -4,17 +4,21 @@
 document:
   id: char_profile
   language: ko
-  updated_at: 2026-10-16
+  updated_at: 2026-10-19
   purpose: 대사·시나리오·대화 CSV 작성 시 참조할 캐릭터 설정과 표현 기준
   sources:
+    - id: source_family_revision
+      description: 2026-10-19 사용자 수정. 어머니의 안타까움과 아버지의 가문 계승에 대한 불만을 구분한다. 유미나는 귀신을 못 봐 퇴마사의 꿈을 포기했으며, 아버지에게 인정받고 싶은 마음으로 사이버 퇴마사를 결심한다.
     - id: source_character
       description: 사용자가 제공한 유미나·채 린의 설정과 두 개의 대화 예시
+    - id: source_mina_revision
+      description: 2026-10-18 사용자 수정. 밝은 겉모습과 내면의 어둠을 대비하고, 어린 시절 기대와 실망의 경험에서 비롯된 인정 욕구를 추가한다.
   related_documents:
     universe: Universe.md
     dialogue_csv_guide: ../Docs/DIALOGUE_CSV_GUIDE.md
   conventions:
     confirmed: 사용자가 명시한 설정
-    interpreted: 사용자 대화 예시에서 해석한 표현 지침. 새로운 과거사나 세계관 사실이 아니다.
+    interpreted: 확정 설정과 사용자 대화 예시를 바탕으로 해석한 표현 지침. 새로운 과거사나 세계관 사실이 아니다.
     reference_example: 사용자가 제공한 예시. 모든 상황에서 반복해야 할 고정 대사가 아니다.
     unknown: 아직 정하지 않은 정보. 임의로 확정하지 않는다.
     ids: 문서 참조용 식별자. 게임 코드·CSV ID가 아니다. 인물 ID는 Universe.md와 공유한다.
@@ -31,7 +35,8 @@ characters:
       items:
         - id: MINA_F001
           field: personality
-          value: ENFP. 명랑하며 현실의 보통 사람과 크게 다르지 않은 성격이다.
+          source: source_mina_revision
+          value: ENFP. 평소에는 명랑하고 밝게 행동하지만, 내면에는 어린 시절의 좌절과 자괴감이 남아 있다. 밝은 겉모습과 어두운 내면의 대비가 성격의 중요한 축이다.
         - id: MINA_F002
           field: fear
           value: 특별히 겁이 많은 것은 아니지만 일반적인 공포를 느낀다. 퇴마업으로 살아온 사람이 아니므로 귀신에 대한 공포도 있다.
@@ -47,12 +52,33 @@ characters:
         - id: MINA_F006
           field: technology
           value: 개발자 경험을 바탕으로 퇴마 프로그램을 발명했다. 현실의 퇴마 의식을 프로그램으로 따라 한 것이지만 성능 자체는 좋다.
+        - id: MINA_F007
+          field: emotional_background
+          source: source_mina_revision
+          value: 어린 시절 큰 기대를 받았으나 그 기대에 부응하지 못해 실망을 안긴 경험이 있다. 자신이 가족을 실망시켰다는 감정이 현재에도 남아 있다.
+          universe_reference: B005
+        - id: MINA_F008
+          field: need_for_recognition
+          source: source_mina_revision
+          value: 남에게 인정받는 것에 조금 집착한다. 인정받고 싶다는 마음에는 다시 기대를 저버리거나 실망을 안기고 싶지 않다는 불안이 얽혀 있다.
+        - id: MINA_F009
+          field: outward_and_inner_contrast
+          source: source_mina_revision
+          value: 겉으로 밝게 웃고 넘어가는 순간에도 내면에는 상처와 불안이 남을 수 있다. 타인에게 보이는 반응과 혼자 품는 감정이 항상 같지는 않다.
+        - id: MINA_F010
+          field: abandoned_dream
+          source: source_family_revision
+          value: 스스로 퇴마사가 되고 싶었지만 귀신을 보지 못해 꿈을 포기했다. 가문의 요구만으로 퇴마사를 지망한 것이 아니다.
+        - id: MINA_F011
+          field: career_motivation
+          source: source_family_revision
+          value: 인터넷 귀신을 경험한 뒤 어머니와 통화를 마치고, 이 능력으로 아버지에게 인정받을 수 있지 않을까 기대하며 사이버 퇴마사가 되기로 한다. 포기했던 꿈을 되찾으려는 마음도 함께 있다.
     expression_guidelines:
       status: interpreted
       items:
         - id: MINA_G001
-          guideline: 밝고 감정 반응이 솔직하다. 놀람·기대·당황을 말에 자연스럽게 드러낸다.
-          basis: [EX01_L003, EX01_L005, EX01_L008, EX02_L001]
+          guideline: 놀람·기대·당황은 밝고 생생하게 드러내되, 상처나 인정받지 못할까 하는 불안까지 늘 솔직하게 말하지는 않는다. 가벼운 말 뒤에 짧은 침묵이나 속마음을 두어 대비를 만든다.
+          basis: [MINA_F001, MINA_F008, MINA_F009, EX01_L003, EX01_L008, EX02_L001]
         - id: MINA_G002
           guideline: 처음 만난 린에게 존댓말을 쓴다. 유명한 퇴마사라는 것을 알면 기대와 반가움을 표현한다.
           basis: [EX01_L003, EX01_L008]
@@ -63,11 +89,23 @@ characters:
           guideline: 귀신 조우 시 비명을 지르거나 말을 더듬을 수 있다. 모든 상황에서 겁에 질리는 인물로 고정하지 않는다.
           basis: [MINA_F002, EX02_L001]
         - id: MINA_G005
-          guideline: 겉으로 예의를 지키면서도 속마음으로 상대를 어렵게 느끼는 등 발화와 내면의 온도 차이를 활용할 수 있다.
-          basis: [EX01_L010, EX01_L011]
+          guideline: 겉으로는 웃거나 괜찮다고 넘겨도 속으로는 상대를 실망시켰는지 되짚을 수 있다. 내면의 어둠은 자책·위축·불안으로 표현하되, 매번 직접 설명하는 독백을 붙이지 않는다.
+          basis: [MINA_F007, MINA_F008, MINA_F009, EX01_L010, EX01_L011]
         - id: MINA_G006
           guideline: 개발 지식과 퇴마 실무 경험을 구분한다. 프로그램 개발 능력이 귀신의 성질이나 현장 대응에 대한 숙련을 뜻하지 않는다.
           basis: [MINA_F002, MINA_F006, EX02_L002]
+        - id: MINA_G007
+          guideline: 칭찬을 받으면 기뻐하면서 상대의 반응을 한 번 더 살피거나, 자신이 도움이 되었는지 확인하고 싶어 할 수 있다. 모든 대사에서 노골적으로 칭찬을 요구하지는 않는다.
+          basis: [MINA_F008]
+        - id: MINA_G008
+          guideline: 실수나 부정적인 평가를 받으면 당장의 문제보다 또 실망시켰다는 생각에 더 오래 붙잡힐 수 있다. 겉으로 빠르게 수습하는 말과 뒤늦게 남는 자책의 차이를 활용한다.
+          basis: [MINA_F007, MINA_F008, MINA_F009]
+        - id: MINA_G009
+          guideline: 자신만 할 수 있는 일을 발견한 기쁨에는 능력을 인정받을 기회를 얻었다는 마음도 섞일 수 있다. 인정 욕구가 강해지는 장면에서는 잘 보이려는 조급함이나 무리를 표현할 수 있지만, 이를 항상 무모하게 행동하는 성격으로 고정하지 않는다.
+          basis: [MINA_F005, MINA_F008]
+        - id: MINA_G010
+          guideline: 타인을 돕고 싶거나 일이 재미있어서 웃는 순간도 유지한다. 밝음 전체를 연기나 가면으로 취급하지 않고, 진짜 명랑함과 감추는 상처가 공존하도록 쓴다.
+          basis: [MINA_F001, MINA_F009]
 
   - id: rin
     name: 채 린
@@ -121,6 +159,25 @@ characters:
           basis: [EX02_L002, EX02_L004, EX02_A001]
 
 relationships:
+  - id: REL002
+    participants: [mina, mina_mother]
+    status: confirmed
+    source: source_family_revision
+    facts:
+      - 어머니는 귀신을 보지 못해 퇴마사가 되지 못한 딸의 상황을 안타까워한다.
+    universe_reference:
+      file: Universe.md
+      id: B004
+  - id: REL003
+    participants: [mina, mina_father]
+    status: confirmed
+    source: source_family_revision
+    facts:
+      - 아버지는 명문 퇴마사 가문의 대가 끊길 수 있다는 점에서 딸을 못마땅해한다.
+      - 유미나는 아버지에게 인정받고 싶어 하며, 사이버 퇴마사가 되는 일을 그 기회로 여긴다.
+    universe_reference:
+      file: Universe.md
+      id: T006
   - id: REL001
     participants: [mina, rin]
     status: confirmed
@@ -159,13 +216,14 @@ interaction_guidelines:
       rin: 직접 해야 한다고 말하고 상대의 강도에 관한 판단을 전한다.
       basis: [EX02]
     - id: PAIR_G005
-      guideline: 유미나의 솔직한 감정 반응과 린의 담담한 업무 태도 사이의 간격으로 대화 리듬을 만든다. 유미나의 명랑함·개발 능력과 린의 실력·숨은 정을 함께 유지한다.
-      basis: [MINA_F001, MINA_F006, RIN_F001, RIN_F005, EX01, EX02]
+      guideline: 유미나의 밝은 감정 표현과 린의 담담한 업무 태도 사이의 간격으로 대화 리듬을 만든다. 유미나의 명랑함·개발 능력과 린의 실력·숨은 정을 유지하면서, 유미나가 린의 평가를 속으로 오래 신경 쓸 수 있음을 반영한다.
+      basis: [MINA_F001, MINA_F006, MINA_F008, RIN_F001, RIN_F005, EX01, EX02]
 
 examples:
   status: reference_example
   source: source_character
   text_policy: 대사 문구는 원문을 보존하고 발화·속마음·행동·효과음을 분리했다.
+  revision_policy: 아래 원문은 초기 사용자 예시다. 새 대사를 작성할 때는 2026-10-18에 수정된 성격과 표현 지침을 우선하며, 이 예시만으로 유미나의 내면을 단순하게 해석하지 않는다.
   items:
     - id: EX01
       title: 둘의 첫 만남
@@ -221,7 +279,7 @@ examples:
     - id: EX02
       title: 첫 귀신 조우
       situation: 의뢰인에게 감지 의식 프로그램을 사용하자 숨어 있던 귀신이 등장했다.
-      chronology_constraint: 예시 제목의 '첫'만으로 Universe.md의 최초 성불 사건 T003~T004와 동일한 사건으로 간주하지 않는다. 연표상의 정확한 위치는 미정이다.
+      chronology_constraint: 예시 제목의 '첫'만으로 Universe.md의 도입부 귀신 경험 T003~T004와 동일한 사건으로 간주하지 않는다. 도입부에서는 퇴마하지 않으며 프로그램도 제작 전이다. 이 예시의 연표상 정확한 위치는 미정이다.
       sequence:
         - id: EX02_L001
           type: speech
@@ -257,6 +315,12 @@ writing_constraints:
     rule: 예시에서 관찰한 말투·행동을 모든 상대나 모든 상황에 적용하는 확정 설정으로 확대하지 않는다.
   - id: CHAR_C004
     rule: 이름 확정이나 문서용 ID 도입을 이유로 기존 CSV의 SpeakerID나 게임 코드를 자동 변경하지 않는다.
+  - id: CHAR_C005
+    rule: 내면의 어둠을 악의·잔혹함·임상적 진단으로 확대하지 않는다. 이번 수정의 중심은 어린 시절의 좌절, 자괴감, 인정 욕구와 밝은 겉모습의 대비다.
+  - id: CHAR_C006
+    rule: 인정 욕구가 조금 강하다는 설정을 모든 행동의 유일한 동기로 만들지 않는다. 평범한 즐거움·공포·호의와 자기 판단도 유지한다.
+  - id: CHAR_C007
+    rule: 어머니의 안타까움과 아버지의 못마땅한 태도를 구분한다. 아버지의 태도를 유미나의 오해로 처리하거나 부모 모두가 단순히 걱정하는 것으로 바꾸지 않는다. 미정인 학대·절연 등의 사건을 추가하지 않는다.
 
 csv_usage:
   guide: ../Docs/DIALOGUE_CSV_GUIDE.md
