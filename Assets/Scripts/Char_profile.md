@@ -7,15 +7,19 @@ document:
   updated_at: 2026-10-19
   purpose: 대사·시나리오·대화 CSV 작성 시 참조할 캐릭터 설정과 표현 기준
   sources:
+    - id: source_first_meeting_revision
+      description: 2026-10-19 사용자 수정. 첫 귀신 조우 예시와 그에 의존한 지침을 폐기한다. 린은 미나가 인터넷 귀신을 퇴마할 수 있다는 사실을 알고 직접 찾아와 방법을 묻는다.
+    - id: source_opening_reboot
+      description: 2026-10-19 최신 사용자 개편. 부모와 관계 단절, 작은 의뢰 해결 이후 시작, 도입부 린 미등장, 명랑하고 힘 있는 반응 유지, 속마음을 1인칭 나레이션으로 표기한다.
     - id: source_family_revision
       description: 2026-10-19 사용자 수정. 어머니의 안타까움과 아버지의 가문 계승에 대한 불만을 구분한다. 유미나는 귀신을 못 봐 퇴마사의 꿈을 포기했으며, 아버지에게 인정받고 싶은 마음으로 사이버 퇴마사를 결심한다.
     - id: source_character
-      description: 사용자가 제공한 유미나·채 린의 설정과 두 개의 대화 예시
+      description: 사용자가 제공한 유미나·채 린의 기본 설정
     - id: source_mina_revision
       description: 2026-10-18 사용자 수정. 밝은 겉모습과 내면의 어둠을 대비하고, 어린 시절 기대와 실망의 경험에서 비롯된 인정 욕구를 추가한다.
   related_documents:
     universe: Universe.md
-    dialogue_csv_guide: ../Docs/DIALOGUE_CSV_GUIDE.md
+    dialogue_csv_guide: ../Docs/HowToUseScripts/DIALOGUE_CSV_GUIDE.md
   conventions:
     confirmed: 사용자가 명시한 설정
     interpreted: 확정 설정과 사용자 대화 예시를 바탕으로 해석한 표현 지침. 새로운 과거사나 세계관 사실이 아니다.
@@ -24,6 +28,7 @@ document:
     ids: 문서 참조용 식별자. 게임 코드·CSV ID가 아니다. 인물 ID는 Universe.md와 공유한다.
     priority: 명시된 설정과 장면의 상황을 MBTI 유형이나 예시 기반 해석보다 우선한다.
     scope: 세계관·과거사·도입부 연표는 Universe.md를 함께 참조한다.
+    latest_priority: source_first_meeting_revision과 source_opening_reboot가 이전 설정과 예시에 우선한다. 과거 예시의 사건은 현재 연표로 확정하지 않는다.
 
 characters:
   - id: mina
@@ -39,13 +44,13 @@ characters:
           value: ENFP. 평소에는 명랑하고 밝게 행동하지만, 내면에는 어린 시절의 좌절과 자괴감이 남아 있다. 밝은 겉모습과 어두운 내면의 대비가 성격의 중요한 축이다.
         - id: MINA_F002
           field: fear
-          value: 특별히 겁이 많은 것은 아니지만 일반적인 공포를 느낀다. 퇴마업으로 살아온 사람이 아니므로 귀신에 대한 공포도 있다.
+          value: 일반적인 공포는 느낀다. 겁먹었을 때 공포에 떨며 오래 위축되기보다 우와아앗!!처럼 과장되게 소리치는 생생한 반응으로 표현한다. 시작 전에 작은 의뢰를 몇 건 해결했지만 베테랑은 아니다.
         - id: MINA_F003
           field: occupation
           value: 전직 개발자, 현직 사이버 퇴마사
         - id: MINA_F004
           field: family
-          value: 명문 퇴마사 가문 출신이다.
+          value: 명문 퇴마사 유 가문 출신이며 현재 부모님과 관계가 단절되어 있다. 단절의 계기와 시기는 미정이다.
         - id: MINA_F005
           field: perception
           value: 현실의 귀신을 보지 못하지만 인터넷에서는 귀신의 본체를 유일하게 볼 수 있어 사이버 퇴마사가 되었다.
@@ -71,29 +76,37 @@ characters:
           value: 스스로 퇴마사가 되고 싶었지만 귀신을 보지 못해 꿈을 포기했다. 가문의 요구만으로 퇴마사를 지망한 것이 아니다.
         - id: MINA_F011
           field: career_motivation
-          source: source_family_revision
-          value: 인터넷 귀신을 경험한 뒤 어머니와 통화를 마치고, 이 능력으로 아버지에게 인정받을 수 있지 않을까 기대하며 사이버 퇴마사가 되기로 한다. 포기했던 꿈을 되찾으려는 마음도 함께 있다.
+          source: source_opening_reboot
+          value: 포기했던 퇴마사의 꿈을 인터넷에서 이어가고 있다. 돈을 많이 벌지 못하고 물어볼 곳도 없지만 퇴마 일을 할 수 있어서 좋다. 인정 욕구는 유지하되, 이전의 어머니와 통화 후 진로를 결심하는 사건은 폐기한다. 구체적인 전직 과정은 미정이다.
+        - id: MINA_F012
+          field: current_experience
+          source: source_opening_reboot
+          value: 시작 시점에 프로그램을 이미 개발했고 자잘한 의뢰 몇 건을 해결했다. 블러디 메리는 생애 첫 퇴마 의뢰가 아니다.
+        - id: MINA_F013
+          field: knowledge_of_peers
+          source: source_opening_reboot
+          value: 세계관상 유일한 사이버 퇴마사지만 미나 본인은 다른 사이버 퇴마사를 아직 만나 보지 못한 정도로 인식한다. 세계 유일임을 단정하는 대사는 쓰지 않는다.
     expression_guidelines:
       status: interpreted
       items:
         - id: MINA_G001
           guideline: 놀람·기대·당황은 밝고 생생하게 드러내되, 상처나 인정받지 못할까 하는 불안까지 늘 솔직하게 말하지는 않는다. 가벼운 말 뒤에 짧은 침묵이나 속마음을 두어 대비를 만든다.
-          basis: [MINA_F001, MINA_F008, MINA_F009, EX01_L003, EX01_L008, EX02_L001]
+          basis: [MINA_F001, MINA_F008, MINA_F009, EX01_L003, EX01_L008]
         - id: MINA_G002
-          guideline: 처음 만난 린에게 존댓말을 쓴다. 유명한 퇴마사라는 것을 알면 기대와 반가움을 표현한다.
+          guideline: 처음 만난 린에게 존댓말을 쓴다. 유명한 베테랑 퇴마사 린이 자기 집에 찾아왔다는 사실에 놀라며 방문 이유를 궁금해한다.
           basis: [EX01_L003, EX01_L008]
         - id: MINA_G003
           guideline: 무례한 말을 들으면 당황하면서도 항의한다. 명랑함을 무조건적인 순종이나 무기력함으로 쓰지 않는다.
           basis: [EX01_L004, EX01_L005]
         - id: MINA_G004
-          guideline: 귀신 조우 시 비명을 지르거나 말을 더듬을 수 있다. 모든 상황에서 겁에 질리는 인물로 고정하지 않는다.
-          basis: [MINA_F002, EX02_L001]
+          guideline: 귀신 조우 시 우와아앗!!처럼 과장되게 소리칠 수 있다. 공포에 떨며 무력해지는 표현보다 생생한 반응을 우선하고, 남과의 대화에서는 명랑하고 힘 있는 말투를 유지한다.
+          basis: [MINA_F002]
         - id: MINA_G005
           guideline: 겉으로는 웃거나 괜찮다고 넘겨도 속으로는 상대를 실망시켰는지 되짚을 수 있다. 내면의 어둠은 자책·위축·불안으로 표현하되, 매번 직접 설명하는 독백을 붙이지 않는다.
-          basis: [MINA_F007, MINA_F008, MINA_F009, EX01_L010, EX01_L011]
+          basis: [MINA_F007, MINA_F008, MINA_F009]
         - id: MINA_G006
           guideline: 개발 지식과 퇴마 실무 경험을 구분한다. 프로그램 개발 능력이 귀신의 성질이나 현장 대응에 대한 숙련을 뜻하지 않는다.
-          basis: [MINA_F002, MINA_F006, EX02_L002]
+          basis: [MINA_F002, MINA_F006]
         - id: MINA_G007
           guideline: 칭찬을 받으면 기뻐하면서 상대의 반응을 한 번 더 살피거나, 자신이 도움이 되었는지 확인하고 싶어 할 수 있다. 모든 대사에서 노골적으로 칭찬을 요구하지는 않는다.
           basis: [MINA_F008]
@@ -142,29 +155,20 @@ characters:
         - id: RIN_G002
           guideline: 칭찬이나 자신의 명성에 관한 이야기를 길게 받아 주기보다 해야 할 일로 화제를 돌린다.
           basis: [EX01_L008, EX01_L009]
-        - id: RIN_G003
-          guideline: 귀신의 등장을 의식의 당연한 결과로 받아들이고 다음 행동을 안내한다.
-          basis: [RIN_F003, RIN_F004, EX02_L002]
-        - id: RIN_G004
-          guideline: 초보자의 공포를 자신도 느끼는 것처럼 표현하기보다 상대의 수준과 귀신의 강도를 판단해 필요한 정보를 전한다.
-          basis: [RIN_F003, EX02_L003, EX02_L004]
         - id: RIN_G005
-          guideline: 무심하거나 귀찮아 보이는 말투 안에 실질적인 안내와 안심할 근거를 담는다. 귀찮다는 이유로 필요한 설명을 생략하지 않는다.
-          basis: [RIN_F006, EX02_L002, EX02_L004]
+          guideline: 귀찮아하는 말투를 쓰더라도 알려줄 것은 알려준다. 구체적인 귀신 대응이나 안심시키는 행동은 별도 장면이 정해지기 전까지 고정하지 않는다.
+          basis: [RIN_F006]
         - id: RIN_G006
-          guideline: 숨은 정은 과도한 다정한 말보다 도움과 행동으로 드러내는 편이 예시 분위기에 맞는다.
-          basis: [RIN_F001, RIN_F006, EX02_L004]
-        - id: RIN_G007
-          guideline: 방을 나가는 예시는 약한 귀신이라는 판단과 유미나가 직접 해야 한다는 안내 뒤의 행동이다. 위험한 상황에서도 무조건 방치한다고 일반화하지 않는다.
-          basis: [EX02_L002, EX02_L004, EX02_A001]
-
+          guideline: 숨은 정은 과도한 다정한 말보다 도움과 행동으로 드러낸다. 특정 귀신 조우 장면을 근거로 삼지 않는다.
+          basis: [RIN_F001, RIN_F006]
 relationships:
   - id: REL002
     participants: [mina, mina_mother]
     status: confirmed
     source: source_family_revision
     facts:
-      - 어머니는 귀신을 보지 못해 퇴마사가 되지 못한 딸의 상황을 안타까워한다.
+      - 어머니는 귀신을 보지 못해 퇴마사가 되지 못한 딸의 상황을 안타까워했다.
+      - 현재는 관계가 단절되어 있으며 도입부에 통화가 없다. 단절의 구체적인 경위는 미정이다.
     universe_reference:
       file: Universe.md
       id: B004
@@ -174,23 +178,22 @@ relationships:
     source: source_family_revision
     facts:
       - 아버지는 명문 퇴마사 가문의 대가 끊길 수 있다는 점에서 딸을 못마땅해한다.
-      - 유미나는 아버지에게 인정받고 싶어 하며, 사이버 퇴마사가 되는 일을 그 기회로 여긴다.
+      - 아버지에게 인정받고 싶어 하는 마음은 내면의 배경으로 남아 있다. 현재는 부모와 관계가 단절된 상태다.
+      - 새 전직 과정이나 화해 계획을 임의로 확정하지 않는다.
     universe_reference:
       file: Universe.md
-      id: T006
+      id: B007
   - id: REL001
     participants: [mina, rin]
     status: confirmed
-    source: source_character
+    source: source_opening_reboot
     facts:
-      - 유미나의 부모님이 부탁해 린이 유미나를 찾아오면서 처음 만난다.
-      - 유미나는 린의 이름을 듣고 업계에서 유명한 퇴마사임을 알아본다.
-      - 린은 유미나가 퇴마 일을 시작한다는 것을 알고 필요한 것을 알려주는 조력자다.
-    basis: [EX01_L006, EX01_L007, EX01_L008, EX01_L009]
+      - 린은 베테랑 퇴마사이자 조력자라는 인물 설정을 유지한다.
+      - 현재 도입부 시점에는 등장하지 않는다. 린은 미나가 인터넷 귀신을 퇴마할 수 있다는 사실을 알고 직접 미나의 집을 찾아온다. 구체적인 등장 시기와 소식을 알게 된 경로는 미정이다.
+      - 부모의 부탁으로 방문하는 것이 아니다. 미나는 유명한 린의 방문에 놀라고, 린은 인터넷 귀신을 어떻게 퇴마했는지 묻는다.
     universe_reference:
       file: Universe.md
-      id: T008
-
+      section: 인물 관계
 interaction_guidelines:
   status: interpreted
   participants: [mina, rin]
@@ -202,110 +205,19 @@ interaction_guidelines:
       basis: [EX01]
     - id: PAIR_G002
       situation: 린의 명성이 화제가 될 때
-      mina: 기대와 감탄을 드러낸다.
-      rin: 명성 이야기를 끊고 실무로 넘어간다.
+      mina: 유명한 베테랑이 자기 집에 왜 찾아왔는지 놀라며 묻는다.
+      rin: 명성 이야기를 끊고 인터넷 귀신을 대체 어떻게 퇴마했는지 묻는다.
       basis: [EX01_L008, EX01_L009]
-    - id: PAIR_G003
-      situation: 귀신이 등장할 때
-      mina: 실제로 나타났다는 사실에 놀라고 두려움을 느낀다.
-      rin: 의식의 당연한 결과로 받아들이고 다음 행동을 안내한다.
-      basis: [EX02_L001, EX02_L002]
-    - id: PAIR_G004
-      situation: 유미나가 직접 퇴마해야 할 때
-      mina: 익숙하지 않은 상황에 긴장한다.
-      rin: 직접 해야 한다고 말하고 상대의 강도에 관한 판단을 전한다.
-      basis: [EX02]
     - id: PAIR_G005
       guideline: 유미나의 밝은 감정 표현과 린의 담담한 업무 태도 사이의 간격으로 대화 리듬을 만든다. 유미나의 명랑함·개발 능력과 린의 실력·숨은 정을 유지하면서, 유미나가 린의 평가를 속으로 오래 신경 쓸 수 있음을 반영한다.
-      basis: [MINA_F001, MINA_F006, MINA_F008, RIN_F001, RIN_F005, EX01, EX02]
+      basis: [MINA_F001, MINA_F006, MINA_F008, RIN_F001, RIN_F005, EX01]
 
 examples:
-  status: reference_example
-  source: source_character
-  text_policy: 대사 문구는 원문을 보존하고 발화·속마음·행동·효과음을 분리했다.
-  revision_policy: 아래 원문은 초기 사용자 예시다. 새 대사를 작성할 때는 2026-10-18에 수정된 성격과 표현 지침을 우선하며, 이 예시만으로 유미나의 내면을 단순하게 해석하지 않는다.
-  items:
-    - id: EX01
-      title: 둘의 첫 만남
-      sequence:
-        - id: EX01_S001
-          type: sound
-          text: 똑똑똑
-        - id: EX01_L001
-          type: speech
-          speaker: mina
-          text: '누구세요?'
-          accompanying_action: 문을 연다
-        - id: EX01_L002
-          type: speech
-          speaker: rin
-          text: '너가 유미나야?'
-        - id: EX01_L003
-          type: speech
-          speaker: mina
-          text: '엇, 네.. 맞는데요..?'
-        - id: EX01_L004
-          type: speech
-          speaker: rin
-          text: '흠, 좀 맹하게 생겼네.'
-        - id: EX01_L005
-          type: speech
-          speaker: mina
-          text: '네..? 아니 누구신데 갑자기 그러세요!'
-        - id: EX01_L006
-          type: speech
-          speaker: rin
-          text: '난 채 린, 그냥 린이라고 불러.'
-        - id: EX01_L007
-          type: speech
-          speaker: rin
-          text: '너네 부모님이 부탁해서 온 거야. 너 뭐 퇴마 일 시작한다며?'
-        - id: EX01_L008
-          type: speech
-          speaker: mina
-          text: '아! 당신이었군요! 퇴마 업계에서는 모르는 사람이 없다는 그..!!'
-        - id: EX01_L009
-          type: speech
-          speaker: rin
-          text: '그런 건 됐고, 내가 뭐 알려줘야 되는지부터 말 해.'
-        - id: EX01_L010
-          type: speech
-          speaker: mina
-          text: '아.. 네에..'
-        - id: EX01_L011
-          type: inner_monologue
-          speaker: mina
-          text: '(되게 어려운 사람이네..)'
-    - id: EX02
-      title: 첫 귀신 조우
-      situation: 의뢰인에게 감지 의식 프로그램을 사용하자 숨어 있던 귀신이 등장했다.
-      chronology_constraint: 예시 제목의 '첫'만으로 Universe.md의 도입부 귀신 경험 T003~T004와 동일한 사건으로 간주하지 않는다. 도입부에서는 퇴마하지 않으며 프로그램도 제작 전이다. 이 예시의 연표상 정확한 위치는 미정이다.
-      sequence:
-        - id: EX02_L001
-          type: speech
-          speaker: mina
-          text: '으.. 으아아앗!! 진, 진짜로 나타났어요!!'
-        - id: EX02_L002
-          type: speech
-          speaker: rin
-          text: '불렀으니까 나왔겠지. 이제 여기서부터는 너가 직접 해야 해.'
-        - id: EX02_L003
-          type: speech
-          speaker: rin
-          text: '솔직히 영 못 미덥긴 하지만 어쩔 수 없지.'
-        - id: EX02_L004
-          type: speech
-          speaker: rin
-          text: '그래도 뭐, 센 놈은 아니니까 별 일은 없을 거야.'
-        - id: EX02_L005
-          type: speech
-          speaker: rin
-          text: '다 끝나고 불러~'
-        - id: EX02_A001
-          type: action
-          actor: rin
-          text: 린이 방에서 나간다.
-
+  status: external_reference
+  first_meeting:
+    file: Story_Parts/Rin_FirstMeeting/01_FirstMeeting.md
+    id: EX01
+    purpose: 첫 만남 대사와 EX01_L 계열 근거 ID의 원본. 구체적인 진행과 대사는 이 파일에서 관리한다.
 writing_constraints:
   - id: CHAR_C001
     rule: MBTI를 정형화된 행동 공식으로 사용하지 않는다. 구체적인 성격과 장면 상황을 우선한다.
@@ -320,15 +232,15 @@ writing_constraints:
   - id: CHAR_C006
     rule: 인정 욕구가 조금 강하다는 설정을 모든 행동의 유일한 동기로 만들지 않는다. 평범한 즐거움·공포·호의와 자기 판단도 유지한다.
   - id: CHAR_C007
-    rule: 어머니의 안타까움과 아버지의 못마땅한 태도를 구분한다. 아버지의 태도를 유미나의 오해로 처리하거나 부모 모두가 단순히 걱정하는 것으로 바꾸지 않는다. 미정인 학대·절연 등의 사건을 추가하지 않는다.
+    rule: 어머니의 안타까움과 아버지의 못마땅한 태도를 구분한다. 아버지의 태도를 유미나의 오해로 처리하거나 부모 모두가 단순히 걱정하는 것으로 바꾸지 않는다. 현재 부모와 관계가 단절된 설정은 유지한다. 미정인 학대나 단절의 구체적인 사건·원인을 추가하지 않는다.
 
 csv_usage:
-  guide: ../Docs/DIALOGUE_CSV_GUIDE.md
+  guide: ../Docs/HowToUseScripts/DIALOGUE_CSV_GUIDE.md
   current_first_call_file: ../Explore_Proto/Data/Explore_FirstCall.csv
   existing_mina_speaker_ids: [주인공, 주인공 속마음]
   rin_in_story_name: 린
   new_dialogue_speaker_policy: 유미나의 이름과 역할명 중 어느 것을 표시할지는 해당 대화의 표시 방식에 맞춰 정한다.
-  inner_monologue_policy: 일반 발화와 구분하고 본문에 괄호를 사용한다.
+  inner_monologue_policy: 새 원고에서 유미나의 속마음은 나레이션으로 표기하고 괄호 없이 1인칭으로 쓴다. 기존 CSV의 주인공 속마음 ID는 현재 구현 기록이며 별도 요청 없이 일괄 변경하지 않는다.
   stage_direction_policy: 행동·효과음은 발화와 구분한다. 문서의 type 값이 CSV의 새 열이나 실행 기능을 뜻하지 않는다.
   asset_policy: Image와 EventID는 실제 연결된 자산·처리 코드에 맞춰 지정한다. 미구현 자산이나 이벤트가 존재한다고 가정하지 않는다.
 
@@ -336,11 +248,11 @@ unknowns:
   - id: CHAR_U001
     topic: 두 사람의 나이와 외형
   - id: CHAR_U002
-    topic: 정확한 경력 연수와 가문 이름
+    topic: 정확한 경력 연수. 가문 표기는 유 가문으로 확정되어 있다.
   - id: CHAR_U003
     topic: 두 사람의 장기적인 관계 변화
   - id: CHAR_U004
     topic: 예시에 등장하지 않은 상대에 대한 호칭·높임말 및 관계별 말투
 ```
 
-관련 자료: [세계관·서사 기반 데이터](Universe.md), [대화 CSV 가이드](../Docs/DIALOGUE_CSV_GUIDE.md).
+관련 자료: [세계관·서사 기반 데이터](Universe.md), [대화 CSV 가이드](../Docs/HowToUseScripts/DIALOGUE_CSV_GUIDE.md).

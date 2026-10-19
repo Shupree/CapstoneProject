@@ -1,257 +1,60 @@
 # Universe — 세계관·서사 기반 데이터
 
-```yaml
-document:
-  id: universe
-  language: ko
-  updated_at: 2026-10-19
-  purpose: 대사·시나리오 작성 시 참조할 세계관 및 도입부 설정
-  sources:
-    - id: source_family_revision
-      description: 2026-10-19 사용자 수정. 어머니는 꿈을 포기한 딸을 안타까워하고, 아버지는 명문 가문의 대가 끊길 수 있어 딸을 못마땅해한다. 유미나는 귀신을 보지 못해 포기한 꿈과 아버지에게 인정받고 싶은 마음으로 사이버 퇴마사를 결심한다.
-    - id: source_intro_revision
-      description: 2026-10-19 사용자 수정. 1챕터 블러디 메리의 공포 분위기에 맞춰 도입부를 섬뜩한 귀신 경험으로 변경한다. 유미나는 퇴마하지 않으며, 이후 사이트가 다시 정상 작동하자 부모님께 귀신에 대해 묻는다. 구체적인 화면 연출은 아직 미정이다.
-    - id: source_universe
-      description: 사용자가 제공한 세계관·주인공 배경·도입부 배경 1·2
-    - id: source_character
-      description: 사용자가 앞서 제공한 캐릭터 설정과 대화 예시
-      reference: Char_profile.md
-    - id: source_mina_revision
-      description: 2026-10-18 사용자 수정. 유미나의 밝은 겉모습과 어두운 내면의 대비 및 어린 시절의 좌절에서 비롯된 인정 욕구
-      reference: Char_profile.md
-  conventions:
-    confirmed: 사용자가 명시한 확정 설정
-    unknown: 사용자가 아직 정하지 않은 정보. 임의로 확정하지 않는다.
-    ids: 이 문서에서 참조하기 위한 식별자. 게임 코드·CSV ID가 아니다.
-    chronology: 사건 ID의 숫자 순서가 시간 순서다. 구체적인 연도·기간을 뜻하지 않는다.
+갱신: 2026-10-19. 최신 사용자 확정안 기준. 인물의 말투·표현은 [Char\_profile.md](Char_profile.md), 실제 도입부 대사는 [Prologue\_Opening\_Cutscene.md](Story_Parts/01_Prologue/01_Opening.md)를 따른다.
 
-entities:
-  - id: mina
-    name: 유미나
-    role: 주인공
-    character_reference: Char_profile.md
-  - id: rin
-    name: 채 린
-    alias: 린
-    role: 베테랑 퇴마사이자 주인공의 조력자
-    character_reference: Char_profile.md
-  - id: mina_family
-    name: 유미나의 가문
-    description: 대대로 이름난 퇴마사를 배출해 온 가문
-  - id: mina_parents
-    name: 유미나의 부모님
-  - id: mina_mother
-    name: 유미나의 어머니
-    description: 귀신을 보지 못해 퇴마사가 되지 못한 딸의 상황을 안타까워한다.
-  - id: mina_father
-    name: 유미나의 아버지
-    description: 명문 퇴마사 가문의 대가 끊길 수 있다는 점에서 딸을 못마땅해한다.
-  - id: first_encounter_ghost
-    name: 도입부에서 처음 만난 귀신
-    presentation: 인터넷 화면에서 마주하는 섬뜩한 존재. 기존의 작고 귀여운 귀신 연출을 대체한다.
-    disposition: 악의·협조 여부와 구체적인 외형은 미정이다.
-  - id: exorcism_program
-    name: 퇴마 프로그램
-    creator: mina
+## 확정된 세계관
 
-world_facts:
-  - id: W001
-    status: confirmed
-    source: source_universe
-    fact: 오래전부터 괴이로 인한 이상현상이 존재했다.
-  - id: W002
-    status: confirmed
-    source: source_universe
-    fact: 이상현상을 처리하는 퇴마사들이 대대로 활동해 왔다.
-  - id: W003
-    status: confirmed
-    source: source_universe
-    fact: 현대에 사람들의 생활이 인터넷으로 옮겨 가면서 이상현상도 디지털 매체를 통해 나타나기 시작했다.
-  - id: W004
-    status: confirmed
-    source: source_universe
-    fact: 기존 퇴마사들의 현실 의식은 인터넷의 귀신에게 영향을 끼치지 못한다. 따라서 그 방식으로 인터넷의 이상현상을 퇴마할 수 없다.
-  - id: W005
-    status: confirmed
-    source: source_universe
-    fact: 기존 감지 의식도 인터넷의 귀신에게 활용할 수 없어, 기존 퇴마사들은 인터넷 귀신의 존재를 감지하는 것조차 어렵다.
-  - id: W006
-    status: confirmed
-    source: source_universe
-    fact: 인터넷에서는 아직 해결되지 않은 미지의 사건들이 진행되고 있다.
-  - id: W007
-    status: confirmed
-    source: source_character
-    fact: 유미나는 현실의 귀신을 보지 못하지만 인터넷에서는 귀신의 본체를 유일하게 볼 수 있다.
+* W001: 오래전부터 괴이로 인한 이상현상이 존재했다.
+* W002: 이를 처리하는 퇴마사들이 대대로 활동해 왔다.
+* W003: 현대에 생활이 인터넷으로 옮겨 가면서 디지털 매체에도 이상현상이 나타나기 시작했다. 인터넷 귀신이 등장한 지는 얼마 되지 않았다. 구체적인 기간은 미정이다.
+* W004: 기존 퇴마사들의 현실 의식은 인터넷 귀신에게 영향을 끼치지 못한다.
+* W005: 기존 감지 의식도 인터넷 귀신에게 활용할 수 없어 존재를 감지하기조차 어렵다.
+* W006: 인터넷에는 아직 해결되지 않은 미지의 사건들이 남아 있다.
+* W007: 유미나는 현실 귀신은 보지 못하지만 인터넷에서는 귀신의 본체를 유일하게 볼 수 있다. 기척까지 감지할 수 있는지는 미정이다.
+* W008: 세계관상 사이버 퇴마사는 유미나가 유일하다. 다만 미나 자신의 인식은 ‘다른 사이버 퇴마사를 아직 만나 보지 못했다’ 정도다. 본인이 세계 유일임을 확신하는 대사로 쓰지 않는다.
 
-character_background:
-  subject: mina
-  status: confirmed
-  source: source_universe
-  facts:
-    - id: B001
-      fact: 유미나는 명문 퇴마사 가문의 딸로 태어났다.
-    - id: B002
-      fact: 어린 시절부터 영적인 힘이 강하다는 평가를 받았으며, 가문은 유미나가 뛰어난 퇴마사가 되리라 기대했다.
-    - id: B003
-      fact: 유미나는 가문의 기대에 부응하려고 노력했지만 귀신을 보거나 괴이의 기척을 느끼지 못했다.
-    - id: B004
-      source: source_family_revision
-      fact: 어머니는 귀신을 보지 못해 퇴마사가 되지 못한 딸의 상황을 안타까워한다. 아버지는 명문 퇴마사 가문의 대가 끊길 수 있다는 점에서 딸을 못마땅해한다. 두 사람의 태도를 동일하게 취급하지 않는다.
-    - id: B005
-      fact: 유미나는 가족의 미묘한 분위기 변화를 알아차렸고, 겉으로는 밝게 웃어넘기면서도 자신이 가족을 실망시켰다는 자괴감을 품었다.
-    - id: B006
-      source: source_family_revision
-      fact: 유미나 자신도 퇴마사가 되고 싶었으나, 귀신을 보지 못하는 문제로 꿈을 포기하고 프리랜서 개발자로 활동했다.
-    - id: B007
-      source: source_mina_revision
-      fact: 어린 시절 큰 기대를 받다가 실망을 안긴 경험 때문에 유미나는 남에게 인정받는 것에 조금 집착한다. 평소의 밝은 모습과 달리 내면에는 자괴감과 다시 실망시킬지 모른다는 불안이 남아 있다.
-      character_reference: Char_profile.md의 MINA_F007~MINA_F009
+## 유미나의 배경과 현재 상태
 
-chronology:
-  - id: T001
-    status: confirmed
-    source: source_universe
-    event: 퇴마사의 꿈을 접고 프리랜서 개발자로 활동하던 유미나가 어떤 사이트의 버그 수정 의뢰를 받는다.
-    participants: [mina]
-  - id: T002
-    status: confirmed
-    source: source_universe
-    event: 코드를 수정하고 정보를 찾아보지만 문제가 해결되지 않는다.
-    participants: [mina]
-    follows: T001
-  - id: T003
-    status: confirmed
-    source: source_intro_revision
-    event: 버그를 조사하던 유미나가 인터넷 화면에서 귀신을 처음 발견하며 섬뜩한 경험을 한다.
-    participants: [mina, first_encounter_ghost]
-    follows: T002
-  - id: T004
-    status: confirmed
-    source: source_intro_revision
-    event: 귀신을 경험한 뒤 사이트가 다시 정상 작동한다. 유미나는 귀신을 퇴마하거나 성불시키지 않았다.
-    participants: [mina]
-    follows: T003
-    constraint: 퇴마 프로그램을 제작하기 전의 사건이다. 사이트가 정상화된 원인과 귀신의 이후 행방은 미정이며, 정상화를 퇴마 성공이나 귀신의 소멸로 해석하지 않는다.
-  - id: T005
-    status: confirmed
-    source: source_intro_revision
-    event: 귀신을 경험하고 사이트가 다시 정상 작동하는 것을 확인한 유미나가 어머니에게 전화해 경험을 짧게 전하고 인터넷 귀신에 대해 묻는다. 어머니는 인터넷 귀신 때문에 골치를 앓고 있다는 사실과 기존 의식·감지 방식의 한계를 알려 준다.
-    participants: [mina, mina_mother]
-    follows: T004
-    related_facts: [W004, W005]
-  - id: T006
-    status: confirmed
-    source: source_family_revision
-    event: 어머니와 통화를 마치고 휴대전화 화면을 끈 유미나는 인터넷에서 귀신을 보는 능력이라면 아버지에게 인정받을 수 있지 않을까 기대한다. 포기했던 꿈을 다시 붙잡아 개발자를 그만두고 사이버 퇴마사가 되기로 한다.
-    participants: [mina]
-    follows: T005
-  - id: T007
-    status: confirmed
-    source: source_universe
-    event: 얼마 뒤 유미나가 부모님의 퇴마 의식서에서 가장 많이 쓰인다는 의식들을 컴퓨터에서 흉내 내는 퇴마 프로그램을 만든다.
-    participants: [mina, exorcism_program]
-    follows: T006
-  - id: T008
-    status: confirmed
-    source: source_universe
-    event: 부모님의 부탁을 받은 린이 유미나를 찾아온다. 린은 퇴마 일에 관한 조언을 주는 역할로 왔다.
-    participants: [mina, rin]
-    follows: T007
-  - id: T009
-    status: confirmed
-    source: source_universe
-    event: 린은 퇴마 프로그램에 대응하는 각 퇴마 의식이 어떤 기능을 하는지 유미나에게 알려 준다.
-    participants: [mina, rin, exorcism_program]
-    follows: T008
-  - id: T010
-    status: confirmed
-    source: source_universe
-    event: 첫 퇴마 의뢰가 이메일로 도착한다.
-    participants: [mina]
-    follows: T009
-    constraint: T001의 개발 업무 의뢰와 구분한다. 도입부 서술은 이 지점에서 끝난다.
+* B001: 대대로 이름난 퇴마사를 배출한 유 가문의 딸이다.
+* B002: 어린 시절 영력이 강하다는 평가와 함께 뛰어난 퇴마사가 되리라는 기대를 받았다.
+* B003: 그러나 현실 귀신을 보거나 괴이의 기척을 느끼지 못했다. 영력과 지각 능력을 동일시하지 않는다.
+* B004: 어머니는 딸이 퇴마사가 되지 못한 것을 안타까워했고, 아버지는 가문의 대가 끊길 수 있다는 점에서 못마땅해했다. 부모의 태도를 똑같은 걱정으로 바꾸지 않는다.
+* B005: 기대에 부응하지 못한 경험과 가족을 실망시켰다는 감정이 자괴감으로 남았다.
+* B006: 미나 자신도 퇴마사가 되고 싶었지만 꿈을 접고 프리랜서 개발자로 활동했다.
+* B007: 남에게 인정받고 싶은 마음과 다시 실망시킬지 모른다는 불안이 있다. 실제 명랑함과 내면의 상처가 공존하며, 밝음 전체가 가면은 아니다.
+* B008: 현재 부모님과 관계가 단절되어 있다. 단절의 구체적인 계기·시기·과정은 미정이다.
+* B009: 현재는 직접 개발한 프로그램으로 인터넷 심령현상을 해결하는 사이버 퇴마사다. 게임 시작 전에 이미 자잘한 의뢰 몇 건을 해결했다. 블러디 메리는 생애 첫 퇴마 의뢰가 아니다.
+* B010: 수입이 많지 않고 물어볼 곳도 없지만, 퇴마 일을 할 수 있다는 사실을 좋아한다.
+* B011: 공포를 느끼더라도 오래 떨며 위축되기보다 ‘우와아앗!!’처럼 과장되고 생생한 반응을 보인다. 남과 대화할 때는 명랑하고 힘 있는 성격을 유지한다.
 
-program_facts:
-  - id: P001
-    status: confirmed
-    source: source_universe
-    fact: 프로그램은 부모님의 퇴마 의식서에서 자주 쓰이는 의식을 컴퓨터에서 흉내 내도록 제작되었다.
-  - id: P002
-    status: confirmed
-    source: source_character
-    fact: 현실 의식을 프로그램으로 따라 한 것이지만 성능 자체는 좋다.
-  - id: P003
-    status: confirmed
-    source: source_universe
-    fact: 린은 프로그램의 각 기능에 대응하는 퇴마 의식의 역할을 설명해 주는 사람이다.
-  - id: P004
-    status: confirmed
-    source: source_character
-    fact: 캐릭터 대화 예시에는 의뢰인에게 감지 의식 프로그램을 사용하자 숨어 있던 귀신이 등장하는 장면이 있다.
-    scope: 대화 예시에서 확인된 기능이다. 도입부 연표상의 정확한 위치는 아직 정하지 않았다.
+## 퇴마 프로그램
 
-causal_links:
-  - from: [W003]
-    to: [W004, W005, W006]
-    relation: 디지털 매체의 이상현상에 기존 퇴마 방식이 대응하지 못해 미해결 문제가 남는다.
-  - from: [B003, B004]
-    to: [B005, B006]
-    relation: 기대에 부응하지 못한 경험과 가족의 반응이 자괴감 및 퇴마사 진로 포기의 배경이다.
-  - from: [B003, B004, B005]
-    to: [B007]
-    relation: 어린 시절 기대가 실망으로 바뀐 경험과 자괴감이 현재의 인정 욕구 및 밝은 겉모습 뒤에 남은 불안의 배경이다.
-  - from: [T003, T004, T005, W007, B004, B006, B007]
-    to: [T006]
-    relation: 인터넷 귀신을 보는 능력과 기존 퇴마사들의 한계를 알게 되며, 포기했던 꿈과 아버지에게 인정받고 싶은 마음이 사이버 퇴마사로 진로를 바꾸는 동기가 된다.
-  - from: [T006]
-    to: [T007]
-    relation: 퇴마사가 되기로 한 뒤 개발 경험과 의식서를 활용해 프로그램을 제작한다.
+* P001: 전직 개발자인 유미나가 자신의 경험을 살려 직접 제작했다. 기존 설정인 부모님의 퇴마 의식서와 현실 의식을 컴퓨터에서 흉내 낸 방식은 유지한다. 의식서를 얻은 시점이나 부모의 현재 지원을 새로 가정하지 않는다.
+* P002: 현실 의식을 프로그램으로 따라 한 것이지만 성능 자체는 좋다. 기존 현실 의식과 효력이 달라지는 원리는 미정이다.
+* P003: 시작 시점에 이미 완성되어 작은 의뢰에 사용되고 있다. 제작 과정을 어느 장면에서 공개할지는 파트별 스토리에서 관리한다.
+* 개발 능력과 일부 의뢰 경험이 퇴마 실무 전반에 숙련되었다는 뜻은 아니다.
 
-writing_constraints:
-  - id: C001
-    rule: 어머니의 안타까움과 아버지의 가문 계승에 대한 불만을 구분한다. 아버지가 딸을 못마땅해한다는 설정을 지우거나 부모 모두의 단순한 걱정으로 바꾸지 않는다. 이를 미정인 학대·절연 등의 사건으로 확대하지 않는다.
-    basis: [B004, B005]
-  - id: C002
-    rule: 영력이 강하다는 평가와 현실의 귀신을 보거나 기척을 느끼는 능력을 동일시하지 않는다.
-    basis: [B002, B003, W007]
-  - id: C003
-    rule: 인터넷에서 귀신을 보는 능력과 현실에서 귀신을 보지 못하는 설정을 함께 유지한다. 도입부 귀신 조우를 현실 귀신을 보게 된 능력 변화로 쓰지 않는다.
-    basis: [W007, T003]
-  - id: C004
-    rule: 유미나가 프로그램을 개발했다는 사실을 퇴마 실무 전반에 이미 능숙하다는 뜻으로 해석하지 않는다. 린이 의식의 기능을 설명하는 흐름을 유지한다.
-    basis: [T007, T009]
-  - id: C005
-    rule: 도입부의 귀신 경험과 프로그램 제작 이후 첫 이메일 퇴마 의뢰를 서로 다른 사건으로 다룬다. 도입부에서 유미나는 퇴마하거나 성불시키지 않으며, 사이트 정상화를 유미나의 퇴마 실적으로 쓰지 않는다.
-    basis: [T004, T007, T010]
-  - id: C006
-    rule: 기존 현실 의식의 한계와 디지털로 흉내 낸 프로그램의 성능은 확정 설정으로 함께 보존하되, 둘의 차이를 설명하는 작동 원리는 임의로 추가하지 않는다.
-    basis: [W004, P001, P002]
-  - id: C007
-    rule: 이 문서의 사건 연표와 캐릭터 대화 예시를 자동으로 같은 장면에 배정하지 않는다.
-    basis: [T003, T008, P004]
+## 인물 관계
 
-unknowns:
-  - id: U001
-    topic: 구체적인 시대·국가·지역·가문 이름과 인물 나이
-  - id: U002
-    topic: 괴이와 귀신의 엄밀한 분류 및 포함 관계
-  - id: U003
-    topic: 귀신이 디지털 매체에 나타나는 원리와 현실·인터넷 사이의 이동 가능 여부
-  - id: U004
-    topic: 유미나의 영력이 강한데도 현실에서 감지하지 못하는 이유 및 인터넷에서만 본체를 보는 원리
-  - id: U005
-    topic: 도입부 사이트의 정체·귀신의 이름·귀신이 보이는 구체적인 화면 연출·버그의 정확한 원인
-  - id: U006
-    topic: 귀신 경험 이후 사이트가 다시 정상 작동하게 된 원인과 귀신의 이후 행방
-  - id: U007
-    topic: 퇴마 프로그램의 이름·전체 의식 목록·각 기능·사용 조건·대가·한계·실제 작동 원리
-  - id: U008
-    topic: 첫 이메일 퇴마 의뢰의 세부 내용 및 기존 프로토타입 의뢰와의 대응 관계
-  - id: U009
-    topic: 린이 인터넷의 귀신을 직접 보거나 디지털 퇴마를 수행할 수 있는지 여부
-  - id: U010
-    topic: 유미나가 인터넷 괴이의 기척까지 직접 감지할 수 있는지 여부. 본체를 볼 수 있다는 사실만 확정되어 있다.
-```
+린은 미나가 인터넷 귀신을 퇴마할 수 있다는 사실을 알고 스스로 찾아오는 베테랑 퇴마사이자 조력자다. 부모의 부탁으로 연결된 관계가 아니다. 구체적인 만남 장면과 대사는 파트별 스토리에서 관리한다.
 
-관련 자료: [캐릭터 설정집](Char_profile.md), [대화 CSV 가이드](../Docs/DIALOGUE_CSV_GUIDE.md).
+## 파트별 스토리
+
+사건 순서, 대사, 정보 공개 범위와 후속 집필 메모는 [파트별 스토리 안내](story_index.md)에서 관리한다. 이 문서는 세계관 전체의 기본 설정을 담당한다.
+## 집필 기준
+
+* 유미나의 속마음은 ‘유미나 속마음’ 대신 ‘나레이션’으로 쓴다. 괄호 없이 유미나의 1인칭 서술로 작성한다. 연출 지문과 구분한다.
+* 설정을 하나씩 강조하거나 이력처럼 나열하지 않는다. 한 문장에 자연스럽게 함께 담을 수 있는 정보는 묶고, 현재 장면에 필요 없는 설명은 미룬다.
+* 작품의 공포 분위기 속에서도 미나의 명랑한 말투와 퇴마 일을 하는 기쁨을 유지한다.
+* 부모와의 관계 단절은 확정이지만, 미정인 학대·구체적인 결별 사건을 임의로 추가하지 않는다.
+* 옛 대화 예시와 프로토타입의 ‘첫 의뢰’ 문구를 현재 연표의 근거로 삼지 않는다. 기존 CSV·코드 변경은 별도 작업이다.
+
+## 아직 정하지 않은 사항
+
+* 부모와 단절한 계기·시기·과정 및 현재 서로에 대해 알고 있는 범위
+* 개편된 이야기에서 인터넷 귀신을 처음 본 사건과 전직의 구체적인 과정
+* 프로그램의 이름·전체 기능·사용 조건·대가·한계·작동 원리
+* 린의 구체적인 등장 시점·미나의 소식을 알게 된 경로·이후 관계 형성 과정 및 디지털 귀신 인식·퇴마 가능 여부
+* 블러디 메리 이전에 해결한 의뢰의 세부 내용과 개편된 1챕터의 상세 대사·진행
+
+관련 자료: [대화 CSV 가이드](../Docs/HowToUseScripts/DIALOGUE_CSV_GUIDE.md).
