@@ -13,6 +13,7 @@ public sealed class BloodyMaryPhaseTwoController : MonoBehaviour
     public RectTransform window, phaseRoot, phraseArea;
     public TextMeshProUGUI timerText, instructionText, completedText;
     public BloodyMarySyllableSource[] sources;
+    public BloodyMaryFigureImage figureImage;
     public BloodyMarySelectedSyllable[] selectedSlots;
     [Min(.01f)] public float partOneSeconds = 20f, partTwoBonusSeconds = 15f;
     // 2파트의 한 주기는 맨 윗줄부터 맨 아랫줄까지 교체하는 데 걸리는 시간이다.
@@ -26,8 +27,6 @@ public sealed class BloodyMaryPhaseTwoController : MonoBehaviour
         "네가 죽였어.", "왜 아무도 구해주지 않았어?", "울지마렴 내 아가..",
         "가증스러운 것들", "용서 못해", "더 많은 생기가 필요해", "너는 죽어야 해"
     };
-    const int FigureRows = 16;
-    static readonly Color FigureRed = new(1f,.05f,.07f,1f);
     static readonly Color PhraseRed = new(1f,.07f,.1f,1f);
 
     readonly List<char> selected = new(Answer.Length);
@@ -54,6 +53,7 @@ public sealed class BloodyMaryPhaseTwoController : MonoBehaviour
         }
         selected.Clear();
         foreach (var source in sources) source.Clear();
+        figureImage.Clear();
         State = PhaseState.Running;
         Part = 1;
         remaining = partOneSeconds;
@@ -61,9 +61,9 @@ public sealed class BloodyMaryPhaseTwoController : MonoBehaviour
         window.gameObject.SetActive(true);
         window.SetAsLastSibling();
         phaseRoot.gameObject.SetActive(true);
-        instructionText.gameObject.SetActive(true);
+        instructionText.text = "";
+        instructionText.gameObject.SetActive(false);
         completedText.gameObject.SetActive(false);
-        instructionText.text = "붉은 글자에서 「네 아기는」을 완성하세요";
         RefreshSelection();
         SpawnFirstWave();
         RefreshTimer();
@@ -103,23 +103,21 @@ public sealed class BloodyMaryPhaseTwoController : MonoBehaviour
 
     void UpdateFigure(float deltaTime)
     {
-        float rowSeconds = partTwoWaveSeconds / FigureRows;
+        const int rowCount = 16;
+        float rowSeconds = partTwoWaveSeconds / rowCount;
         waveClock += deltaTime;
         while (waveClock >= rowSeconds)
         {
-            if (!figureRowReplaced) RestoreFigureRow(figureRow);
-            SetFigureRowAlpha(figureRow, 1f);
+            figureImage.SetHiddenRow(-1);
             waveClock -= rowSeconds;
-            figureRow = (figureRow + 1) % FigureRows;
+            figureRow = (figureRow + 1) % rowCount;
             figureRowReplaced = false;
         }
         if (!figureRowReplaced && waveClock >= rowSeconds * .5f)
         {
-            RestoreFigureRow(figureRow);
+            figureImage.SetHiddenRow(figureRow);
             figureRowReplaced = true;
         }
-        // 현재 줄만 희미해졌다가 새 문구로 나타난다. 다른 줄의 위치는 고정이다.
-        SetFigureRowAlpha(figureRow, Mathf.Abs(1f - 2f * waveClock / rowSeconds));
     }
 
     void SpawnFirstWave()
@@ -165,24 +163,7 @@ public sealed class BloodyMaryPhaseTwoController : MonoBehaviour
         figureRow = 0;
         figureRowReplaced = false;
         waveClock = 0f;
-        foreach (var source in sources)
-        {
-            source.ShowFixedFigure(phraseArea.rect);
-            source.label.color = FigureRed;
-            source.SetAlpha(1f);
-        }
-    }
-
-    void RestoreFigureRow(int row)
-    {
-        foreach (var source in sources)
-            if (source.figureRow == row) source.ShowFixedFigure(phraseArea.rect);
-    }
-
-    void SetFigureRowAlpha(int row, float alpha)
-    {
-        foreach (var source in sources)
-            if (source.figureRow == row) source.SetAlpha(alpha);
+        figureImage.Show();
     }
 
     static void Shuffle(List<int> values)
@@ -197,12 +178,20 @@ public sealed class BloodyMaryPhaseTwoController : MonoBehaviour
     public void CollectSyllable(BloodyMarySyllableSource source, int characterIndex, int generation)
     {
         if (!CanInteract || !source || Array.IndexOf(sources, source) < 0 ||
-            selected.Count >= (Part == 1 ? 4 : Answer.Length) ||
+            Part != 1 || selected.Count >= 4 ||
             !source.TryConsume(characterIndex, generation, out char syllable)) return;
         selected.Add(syllable);
         RefreshSelection();
-        if (Part == 1 && MatchesPrefix(4)) BeginPartTwo();
-        else if (Part == 2 && MatchesPrefix(Answer.Length)) CompletePhase();
+        if (MatchesPrefix(4)) BeginPartTwo();
+    }
+
+    public bool CollectFigureSyllable(char syllable)
+    {
+        if (!CanInteract || Part != 2 || selected.Count >= Answer.Length || syllable == '\0' || char.IsWhiteSpace(syllable)) return false;
+        selected.Add(syllable);
+        RefreshSelection();
+        if (MatchesPrefix(Answer.Length)) CompletePhase();
+        return true;
     }
 
     public void RemoveSyllable(int index)
@@ -234,6 +223,7 @@ public sealed class BloodyMaryPhaseTwoController : MonoBehaviour
     {
         State = PhaseState.Completed;
         foreach (var source in sources) source.Clear();
+        figureImage.Clear();
         timerText.text = "";
         instructionText.text = "문장을 완성했다";
         completedText.text = "네 아기는 죽지 않았어.";
@@ -254,6 +244,7 @@ public sealed class BloodyMaryPhaseTwoController : MonoBehaviour
     {
         State = PhaseState.Failed;
         foreach (var source in sources) if (source) source.Clear();
+        if (figureImage) figureImage.Clear();
         if (phaseRoot) phaseRoot.gameObject.SetActive(false);
     }
 
@@ -264,6 +255,7 @@ public sealed class BloodyMaryPhaseTwoController : MonoBehaviour
         remaining = waveClock = 0f;
         selected.Clear();
         if (sources != null) foreach (var source in sources) if (source) source.Clear();
+        if (figureImage) figureImage.Clear();
         if (phaseRoot) phaseRoot.gameObject.SetActive(false);
         if (selectedSlots != null && selectedSlots.Length == Answer.Length) RefreshSelection();
     }
@@ -272,25 +264,19 @@ public sealed class BloodyMaryPhaseTwoController : MonoBehaviour
     {
         if (!phaseOne || !gameOver || !window || !phaseRoot || !phraseArea || !timerText ||
             !instructionText || !completedText || !phaseRoot.IsChildOf(window) ||
-            !phraseArea.IsChildOf(phaseRoot) || sources == null || sources.Length < FirstPhrases.Length ||
+            !phraseArea.IsChildOf(phaseRoot) || !figureImage || !figureImage.IsConfigured ||
+            !figureImage.transform.IsChildOf(phraseArea) || sources == null || sources.Length < FirstPhrases.Length ||
             selectedSlots == null || selectedSlots.Length != Answer.Length ||
             !float.IsFinite(partOneSeconds) || partOneSeconds <= 0f ||
             !float.IsFinite(partTwoBonusSeconds) || partTwoBonusSeconds <= 0f ||
             !float.IsFinite(partOneWaveSeconds) || partOneWaveSeconds <= 0f ||
             !float.IsFinite(partTwoWaveSeconds) || partTwoWaveSeconds <= 0f) return false;
         var unique = new HashSet<BloodyMarySyllableSource>();
-        var populatedRows = new bool[FigureRows];
         foreach (var source in sources)
         {
             if (!source || !unique.Add(source) || source.phase != this || !source.label || !source.group ||
-                !source.Rect.IsChildOf(phraseArea) || string.IsNullOrWhiteSpace(source.figurePhrase) ||
-                source.figureRow < 0 || source.figureRow >= FigureRows ||
-                !float.IsFinite(source.figurePosition.x) || !float.IsFinite(source.figurePosition.y) ||
-                !float.IsFinite(source.figureAngle) || !float.IsFinite(source.figureFontSize) ||
-                source.figureFontSize < 8f) return false;
-            populatedRows[source.figureRow] = true;
+                !source.Rect.IsChildOf(phraseArea)) return false;
         }
-        foreach (bool populated in populatedRows) if (!populated) return false;
         foreach (var slot in selectedSlots)
             if (!slot || slot.phase != this || !slot.label || !slot.button || !slot.transform.IsChildOf(phaseRoot)) return false;
         return true;

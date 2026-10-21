@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0a92ed57b38b2114096dad000bfc6467
+guid: 6eef0eabe9ae14b4997537d3ff23fd03
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4051308157495644754
-    second: phase2_final_0
+      213: -4769053730300806530
+    second: card_merry_02_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: phase2_final_0
+      name: card_merry_02_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1600
-        height: 900
+        width: 320
+        height: 407
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ead64dc02bcd6c7c0800000000000000
-      internalID: -4051308157495644754
+      spriteID: e7a3baa56eae0ddb0800000000000000
+      internalID: -4769053730300806530
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      phase2_final_0: -4051308157495644754
+      card_merry_02_0: -4769053730300806530
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 /// <summary>Three call-card parts, using prefab instances already saved in Battle_Proto.</summary>
 public sealed class BloodyMaryPhaseController : MonoBehaviour
@@ -33,7 +34,6 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
     public RectTransform callWindow, cardArea;
     public GameObject confrontationRoot, dialogueRoot;
     [Min(0f)] public float cardSpawnGapSeconds = .1f;
-    [Min(0f)] public float confrontationSeconds = 1f, dialogueSeconds = 2f;
     [Min(0f)] public float threatSeconds = 1f;
     [Tooltip("클릭/드래그로 연장되지 않는 파트별 제한 시간"), Min(.01f)] public float inactivityLimit = 10f;
     public Stage[] stages = { new Stage(9, 1), new Stage(12, 3), new Stage(18, 5) };
@@ -49,11 +49,22 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
     public bool CanInteract => State == PhaseState.Running && gameOver && !gameOver.IsBlocking && callWindow && callWindow.gameObject.activeInHierarchy;
     public float InactivitySeconds => State == PhaseState.Running ? (float)(Time.unscaledTimeAsDouble - stageStartedAt) : 0f;
     int stageIndex = -1;
-    double stateStartedAt, stageStartedAt;
+    double stageStartedAt;
+    int confrontationStartedFrame;
+    int dialogueReadyAfterFrame;
+    Vector2 phaseOneAnchorMin, phaseOneAnchorMax, phaseOnePivot, phaseOneSize, phaseOnePosition;
 
     void Awake()
     {
-        if (callWindow) callWindow.gameObject.SetActive(false);
+        if (callWindow)
+        {
+            phaseOneAnchorMin = callWindow.anchorMin;
+            phaseOneAnchorMax = callWindow.anchorMax;
+            phaseOnePivot = callWindow.pivot;
+            phaseOneSize = callWindow.sizeDelta;
+            phaseOnePosition = callWindow.anchoredPosition;
+            callWindow.gameObject.SetActive(false);
+        }
         if (exorcismContent) exorcismContent.SetActive(false);
         if (clearedInternetWindow) clearedInternetWindow.gameObject.SetActive(false);
         if (retrySequence) retrySequence.ThemeApplied += BeginPhase;
@@ -64,20 +75,30 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
     void Update()
     {
         if (!HasEntered || IsCompleted || !gameOver || gameOver.IsBlocking) return;
-        if (State == PhaseState.Confrontation && Time.unscaledTimeAsDouble - stateStartedAt >= confrontationSeconds)
+        if (State == PhaseState.Confrontation && Time.frameCount > confrontationStartedFrame &&
+            Pointer.current != null && Pointer.current.press.wasPressedThisFrame)
         {
             dialogueRoot.SetActive(true);
             State = PhaseState.Dialogue;
-            stateStartedAt = Time.unscaledTimeAsDouble;
+            dialogueReadyAfterFrame = int.MaxValue;
         }
-        else if (State == PhaseState.Dialogue && Time.unscaledTimeAsDouble - stateStartedAt >= dialogueSeconds)
-        {
-            confrontationRoot.SetActive(false);
-            dialogueRoot.SetActive(false);
-            StartStage(0);
-        }
+        else if (State == PhaseState.Dialogue && dialogueReadyAfterFrame == int.MaxValue &&
+            (Pointer.current == null || !Pointer.current.press.isPressed))
+            dialogueReadyAfterFrame = Time.frameCount;
         else if (State == PhaseState.Running && InactivitySeconds >= inactivityLimit)
             gameOver.FailPhaseOne();
+    }
+
+    // 대사 패널의 Button.onClick에서 호출한다. 대사를 읽을 때까지 자동으로 넘어가지 않는다.
+    public void AdvanceDialogue()
+    {
+        // 대면 화면을 넘긴 클릭의 마우스 버튼을 놓은 뒤, 새로 클릭해야 넘어간다.
+        if (State != PhaseState.Dialogue || Time.frameCount <= dialogueReadyAfterFrame ||
+            !gameOver || gameOver.IsBlocking) return;
+        confrontationRoot.SetActive(false);
+        dialogueRoot.SetActive(false);
+        RestorePhaseOneWindowLayout();
+        StartStage(0);
     }
 
     void BeginPhase()
@@ -96,12 +117,37 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
         foreach (var stage in stages) stage.root.SetActive(false);
         stageIndex = -1;
         ActiveImageCount = RemainingAttacks = 0;
+        MatchGroupCallWindowLayout();
         callWindow.gameObject.SetActive(true);
         callWindow.SetAsLastSibling();
         confrontationRoot.SetActive(true);
         dialogueRoot.SetActive(false);
         State = PhaseState.Confrontation;
-        stateStartedAt = Time.unscaledTimeAsDouble;
+        confrontationStartedFrame = Time.frameCount;
+        dialogueReadyAfterFrame = int.MaxValue;
+    }
+
+    void MatchGroupCallWindowLayout()
+    {
+        // 대면 통화 동안만 앞선 3인 통화 창과 같은 화면 영역을 사용한다.
+        if (!retrySequence.intermediateCallWindow) return;
+        var groupWindow = retrySequence.intermediateCallWindow.transform as RectTransform;
+        if (!groupWindow || groupWindow.parent != callWindow.parent) return;
+        callWindow.anchorMin = groupWindow.anchorMin;
+        callWindow.anchorMax = groupWindow.anchorMax;
+        callWindow.pivot = groupWindow.pivot;
+        callWindow.sizeDelta = groupWindow.sizeDelta;
+        callWindow.anchoredPosition = groupWindow.anchoredPosition;
+    }
+
+    void RestorePhaseOneWindowLayout()
+    {
+        // 1페이즈의 카드판은 씬에 저장된 원래 창 크기와 위치로 되돌린다.
+        callWindow.anchorMin = phaseOneAnchorMin;
+        callWindow.anchorMax = phaseOneAnchorMax;
+        callWindow.pivot = phaseOnePivot;
+        callWindow.sizeDelta = phaseOneSize;
+        callWindow.anchoredPosition = phaseOnePosition;
     }
 
     bool HasValidConfiguration()

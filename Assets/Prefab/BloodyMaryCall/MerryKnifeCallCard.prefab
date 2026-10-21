@@ -16,6 +16,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1548533360144578087, guid: 230c1d9cdc3913a4ca4189d76ac23d5f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3913044
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548533360144578087, guid: 230c1d9cdc3913a4ca4189d76ac23d5f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3913044
+      objectReference: {fileID: 0}
     - target: {fileID: 1716808025768064414, guid: 230c1d9cdc3913a4ca4189d76ac23d5f, type: 3}
       propertyPath: m_SizeDelta.x
       value: 82.8
