@@ -16,7 +16,7 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
         public BloodyMaryCallCard[] cards;
         public Stage(int images, int attacks) { imageCount = images; attackCount = attacks; root = null; cards = null; }
     }
-    public enum PhaseState { NotStarted, Confrontation, Dialogue, Running, Completed, Spawning }
+    public enum PhaseState { NotStarted, Confrontation, Dialogue, Running, Completed, Spawning, Transition }
     public BattleProtoRetrySequence retrySequence;
     [Header("기존 인터넷 UI 참조 (배틀에서 숨김)")]
     public GameObject internetWindow, exorcismContent, keywordPopup;
@@ -34,6 +34,7 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
     public GameObject confrontationRoot, dialogueRoot;
     [Min(0f)] public float cardSpawnGapSeconds = .1f;
     [Min(0f)] public float confrontationSeconds = 1f, dialogueSeconds = 2f;
+    [Min(0f)] public float threatSeconds = 1f;
     [Tooltip("클릭/드래그로 연장되지 않는 파트별 제한 시간"), Min(.01f)] public float inactivityLimit = 10f;
     public Stage[] stages = { new Stage(9, 1), new Stage(12, 3), new Stage(18, 5) };
     [Tooltip("완료 후 확장용 이벤트. 현재 2페이즈에는 연결하지 않습니다.")]
@@ -116,7 +117,7 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
             int knives = 0;
             foreach (var card in stage.cards)
             {
-                if (!card || !unique.Add(card) || card.phase != this || !card.artwork || !card.dismissButton || !card.transform.IsChildOf(stage.root.transform)) return false;
+                if (!card || !unique.Add(card) || card.phase != this || !card.artwork || !card.dismissButton || !card.threatOverlay || !card.transform.IsChildOf(stage.root.transform)) return false;
                 if (card.isKnife) knives++;
             }
             if (knives != stage.attackCount || knives < 1) return false;
@@ -184,13 +185,26 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
         card.gameObject.SetActive(false);
         RemainingAttacks--;
         if (RemainingAttacks > 0) return;
-        stages[stageIndex].root.SetActive(false);
         if (stageIndex + 1 < stages.Length) { StartStage(stageIndex + 1); return; }
-        State = PhaseState.Completed;
+        StartCoroutine(EndPhaseOne());
+    }
+
+    IEnumerator EndPhaseOne()
+    {
+        State = PhaseState.Transition;
         ActiveImageCount = 0;
         BoardRevision++;
-        // Keep the empty call window. A future phase can subscribe without changing this controller.
+        // 18개의 창을 다시 드러낸 뒤 인물 대신 검은 경고 화면을 1초간 표시한다.
+        foreach (var card in stages[stageIndex].cards)
+        {
+            card.gameObject.SetActive(true);
+            card.ShowThreat();
+        }
+        yield return new WaitForSecondsRealtime(threatSeconds);
+        stages[stageIndex].root.SetActive(false);
+        State = PhaseState.Completed;
         onPhaseCompleted.Invoke();
+        if (phaseTwo) phaseTwo.BeginPhase();
     }
 
     public void RestartAfterGameOver()

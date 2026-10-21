@@ -8,6 +8,7 @@ public sealed class BloodyMaryCallCard : MonoBehaviour, IPointerDownHandler, IBe
     public BloodyMaryPhaseController phase;
     public UnityEngine.UI.Image artwork;
     public UnityEngine.UI.Button dismissButton;
+    public GameObject threatOverlay;
     public bool isKnife;
     RectTransform rect;
     Vector2 initialPosition, dragOffset;
@@ -32,8 +33,18 @@ public sealed class BloodyMaryCallCard : MonoBehaviour, IPointerDownHandler, IBe
     {
         CapturePlacement();
         dragging = false;
+        if (threatOverlay) threatOverlay.SetActive(false);
+        if (artwork) artwork.enabled = true;
         rect.anchoredPosition = initialPosition;
         ClampToWindow();
+    }
+
+    public void ShowThreat()
+    {
+        dragging = false;
+        if (dismissButton) dismissButton.interactable = false;
+        if (artwork) artwork.enabled = false;
+        if (threatOverlay) threatOverlay.SetActive(true);
     }
 
     public void PlaceRandomly()
