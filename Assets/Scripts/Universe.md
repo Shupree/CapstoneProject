@@ -57,4 +57,4 @@
 * 린의 구체적인 등장 시점·미나의 소식을 알게 된 경로·이후 관계 형성 과정 및 디지털 귀신 인식·퇴마 가능 여부
 * 블러디 메리 이전에 해결한 의뢰의 세부 내용과 개편된 1챕터의 상세 대사·진행
 
-관련 자료: [대화 CSV 가이드](../Docs/HowToUseScripts/DIALOGUE_CSV_GUIDE.md).
+관련 자료: [대화 CSV 가이드](HowToUseScripts/DIALOGUE_CSV_GUIDE.md).

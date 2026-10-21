@@ -19,7 +19,7 @@ document:
       description: 2026-10-18 사용자 수정. 밝은 겉모습과 내면의 어둠을 대비하고, 어린 시절 기대와 실망의 경험에서 비롯된 인정 욕구를 추가한다.
   related_documents:
     universe: Universe.md
-    dialogue_csv_guide: ../Docs/HowToUseScripts/DIALOGUE_CSV_GUIDE.md
+    dialogue_csv_guide: HowToUseScripts/DIALOGUE_CSV_GUIDE.md
   conventions:
     confirmed: 사용자가 명시한 설정
     interpreted: 확정 설정과 사용자 대화 예시를 바탕으로 해석한 표현 지침. 새로운 과거사나 세계관 사실이 아니다.
@@ -235,7 +235,7 @@ writing_constraints:
     rule: 어머니의 안타까움과 아버지의 못마땅한 태도를 구분한다. 아버지의 태도를 유미나의 오해로 처리하거나 부모 모두가 단순히 걱정하는 것으로 바꾸지 않는다. 현재 부모와 관계가 단절된 설정은 유지한다. 미정인 학대나 단절의 구체적인 사건·원인을 추가하지 않는다.
 
 csv_usage:
-  guide: ../Docs/HowToUseScripts/DIALOGUE_CSV_GUIDE.md
+  guide: HowToUseScripts/DIALOGUE_CSV_GUIDE.md
   current_first_call_file: ../Explore_Proto/Data/Explore_FirstCall.csv
   existing_mina_speaker_ids: [주인공, 주인공 속마음]
   rin_in_story_name: 린
@@ -255,4 +255,4 @@ unknowns:
     topic: 예시에 등장하지 않은 상대에 대한 호칭·높임말 및 관계별 말투
 ```
 
-관련 자료: [세계관·서사 기반 데이터](Universe.md), [대화 CSV 가이드](../Docs/HowToUseScripts/DIALOGUE_CSV_GUIDE.md).
+관련 자료: [세계관·서사 기반 데이터](Universe.md), [대화 CSV 가이드](HowToUseScripts/DIALOGUE_CSV_GUIDE.md).

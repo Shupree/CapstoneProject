@@ -1,6 +1,6 @@
 # 대사 CSV 사용 가이드
 
-이 문서는 팀원이 정리한 `엑셀 파일 사용법.txt`를 프로젝트 안에서 공유하기 위한 안내다. 현재 구현은 [DialogueCsvReader.cs](../../Scripts/DialogueReader/DialogueCsvReader.cs)를 사용한다. CSV를 사용하는 코드를 작성하기 전에 실제 리더와 호출부도 확인한다.
+이 문서는 팀원이 정리한 `엑셀 파일 사용법.txt`를 프로젝트 안에서 공유하기 위한 안내다. 현재 구현은 [DialogueCsvReader.cs](../DialogueReader/DialogueCsvReader.cs)를 사용한다. CSV를 사용하는 코드를 작성하기 전에 실제 리더와 호출부도 확인한다.
 
 ## CSV 열의 의미
 

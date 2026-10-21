@@ -3,8 +3,8 @@
 
 목적
 - 이 문서는 다른 팀원이나 AI가 기존 하단 대화창을 재사용할 때의 연결 방법과 데이터 계약을 설명한다.
-- 작업 전 Assets/AGENTS.md, Assets/Docs/CONTEXT.md,
-  Assets/Docs/HowToUseScripts/DIALOGUE_CSV_GUIDE.md를 읽고 실제 코드·프리팹·씬 상태를 확인한다.
+- 작업 전 프로젝트 루트의 AGENTS.md, Docs/CONTEXT.md,
+  Assets/Scripts/HowToUseScripts/DIALOGUE_CSV_GUIDE.md를 읽고 실제 코드·프리팹·씬 상태를 확인한다.
 - 이 문서는 현재 구현의 설명이다. 실제 동작은 아래 스크립트와 저장된 프리팹을 기준으로 판단한다.
 
 1. 구현 파일과 책임
