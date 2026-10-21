@@ -213,11 +213,11 @@ interaction_guidelines:
       basis: [MINA_F001, MINA_F006, MINA_F008, RIN_F001, RIN_F005, EX01]
 
 examples:
-  status: external_reference
+  status: source_unavailable
   first_meeting:
-    file: Story_Parts/Rin_FirstMeeting/01_FirstMeeting.md
+    file: null
     id: EX01
-    purpose: 첫 만남 대사와 EX01_L 계열 근거 ID의 원본. 구체적인 진행과 대사는 이 파일에서 관리한다.
+    purpose: 기존 첫 만남 예시의 식별자. 현재 폴더 구조에는 원본 대본이 없으며 EX01_L 계열은 과거 근거 ID로만 보존한다. 새 대본의 참고 자료로 사용하지 않는다.
 writing_constraints:
   - id: CHAR_C001
     rule: MBTI를 정형화된 행동 공식으로 사용하지 않는다. 구체적인 성격과 장면 상황을 우선한다.

@@ -1,6 +1,6 @@
 # Universe — 세계관·서사 기반 데이터
 
-갱신: 2026-10-19. 최신 사용자 확정안 기준. 인물의 말투·표현은 [Char\_profile.md](Char_profile.md), 실제 도입부 대사는 [Prologue\_Opening\_Cutscene.md](Story_Parts/01_Prologue/01_Opening.md)를 따른다.
+갱신: 2026-10-19. 최신 사용자 확정안 기준. 인물의 말투·표현은 [Char\_profile.md](Char_profile.md), 실제 도입부 대사는 [01_Opening.md](Story_Parts/Chapter1_BloodyMary/01_Opening.md)를 따른다.
 
 ## 확정된 세계관
 
