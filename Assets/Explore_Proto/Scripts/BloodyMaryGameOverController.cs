@@ -67,7 +67,7 @@ public sealed class BloodyMaryGameOverController : MonoBehaviour
         overlayRoot.SetActive(true);
         retryButton.interactable = false;
         exitButton.interactable = false;
-        phaseOne.imageScroll.StopMovement();
+        if (phaseOne.imageScroll) phaseOne.imageScroll.StopMovement();
         if (secondPhase)
         {
             phaseTwo.StopForGameOver();

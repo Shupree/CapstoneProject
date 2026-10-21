@@ -71,11 +71,17 @@ public sealed class BattleProtoRetrySequence : MonoBehaviour
             if (window && window != intermediateCallWindow) window.SetActive(false);
         foreach (var item in normalCallObjects)
             if (item) item.SetActive(false);
-        intermediateCallWindow.SetActive(true);
-        intermediateCallWindow.transform.SetAsLastSibling();
-        intermediateCallRoot.SetActive(true);
-        if (intermediateCallSeconds > 0f)
-            yield return new WaitForSecondsRealtime(intermediateCallSeconds);
+        // The new call phase owns its 1-second confrontation and 2-second dialogue.
+        // Preserve the old intermediate call for scenes that have no call-card board.
+        var phase = GetComponent<BloodyMaryPhaseController>();
+        if (!phase || !phase.callWindow)
+        {
+            intermediateCallWindow.SetActive(true);
+            intermediateCallWindow.transform.SetAsLastSibling();
+            intermediateCallRoot.SetActive(true);
+            if (intermediateCallSeconds > 0f)
+                yield return new WaitForSecondsRealtime(intermediateCallSeconds);
+        }
         ApplyBattleTheme();
         IsThemeApplied = true;
         ThemeApplied?.Invoke();
