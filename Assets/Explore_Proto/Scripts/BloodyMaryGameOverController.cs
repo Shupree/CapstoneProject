@@ -62,6 +62,7 @@ public sealed class BloodyMaryGameOverController : MonoBehaviour
     void BeginFailure(bool secondPhase)
     {
         State = GameOverState.PhaseFailure; // Lock gameplay before activating any overlay.
+        retrySequence.StopBattleMusic(); // Silence the BGM before the first failure overlay or effect.
         StopGameOverAudio();
         if (EventSystem.current) EventSystem.current.SetSelectedGameObject(null);
         overlayRoot.SetActive(true);

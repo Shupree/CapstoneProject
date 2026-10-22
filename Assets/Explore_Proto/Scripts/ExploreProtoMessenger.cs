@@ -49,7 +49,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     private int currentSiteIndex = -1;
     private const string FirstCallSceneId = "Explore_FirstCall";
     public bool HasBloodyMaryKeyword => bloodyMaryStored;
-    private bool IsBloodyMaryPhase => bloodyMaryPhase && bloodyMaryPhase.HasEntered;
+    private bool IsBloodyMaryPhase => bloodyMaryPhase && bloodyMaryPhase.IsBattleDesktop;
 
     private void Start() => ExploreProtoSceneTransfer.InitializeScene(this);
 

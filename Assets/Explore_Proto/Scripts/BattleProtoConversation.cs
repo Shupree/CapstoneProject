@@ -3,7 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-/// <summary>Continues the saved messenger conversation and opens the scene-authored three-person call.</summary>
+/// <summary>Two-person call and the battle desktop transition.</summary>
 public sealed class BattleProtoConversation : MonoBehaviour
 {
     public ExploreProtoMessenger messenger;
@@ -18,7 +18,7 @@ public sealed class BattleProtoConversation : MonoBehaviour
         public bool playProgrammingAfter;
         [InspectorName("주인공 스프라이트"), Tooltip("비워두면 이전 대사의 이미지를 유지합니다.")]
         public Sprite heroineSprite;
-        [InspectorName("시율 스프라이트"), Tooltip("비워두면 이전 대사의 이미지를 유지합니다.")]
+        [InspectorName("이서연 스프라이트"), Tooltip("비워두면 이전 대사의 이미지를 유지합니다.")]
         public Sprite clientSprite;
         [InspectorName("친구 스프라이트"), Tooltip("비워두면 이전 대사의 이미지를 유지합니다.")]
         public Sprite friendSprite;
@@ -29,6 +29,8 @@ public sealed class BattleProtoConversation : MonoBehaviour
     public AudioSource programmingAudio;
     public BattleProtoRetrySequence retrySequence;
     public VideoCallPortraits callPortraits;
+    [Header("테마 전환")]
+    [Min(0)] public int themeChangeAfterElement = 12;
     bool initialized;
     bool callStarted, waitingForSound;
     int callIndex;
@@ -68,15 +70,15 @@ public sealed class BattleProtoConversation : MonoBehaviour
     public void AdvanceDialogue()
     {
         if (!callStarted || !groupCallWindow.activeInHierarchy || waitingForSound || (retrySequence && retrySequence.HasStarted)) return;
-        if (callIndex >= callLines.Length - 1)
+        if (callIndex >= themeChangeAfterElement)
         {
-            if (retrySequence && retrySequence.BeginRetry())
+            if (retrySequence && retrySequence.BeginThemeTransition())
             {
                 nextButton.interactable = false;
-                nextLabel.text = "프로그램 실행 중...";
             }
             return;
         }
+        if (callIndex >= callLines.Length - 1) return;
         if (callLines[callIndex].playProgrammingAfter)
             StartCoroutine(PlayProgrammingThenContinue());
         else { callIndex++; ShowLine(); }
@@ -104,8 +106,9 @@ public sealed class BattleProtoConversation : MonoBehaviour
         callSpeaker.text = named ? line.speaker : string.Empty;
         callSpeaker.gameObject.SetActive(named);
         callText.text = line.text;
-        bool hasNext = callIndex < callLines.Length - 1;
-        nextButton.interactable = hasNext || (retrySequence && !retrySequence.HasStarted);
-        nextLabel.text = hasNext ? "다음" : "다시 한번 시도하기";
+        nextButton.interactable = callIndex < callLines.Length - 1 ||
+            (callIndex >= themeChangeAfterElement && retrySequence && !retrySequence.HasStarted);
+        nextLabel.text = "다음";
     }
+
 }

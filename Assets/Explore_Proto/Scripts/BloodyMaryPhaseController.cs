@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 
 /// <summary>Three call-card parts, using prefab instances already saved in Battle_Proto.</summary>
 public sealed class BloodyMaryPhaseController : MonoBehaviour
@@ -17,7 +16,7 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
         public BloodyMaryCallCard[] cards;
         public Stage(int images, int attacks) { imageCount = images; attackCount = attacks; root = null; cards = null; }
     }
-    public enum PhaseState { NotStarted, Confrontation, Dialogue, Running, Completed, Spawning, Transition }
+    public enum PhaseState { NotStarted = 0, Running = 3, Completed = 4, Spawning = 5, Transition = 6 }
     public BattleProtoRetrySequence retrySequence;
     [Header("기존 인터넷 UI 참조 (배틀에서 숨김)")]
     public GameObject internetWindow, exorcismContent, keywordPopup;
@@ -32,7 +31,8 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
 
     [Header("씬에 저장된 화상통화 UI")]
     public RectTransform callWindow, cardArea;
-    public GameObject confrontationRoot, dialogueRoot;
+    [Header("인터넷 창의 전투 시작 이미지")]
+    public UnityEngine.UI.Button maryEntryButton;
     [Min(0f)] public float cardSpawnGapSeconds = .1f;
     [Min(0f)] public float threatSeconds = 1f;
     [Tooltip("클릭/드래그로 연장되지 않는 파트별 제한 시간"), Min(.01f)] public float inactivityLimit = 10f;
@@ -41,6 +41,7 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
     public UnityEvent onPhaseCompleted = new UnityEvent();
     public PhaseState State { get; private set; }
     public bool HasEntered => State != PhaseState.NotStarted;
+    public bool IsBattleDesktop => retrySequence && retrySequence.IsThemeApplied;
     public bool IsCompleted => State == PhaseState.Completed;
     public int StageNumber => stageIndex + 1;
     public int ActiveImageCount { get; private set; }
@@ -50,8 +51,6 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
     public float InactivitySeconds => State == PhaseState.Running ? (float)(Time.unscaledTimeAsDouble - stageStartedAt) : 0f;
     int stageIndex = -1;
     double stageStartedAt;
-    int confrontationStartedFrame;
-    int dialogueReadyAfterFrame;
     Vector2 phaseOneAnchorMin, phaseOneAnchorMax, phaseOnePivot, phaseOneSize, phaseOnePosition;
 
     void Awake()
@@ -67,38 +66,41 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
         }
         if (exorcismContent) exorcismContent.SetActive(false);
         if (clearedInternetWindow) clearedInternetWindow.gameObject.SetActive(false);
-        if (retrySequence) retrySequence.ThemeApplied += BeginPhase;
+        if (maryEntryButton)
+        {
+            maryEntryButton.gameObject.SetActive(false);
+            maryEntryButton.onClick.AddListener(BeginFromInternet);
+        }
+        if (retrySequence) retrySequence.ThemeApplied += PrepareInternetEntry;
     }
-    void Start() { if (retrySequence && retrySequence.IsThemeApplied) BeginPhase(); }
-    void OnDestroy() { if (retrySequence) retrySequence.ThemeApplied -= BeginPhase; }
+    void Start() { if (IsBattleDesktop) PrepareInternetEntry(); }
+    void OnDestroy()
+    {
+        if (retrySequence) retrySequence.ThemeApplied -= PrepareInternetEntry;
+        if (maryEntryButton) maryEntryButton.onClick.RemoveListener(BeginFromInternet);
+    }
 
     void Update()
     {
         if (!HasEntered || IsCompleted || !gameOver || gameOver.IsBlocking) return;
-        if (State == PhaseState.Confrontation && Time.frameCount > confrontationStartedFrame &&
-            Pointer.current != null && Pointer.current.press.wasPressedThisFrame)
-        {
-            dialogueRoot.SetActive(true);
-            State = PhaseState.Dialogue;
-            dialogueReadyAfterFrame = int.MaxValue;
-        }
-        else if (State == PhaseState.Dialogue && dialogueReadyAfterFrame == int.MaxValue &&
-            (Pointer.current == null || !Pointer.current.press.isPressed))
-            dialogueReadyAfterFrame = Time.frameCount;
-        else if (State == PhaseState.Running && InactivitySeconds >= inactivityLimit)
+        if (State == PhaseState.Running && InactivitySeconds >= inactivityLimit)
             gameOver.FailPhaseOne();
     }
 
-    // 대사 패널의 Button.onClick에서 호출한다. 대사를 읽을 때까지 자동으로 넘어가지 않는다.
-    public void AdvanceDialogue()
+    void PrepareInternetEntry()
     {
-        // 대면 화면을 넘긴 클릭의 마우스 버튼을 놓은 뒤, 새로 클릭해야 넘어간다.
-        if (State != PhaseState.Dialogue || Time.frameCount <= dialogueReadyAfterFrame ||
-            !gameOver || gameOver.IsBlocking) return;
-        confrontationRoot.SetActive(false);
-        dialogueRoot.SetActive(false);
-        RestorePhaseOneWindowLayout();
-        StartStage(0);
+        if (HasEntered) return;
+        foreach (var panel in investigationPanels) if (panel) panel.SetActive(false);
+        if (keywordPopup) keywordPopup.SetActive(false);
+        if (exorcismContent) exorcismContent.SetActive(false);
+        if (maryEntryButton) maryEntryButton.gameObject.SetActive(true);
+    }
+
+    public void BeginFromInternet()
+    {
+        if (!IsBattleDesktop || HasEntered || !internetWindow || !internetWindow.activeInHierarchy ||
+            !maryEntryButton || !maryEntryButton.gameObject.activeInHierarchy || !gameOver || gameOver.IsBlocking) return;
+        BeginPhase();
     }
 
     void BeginPhase()
@@ -117,27 +119,12 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
         foreach (var stage in stages) stage.root.SetActive(false);
         stageIndex = -1;
         ActiveImageCount = RemainingAttacks = 0;
-        MatchGroupCallWindowLayout();
+        if (maryEntryButton) maryEntryButton.gameObject.SetActive(false);
+        RestorePhaseOneWindowLayout();
         callWindow.gameObject.SetActive(true);
         callWindow.SetAsLastSibling();
-        confrontationRoot.SetActive(true);
-        dialogueRoot.SetActive(false);
-        State = PhaseState.Confrontation;
-        confrontationStartedFrame = Time.frameCount;
-        dialogueReadyAfterFrame = int.MaxValue;
-    }
-
-    void MatchGroupCallWindowLayout()
-    {
-        // 대면 통화 동안만 앞선 3인 통화 창과 같은 화면 영역을 사용한다.
-        if (!retrySequence.intermediateCallWindow) return;
-        var groupWindow = retrySequence.intermediateCallWindow.transform as RectTransform;
-        if (!groupWindow || groupWindow.parent != callWindow.parent) return;
-        callWindow.anchorMin = groupWindow.anchorMin;
-        callWindow.anchorMax = groupWindow.anchorMax;
-        callWindow.pivot = groupWindow.pivot;
-        callWindow.sizeDelta = groupWindow.sizeDelta;
-        callWindow.anchoredPosition = groupWindow.anchoredPosition;
+        retrySequence.StartBattleMusic();
+        StartStage(0);
     }
 
     void RestorePhaseOneWindowLayout()
@@ -152,7 +139,7 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
 
     bool HasValidConfiguration()
     {
-        if (!gameOver || !callWindow || !cardArea || !confrontationRoot || !dialogueRoot ||
+        if (!gameOver || !callWindow || !cardArea ||
             !float.IsFinite(cardSpawnGapSeconds) || cardSpawnGapSeconds < 0f ||
             !float.IsFinite(inactivityLimit) || inactivityLimit <= 0f || investigationPanels == null ||
             stages == null || stages.Length != 3 || !cardArea.IsChildOf(callWindow)) return false;
@@ -263,7 +250,17 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
     }
 
     // Existing desktop and old saved image buttons retain valid targets, but cannot reopen the old puzzle.
-    public void ToggleInternet() { }
-    public void CloseInternet() { }
+    public void ToggleInternet()
+    {
+        if (!IsBattleDesktop || HasEntered || !internetWindow || !gameOver || gameOver.IsBlocking) return;
+        PrepareInternetEntry();
+        bool open = !internetWindow.activeSelf;
+        internetWindow.SetActive(open);
+        if (open) internetWindow.transform.SetAsLastSibling();
+    }
+    public void CloseInternet()
+    {
+        if (!HasEntered && internetWindow) internetWindow.SetActive(false);
+    }
     public void SelectImage(int index, int pressedRevision) { }
 }
