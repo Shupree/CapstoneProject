@@ -22,8 +22,8 @@ Shader "Hidden/Battle/ScreenInterference"
                 float bandMask = 0;
                 if (_GlitchLines > .5)
                 {
-                    float d = abs(uv.y - .5 - jitter);
-                    if (_GlitchLines > 1.5) d = min(abs(uv.y-.475-jitter),abs(uv.y-.525+jitter));
+                    float d = abs(uv.y - .4 - jitter);
+                    if (_GlitchLines > 1.5) d = min(abs(uv.y-.630-jitter),abs(uv.y-.710+jitter));
                     bandMask = 1-smoothstep(.0015,.005,d);
                 }
                 float amount = saturate(_CRTAmount);

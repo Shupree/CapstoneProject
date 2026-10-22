@@ -82,6 +82,8 @@ public sealed class BattleMaryIntroController : MonoBehaviour
         yield return Wait(Mathf.Max(0f, glitchStartGapSeconds - glitchPulseSeconds));
         screenInterference.SetLines(2);
         yield return Wait(glitchPulseSeconds);
+        screenInterference.SetLines(1);
+        yield return Wait(glitchPulseSeconds);
         screenInterference.SetLines(0);
         for (float elapsed = 0f; elapsed < crtFadeSeconds; elapsed += Time.unscaledDeltaTime)
         {
