@@ -24,7 +24,7 @@ public sealed class BattleProtoRetrySequence : MonoBehaviour
     public bool BeginThemeTransition()
     {
         if (HasStarted) return false;
-        if (!effectsAudio || !backgroundMusic || !lightSwitchClip || !battleMusic || !maryIntro || !maryIntro.IsReady ||
+        if (!effectsAudio || !backgroundMusic || !battleMusic || !maryIntro || !maryIntro.IsReady ||
             !backgroundChange.image || !backgroundChange.battleSprite || spriteChanges == null || windowsToClose == null)
         {
             Debug.LogError("배틀 테마 전환의 음원, 배경 또는 창 참조가 없습니다.", this);
@@ -44,9 +44,6 @@ public sealed class BattleProtoRetrySequence : MonoBehaviour
     public void ApplyThemeAfterBlackout()
     {
         if (!HasStarted || IsThemeApplied) return;
-        effectsAudio.loop = false;
-        effectsAudio.clip = lightSwitchClip;
-        effectsAudio.Play();
         ApplyBattleTheme();
         IsThemeApplied = true;
         ThemeApplied?.Invoke();

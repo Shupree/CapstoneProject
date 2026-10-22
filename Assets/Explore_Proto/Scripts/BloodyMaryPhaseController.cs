@@ -133,7 +133,7 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
         if (State != PhaseState.Spawning || stageIndex != 0 || index < 0 || index >= IntroCardCount) return;
         var card = stages[0].cards[index];
         if (!card.gameObject.activeInHierarchy) return;
-        card.transform.SetAsLastSibling();
+        // Preserve the intro's stacking, especially the single knife card at the knife tip.
         card.artwork.enabled = true;
     }
 
