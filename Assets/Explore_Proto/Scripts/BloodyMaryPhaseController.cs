@@ -31,9 +31,10 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
 
     [Header("씬에 저장된 화상통화 UI")]
     public RectTransform callWindow, cardArea;
-    [Header("인터넷 창의 전투 시작 이미지")]
+    [Header("이전 인터넷 진입 UI (사용하지 않음)")]
     public UnityEngine.UI.Button maryEntryButton;
-    [Min(0f)] public float cardSpawnGapSeconds = .1f;
+    [Min(0f)] public float cardSpawnGapSeconds = .18f;
+    [Range(.1f, 1f)] public float cardSpawnAcceleration = .9f;
     [Min(0f)] public float threatSeconds = 1f;
     [Tooltip("클릭/드래그로 연장되지 않는 파트별 제한 시간"), Min(.01f)] public float inactivityLimit = 10f;
     public Stage[] stages = { new Stage(9, 1), new Stage(12, 3), new Stage(18, 5) };
@@ -47,6 +48,7 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
     public int ActiveImageCount { get; private set; }
     public int RemainingAttacks { get; private set; }
     public int BoardRevision { get; private set; }
+    public int IntroCardCount => stages != null && stages.Length > 0 && stages[0].cards != null ? stages[0].cards.Length : 0;
     public bool CanInteract => State == PhaseState.Running && gameOver && !gameOver.IsBlocking && callWindow && callWindow.gameObject.activeInHierarchy;
     public float InactivitySeconds => State == PhaseState.Running ? (float)(Time.unscaledTimeAsDouble - stageStartedAt) : 0f;
     int stageIndex = -1;
@@ -67,17 +69,7 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
         if (exorcismContent) exorcismContent.SetActive(false);
         if (clearedInternetWindow) clearedInternetWindow.gameObject.SetActive(false);
         if (maryEntryButton)
-        {
             maryEntryButton.gameObject.SetActive(false);
-            maryEntryButton.onClick.AddListener(BeginFromInternet);
-        }
-        if (retrySequence) retrySequence.ThemeApplied += PrepareInternetEntry;
-    }
-    void Start() { if (IsBattleDesktop) PrepareInternetEntry(); }
-    void OnDestroy()
-    {
-        if (retrySequence) retrySequence.ThemeApplied -= PrepareInternetEntry;
-        if (maryEntryButton) maryEntryButton.onClick.RemoveListener(BeginFromInternet);
     }
 
     void Update()
@@ -87,20 +79,74 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
             gameOver.FailPhaseOne();
     }
 
-    void PrepareInternetEntry()
+    // 연출 동안 기존 1페이즈 창을 보여주되, 카드 입력은 아직 시작하지 않는다.
+    public bool PrepareIntroWindow()
     {
-        if (HasEntered) return;
+        if (HasEntered || !IsBattleDesktop || !callWindow || !cardArea) return false;
         foreach (var panel in investigationPanels) if (panel) panel.SetActive(false);
         if (keywordPopup) keywordPopup.SetActive(false);
+        if (internetWindow) internetWindow.SetActive(false);
         if (exorcismContent) exorcismContent.SetActive(false);
-        if (maryEntryButton) maryEntryButton.gameObject.SetActive(true);
+        if (clearedInternetWindow) clearedInternetWindow.gameObject.SetActive(false);
+        foreach (var stage in stages) if (stage.root) stage.root.SetActive(false);
+        if (maryEntryButton) maryEntryButton.gameObject.SetActive(false);
+        RestorePhaseOneWindowLayout();
+        callWindow.gameObject.SetActive(true);
+        callWindow.SetAsLastSibling();
+        return true;
     }
 
+    // 이전 씬의 직렬화된 버튼 호출이 남아 있어도 인터넷에서 전투를 시작하지 않는다.
     public void BeginFromInternet()
     {
-        if (!IsBattleDesktop || HasEntered || !internetWindow || !internetWindow.activeInHierarchy ||
-            !maryEntryButton || !maryEntryButton.gameObject.activeInHierarchy || !gameOver || gameOver.IsBlocking) return;
-        BeginPhase();
+    }
+
+    // 등장 연출에 쓸 기존 1페이즈 카드들을 숨긴 상태로 준비한다.
+    public bool PrepareIntroCards()
+    {
+        if (!IsBattleDesktop || HasEntered || !HasValidConfiguration() || !callWindow.gameObject.activeInHierarchy) return false;
+        foreach (var stage in stages) stage.root.SetActive(false);
+        stageIndex = 0;
+        BoardRevision++;
+        ActiveImageCount = stages[0].imageCount;
+        RemainingAttacks = stages[0].attackCount;
+        State = PhaseState.Spawning;
+        foreach (var card in stages[0].cards)
+        {
+            card.RestorePlacement();
+            card.dismissButton.interactable = false;
+            card.artwork.enabled = false;
+            card.gameObject.SetActive(false);
+        }
+        stages[0].root.SetActive(true);
+        return true;
+    }
+
+    public void RevealIntroCardFrame(int index)
+    {
+        if (State != PhaseState.Spawning || stageIndex != 0 || index < 0 || index >= IntroCardCount) return;
+        stages[0].cards[index].gameObject.SetActive(true);
+    }
+
+    public void RevealIntroCard(int index)
+    {
+        if (State != PhaseState.Spawning || stageIndex != 0 || index < 0 || index >= IntroCardCount) return;
+        var card = stages[0].cards[index];
+        if (!card.gameObject.activeInHierarchy) return;
+        card.transform.SetAsLastSibling();
+        card.artwork.enabled = true;
+    }
+
+    public bool BeginAfterIntro()
+    {
+        if (!IsBattleDesktop || State != PhaseState.Spawning || stageIndex != 0 || !gameOver || gameOver.IsBlocking) return false;
+        foreach (var card in stages[0].cards)
+            if (!card.gameObject.activeInHierarchy || !card.artwork.enabled) return false;
+        foreach (var card in stages[0].cards) card.dismissButton.interactable = true;
+        retrySequence.StartBattleMusic();
+        stageStartedAt = Time.unscaledTimeAsDouble;
+        State = PhaseState.Running;
+        return true;
     }
 
     void BeginPhase()
@@ -141,6 +187,7 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
     {
         if (!gameOver || !callWindow || !cardArea ||
             !float.IsFinite(cardSpawnGapSeconds) || cardSpawnGapSeconds < 0f ||
+            !float.IsFinite(cardSpawnAcceleration) || cardSpawnAcceleration <= 0f || cardSpawnAcceleration > 1f ||
             !float.IsFinite(inactivityLimit) || inactivityLimit <= 0f || investigationPanels == null ||
             stages == null || stages.Length != 3 || !cardArea.IsChildOf(callWindow)) return false;
         var unique = new HashSet<BloodyMaryCallCard>();
@@ -186,23 +233,19 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
             }
         }
         current.root.SetActive(true);
-        StartCoroutine(RevealStage(order, index == 2 ? 2 : 1));
+        StartCoroutine(RevealStage(order));
     }
 
-    IEnumerator RevealStage(BloodyMaryCallCard[] order, int batchSize)
+    IEnumerator RevealStage(BloodyMaryCallCard[] order)
     {
-        for (int i = 0; i < order.Length; i += batchSize)
+        for (int i = 0; i < order.Length; i++)
         {
-            int end = Mathf.Min(i + batchSize, order.Length);
-            for (int j = i; j < end; j++)
-            {
-                order[j].transform.SetAsLastSibling();
-                order[j].gameObject.SetActive(true);
-            }
-            if (end < order.Length && cardSpawnGapSeconds > 0f)
-                yield return new WaitForSecondsRealtime(cardSpawnGapSeconds);
+            order[i].transform.SetAsLastSibling();
+            order[i].gameObject.SetActive(true);
+            if (i + 1 < order.Length && cardSpawnGapSeconds > 0f)
+                yield return new WaitForSecondsRealtime(cardSpawnGapSeconds * Mathf.Pow(cardSpawnAcceleration, i));
             else
-                yield return null; // Render the final card before unlocking input and starting the clock.
+                yield return null; // 마지막 카드가 렌더링된 뒤 입력과 제한 시간을 시작한다.
         }
         foreach (var card in order) card.dismissButton.interactable = true;
         stageStartedAt = Time.unscaledTimeAsDouble;
@@ -252,11 +295,7 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
     // Existing desktop and old saved image buttons retain valid targets, but cannot reopen the old puzzle.
     public void ToggleInternet()
     {
-        if (!IsBattleDesktop || HasEntered || !internetWindow || !gameOver || gameOver.IsBlocking) return;
-        PrepareInternetEntry();
-        bool open = !internetWindow.activeSelf;
-        internetWindow.SetActive(open);
-        if (open) internetWindow.transform.SetAsLastSibling();
+        // 테마 전환 뒤에는 인터넷 진입 없이 연출과 1페이즈가 이어진다.
     }
     public void CloseInternet()
     {

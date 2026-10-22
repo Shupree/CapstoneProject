@@ -17,7 +17,7 @@ public sealed class BloodyMaryPhaseTwoController : MonoBehaviour
     public BloodyMarySelectedSyllable[] selectedSlots;
     [Min(.01f)] public float partOneSeconds = 20f, partTwoBonusSeconds = 15f;
     // 2파트의 한 주기는 맨 윗줄부터 맨 아랫줄까지 교체하는 데 걸리는 시간이다.
-    [Min(.2f)] public float partOneWaveSeconds = 2.4f, partTwoWaveSeconds = 4f;
+    [Min(.2f)] public float partOneWaveSeconds = 3.4f, partTwoWaveSeconds = 4f;
     public UnityEvent onPhaseTwoCompleted = new UnityEvent();
 
     // 띄어쓰기는 화면의 음절 슬롯 위치로 자동 표현한다.
@@ -127,6 +127,9 @@ public sealed class BloodyMaryPhaseTwoController : MonoBehaviour
         order.Clear();
         for (int i = 0; i < FirstPhrases.Length; i++) order.Add(i);
         Shuffle(order);
+        // 입력창과 그 자식 버튼까지 포함한 경계를 문구 영역 좌표로 계산한다.
+        var inputRect = (RectTransform)selectedSlots[0].transform.parent;
+        float inputTop = RectTransformUtility.CalculateRelativeRectTransformBounds(phraseArea, inputRect).max.y;
         for (int i = 0; i < FirstPhrases.Length; i++)
         {
             var source = sources[i];
@@ -137,6 +140,7 @@ public sealed class BloodyMaryPhaseTwoController : MonoBehaviour
             float left = area.xMin + size.x * .5f + 35f;
             float right = area.xMax - size.x * .5f - 35f;
             float bottom = area.yMin + size.y * .5f + 20f;
+            bottom = Mathf.Max(bottom, inputTop + size.y * .5f + 20f);
             float top = area.yMax - size.y * .5f - 20f;
             if (right < left || top < bottom) continue;
             Vector2 point = Vector2.zero;
@@ -267,6 +271,7 @@ public sealed class BloodyMaryPhaseTwoController : MonoBehaviour
             !phraseArea.IsChildOf(phaseRoot) || !figureImage || !figureImage.IsConfigured ||
             !figureImage.transform.IsChildOf(phraseArea) || sources == null || sources.Length < FirstPhrases.Length ||
             selectedSlots == null || selectedSlots.Length != Answer.Length ||
+            !selectedSlots[0] || !(selectedSlots[0].transform.parent is RectTransform) ||
             !float.IsFinite(partOneSeconds) || partOneSeconds <= 0f ||
             !float.IsFinite(partTwoBonusSeconds) || partTwoBonusSeconds <= 0f ||
             !float.IsFinite(partOneWaveSeconds) || partOneWaveSeconds <= 0f ||
