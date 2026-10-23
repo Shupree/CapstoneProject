@@ -13,7 +13,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         [TextArea] public string text;
         [InspectorName("주인공 스프라이트"), Tooltip("비워두면 이전 대사의 이미지를 유지합니다.")]
         public Sprite heroineSprite;
-        [InspectorName("시율 스프라이트"), Tooltip("비워두면 이전 대사의 이미지를 유지합니다.")]
+        [InspectorName("이서연 스프라이트"), Tooltip("비워두면 이전 대사의 이미지를 유지합니다.")]
         public Sprite clientSprite;
         [InspectorName("친구 스프라이트"), Tooltip("친구 영상이 있는 통화에서 사용합니다. 비워두면 이전 이미지를 유지합니다.")]
         public Sprite friendSprite;
@@ -27,6 +27,9 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     public TMP_Text callSpeaker, callLineText, transcriptText, memoKeyword, searchKeywordText, searchHint;
     public TMP_Text siteCategoryText, siteTitleText, siteArticleText;
     public Button messengerButton, emojiButton, internetButton, callAdvanceButton;
+    [Header("탐색 씬의 새 데스크톱 버튼")]
+    public Button memoButton;
+    public ExploreProtoEmailController email;
     public Button callButton, recordingButton, transcriptCloseButton, messengerCloseButton;
     public Button memoCloseButton, internetCloseButton, callCloseButton, transcriptTitleCloseButton;
     public ScrollRect transcriptScroll, siteArticleScroll;
@@ -46,6 +49,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     public SiteEntry[] siteEntries;
     private int lineIndex;
     private bool callCompleted, bloodyMaryStored, bloodyMarySelected;
+    private bool contactRegistered;
     private int currentSiteIndex = -1;
     private const string FirstCallSceneId = "Explore_FirstCall";
     public bool HasBloodyMaryKeyword => bloodyMaryStored;
@@ -129,8 +133,20 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     {
         var callDataReady = LoadCallLinesFromCsv();
         callButton.interactable = callDataReady;
-        messengerButton.onClick.AddListener(ToggleMessenger);
-        emojiButton.onClick.AddListener(ToggleMemo);
+        if (gameObject.scene.name == "Explore_Proto")
+        {
+            // 탐색 씬에서는 기존 메일·메신저·메모 아이콘의 역할을 분리한다.
+            if (email) messengerButton.onClick.AddListener(email.ToggleEmail);
+            else Debug.LogError("Explore_Proto의 메일 창 컨트롤러가 연결되지 않았습니다.", this);
+            emojiButton.onClick.AddListener(ToggleMessenger);
+            if (memoButton) memoButton.onClick.AddListener(ToggleMemo);
+        }
+        else
+        {
+            // 배틀 씬에 저장된 데스크톱 연결은 그대로 둔다.
+            messengerButton.onClick.AddListener(ToggleMessenger);
+            emojiButton.onClick.AddListener(ToggleMemo);
+        }
         internetButton.onClick.AddListener(ToggleInternet);
         messengerCloseButton.onClick.AddListener(CloseMessenger);
         memoCloseButton.onClick.AddListener(CloseMemo);
@@ -173,8 +189,8 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     public void ToggleMessenger()
     {
         if (IsBloodyMaryPhase) return;
-        // A new message brings an already open window to the front instead of closing it.
-        if (!messengerWindow.activeSelf || unreadBadge.activeSelf) ShowMessenger();
+        // 배틀 씬의 기존 알림은 창이 열려 있어도 앞으로 가져온다.
+        if (!messengerWindow.activeSelf || (gameObject.scene.name != "Explore_Proto" && unreadBadge.activeSelf)) ShowMessenger();
         else CloseMessenger();
     }
     public void ShowMessenger()
@@ -182,10 +198,13 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         if (IsBloodyMaryPhase) return;
         messengerWindow.SetActive(true);
         messengerWindow.transform.SetAsLastSibling();
-        MarkMessengerRead();
+        if (gameObject.scene.name != "Explore_Proto") MarkMessengerRead();
         if (callCompleted) ScrollConversationToLatest();
-        if (investigation) investigation.OnMessengerRead();
+        if (investigation && (gameObject.scene.name != "Explore_Proto" || contactRegistered))
+            investigation.OnMessengerRead();
     }
+    /// <summary>메일에서 친구 추가를 마친 뒤 탐색 씬의 통화를 허용한다.</summary>
+    public void SetContactRegistered(bool registered) => contactRegistered = registered;
     public void ReceiveUnreadMessage()
     {
         unreadCount.text = "1";
@@ -226,8 +245,9 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
 
     public void StartCall()
     {
+        if (gameObject.scene.name == "Explore_Proto" && !contactRegistered) return;
         if (callCompleted || callLines.Length == 0) return;
-        MarkMessengerRead();
+        if (gameObject.scene.name != "Explore_Proto") MarkMessengerRead();
         lineIndex = 0; callCompleted = false; callButton.gameObject.SetActive(false);
         if (callPortraits) callPortraits.ResetToDefaults();
         callWindow.SetActive(true); callWindow.transform.SetAsLastSibling(); ShowCallLine();
@@ -240,7 +260,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         if (lineIndex >= callLines.Length)
         {
             callWindow.SetActive(false); callCompleted = true;
-            MarkMessengerRead();
+            if (gameObject.scene.name != "Explore_Proto") MarkMessengerRead();
             recordingButton.gameObject.SetActive(true);
             if (linkMessage) linkMessage.gameObject.SetActive(true);
             linkButtonObject.SetActive(true);
@@ -272,7 +292,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
             string.IsNullOrEmpty(heroineCallImageId) || string.IsNullOrEmpty(siyulCallImageId) ||
             heroineCallImageId == siyulCallImageId)
         {
-            Debug.LogError("첫 화상통화의 주인공·시율 이미지와 CSV 이미지 이름을 확인해 주세요.", this);
+            Debug.LogError("첫 화상통화의 주인공·이서연 이미지와 CSV 이미지 이름을 확인해 주세요.", this);
             return false;
         }
 

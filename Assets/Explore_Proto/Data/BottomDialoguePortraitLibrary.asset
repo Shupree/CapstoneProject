@@ -67,7 +67,7 @@ MonoBehaviour:
   - speakerId: "\uC8FC\uC778\uACF5 \uC18D\uB9C8\uC74C"
     side: 1
     defaultImageId: Heroine_1
-  - speakerId: "\uC2DC\uC728"
+  - speakerId: "\uC774\uC11C\uC5F0"
     side: 2
     defaultImageId: Client_1
   - speakerId: "\uBA54\uB9AC"

@@ -4,7 +4,7 @@ using UnityEngine;
 public sealed class VideoCallPortraits : MonoBehaviour
 {
     [InspectorName("주인공 이미지")] public UnityEngine.UI.Image heroineImage;
-    [InspectorName("시율 이미지")] public UnityEngine.UI.Image clientImage;
+    [InspectorName("이서연 이미지")] public UnityEngine.UI.Image clientImage;
     [InspectorName("친구 이미지")] public UnityEngine.UI.Image friendImage;
     Sprite defaultHeroine, defaultClient, defaultFriend;
     bool captured;

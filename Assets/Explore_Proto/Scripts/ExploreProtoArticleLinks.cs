@@ -10,22 +10,26 @@ public sealed class ExploreProtoArticleLinks : MonoBehaviour, IPointerEnterHandl
     public TMP_Text article;
     public UnityEngine.UI.ScrollRect articleScroll;
     public ExploreProtoInvestigation investigation;
+    public ExploreProtoExorcismVision exorcismVision;
     string source = string.Empty, hoveredId, rendered;
     bool pointerInside;
     Vector2 pointerPosition;
     Camera eventCamera;
     static readonly Regex Links = new Regex("<link=\"([^\"]+)\">(.*?)</link>", RegexOptions.Singleline);
+    static readonly Regex HiddenByExorcism = new Regex("<vision>(.*?)</vision>", RegexOptions.Singleline);
 
     void OnEnable()
     {
         pointerInside = false; hoveredId = null;
         articleScroll.onValueChanged.AddListener(OnScrolled);
+        if (exorcismVision) exorcismVision.StateChanged += OnVisionChanged;
         Render();
     }
 
     void OnDisable()
     {
         articleScroll.onValueChanged.RemoveListener(OnScrolled);
+        if (exorcismVision) exorcismVision.StateChanged -= OnVisionChanged;
         pointerInside = false; hoveredId = null;
     }
 
@@ -35,6 +39,14 @@ public sealed class ExploreProtoArticleLinks : MonoBehaviour, IPointerEnterHandl
         hoveredId = null; pointerInside = false;
         Render();
         investigation.SetArticleHint(null);
+    }
+
+    private void OnVisionChanged(bool enabled)
+    {
+        hoveredId = null;
+        Render();
+        if (pointerInside) SetHovered(LinkAt(pointerPosition, eventCamera));
+        else investigation.SetArticleHint(null);
     }
 
     public void OnPointerEnter(PointerEventData data) => Track(data);
@@ -79,7 +91,10 @@ public sealed class ExploreProtoArticleLinks : MonoBehaviour, IPointerEnterHandl
     }
     void Render()
     {
-        string next = Links.Replace(source, match =>
+        // 퇴마프로그램이 꺼져 있으면 숨겨진 문장의 링크 자체가 TMP에 전달되지 않는다.
+        string visibleSource = HiddenByExorcism.Replace(source,
+            match => exorcismVision && exorcismVision.IsActive ? match.Groups[1].Value : string.Empty);
+        string next = Links.Replace(visibleSource, match =>
         {
             string id = match.Groups[1].Value, body = match.Groups[2].Value;
             if (investigation.IsCollected(id)) body = "<color=#327466><u>" + body + "</u></color>";

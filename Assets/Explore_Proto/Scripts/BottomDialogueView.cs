@@ -13,6 +13,9 @@ public sealed class BottomDialogueView : MonoBehaviour
     [SerializeField] private GameObject nameBar;
     [SerializeField] private TMP_Text speakerText;
     [SerializeField] private TMP_Text dialogueText;
+    [Header("이 씬에서 사용할 표시 방식")]
+    [SerializeField] private GameObject screenDimmer;
+    [SerializeField] private bool barOnly;
 
     [Header("현재 화자 표시")]
     [SerializeField] private Color speakingTint = Color.white;
@@ -30,6 +33,7 @@ public sealed class BottomDialogueView : MonoBehaviour
     {
         if (!visualRoot) return;
         if (visible) transform.SetAsLastSibling();
+        if (visible && screenDimmer) screenDimmer.SetActive(!barOnly);
         visualRoot.SetActive(visible);
     }
 
@@ -43,9 +47,9 @@ public sealed class BottomDialogueView : MonoBehaviour
         dialogueText.text = dialogue ?? string.Empty;
         nameBar.SetActive(!string.IsNullOrWhiteSpace(speaker));
 
-        SetPortrait(leftPortrait, leftSprite,
+        SetPortrait(leftPortrait, barOnly ? null : leftSprite,
             speakingSide == BottomDialogueSide.Left ? speakingTint : listeningTint);
-        SetPortrait(rightPortrait, rightSprite,
+        SetPortrait(rightPortrait, barOnly ? null : rightSprite,
             speakingSide == BottomDialogueSide.Right ? speakingTint : listeningTint);
     }
 

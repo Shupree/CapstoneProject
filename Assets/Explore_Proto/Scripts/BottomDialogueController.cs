@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -23,6 +24,8 @@ public sealed class BottomDialogueController : MonoBehaviour
 
     public bool IsPlaying => lines != null;
     public string CurrentSceneId => currentSceneId;
+    /// <summary>마지막 줄을 닫은 뒤 외부 진행 코드에 완료된 대화 묶음을 알린다.</summary>
+    public event Action<string> DialogueCompleted;
 
     /// <summary>미리 배치한 클릭 영역만 연결한다. 게임 오브젝트는 생성하지 않는다.</summary>
     private void Awake()
@@ -85,6 +88,7 @@ public sealed class BottomDialogueController : MonoBehaviour
         var completedSceneId = currentSceneId;
         StopDialogue();
         onDialogueCompleted.Invoke(completedSceneId);
+        DialogueCompleted?.Invoke(completedSceneId);
     }
 
     /// <summary>대화를 중단하고 UI를 숨긴다. 정상 완료 이벤트는 보내지 않는다.</summary>

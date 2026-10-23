@@ -21,9 +21,15 @@ public sealed class ExploreProtoInvestigation : MonoBehaviour
     public UnityEngine.UI.Button monologueDismissButton, replyButton;
     public GameObject[] followUpMessages;
     public string[] replyLabels;
+    [Header("탐색 씬 독백")]
+    public BottomDialogueController bottomDialogue;
+    public bool stopAfterResearch;
+    public string memoryDialogueSceneId = "Explore_ClueMemory";
+    public string completionDialogueSceneId = "Explore_ResearchComplete";
 
     readonly HashSet<string> collected = new HashSet<string>();
     readonly List<string> collectionOrder = new List<string>();
+    readonly Queue<string> pendingMonologues = new Queue<string>();
     bool completionShown, followUpDelivered, followUpRead;
     int visibleMessages, replyStep;
 
@@ -35,8 +41,14 @@ public sealed class ExploreProtoInvestigation : MonoBehaviour
         replyButton.gameObject.SetActive(false);
         foreach (var message in followUpMessages) message.SetActive(false);
         monologueDismissButton.onClick.AddListener(DismissMonologue);
-        replyButton.onClick.AddListener(ReplyToSiyul);
+        replyButton.onClick.AddListener(ReplyToSeoyeon);
+        if (bottomDialogue) bottomDialogue.DialogueCompleted += OnDialogueCompleted;
         SetArticleHint(null);
+    }
+
+    private void OnDestroy()
+    {
+        if (bottomDialogue) bottomDialogue.DialogueCompleted -= OnDialogueCompleted;
     }
 
     public bool IsClue(string id) => Array.Exists(clues, clue => clue.id == id);
@@ -70,14 +82,34 @@ public sealed class ExploreProtoInvestigation : MonoBehaviour
         collectionOrder.Add(id);
         RefreshNotes();
         SetArticleHint(id);
+        if (stopAfterResearch && id == "mary_weakness") QueueMonologue(memoryDialogueSceneId);
         if (collected.Count == clues.Length && !completionShown)
         {
             completionShown = true;
-            monologueWindow.SetActive(true);
-            monologueWindow.transform.SetAsLastSibling();
+            if (stopAfterResearch) QueueMonologue(completionDialogueSceneId);
+            else
+            {
+                monologueWindow.SetActive(true);
+                monologueWindow.transform.SetAsLastSibling();
+            }
         }
         return true;
     }
+
+    private void QueueMonologue(string sceneId)
+    {
+        if (!bottomDialogue || string.IsNullOrEmpty(sceneId)) return;
+        pendingMonologues.Enqueue(sceneId);
+        PlayNextMonologue();
+    }
+
+    private void PlayNextMonologue()
+    {
+        if (bottomDialogue && !bottomDialogue.IsPlaying && pendingMonologues.Count > 0)
+            bottomDialogue.StartDialogue(pendingMonologues.Dequeue());
+    }
+
+    private void OnDialogueCompleted(string sceneId) => PlayNextMonologue();
 
     void RefreshNotes()
     {
@@ -100,6 +132,7 @@ public sealed class ExploreProtoInvestigation : MonoBehaviour
 
     public void DismissMonologue()
     {
+        if (stopAfterResearch) return;
         if (!completionShown || followUpDelivered || !monologueWindow.activeSelf) return;
         monologueWindow.SetActive(false);
         followUpDelivered = true;
@@ -111,6 +144,7 @@ public sealed class ExploreProtoInvestigation : MonoBehaviour
 
     public void OnMessengerRead()
     {
+        if (stopAfterResearch) return;
         if (!followUpDelivered) return;
         followUpRead = true;
         bool canReply = visibleMessages < followUpMessages.Length;
@@ -120,8 +154,9 @@ public sealed class ExploreProtoInvestigation : MonoBehaviour
         messenger.ScrollConversationToLatest();
     }
 
-    public void ReplyToSiyul()
+    public void ReplyToSeoyeon()
     {
+        if (stopAfterResearch) return;
         if (!followUpDelivered || !followUpRead) return;
         if (visibleMessages >= followUpMessages.Length)
         {
