@@ -26,6 +26,10 @@ public sealed class BattleMaryIntroController : MonoBehaviour
     public AudioClip appearanceClip;
     public AudioClip maryVoiceClip;
     public AudioClip babyCryClip;
+    public AudioClip firstLineNoiseClip;
+    public AudioClip secondLineNoiseClip;
+    public AudioClip thirdLineNoiseClip;
+    public AudioClip crtNoiseClip;
     [Range(0f, 1f)] public float ambienceVolume = .32f;
 
     [Header("자동 연출 시간")]
@@ -46,6 +50,51 @@ public sealed class BattleMaryIntroController : MonoBehaviour
     [Min(0f)] public float knifeHoldSeconds = .75f;
 
     bool started;
+
+    [Header("메리 사진 켜짐 효과")]
+    [Min(0f)] public float photoGlitchSeconds = .18f;
+    [Min(.01f)] public float photoGlitchTickSeconds = .035f;
+    [Min(0f)] public float photoGlitchOffset = 5f;
+    readonly System.Collections.Generic.List<PhotoFlash> photoFlashes = new();
+
+    sealed class PhotoFlash
+    {
+        public UnityEngine.UI.Image image;
+        public Vector2 position;
+        public Color color;
+        public void Restore()
+        {
+            if (!image) return;
+            image.rectTransform.anchoredPosition = position;
+            image.color = color;
+        }
+    }
+
+    void FlashPhoto(UnityEngine.UI.Image image)
+    {
+        if (image && photoGlitchSeconds > 0f) StartCoroutine(FlashPhotoRoutine(image));
+    }
+
+    IEnumerator FlashPhotoRoutine(UnityEngine.UI.Image image)
+    {
+        var flash = new PhotoFlash { image = image, position = image.rectTransform.anchoredPosition, color = image.color };
+        photoFlashes.Add(flash);
+        float duration = photoGlitchSeconds;
+        for (float elapsed = 0f; elapsed < duration; elapsed += Time.unscaledDeltaTime)
+        {
+            if (!image || !image.gameObject.activeInHierarchy) break;
+            int tick = Mathf.FloorToInt(elapsed / Mathf.Max(.01f, photoGlitchTickSeconds));
+            float fade = 1f - elapsed / duration;
+            float offset = (tick % 2 == 0 ? 1f : -1f) * photoGlitchOffset * fade;
+            image.rectTransform.anchoredPosition = flash.position + new Vector2(offset, 0f);
+            float brightness = tick % 3 == 0 ? .12f : (tick % 3 == 1 ? .55f : 1f);
+            image.color = new Color(flash.color.r * brightness, flash.color.g * brightness,
+                flash.color.b * brightness, flash.color.a);
+            yield return null;
+        }
+        flash.Restore();
+        photoFlashes.Remove(flash);
+    }
 
     public bool IsReady => retrySequence && phaseOne && blackoutRoot && blackoutImage && introRoot &&
         heroineCard && maryCard && knifeRoot && ambienceSource && ambienceClip && bellClip && appearanceClip &&
@@ -77,20 +126,28 @@ public sealed class BattleMaryIntroController : MonoBehaviour
         blackoutRoot.transform.SetAsLastSibling();
         SetBlackoutAlpha(0f);
         screenInterference.SetLines(1);
+        PlayEffect(firstLineNoiseClip, .7f);
         yield return Wait(glitchPulseSeconds);
         screenInterference.SetLines(0);
         yield return Wait(Mathf.Max(0f, glitchStartGapSeconds - glitchPulseSeconds));
         screenInterference.SetLines(2);
+        PlayEffect(secondLineNoiseClip, .7f);
         yield return Wait(glitchPulseSeconds);
         screenInterference.SetLines(1);
+        PlayEffect(thirdLineNoiseClip, .7f);
         yield return Wait(glitchPulseSeconds);
         screenInterference.SetLines(0);
+        ambienceSource.clip = crtNoiseClip;
+        ambienceSource.loop = true;
+        ambienceSource.volume = .7f;
+        if (crtNoiseClip && crtFadeSeconds > 0f) ambienceSource.Play();
         for (float elapsed = 0f; elapsed < crtFadeSeconds; elapsed += Time.unscaledDeltaTime)
         {
             screenInterference.SetCRT(elapsed / crtFadeSeconds);
             yield return null;
         }
         screenInterference.SetCRT(1f);
+        ambienceSource.Stop();
         yield return Wait(blackoutSeconds);
 
         retrySequence.ApplyThemeAfterBlackout();
@@ -114,6 +171,7 @@ public sealed class BattleMaryIntroController : MonoBehaviour
         yield return Wait(heroineSeconds);
 
         maryArtwork.enabled = true;
+        FlashPhoto(maryArtwork);
         PlayEffect(appearanceClip, .7f);
         PlayEffect(maryVoiceClip, .5f);
         yield return Wait(marySeconds);
@@ -157,6 +215,7 @@ public sealed class BattleMaryIntroController : MonoBehaviour
         knifeRect.anchoredPosition = knifeDestination;
         yield return Wait(knifeHoldSeconds);
         phaseOne.RevealIntroCard(knifeCardIndex);
+        FlashPhoto(phaseOne.stages[0].cards[knifeCardIndex].artwork);
         for (float elapsed = 0f; elapsed < knifeFadeSeconds; elapsed += Time.unscaledDeltaTime)
         {
             knifeFadeGroup.alpha = 1f - elapsed / knifeFadeSeconds;
@@ -174,9 +233,11 @@ public sealed class BattleMaryIntroController : MonoBehaviour
             else if (revealed == 3) yield return Wait(remainingFacesDelay);
             else if (revealed > 3) yield return Wait(remainingFaceGap);
             phaseOne.RevealIntroCard(i);
+            FlashPhoto(phaseOne.stages[0].cards[i].artwork);
             revealed++;
         }
-        yield return null; // Keep exactly this board; unlock only after the final face is rendered.
+        while (photoFlashes.Count > 0) yield return null;
+        yield return null; // Unlock only after every photo has settled back to its authored appearance.
         blackoutRoot.SetActive(false);
         ambienceSource.Stop();
         retrySequence.effectsAudio.Stop();
@@ -195,7 +256,7 @@ public sealed class BattleMaryIntroController : MonoBehaviour
 
     void PlayEffect(AudioClip clip, float volume)
     {
-        retrySequence.effectsAudio.PlayOneShot(clip, volume);
+        if (clip) retrySequence.effectsAudio.PlayOneShot(clip, volume);
     }
 
     void SetBlackoutAlpha(float alpha)
@@ -246,6 +307,10 @@ public sealed class BattleMaryIntroController : MonoBehaviour
 
     void OnDisable()
     {
+        StopAllCoroutines();
+        foreach (var flash in photoFlashes) flash.Restore();
+        photoFlashes.Clear();
+        if (ambienceSource) ambienceSource.Stop();
         if (screenInterference) screenInterference.Clear();
     }
 }

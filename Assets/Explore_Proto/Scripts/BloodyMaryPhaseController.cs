@@ -243,7 +243,7 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
             order[i].transform.SetAsLastSibling();
             order[i].gameObject.SetActive(true);
             if (i + 1 < order.Length && cardSpawnGapSeconds > 0f)
-                yield return new WaitForSecondsRealtime(cardSpawnGapSeconds * Mathf.Pow(cardSpawnAcceleration, i));
+                yield return new WaitForSecondsRealtime(stageIndex > 0 ? cardSpawnGapSeconds : cardSpawnGapSeconds * Mathf.Pow(cardSpawnAcceleration, i));
             else
                 yield return null; // 마지막 카드가 렌더링된 뒤 입력과 제한 시간을 시작한다.
         }
