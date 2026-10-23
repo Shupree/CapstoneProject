@@ -18,6 +18,20 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
     }
     public enum PhaseState { NotStarted = 0, Running = 3, Completed = 4, Spawning = 5, Transition = 6 }
     public BattleProtoRetrySequence retrySequence;
+    [Header("메리 캠 등장 효과음 (01 → 02 → 03 반복)")]
+    public AudioSource camActivationSource;
+    public AudioClip camActivation01, camActivation02, camActivation03;
+    [Range(0f, 1f)] public float camActivationVolume = .55f;
+    int nextCamActivation;
+
+    public void PlayCamActivation()
+    {
+        if (!camActivationSource) return;
+        AudioClip clip = nextCamActivation == 0 ? camActivation01 : nextCamActivation == 1 ? camActivation02 : camActivation03;
+        if (!clip) return;
+        camActivationSource.PlayOneShot(clip, camActivationVolume);
+        nextCamActivation = (nextCamActivation + 1) % 3;
+    }
     [Header("기존 인터넷 UI 참조 (배틀에서 숨김)")]
     public GameObject internetWindow, exorcismContent, keywordPopup;
     public RectTransform clearedInternetWindow;
@@ -135,6 +149,7 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
         if (!card.gameObject.activeInHierarchy) return;
         // Preserve the intro's stacking, especially the single knife card at the knife tip.
         card.artwork.enabled = true;
+        PlayCamActivation();
     }
 
     public bool BeginAfterIntro()
@@ -242,6 +257,7 @@ public sealed class BloodyMaryPhaseController : MonoBehaviour
         {
             order[i].transform.SetAsLastSibling();
             order[i].gameObject.SetActive(true);
+            PlayCamActivation();
             if (i + 1 < order.Length && cardSpawnGapSeconds > 0f)
                 yield return new WaitForSecondsRealtime(stageIndex > 0 ? cardSpawnGapSeconds : cardSpawnGapSeconds * Mathf.Pow(cardSpawnAcceleration, i));
             else

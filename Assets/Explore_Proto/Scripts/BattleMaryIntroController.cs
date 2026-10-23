@@ -171,6 +171,7 @@ public sealed class BattleMaryIntroController : MonoBehaviour
         yield return Wait(heroineSeconds);
 
         maryArtwork.enabled = true;
+        phaseOne.PlayCamActivation();
         FlashPhoto(maryArtwork);
         PlayEffect(appearanceClip, .7f);
         PlayEffect(maryVoiceClip, .5f);
@@ -202,10 +203,18 @@ public sealed class BattleMaryIntroController : MonoBehaviour
         Vector2 knifeDestination = knifeRect.anchoredPosition;
         // 활성화 전에 화면 밖 출발점으로 옮겨 도착 위치가 한 프레임 보이지 않게 한다.
         var knifeParent = (RectTransform)knifeRect.parent;
-        float knifeHalfWidth = knifeRect.rect.width * knifeRect.localScale.x * .5f;
-        // 해상도가 바뀌어도 손 이미지 오른쪽이 통화창 밖에서 잘리지 않게 한다.
-        knifeDestination.x = Mathf.Min(knifeDestination.x, knifeParent.rect.xMax - knifeHalfWidth - 50f);
-        Vector2 knifeStart = new(knifeParent.rect.xMax + knifeHalfWidth + 50f, knifeDestination.y);
+        // 전체 화면 오른쪽 바깥에 이미지의 왼쪽 끝까지 숨긴 상태로 출발한다.
+        // 앵커·피벗·크기를 바꾸어도 씬에 지정한 도착 위치는 유지한다.
+        var canvas = knifeRect.GetComponentInParent<Canvas>().rootCanvas;
+        var canvasCamera = canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(knifeParent,
+            new Vector2(Screen.width, Screen.height * .5f), canvasCamera, out var screenRight);
+        var corners = new Vector3[4];
+        knifeRect.GetWorldCorners(corners);
+        float leftEdge = float.PositiveInfinity;
+        foreach (var corner in corners)
+            leftEdge = Mathf.Min(leftEdge, knifeParent.InverseTransformPoint(corner).x);
+        Vector2 knifeStart = knifeDestination + Vector2.right * Mathf.Max(0f, screenRight.x - leftEdge + 50f);
         knifeRect.anchoredPosition = knifeStart;
         knifeRoot.SetActive(true);
         knifeRoot.transform.SetAsLastSibling();
