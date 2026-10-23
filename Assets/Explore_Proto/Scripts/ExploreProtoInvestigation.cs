@@ -11,6 +11,8 @@ public sealed class ExploreProtoInvestigation : MonoBehaviour
     public struct Clue
     {
         public string id;
+        public bool optional;
+        public bool excludeFromMemo;
         [TextArea(2, 5)] public string memoText;
     }
 
@@ -24,6 +26,8 @@ public sealed class ExploreProtoInvestigation : MonoBehaviour
     [Header("탐색 씬 독백")]
     public BottomDialogueController bottomDialogue;
     public bool stopAfterResearch;
+    public ExploreResearchQuestions researchQuestions;
+    public string nicknameDialogueSceneId = "Explore_FamiliarNickname";
     public string memoryDialogueSceneId = "Explore_ClueMemory";
     public string completionDialogueSceneId = "Explore_ResearchComplete";
 
@@ -53,6 +57,8 @@ public sealed class ExploreProtoInvestigation : MonoBehaviour
 
     public bool IsClue(string id) => Array.Exists(clues, clue => clue.id == id);
     public bool IsCollected(string id) => collected.Contains(id);
+    public int RequiredClueCount => Array.FindAll(clues, c => !c.optional).Length;
+    public int RequiredCollectedCount => Array.FindAll(clues, c => !c.optional && collected.Contains(c.id)).Length;
 
     public string[] CollectedClueIds => collectionOrder.ToArray();
 
@@ -83,7 +89,9 @@ public sealed class ExploreProtoInvestigation : MonoBehaviour
         RefreshNotes();
         SetArticleHint(id);
         if (stopAfterResearch && id == "mary_weakness") QueueMonologue(memoryDialogueSceneId);
-        if (collected.Count == clues.Length && !completionShown)
+        if (researchQuestions && id == "mary_comment") QueueMonologue(nicknameDialogueSceneId);
+        if (researchQuestions) researchQuestions.RefreshChoices();
+        if (!researchQuestions && RequiredCollectedCount == RequiredClueCount && !completionShown)
         {
             completionShown = true;
             if (stopAfterResearch) QueueMonologue(completionDialogueSceneId);
@@ -116,8 +124,10 @@ public sealed class ExploreProtoInvestigation : MonoBehaviour
         var notes = new StringBuilder();
         foreach (var savedId in collectionOrder)
         {
+            var clue = Array.Find(clues, clue => clue.id == savedId);
+            if (clue.excludeFromMemo) continue;
             if (notes.Length > 0) notes.Append("\n\n");
-            notes.Append("• ").Append(Array.Find(clues, clue => clue.id == savedId).memoText);
+            notes.Append("• ").Append(clue.memoText);
         }
         memoNotes.text = notes.ToString();
     }
@@ -125,9 +135,11 @@ public sealed class ExploreProtoInvestigation : MonoBehaviour
     public void SetArticleHint(string id)
     {
         if (!string.IsNullOrEmpty(id) && IsClue(id))
-            articleHint.text = IsCollected(id) ? "메모장에 기록한 정보입니다." : "클릭하면 메모장에 기록됩니다.";
+            articleHint.text = Array.Find(clues, c => c.id == id).excludeFromMemo
+                ? (IsCollected(id) ? "확인한 단서입니다." : "클릭하면 단서를 확인합니다.")
+                : (IsCollected(id) ? "메모장에 기록한 정보입니다." : "클릭하면 메모장에 기록됩니다.");
         else
-            articleHint.text = "문장 위에 마우스를 올려 단서를 살펴보세요.  " + collected.Count + "/" + clues.Length;
+            articleHint.text = "문장 위에 마우스를 올려 단서를 살펴보세요.  필수 " + RequiredCollectedCount + "/" + RequiredClueCount;
     }
 
     public void DismissMonologue()

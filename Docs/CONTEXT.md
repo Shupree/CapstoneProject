@@ -21,10 +21,12 @@
 | 화상통화 카드 프리팹 | `Assets/Prefab/BloodyMaryCall` |
 | 기존 민서 의뢰 프로토타입 | `Assets/Scenes/CyberExorcistPrototype.unity`, `Assets/CyberExorcist` |
 
-- 현재 `Explore_Proto`는 메일 의뢰 확인 → 이서연 메신저 등록·첫 통화 → 블러디 메리 검색과 단서 5개 수집 → 두 줄 독백까지 진행한다. 탐색 완료 시 배틀로 자동 이동하지 않는다. `Battle_Proto` 단독 실행은 조사 완료 상태에서 시작한다.
+- 현재 `Explore_Proto`는 메일·첫 통화 이후 필수 단서 5개와 선택 단서 1개를 조사한다. `ExploreResearchQuestions`가 수집 단서별 메신저 질문을 표시하며, 닉네임 단서와 친구 상황·부작용 질문 완료로 전말 질문과 두 번째 통화를 연다. 닉네임 단서는 독백만 표시하고 메모에서는 제외한다. 필수 조사 완료는 필수 단서 5개와 두 번째 통화 완료 기준이며 선택 단서는 제외된다. 탐색 완료 시 배틀로 자동 이동하지 않는다. `Battle_Proto` 단독 실행은 조사 완료 상태에서 시작한다.
 - 배틀 통화는 유미나·이서연 2인이다. `BattleProtoConversation`의 Element 12 이후 `BattleMaryIntroController`가 전체 화면 가로 지직거림·CRT 암전, 종소리와 주인공·캠 프레임 등장, 딸깍 소리와 메리 등장을 순서대로 진행한다. 빈 프레임 9장이 기존 인물을 덮은 뒤 손이 다가오고, 칼끝이 닿는 손 왼쪽 프레임에 칼 든 메리가 먼저 나타난다. 손이 2초간 사라진 뒤 나머지 얼굴이 차례로 채워지고 같은 배치로 1페이즈가 시작된다. 시간은 해당 컴포넌트 Inspector에서 조절한다. 전체 화면 효과는 `BattleInterferenceRendererFeature`와 카메라의 `BattleScreenInterference`를 사용한다.
 - 현재 배틀 1페이즈는 화상통화 카드 퍼즐이다. 9장/칼 1개 → 12장/칼 3개 → 18장/칼 5개, 각 파트 전체 표시 후 10초 제한을 적용한다. 2·3파트의 카드는 처음부터 0.15초 고정 간격으로 등장한다. 이후 2페이즈에서는 붉은 문구에서 음절을 골라 문장을 완성한다. 1파트 문구는 입력창 위에서 생성되고 3.4초 간격으로 바뀐다. 2파트의 사람 형상은 `Assets/Sprite/ProtoType/Phase2_Part2.png` 한 장으로 표시하며 씬에 저장된 클릭 영역으로 음절을 선택한다.
 - 이전 인터넷 이미지·어절 수집 코드가 남아 있으므로 현재 활성 흐름은 씬의 연결을 기준으로 확인한다. 저장·불러오기는 미구현이다.
+
+- 탐색 메신저는 ‘말을 건다.’ 선택 → 인사 3개 → ‘화상통화를 연결한다.’ 선택으로 진행한다. 통화는 오른쪽 `EmbeddedVideoCall`에서 2초간 연결중 표시 후 두 인물과 `BottomDialogueSystem`을 표시한다. `Explore_FirstCall.csv`의 `AcquireBloodyMary` 이벤트 줄에서 키워드를 자동 획득하며, 종료 후 별도 획득 버튼 없이 메신저로 복귀한다. 나레이션은 화자 이름을 비운다. 연결 대기 중 창 이동이 가능하며 시간은 `ExploreProtoMessenger.callConnectSeconds`에서 조절한다.
 
 ## 필요한 작업에서만 읽을 문서
 

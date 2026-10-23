@@ -73,3 +73,6 @@ MonoBehaviour:
   - speakerId: "\uBA54\uB9AC"
     side: 2
     defaultImageId: Merry
+  - speakerId: "\uC758\uB8B0\uC778"
+    side: 2
+    defaultImageId: Client_1

@@ -46,6 +46,23 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     public Sprite heroineCallSprite, siyulCallSprite;
     private CallLine[] callLines = Array.Empty<CallLine>();
     public VideoCallPortraits callPortraits;
+    [Header("탐색 메신저 내부 통화")]
+    public BottomDialogueController callBottomDialogue;
+    public GameObject embeddedCallPanel, embeddedClientCard, connectingLabel, connectedControls;
+    [Min(0f)] public float callConnectSeconds = 2f;
+    private bool embeddedCallActive;
+    private string activeEmbeddedSceneId = FirstCallSceneId;
+    private DialogueCsvReader activeEmbeddedReader;
+    public bool HasCompletedFirstCall => callCompleted;
+    public bool IsEmbeddedCallActive => embeddedCallActive;
+    public event Action<string> EmbeddedCallCompleted;
+    public event Action<string> EmbeddedCallFailed;
+    public ExploreProtoWindowDrag embeddedWindowDrag;
+    private bool dragWasEnabled;
+    [Header("탐색 통화 전 메신저 인사")]
+    public GameObject[] openingMessages = Array.Empty<GameObject>();
+    [Min(0f)] public float openingMessageGap = .7f;
+    private bool openingStarted, openingCompleted;
     public SiteEntry[] siteEntries;
     private int lineIndex;
     private bool callCompleted, bloodyMaryStored, bloodyMarySelected;
@@ -131,8 +148,16 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
 
     private void Awake()
     {
+        if (callBottomDialogue) callBottomDialogue.DialogueCompleted += OnEmbeddedCallCompleted;
+        if (callBottomDialogue) callBottomDialogue.LineShown += OnEmbeddedCallLine;
         var callDataReady = LoadCallLinesFromCsv();
         callButton.interactable = callDataReady;
+        if (gameObject.scene.name == "Explore_Proto" && openingMessages.Length > 0)
+        {
+            foreach (var message in openingMessages) if (message) message.SetActive(false);
+            callButton.GetComponentInChildren<TMP_Text>(true).text = "말을 건다.";
+            addKeywordButton.gameObject.SetActive(false);
+        }
         if (gameObject.scene.name == "Explore_Proto")
         {
             // 탐색 씬에서는 기존 메일·메신저·메모 아이콘의 역할을 분리한다.
@@ -235,7 +260,11 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         window.SetActive(open);
         if (open) window.transform.SetAsLastSibling();
     }
-    public void CloseMessenger() => messengerWindow.SetActive(false);
+    public void CloseMessenger()
+    {
+        if (embeddedCallActive) return;
+        messengerWindow.SetActive(false);
+    }
     public void CloseMemo() => memoWindow.SetActive(false);
     public void CloseInternet()
     {
@@ -247,12 +276,120 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     {
         if (gameObject.scene.name == "Explore_Proto" && !contactRegistered) return;
         if (callCompleted || callLines.Length == 0) return;
+        if (gameObject.scene.name == "Explore_Proto" && openingMessages.Length > 0 && !openingCompleted)
+        {
+            if (!openingStarted) StartCoroutine(ShowOpeningMessages());
+            return;
+        }
+        if (embeddedCallActive) return;
+        if (gameObject.scene.name == "Explore_Proto" && embeddedCallPanel && callBottomDialogue)
+        {
+            if (callBottomDialogue.IsPlaying) return;
+            embeddedCallActive = true;
+            activeEmbeddedSceneId = FirstCallSceneId;
+            activeEmbeddedReader = callDialogueReader;
+            if (embeddedWindowDrag) dragWasEnabled = embeddedWindowDrag.enabled;
+            callButton.gameObject.SetActive(false);
+            ShowMessenger();
+            conversationScroll.gameObject.SetActive(false);
+            embeddedCallPanel.SetActive(true);
+            embeddedClientCard.SetActive(false);
+            connectingLabel.SetActive(true);
+            connectedControls.SetActive(false);
+            if (callPortraits) callPortraits.ResetToDefaults();
+            StartCoroutine(ConnectEmbeddedCall());
+            return;
+        }
         if (gameObject.scene.name != "Explore_Proto") MarkMessengerRead();
         lineIndex = 0; callCompleted = false; callButton.gameObject.SetActive(false);
         if (callPortraits) callPortraits.ResetToDefaults();
         callWindow.SetActive(true); callWindow.transform.SetAsLastSibling(); ShowCallLine();
     }
     public void CloseCall() => callWindow.SetActive(false);
+    public bool StartAdditionalCall(string sceneId, DialogueCsvReader reader)
+    {
+        if (!callCompleted || embeddedCallActive || !embeddedCallPanel || !callBottomDialogue ||
+            callBottomDialogue.IsPlaying || !reader || !reader.TryGetScene(sceneId, out var lines) || lines.Count == 0) return false;
+        activeEmbeddedSceneId = sceneId;
+        activeEmbeddedReader = reader;
+        embeddedCallActive = true;
+        if (embeddedWindowDrag) dragWasEnabled = embeddedWindowDrag.enabled;
+        ShowMessenger();
+        conversationScroll.gameObject.SetActive(false);
+        embeddedCallPanel.SetActive(true);
+        embeddedClientCard.SetActive(false);
+        connectingLabel.SetActive(true);
+        connectedControls.SetActive(false);
+        if (callPortraits) callPortraits.ResetToDefaults();
+        StartCoroutine(ConnectEmbeddedCall());
+        return true;
+    }
+    private System.Collections.IEnumerator ShowOpeningMessages()
+    {
+        openingStarted = true;
+        callButton.gameObject.SetActive(false);
+        foreach (var message in openingMessages)
+        {
+            if (message) message.SetActive(true);
+            ScrollConversationToLatest();
+            yield return new WaitForSecondsRealtime(openingMessageGap);
+        }
+        openingCompleted = true;
+        callButton.GetComponentInChildren<TMP_Text>(true).text = "화상통화를 연결한다.";
+        callButton.gameObject.SetActive(true);
+        ScrollConversationToLatest();
+    }
+    private System.Collections.IEnumerator ConnectEmbeddedCall()
+    {
+        yield return new WaitForSecondsRealtime(callConnectSeconds);
+        connectingLabel.SetActive(false);
+        embeddedClientCard.SetActive(true);
+        connectedControls.SetActive(true);
+        if (embeddedWindowDrag) embeddedWindowDrag.enabled = false;
+        if (!callBottomDialogue.StartDialogue(activeEmbeddedSceneId, activeEmbeddedReader))
+        {
+            RestoreMessengerAfterCall();
+            if (activeEmbeddedSceneId == FirstCallSceneId) callButton.gameObject.SetActive(true);
+            EmbeddedCallFailed?.Invoke(activeEmbeddedSceneId);
+        }
+    }
+    private void RestoreMessengerAfterCall()
+    {
+        embeddedCallActive = false;
+        if (embeddedWindowDrag) embeddedWindowDrag.enabled = dragWasEnabled;
+        embeddedCallPanel.SetActive(false);
+        conversationScroll.gameObject.SetActive(true);
+    }
+    private void OnEmbeddedCallCompleted(string sceneId)
+    {
+        if (!embeddedCallActive || sceneId != activeEmbeddedSceneId) return;
+        RestoreMessengerAfterCall();
+        if (sceneId != FirstCallSceneId)
+        {
+            ScrollConversationToLatest();
+            EmbeddedCallCompleted?.Invoke(sceneId);
+            return;
+        }
+        callCompleted = true;
+        lineIndex = callLines.Length;
+        recordingButton.gameObject.SetActive(true);
+        if (linkMessage) linkMessage.gameObject.SetActive(true);
+        linkButtonObject.SetActive(false); // 통화 중 CSV 이벤트에서 키워드를 자동 획득한다.
+        ScrollConversationToLatest();
+        EmbeddedCallCompleted?.Invoke(sceneId);
+    }
+    private void OnDestroy()
+    {
+        if (callBottomDialogue) callBottomDialogue.DialogueCompleted -= OnEmbeddedCallCompleted;
+        if (callBottomDialogue) callBottomDialogue.LineShown -= OnEmbeddedCallLine;
+    }
+    private void OnEmbeddedCallLine(DialogueLine line)
+    {
+        if (!embeddedCallActive || callBottomDialogue.CurrentSceneId != activeEmbeddedSceneId) return;
+        if (line.EventID == "AcquireBloodyMary" && !bloodyMaryStored) AddBloodyMaryKeyword();
+        if (callPortraits) callPortraits.Apply(line.Image == heroineCallImageId ? heroineCallSprite : null,
+            line.Image == siyulCallImageId ? siyulCallSprite : null, null);
+    }
     public void AdvanceCall()
     {
         if (!callWindow.activeSelf) return;

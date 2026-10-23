@@ -26,6 +26,7 @@ public sealed class BottomDialogueController : MonoBehaviour
     public string CurrentSceneId => currentSceneId;
     /// <summary>마지막 줄을 닫은 뒤 외부 진행 코드에 완료된 대화 묶음을 알린다.</summary>
     public event Action<string> DialogueCompleted;
+    public event Action<DialogueLine> LineShown;
 
     /// <summary>미리 배치한 클릭 영역만 연결한다. 게임 오브젝트는 생성하지 않는다.</summary>
     private void Awake()
@@ -48,14 +49,18 @@ public sealed class BottomDialogueController : MonoBehaviour
     /// <summary>지정한 SceneID의 CSV 대화를 시작한다. 기존 화상통화와 같은 리더를 사용한다.</summary>
     /// <returns>CSV와 필수 참조를 읽고 첫 줄을 표시했으면 true.</returns>
     public bool StartDialogue(string sceneId)
+        => StartDialogue(sceneId, dialogueReader);
+
+    // 통화처럼 별도 CSV를 쓰는 호출도 기존 독백 리더를 변경하지 않고 재사용한다.
+    public bool StartDialogue(string sceneId, DialogueCsvReader source)
     {
-        if (!dialogueReader || !view || !view.IsConfigured || !portraitLibrary)
+        if (!source || !view || !view.IsConfigured || !portraitLibrary)
         {
             Debug.LogError("하단 대화창의 CSV 리더, UI 또는 초상화 라이브러리 연결을 확인해 주세요.", this);
             return false;
         }
 
-        if (!dialogueReader.TryGetScene(sceneId, out var loadedLines) || loadedLines.Count == 0)
+        if (!source.TryGetScene(sceneId, out var loadedLines) || loadedLines.Count == 0)
         {
             Debug.LogError($"하단 대화 CSV에서 SceneID '{sceneId}'를 찾지 못했습니다.", this);
             return false;
@@ -159,6 +164,7 @@ public sealed class BottomDialogueController : MonoBehaviour
         }
 
         view.ShowLine(line.SpeakerID, line.Dialogue, leftSprite, rightSprite, side);
+        LineShown?.Invoke(line);
         if (!string.IsNullOrEmpty(line.EventID))
             onEventRequested.Invoke(line.EventID);
     }
