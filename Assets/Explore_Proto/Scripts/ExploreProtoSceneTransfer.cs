@@ -56,7 +56,7 @@ public static class ExploreProtoSceneTransfer
         desktop.RestoreCompletedDesktop(state);
         if (state != null) RestoreScrolls(desktop.DesktopScrolls, state.scrolls);
         var battle = desktop.GetComponent<BattleProtoConversation>();
-        if (battle) battle.BeginPreparation();
+        if (battle) battle.BeginCall();
     }
 
     public static void EnterBattle(ExploreProtoMessenger desktop)
@@ -85,8 +85,11 @@ public static class ExploreProtoSceneTransfer
     {
         ResetSession();
         Debug.LogError(message, desktop);
-        desktop.investigation.replyLabel.text = "배틀 씬으로 이동 다시 시도";
-        desktop.investigation.replyButton.gameObject.SetActive(true);
+        if (desktop.investigation && !desktop.investigation.stopAfterResearch)
+        {
+            desktop.investigation.replyLabel.text = "배틀 씬으로 이동 다시 시도";
+            desktop.investigation.replyButton.gameObject.SetActive(true);
+        }
     }
 
     public static WindowState[] CaptureWindows(GameObject[] windows)

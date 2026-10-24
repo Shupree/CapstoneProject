@@ -7,8 +7,6 @@ using UnityEngine;
 public sealed class BattleProtoConversation : MonoBehaviour
 {
     public ExploreProtoMessenger messenger;
-    public GameObject[] preparationMessages;
-    public UnityEngine.UI.Button startCallButton;
     public GameObject groupCallWindow;
     [Serializable]
     public struct CallLine
@@ -30,27 +28,24 @@ public sealed class BattleProtoConversation : MonoBehaviour
     public BattleProtoRetrySequence retrySequence;
     public VideoCallPortraits callPortraits;
     [Header("테마 전환")]
-    [Min(0)] public int themeChangeAfterElement = 12;
+    [Min(0)] public int themeChangeAfterElement = 10;
     bool initialized;
     bool callStarted, waitingForSound;
     int callIndex;
 
     void Awake()
     {
-        foreach (var message in preparationMessages) message.SetActive(false);
-        startCallButton.gameObject.SetActive(false);
-        startCallButton.onClick.AddListener(OpenGroupCall);
+        groupCallWindow.SetActive(false);
         nextButton.onClick.AddListener(AdvanceDialogue);
     }
 
     // Called after the exploration state has been restored, for both entry paths.
-    public void BeginPreparation()
+    public void BeginCall()
     {
         if (initialized) return;
         initialized = true;
-        foreach (var message in preparationMessages) message.SetActive(true);
-        startCallButton.gameObject.SetActive(true);
-        messenger.ShowMessenger();
+        messenger.CloseMessenger();
+        OpenGroupCall();
     }
 
     public void OpenGroupCall()

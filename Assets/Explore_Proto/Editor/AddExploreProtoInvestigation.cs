@@ -21,7 +21,7 @@ public static class AddExploreProtoInvestigation
         if (!messenger || messenger.GetComponent<ExploreProtoInvestigation>())
             throw new InvalidOperationException("Investigation UI already exists, or the desktop is missing. Edit the saved objects.");
         var canvas = messenger.messengerWindow.transform.parent;
-        font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/Explore_Proto/Fonts/ExploreProtoKorean.asset");
+        font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/TextMesh Pro/Fonts/GalmuriMono11 SDF 1.asset");
         Undo.RegisterFullObjectHierarchyUndo(canvas.gameObject, "Add Explore Proto investigation UI");
         Undo.RecordObject(messenger, "Connect investigation UI");
         var investigation = Undo.AddComponent<ExploreProtoInvestigation>(messenger.gameObject);

@@ -17,6 +17,7 @@ public sealed class ExploreResearchQuestions : MonoBehaviour
     public Topic[] topics;
     public GameObject choicesRoot;
     public UnityEngine.UI.Button truthCallButton;
+    public ExploreProtoNightSequence nightSequence;
     public DialogueCsvReader truthCallReader;
     public string truthCallSceneId = "Explore_TruthCall";
     [Min(0f)] public float messageGapSeconds = .7f;
@@ -45,15 +46,18 @@ public sealed class ExploreResearchQuestions : MonoBehaviour
     public void RefreshChoices()
     {
         bool ready = messenger.HasCompletedFirstCall && !busy && !messenger.IsEmbeddedCallActive;
+        bool timeAdvanced = nightSequence && nightSequence.IsTimeAdvanced;
         bool any = false;
         foreach (var topic in topics)
         {
-            bool show = ready && !callPending && Available(topic);
+            bool show = ready && !timeAdvanced && !callPending && Available(topic);
             topic.button.gameObject.SetActive(show);
             any |= show;
         }
-        truthCallButton.gameObject.SetActive(ready && callPending);
-        choicesRoot.SetActive(any || (ready && callPending));
+        bool showTruthCall = ready && !timeAdvanced && callPending;
+        truthCallButton.gameObject.SetActive(showTruthCall);
+        bool showNightChoice = nightSequence && nightSequence.RefreshChoice(ready);
+        choicesRoot.SetActive(any || showTruthCall || showNightChoice);
     }
     void Ask(Topic topic)
     {

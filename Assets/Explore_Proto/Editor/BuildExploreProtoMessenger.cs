@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public static class BuildExploreProtoMessenger
 {
+    const string GalmuriFontPath = "Assets/TextMesh Pro/Fonts/GalmuriMono11 SDF 1.asset";
     static Transform Make(Transform parent,string name,Vector2 pos,Vector2 size,Color color,Sprite sprite=null,bool raycast=false)
     {
         var go=new GameObject(name,typeof(RectTransform),typeof(CanvasRenderer),typeof(Image)); go.transform.SetParent(parent,false);
@@ -18,7 +19,7 @@ public static class BuildExploreProtoMessenger
     {
         var g=new GameObject(n,typeof(RectTransform),typeof(CanvasRenderer),typeof(TextMeshProUGUI)); g.transform.SetParent(p,false);
         var r=(RectTransform)g.transform;r.anchorMin=r.anchorMax=new Vector2(.5f,.5f);r.pivot=new Vector2(.5f,.5f);r.anchoredPosition=pos;r.sizeDelta=size;
-        var t=g.GetComponent<TextMeshProUGUI>(); t.text=value;t.font=AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/CyberExorcist/Fonts/PrototypeKorean.asset");t.fontSize=font;t.color=color;t.alignment=align;t.enableWordWrapping=true;t.raycastTarget=false; return t;
+        var t=g.GetComponent<TextMeshProUGUI>(); t.text=value;t.font=AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GalmuriFontPath);t.fontSize=font;t.color=color;t.alignment=align;t.enableWordWrapping=true;t.raycastTarget=false; return t;
     }
     static Button Button(Transform p,string n,string label,Vector2 pos,Vector2 size,Color bg,Color fg,int font)
     {
@@ -35,8 +36,8 @@ public static class BuildExploreProtoMessenger
         var canvas=GameObject.Find("ExploreProtoCanvas"); if(!canvas) throw new System.Exception("ExploreProtoCanvas not found");
         var root=canvas.transform;
         if(root.Find("MessengerWindow")) throw new System.Exception("Messenger UI already exists. Edit the saved scene instead of rebuilding it.");
-        var font=AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/CyberExorcist/Fonts/PrototypeKorean.asset");
-        if(!font) throw new System.Exception("PrototypeKorean font missing");
+        var font=AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GalmuriFontPath);
+        if(!font) throw new System.Exception("GalmuriMono11 font missing");
         var player=AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprite/ProtoType/SpriteNew/Heroine_1.png");
         var caller=AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprite/ProtoType/SpriteNew/Client_1.png");
         var callCsv=AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Explore_Proto/Data/Explore_FirstCall.csv");
@@ -108,26 +109,18 @@ public static class BuildExploreProtoMessenger
         Debug.Log("Explore_Proto messenger UI built and saved.");
     }
 
-    [MenuItem("Explore Proto/Use Local Prototype Font")]
+    [MenuItem("Explore Proto/Use Galmuri 11 Font")]
     public static void UseLocalFont()
     {
-        const string source="Assets/CyberExorcist/Fonts/PrototypeKorean.asset";
-        const string local="Assets/Explore_Proto/Fonts/ExploreProtoKorean.asset";
-        AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
-        if(!AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(local))
-        {
-            if(!AssetDatabase.CopyAsset(source,local)) throw new System.Exception("Could not copy prototype font into Explore_Proto.");
-            AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
-        }
-        var font=AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(local);
+        var font=AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GalmuriFontPath);
         var canvas=GameObject.Find("ExploreProtoCanvas");
-        if(!font||!canvas) throw new System.Exception("Local font or ExploreProtoCanvas was not found.");
+        if(!font||!canvas) throw new System.Exception("GalmuriMono11 font or ExploreProtoCanvas was not found.");
         foreach(var text in canvas.GetComponentsInChildren<TMP_Text>(true)) text.font=font;
         var controller=Object.FindObjectOfType<ExploreProtoMessenger>();
         if(controller) controller.messengerButton=GameObject.Find("Button_Messenger").GetComponent<Button>();
         var scene=SceneManager.GetSceneByPath("Assets/Scenes/Explore_Proto.unity");
         if(controller) EditorUtility.SetDirty(controller);
         EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);
-        Debug.Log("Explore_Proto TMP labels now use their local font asset.");
+        Debug.Log("Explore_Proto TMP labels now use GalmuriMono11.");
     }
 }

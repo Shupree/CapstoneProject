@@ -10,7 +10,7 @@ public static class AuthorBattleCallPhaseTwo
 {
     const string ScenePath = "Assets/Scenes/Battle_Proto.unity";
     const string CardPath = "Assets/Prefab/BloodyMaryCall/CallCard.prefab";
-    const string FontPath = "Assets/Explore_Proto/Fonts/ExploreProtoKorean.asset";
+    const string FontPath = "Assets/TextMesh Pro/Fonts/GalmuriMono11 SDF 1.asset";
     static readonly Color Red = new(1f, .07f, .1f, 1f);
     static TMP_FontAsset font;
     // 레퍼런스처럼 윗부분은 촘촘히 채우고 눈 주변은 특수기호로 남긴다.

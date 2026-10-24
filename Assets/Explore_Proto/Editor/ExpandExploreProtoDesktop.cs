@@ -25,7 +25,7 @@ public static class ExpandExploreProtoDesktop
     {
         var go=new GameObject(name,typeof(RectTransform),typeof(CanvasRenderer),typeof(TextMeshProUGUI));go.transform.SetParent(parent,false);
         var r=(RectTransform)go.transform;r.anchorMin=r.anchorMax=new Vector2(.5f,.5f);r.pivot=new Vector2(.5f,.5f);r.anchoredPosition=pos;r.sizeDelta=size;
-        var t=go.GetComponent<TextMeshProUGUI>();t.text=value;t.font=AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/Explore_Proto/Fonts/ExploreProtoKorean.asset");t.fontSize=font;t.color=color;t.alignment=align;t.enableWordWrapping=true;t.raycastTarget=false;return t;
+        var t=go.GetComponent<TextMeshProUGUI>();t.text=value;t.font=AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/TextMesh Pro/Fonts/GalmuriMono11 SDF 1.asset");t.fontSize=font;t.color=color;t.alignment=align;t.enableWordWrapping=true;t.raycastTarget=false;return t;
     }
     static Button Btn(Transform p,string name,string label,Vector2 pos,Vector2 size,Color color,int font=34,Sprite sprite=null)
     {

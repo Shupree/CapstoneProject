@@ -224,12 +224,19 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         messengerWindow.SetActive(true);
         messengerWindow.transform.SetAsLastSibling();
         if (gameObject.scene.name != "Explore_Proto") MarkMessengerRead();
-        if (callCompleted) ScrollConversationToLatest();
+        if (gameObject.scene.name == "Explore_Proto" && !openingStarted && !callCompleted)
+            ScrollConversationToTop();
+        else if (callCompleted || openingStarted)
+            ScrollConversationToLatest();
         if (investigation && (gameObject.scene.name != "Explore_Proto" || contactRegistered))
             investigation.OnMessengerRead();
     }
     /// <summary>메일에서 친구 추가를 마친 뒤 탐색 씬의 통화를 허용한다.</summary>
-    public void SetContactRegistered(bool registered) => contactRegistered = registered;
+    public void SetContactRegistered(bool registered)
+    {
+        contactRegistered = registered;
+        if (registered) ScrollConversationToTop();
+    }
     public void ReceiveUnreadMessage()
     {
         unreadCount.text = "1";
@@ -237,11 +244,24 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     }
     public void ScrollConversationToLatest()
     {
-        if (!conversationScroll || !messengerWindow.activeInHierarchy) return;
+        ScrollConversationTo(0f);
+    }
+
+    private void ScrollConversationToTop()
+    {
+        ScrollConversationTo(1f);
+    }
+
+    private void ScrollConversationTo(float position)
+    {
+        if (!conversationScroll || !conversationScroll.isActiveAndEnabled || !messengerWindow.activeInHierarchy) return;
         Canvas.ForceUpdateCanvases();
         LayoutRebuilder.ForceRebuildLayoutImmediate(conversationScroll.content);
+        Canvas.ForceUpdateCanvases();
         conversationScroll.StopMovement();
-        conversationScroll.verticalNormalizedPosition = 0f;
+        // 대화가 화면보다 짧으면 아래 정렬로 밀리지 않도록 위에 고정한다.
+        conversationScroll.verticalNormalizedPosition =
+            conversationScroll.content.rect.height <= conversationScroll.viewport.rect.height ? 1f : position;
     }
     private void MarkMessengerRead()
     {
@@ -328,10 +348,12 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     {
         openingStarted = true;
         callButton.gameObject.SetActive(false);
-        foreach (var message in openingMessages)
+        for (int i = 0; i < openingMessages.Length; i++)
         {
+            var message = openingMessages[i];
             if (message) message.SetActive(true);
-            ScrollConversationToLatest();
+            if (i == 0) ScrollConversationToTop();
+            else ScrollConversationToLatest();
             yield return new WaitForSecondsRealtime(openingMessageGap);
         }
         openingCompleted = true;

@@ -148,6 +148,8 @@ MonoBehaviour:
   nameBar: {fileID: 5686329101123020152}
   speakerText: {fileID: 7297782901916529412}
   dialogueText: {fileID: 922082744530797509}
+  screenDimmer: {fileID: 0}
+  barOnly: 0
   speakingTint: {r: 1, g: 1, b: 1, a: 1}
   listeningTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!114 &5220364859126453312
@@ -358,8 +360,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0dab96e280266ea4a97fc5c23a3db018, type: 2}
-  m_sharedMaterial: {fileID: 4677773145766736754, guid: 0dab96e280266ea4a97fc5c23a3db018, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: eeb43719f3f8b074c883376ceb2a11e2, type: 2}
+  m_sharedMaterial: {fileID: 9217577605646544919, guid: eeb43719f3f8b074c883376ceb2a11e2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -570,8 +572,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0dab96e280266ea4a97fc5c23a3db018, type: 2}
-  m_sharedMaterial: {fileID: 4677773145766736754, guid: 0dab96e280266ea4a97fc5c23a3db018, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: eeb43719f3f8b074c883376ceb2a11e2, type: 2}
+  m_sharedMaterial: {fileID: 9217577605646544919, guid: eeb43719f3f8b074c883376ceb2a11e2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
