@@ -498,7 +498,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1628143727}
   m_Father: {fileID: 384670440}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -619,6 +620,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExploreProtoArticleLinks
   article: {fileID: 26489643}
+  revealedLayer: {fileID: 1628143729}
+  revealedTextSizePercent: 160
   articleScroll: {fileID: 926595674}
   investigation: {fileID: 38694934}
   exorcismVision: {fileID: 629126540}
@@ -1129,20 +1132,21 @@ MonoBehaviour:
       \uBB3C\uC5B4\uBCF4\uC9C0 \uB9D0\uACE0 \uD1B5\uD654 \uC885\uB8CC \uBC84\uD2BC\uC744
       \uB204\uB974\uC138\uC694.\n\n<link=\"mary_forbidden\"><b>2. \u2018\uB124 \uC544\uC774\uB294
       \uB0B4\uAC00 \uC8FD\uC600\uC5B4\u2019\uB77C\uB294 \uB9D0\uC744 \uD558\uC9C0
-      \uB9D0 \uAC83.</b></link>\n<vision><color=#C31D1D><link=\"mary_curse\">\uBA54\uB9AC\uAC00    
-      \uB2F9\uC2E0\uC744     \uBD99\uC7A1\uC2B5\uB2C8\uB2E4</link></color></vision>\n\n\uC774
-      \uB9D0\uC744 \uD558\uBA74 \uC774\uC0C1\uD55C \uD654\uBA74\uACFC \uC18C\uB9AC\uAC00
-      \uB098\uC624\uB2C8 \uC8FC\uC758\uD558\uC138\uC694. \uAC19\uC774 \uD558\uB294
-      \uCE5C\uAD6C\uB97C \uB180\uB798\uD0A4\uACA0\uB2E4\uACE0 \uC7A5\uB09C\uC73C\uB85C
-      \uC678\uCE58\uC9C0 \uB9C8\uC138\uC694!\n\n\uAD81\uAE08\uD55C \uC810\uC774\uB098
-      \uD6C4\uAE30\uB294 \uB313\uAE00\uB85C \uB0A8\uACA8 \uC8FC\uC138\uC694. \uBC30\uC6B0\uC790\uB97C
-      \uBCF4\uC168\uB2E4\uB294 \uBD84\uB4E4\uC740 \uC5B4\uB5A4 \uC0AC\uB78C\uC774\uC5C8\uB294\uC9C0\uB3C4
-      \uC0B4\uC9DD \uC54C\uB824\uC8FC\uC2DC\uACE0\uC694 :)\n\n<b>\uB313\uAE00</b>\n\uB0B4\uC9DD\uC5B4\uB528\uB2C8
-      : \uC900\uBE44\uBB3C\uC740 \uB2E4 \uC788\uB294\uB370 12\uC2DC\uAE4C\uC9C0 \uBC84\uD2F0\uB294
-      \uAC8C \uC81C\uC77C \uC5B4\uB835\uB124...\n<link=\"mary_comment\">seoyeon041
-      : \uC800 \uC774\uC0C1\uD55C \uD654\uBA74\uC774\uB791 \uC18C\uB9AC \uB098\uC624\uB294
-      \uAC70\uC694. \uC800 \uB9D0 \uD55C \uC0AC\uB78C\uC774 \uC544\uB2C8\uB77C \uBC30\uC6B0\uC790
-      \uCC3E\uAE30 \uD558\uB294 \uC0AC\uB78C\uD55C\uD14C \uB098\uC624\uB294 \uAC70\uC8E0?</link>\n\uBAA8\uB2C8\uD130\uBA3C\uC9C0
+      \uB9D0 \uAC83.</b></link>\n\n<veil>\uC774 \uB9D0\uC744 \uD558\uBA74 \uC774\uC0C1\uD55C
+      \uD654\uBA74\uACFC \uC18C\uB9AC\uAC00 \uB098\uC624\uB2C8 \uC8FC\uC758\uD558\uC138\uC694.
+      \uAC19\uC774 \uD558\uB294 \uCE5C\uAD6C\uB97C \uB180\uB798\uD0A4\uACA0\uB2E4\uACE0
+      \uC7A5\uB09C\uC73C\uB85C \uC678\uCE58\uC9C0 \uB9C8\uC138\uC694!<revealed><color=#C31D1D>\uC774
+      \uB9D0\uC744 \uD558\uBA74 <link=\"mary_curse\">\uBA54\uB9AC\uAC00    \uB2F9\uC2E0\uC744    
+      \uBD99\uC7A1\uC2B5\uB2C8\uB2E4.</link> </color></revealed></veil>\n\n\uAD81\uAE08\uD55C
+      \uC810\uC774\uB098 \uD6C4\uAE30\uB294 \uB313\uAE00\uB85C \uB0A8\uACA8 \uC8FC\uC138\uC694.
+      \uBC30\uC6B0\uC790\uB97C \uBCF4\uC168\uB2E4\uB294 \uBD84\uB4E4\uC740 \uC5B4\uB5A4
+      \uC0AC\uB78C\uC774\uC5C8\uB294\uC9C0\uB3C4 \uC0B4\uC9DD \uC54C\uB824\uC8FC\uC2DC\uACE0\uC694
+      :)\n\n<b>\uB313\uAE00</b>\n\uB0B4\uC9DD\uC5B4\uB528\uB2C8 : \uC900\uBE44\uBB3C\uC740
+      \uB2E4 \uC788\uB294\uB370 12\uC2DC\uAE4C\uC9C0 \uBC84\uD2F0\uB294 \uAC8C \uC81C\uC77C
+      \uC5B4\uB835\uB124...\n<link=\"mary_comment\">seoyeon041 : \uC800 \uC774\uC0C1\uD55C
+      \uD654\uBA74\uC774\uB791 \uC18C\uB9AC \uB098\uC624\uB294 \uAC70\uC694. \uC800
+      \uB9D0 \uD55C \uC0AC\uB78C\uC774 \uC544\uB2C8\uB77C \uBC30\uC6B0\uC790 \uCC3E\uAE30
+      \uD558\uB294 \uC0AC\uB78C\uD55C\uD14C \uB098\uC624\uB294 \uAC70\uC8E0?</link>\n\uBAA8\uB2C8\uD130\uBA3C\uC9C0
       : \uC8FC\uC758\uC0AC\uD56D \uC77D\uB2E4\uAC00 \uBC30\uC6B0\uC790 \uC548 \uAD81\uAE08\uD574\uC84C\uC5B4\uC694.\n\uC0DD\uD65C\uAC15\uB839
       : \uC9C8\uBB38\uC774 \uB9CE\uC544\uC11C \uB367\uBD99\uC785\uB2C8\uB2E4. \uC0AC\uC774\uD2B8\uC5D0
       \uCC98\uC74C \uB4E4\uC5B4\uAC14\uC744 \uB54C \uC790\uAE30 \uC5BC\uAD74\uC774
@@ -26265,6 +26269,164 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1628143726
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1628143727}
+  - component: {fileID: 1628143730}
+  - component: {fileID: 1628143729}
+  - component: {fileID: 1628143728}
+  m_Layer: 0
+  m_Name: RevealedArticleLayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1628143727
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628143726}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 26489641}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1628143728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628143726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
+  m_IgnoreLayout: 1
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
+--- !u!114 &1628143729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628143726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: eeb43719f3f8b074c883376ceb2a11e2, type: 2}
+  m_sharedMaterial: {fileID: 9217577605646544919, guid: eeb43719f3f8b074c883376ceb2a11e2, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: 0
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 50
+  m_fontSizeBase: 50
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 4
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 10
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1628143730
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628143726}
+  m_CullTransparentMesh: 1
 --- !u!1 &1632841418
 GameObject:
   m_ObjectHideFlags: 0

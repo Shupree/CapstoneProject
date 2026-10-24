@@ -30,6 +30,8 @@
 
 ## 필요한 작업에서만 읽을 문서
 
+퇴마 프로그램을 켜면 `ExploreProtoArticleLinks`가 주의 문단의 ‘이상한 화면과 소리가 나오니 주의하세요.’만 ‘메리가    당신을    붙잡습니다.’로 교체한다. 본문과 같은 글자 크기를 사용하며 앞뒤 문장은 유지한다. 끄면 원문이 돌아온다. 기존 `RevealedArticleLayer`는 사용하지 않는다.
+
 - CSV 데이터 연동: [대사 CSV 사용 가이드](../Assets/Scripts/HowToUseScripts/DIALOGUE_CSV_GUIDE.md)
 - 하단 대화창: [사용 안내](../Assets/Scripts/HowToUseScripts/BOTTOM_DIALOGUE_USAGE.txt)
 - 기존 민서 프로토타입 UI: [UI 편집 안내](UI_EDITING.md)

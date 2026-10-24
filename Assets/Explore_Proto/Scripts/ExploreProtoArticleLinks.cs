@@ -8,6 +8,7 @@ public sealed class ExploreProtoArticleLinks : MonoBehaviour, IPointerEnterHandl
     IPointerMoveHandler, IPointerExitHandler, IPointerClickHandler
 {
     public TMP_Text article;
+    public TMP_Text revealedLayer;
     public UnityEngine.UI.ScrollRect articleScroll;
     public ExploreProtoInvestigation investigation;
     public ExploreProtoExorcismVision exorcismVision;
@@ -17,6 +18,7 @@ public sealed class ExploreProtoArticleLinks : MonoBehaviour, IPointerEnterHandl
     Camera eventCamera;
     static readonly Regex Links = new Regex("<link=\"([^\"]+)\">(.*?)</link>", RegexOptions.Singleline);
     static readonly Regex HiddenByExorcism = new Regex("<vision>(.*?)</vision>", RegexOptions.Singleline);
+    static readonly Regex OverlaidParagraph = new Regex("<veil>(.*?)<revealed>(.*?)</revealed></veil>", RegexOptions.Singleline);
 
     void OnEnable()
     {
@@ -69,6 +71,15 @@ public sealed class ExploreProtoArticleLinks : MonoBehaviour, IPointerEnterHandl
     {
         if (!RectTransformUtility.RectangleContainsScreenPoint(articleScroll.viewport, position, camera)) return null;
         int index = TMP_TextUtilities.FindIntersectingLink(article, position, camera);
+        if (revealedLayer && revealedLayer.gameObject.activeInHierarchy)
+        {
+            int revealedIndex = TMP_TextUtilities.FindIntersectingLink(revealedLayer, position, camera);
+            if (revealedIndex >= 0)
+            {
+                string revealedId = revealedLayer.textInfo.linkInfo[revealedIndex].GetLinkID();
+                if (investigation.IsClue(revealedId)) return revealedId;
+            }
+        }
         if (index < 0) return null;
         string id = article.textInfo.linkInfo[index].GetLinkID();
         return investigation.IsClue(id) ? id : null;
@@ -94,16 +105,31 @@ public sealed class ExploreProtoArticleLinks : MonoBehaviour, IPointerEnterHandl
         // 퇴마프로그램이 꺼져 있으면 숨겨진 문장의 링크 자체가 TMP에 전달되지 않는다.
         string visibleSource = HiddenByExorcism.Replace(source,
             match => exorcismVision && exorcismVision.IsActive ? match.Groups[1].Value : string.Empty);
-        string next = Links.Replace(visibleSource, match =>
+        bool reveal = exorcismVision && exorcismVision.IsActive;
+        if (revealedLayer) revealedLayer.gameObject.SetActive(false);
+        // 같은 TMP 문단 안에서 지정 구절만 교체한다. 별도 크기 태그를 사용하지 않는다.
+        visibleSource = OverlaidParagraph.Replace(visibleSource, match =>
+        {
+            string normal = match.Groups[1].Value;
+            if (!reveal) return normal;
+            if (match.Groups[2].Value.Contains("mary_curse"))
+                return normal.Replace("이상한 화면과 소리가 나오니 주의하세요.",
+                    "<color=#C31D1D><link=\"mary_curse\">메리가    당신을    붙잡습니다.</link></color>");
+            return match.Groups[2].Value;
+        });
+        string next = DecorateLinks(visibleSource);
+        if (rendered == next) return;
+        rendered = next; article.text = next;
+        if (article.gameObject.activeInHierarchy) article.ForceMeshUpdate();
+    }
+    string DecorateLinks(string value)
+    {
+        return Links.Replace(value, match =>
         {
             string id = match.Groups[1].Value, body = match.Groups[2].Value;
             if (investigation.IsCollected(id)) body = "<color=#327466><u>" + body + "</u></color>";
             else if (id == hoveredId) body = "<mark=#F2C56B66><u>" + body + "</u></mark>";
             return "<link=\"" + id + "\">" + body + "</link>";
         });
-        if (rendered == next) return;
-        rendered = next; article.text = next;
-        // Highlighting changes decoration only, so hovering never changes line wrapping.
-        if (article.gameObject.activeInHierarchy) article.ForceMeshUpdate();
     }
 }

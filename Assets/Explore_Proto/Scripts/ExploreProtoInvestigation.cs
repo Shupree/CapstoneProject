@@ -88,7 +88,9 @@ public sealed class ExploreProtoInvestigation : MonoBehaviour
         collectionOrder.Add(id);
         RefreshNotes();
         SetArticleHint(id);
-        if (stopAfterResearch && id == "mary_weakness") QueueMonologue(memoryDialogueSceneId);
+        var collectedClue = Array.Find(clues, clue => clue.id == id);
+        if (stopAfterResearch && !collectedClue.optional && !collectedClue.excludeFromMemo)
+            QueueMonologue("Explore_RequiredMemoUpdated");
         if (researchQuestions && id == "mary_comment") QueueMonologue(nicknameDialogueSceneId);
         if (researchQuestions) researchQuestions.RefreshChoices();
         if (!researchQuestions && RequiredCollectedCount == RequiredClueCount && !completionShown)
