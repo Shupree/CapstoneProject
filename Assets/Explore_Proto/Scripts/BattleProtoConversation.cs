@@ -27,6 +27,9 @@ public sealed class BattleProtoConversation : MonoBehaviour
     public AudioSource programmingAudio;
     public BattleProtoRetrySequence retrySequence;
     public VideoCallPortraits callPortraits;
+    public VideoCallConnectionSequence callConnection;
+    [Header("공통 하단 대화 UI")]
+    public BottomDialogueView callDialogueView;
     [Header("테마 전환")]
     [Min(0)] public int themeChangeAfterElement = 10;
     bool initialized;
@@ -53,23 +56,33 @@ public sealed class BattleProtoConversation : MonoBehaviour
         if (!initialized || (retrySequence && retrySequence.HasStarted)) return;
         groupCallWindow.SetActive(true);
         groupCallWindow.transform.SetAsLastSibling();
+        if (callDialogueView) callDialogueView.SetVisible(false);
         if (!callStarted)
         {
             callStarted = true;
             callIndex = 0;
             if (callPortraits) callPortraits.ResetToDefaults();
-            ShowLine();
+            callSpeaker.text = string.Empty;
+            callSpeaker.gameObject.SetActive(false);
+            callText.text = string.Empty;
+            nextLabel.text = "연결 중...";
+            nextButton.interactable = false;
+            if (!callConnection || !callConnection.TryBegin(
+                    VideoCallConnectionSequence.ConnectionMode.UrgentOutgoing, ShowLine))
+                ShowLine();
         }
     }
 
     public void AdvanceDialogue()
     {
-        if (!callStarted || !groupCallWindow.activeInHierarchy || waitingForSound || (retrySequence && retrySequence.HasStarted)) return;
+        if (!callStarted || !groupCallWindow.activeInHierarchy || waitingForSound ||
+            (callConnection && callConnection.IsConnecting) || (retrySequence && retrySequence.HasStarted)) return;
         if (callIndex >= themeChangeAfterElement)
         {
             if (retrySequence && retrySequence.BeginThemeTransition())
             {
                 nextButton.interactable = false;
+                if (callDialogueView) callDialogueView.SetVisible(false);
             }
             return;
         }
@@ -97,6 +110,12 @@ public sealed class BattleProtoConversation : MonoBehaviour
         if (callLines == null || callLines.Length == 0) return;
         var line = callLines[callIndex];
         if (callPortraits) callPortraits.Apply(line.heroineSprite, line.clientSprite, line.friendSprite);
+        if (callPortraits) callPortraits.HighlightSpeaker(line.speaker);
+        if (callDialogueView)
+        {
+            callDialogueView.SetVisible(true);
+            callDialogueView.ShowLine(line.speaker, line.text, null, null, BottomDialogueSide.None);
+        }
         bool named = !string.IsNullOrEmpty(line.speaker) && line.speaker != "나레이션";
         callSpeaker.text = named ? line.speaker : string.Empty;
         callSpeaker.gameObject.SetActive(named);

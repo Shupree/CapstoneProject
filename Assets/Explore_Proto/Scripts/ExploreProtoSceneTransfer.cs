@@ -49,7 +49,8 @@ public static class ExploreProtoSceneTransfer
             ResetSession();
             return;
         }
-        if (scene != BattleScene) return;
+        // 에디터에서 두 씬을 함께 열어도 비활성 배틀 씬의 통화가 탐색 시작과 동시에 재생되지 않도록 한다.
+        if (scene != BattleScene || SceneManager.GetActiveScene() != desktop.gameObject.scene) return;
         // Start runs after both controllers' Awake initializers.
         var state = pending;
         ResetSession();

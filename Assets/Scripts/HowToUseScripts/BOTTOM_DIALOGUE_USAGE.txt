@@ -92,8 +92,9 @@ Inspector에서 시작하는 예:
 - ScreenDimmer는 검정 알파 0.4, DialogueBar/NameBar는 검정 알파 0.8이다.
 - VisualRoot의 AdvanceClickArea(Button)가 화면 클릭을 받아
   Controller.NextDialogue()를 호출한다.
-- Explore_Proto의 BottomDialogueView는 Bar Only를 켜서 초상화와 전체 암전 없이
-  하단 이름·대사 바만 표시한다. 다른 씬의 기본 표시 방식은 그대로 유지된다.
+- Explore_Proto와 Battle_Proto의 두 인물 화상통화는 Bar Only를 켜서
+  초상화와 전체 암전 없이 하단 이름·대사 바만 표시한다.
+  BattleProtoConversation은 Battle_Proto의 BottomDialogueSystem을 직접 갱신한다.
 - 코드에서는 DialogueCompleted 이벤트로 종료된 SceneID를 받을 수 있다.
   탐색 씬은 이를 이용해 대기 중인 다음 독백을 이어서 표시한다.
 - On Event Requested: EventID가 있는 줄을 표시할 때 그 문자열을 전달한다.

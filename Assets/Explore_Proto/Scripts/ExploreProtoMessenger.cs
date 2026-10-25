@@ -49,7 +49,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     [Header("탐색 메신저 내부 통화")]
     public BottomDialogueController callBottomDialogue;
     public GameObject embeddedCallPanel, embeddedClientCard, connectingLabel, connectedControls;
-    [Min(0f)] public float callConnectSeconds = 2f;
+    public VideoCallConnectionSequence callConnection;
     private bool embeddedCallActive;
     private string activeEmbeddedSceneId = FirstCallSceneId;
     private DialogueCsvReader activeEmbeddedReader;
@@ -313,11 +313,17 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
             ShowMessenger();
             conversationScroll.gameObject.SetActive(false);
             embeddedCallPanel.SetActive(true);
-            embeddedClientCard.SetActive(false);
-            connectingLabel.SetActive(true);
-            connectedControls.SetActive(false);
+            embeddedCallPanel.transform.SetAsLastSibling();
+            embeddedClientCard.SetActive(true);
+            connectedControls.SetActive(true);
             if (callPortraits) callPortraits.ResetToDefaults();
-            StartCoroutine(ConnectEmbeddedCall());
+            if (!callConnection || !callConnection.TryBegin(
+                    VideoCallConnectionSequence.ConnectionMode.Outgoing, CompleteEmbeddedCallConnection))
+            {
+                RestoreMessengerAfterCall();
+                callButton.gameObject.SetActive(true);
+                EmbeddedCallFailed?.Invoke(activeEmbeddedSceneId);
+            }
             return;
         }
         if (gameObject.scene.name != "Explore_Proto") MarkMessengerRead();
@@ -326,7 +332,8 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         callWindow.SetActive(true); callWindow.transform.SetAsLastSibling(); ShowCallLine();
     }
     public void CloseCall() => callWindow.SetActive(false);
-    public bool StartAdditionalCall(string sceneId, DialogueCsvReader reader)
+    public bool StartAdditionalCall(string sceneId, DialogueCsvReader reader,
+        VideoCallConnectionSequence.ConnectionMode mode = VideoCallConnectionSequence.ConnectionMode.Outgoing)
     {
         if (!callCompleted || embeddedCallActive || !embeddedCallPanel || !callBottomDialogue ||
             callBottomDialogue.IsPlaying || !reader || !reader.TryGetScene(sceneId, out var lines) || lines.Count == 0) return false;
@@ -337,11 +344,16 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         ShowMessenger();
         conversationScroll.gameObject.SetActive(false);
         embeddedCallPanel.SetActive(true);
-        embeddedClientCard.SetActive(false);
-        connectingLabel.SetActive(true);
-        connectedControls.SetActive(false);
+        embeddedCallPanel.transform.SetAsLastSibling();
+        embeddedClientCard.SetActive(true);
+        connectedControls.SetActive(true);
         if (callPortraits) callPortraits.ResetToDefaults();
-        StartCoroutine(ConnectEmbeddedCall());
+        if (!callConnection || !callConnection.TryBegin(mode, CompleteEmbeddedCallConnection))
+        {
+            RestoreMessengerAfterCall();
+            EmbeddedCallFailed?.Invoke(sceneId);
+            return false;
+        }
         return true;
     }
     private System.Collections.IEnumerator ShowOpeningMessages()
@@ -361,11 +373,10 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         callButton.gameObject.SetActive(true);
         ScrollConversationToLatest();
     }
-    private System.Collections.IEnumerator ConnectEmbeddedCall()
+    private void CompleteEmbeddedCallConnection()
     {
-        yield return new WaitForSecondsRealtime(callConnectSeconds);
-        connectingLabel.SetActive(false);
-        embeddedClientCard.SetActive(true);
+        if (!embeddedCallActive) return;
+        // 조작 버튼은 카드 아래에 두고 하단 대화 바가 열린 동안에는 바 뒤에 표시한다.
         connectedControls.SetActive(true);
         if (embeddedWindowDrag) embeddedWindowDrag.enabled = false;
         if (!callBottomDialogue.StartDialogue(activeEmbeddedSceneId, activeEmbeddedReader))
@@ -377,6 +388,9 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     }
     private void RestoreMessengerAfterCall()
     {
+        if (callConnection) callConnection.Cancel();
+        if (callPortraits) callPortraits.HighlightSpeaker(null);
+        connectedControls.SetActive(false);
         embeddedCallActive = false;
         if (embeddedWindowDrag) embeddedWindowDrag.enabled = dragWasEnabled;
         embeddedCallPanel.SetActive(false);
@@ -411,6 +425,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         if (line.EventID == "AcquireBloodyMary" && !bloodyMaryStored) AddBloodyMaryKeyword();
         if (callPortraits) callPortraits.Apply(line.Image == heroineCallImageId ? heroineCallSprite : null,
             line.Image == siyulCallImageId ? siyulCallSprite : null, null);
+        if (callPortraits) callPortraits.HighlightSpeaker(line.SpeakerID);
     }
     public void AdvanceCall()
     {
@@ -432,6 +447,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     {
         if (callPortraits) callPortraits.Apply(callLines[lineIndex].heroineSprite,
             callLines[lineIndex].clientSprite, callLines[lineIndex].friendSprite);
+        if (callPortraits) callPortraits.HighlightSpeaker(callLines[lineIndex].speaker);
         callSpeaker.text = callLines[lineIndex].speaker;
         callLineText.text = callLines[lineIndex].text;
     }
