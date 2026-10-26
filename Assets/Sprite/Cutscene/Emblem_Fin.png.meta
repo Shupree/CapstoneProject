@@ -1,0 +1,3211 @@
+fileFormatVersion: 2
+guid: 7f41139ed89e8784b9f5f2d10f45f57f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2698070794720709368
+    second: Emblem_Fin_0
+  - first:
+      213: -6677969482649830669
+    second: Emblem_Fin_1
+  - first:
+      213: -6328789599113415720
+    second: Emblem_Fin_2
+  - first:
+      213: 1541813564336977562
+    second: Emblem_Fin_3
+  - first:
+      213: -2155322126092567458
+    second: Emblem_Fin_4
+  - first:
+      213: -2940991435425289578
+    second: Emblem_Fin_5
+  - first:
+      213: -8232696661459323977
+    second: Emblem_Fin_6
+  - first:
+      213: -3046152900708160576
+    second: Emblem_Fin_7
+  - first:
+      213: 5251133969166258080
+    second: Emblem_Fin_8
+  - first:
+      213: -6441206982114805288
+    second: Emblem_Fin_9
+  - first:
+      213: 6916125151184289121
+    second: Emblem_Fin_10
+  - first:
+      213: -287556855678177754
+    second: Emblem_Fin_11
+  - first:
+      213: 6063373976249646973
+    second: Emblem_Fin_12
+  - first:
+      213: -2570649120557262426
+    second: Emblem_Fin_13
+  - first:
+      213: -2340889253126601086
+    second: Emblem_Fin_14
+  - first:
+      213: 4427505265418805598
+    second: Emblem_Fin_15
+  - first:
+      213: 8874829417964930529
+    second: Emblem_Fin_16
+  - first:
+      213: 5806553279507563168
+    second: Emblem_Fin_17
+  - first:
+      213: -5784787948478615446
+    second: Emblem_Fin_18
+  - first:
+      213: -4390355878603225968
+    second: Emblem_Fin_19
+  - first:
+      213: 1735825551663748549
+    second: Emblem_Fin_20
+  - first:
+      213: -5427435125530489763
+    second: Emblem_Fin_21
+  - first:
+      213: 6590114314886282811
+    second: Emblem_Fin_22
+  - first:
+      213: -4193668068450550899
+    second: Emblem_Fin_23
+  - first:
+      213: -6793519307198546396
+    second: Emblem_Fin_24
+  - first:
+      213: -8504462300829842527
+    second: Emblem_Fin_25
+  - first:
+      213: 6462471623602074173
+    second: Emblem_Fin_26
+  - first:
+      213: -4681794407925087976
+    second: Emblem_Fin_27
+  - first:
+      213: -6722812302449325851
+    second: Emblem_Fin_28
+  - first:
+      213: 5543134904983156250
+    second: Emblem_Fin_29
+  - first:
+      213: 7335609511505330432
+    second: Emblem_Fin_30
+  - first:
+      213: 3783615065829237119
+    second: Emblem_Fin_31
+  - first:
+      213: -6459111769812222008
+    second: Emblem_Fin_32
+  - first:
+      213: -1125915656979208653
+    second: Emblem_Fin_33
+  - first:
+      213: -930073884083221818
+    second: Emblem_Fin_34
+  - first:
+      213: 6774731011962105590
+    second: Emblem_Fin_35
+  - first:
+      213: -6881169530872068655
+    second: Emblem_Fin_36
+  - first:
+      213: -8273039995090014779
+    second: Emblem_Fin_37
+  - first:
+      213: -6018575346379608876
+    second: Emblem_Fin_38
+  - first:
+      213: 3914539013652367895
+    second: Emblem_Fin_39
+  - first:
+      213: -2165267485177727684
+    second: Emblem_Fin_40
+  - first:
+      213: 1501672041209638937
+    second: Emblem_Fin_41
+  - first:
+      213: -2806805760225995423
+    second: Emblem_Fin_42
+  - first:
+      213: -8604136442384698080
+    second: Emblem_Fin_43
+  - first:
+      213: 9201284737732832595
+    second: Emblem_Fin_44
+  - first:
+      213: -1350497461766749473
+    second: Emblem_Fin_45
+  - first:
+      213: 3233325135892536744
+    second: Emblem_Fin_46
+  - first:
+      213: -190980357122659307
+    second: Emblem_Fin_47
+  - first:
+      213: -9068317583034257867
+    second: Emblem_Fin_48
+  - first:
+      213: -2117440852391666957
+    second: Emblem_Fin_49
+  - first:
+      213: 4823962816860861309
+    second: Emblem_Fin_50
+  - first:
+      213: 8588273196954694754
+    second: Emblem_Fin_51
+  - first:
+      213: 8205409598960216
+    second: Emblem_Fin_52
+  - first:
+      213: 4246569312806844423
+    second: Emblem_Fin_53
+  - first:
+      213: 1977784226454797578
+    second: Emblem_Fin_54
+  - first:
+      213: 3482971978932450512
+    second: Emblem_Fin_55
+  - first:
+      213: -9202910628304607226
+    second: Emblem_Fin_56
+  - first:
+      213: -1508952816879767758
+    second: Emblem_Fin_57
+  - first:
+      213: 8857140983999646022
+    second: Emblem_Fin_58
+  - first:
+      213: -187752448170266319
+    second: Emblem_Fin_59
+  - first:
+      213: -2391673020700918740
+    second: Emblem_Fin_60
+  - first:
+      213: -3405513991602620724
+    second: Emblem_Fin_61
+  - first:
+      213: 6512033938343883974
+    second: Emblem_Fin_62
+  - first:
+      213: 8582781160128967050
+    second: Emblem_Fin_63
+  - first:
+      213: -6324124875106399419
+    second: Emblem_Fin_64
+  - first:
+      213: 5401386135839046265
+    second: Emblem_Fin_65
+  - first:
+      213: 8993212588402313313
+    second: Emblem_Fin_66
+  - first:
+      213: 645643731715544301
+    second: Emblem_Fin_67
+  - first:
+      213: -6910685370841988274
+    second: Emblem_Fin_68
+  - first:
+      213: -5966319478841939013
+    second: Emblem_Fin_69
+  - first:
+      213: 4641187775289724579
+    second: Emblem_Fin_70
+  - first:
+      213: 7061053535087573607
+    second: Emblem_Fin_71
+  - first:
+      213: -3521074674144542369
+    second: Emblem_Fin_72
+  - first:
+      213: -1549362804321362043
+    second: Emblem_Fin_73
+  - first:
+      213: 6717151967138679423
+    second: Emblem_Fin_74
+  - first:
+      213: -4094470361911498403
+    second: Emblem_Fin_75
+  - first:
+      213: 8675572602115069689
+    second: Emblem_Fin_76
+  - first:
+      213: 3009566999987493556
+    second: Emblem_Fin_77
+  - first:
+      213: 7589285732537805401
+    second: Emblem_Fin_78
+  - first:
+      213: -6230541963832893324
+    second: Emblem_Fin_79
+  - first:
+      213: -7472463951370042072
+    second: Emblem_Fin_80
+  - first:
+      213: 8817564904228080480
+    second: Emblem_Fin_81
+  - first:
+      213: 6165007772085177832
+    second: Emblem_Fin_82
+  - first:
+      213: 6048489775378158961
+    second: Emblem_Fin_83
+  - first:
+      213: 1713304691315829356
+    second: Emblem_Fin_84
+  - first:
+      213: -5996091666308138688
+    second: Emblem_Fin_85
+  - first:
+      213: 8152932840097046047
+    second: Emblem_Fin_86
+  - first:
+      213: -6023858272442944633
+    second: Emblem_Fin_87
+  - first:
+      213: 6807056436338277062
+    second: Emblem_Fin_88
+  - first:
+      213: -2029186417626042365
+    second: Emblem_Fin_89
+  - first:
+      213: 8303765967868967013
+    second: Emblem_Fin_90
+  - first:
+      213: 7106634796983033702
+    second: Emblem_Fin_91
+  - first:
+      213: -437079645331330124
+    second: Emblem_Fin_92
+  - first:
+      213: 4038087556123487890
+    second: Emblem_Fin_93
+  - first:
+      213: 4486958009657025078
+    second: Emblem_Fin_94
+  - first:
+      213: -3047191702675296224
+    second: Emblem_Fin_95
+  - first:
+      213: -8270888812934184710
+    second: Emblem_Fin_96
+  - first:
+      213: -4593358152783457416
+    second: Emblem_Fin_97
+  - first:
+      213: 6407326304938802007
+    second: Emblem_Fin_98
+  - first:
+      213: 6977085183414319043
+    second: Emblem_Fin_99
+  - first:
+      213: -6440287185880483923
+    second: Emblem_Fin_100
+  - first:
+      213: -3062989928611706338
+    second: Emblem_Fin_101
+  - first:
+      213: -6644824524656943258
+    second: Emblem_Fin_102
+  - first:
+      213: 5445922316014703012
+    second: Emblem_Fin_103
+  - first:
+      213: 6988491314454323302
+    second: Emblem_Fin_104
+  - first:
+      213: 3937675326194486596
+    second: Emblem_Fin_105
+  - first:
+      213: 1087022743328182673
+    second: Emblem_Fin_106
+  - first:
+      213: 1979359240896030638
+    second: Emblem_Fin_107
+  - first:
+      213: -8087155789171174491
+    second: Emblem_Fin_108
+  - first:
+      213: 7673204650314989459
+    second: Emblem_Fin_109
+  - first:
+      213: -2984823044382846950
+    second: Emblem_Fin_110
+  - first:
+      213: -4444378627822752091
+    second: Emblem_Fin_111
+  - first:
+      213: -4259704634018776135
+    second: Emblem_Fin_112
+  - first:
+      213: 8813309447191569397
+    second: Emblem_Fin_113
+  - first:
+      213: -8107289773350551295
+    second: Emblem_Fin_114
+  - first:
+      213: 3621520703848275811
+    second: Emblem_Fin_115
+  - first:
+      213: 6989529913871166175
+    second: Emblem_Fin_116
+  - first:
+      213: 7662084756343377290
+    second: Emblem_Fin_117
+  - first:
+      213: 5609766587910445289
+    second: Emblem_Fin_118
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Emblem_Fin_0
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 215
+        width: 170
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fa0f22c719717520800000000000000
+      internalID: 2698070794720709368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_1
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 273
+        width: 41
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3faf1cd03261353a0800000000000000
+      internalID: -6677969482649830669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_2
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 304
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d378a6146f9b28a0800000000000000
+      internalID: -6328789599113415720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_3
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 299
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a963f24944f956510800000000000000
+      internalID: 1541813564336977562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_4
+      rect:
+        serializedVersion: 2
+        x: 572
+        y: 309
+        width: 15
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5c76b912f1c612e0800000000000000
+      internalID: -2155322126092567458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_5
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 272
+        width: 40
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69a620c1fdf7f27d0800000000000000
+      internalID: -2940991435425289578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_6
+      rect:
+        serializedVersion: 2
+        x: 1018
+        y: 299
+        width: 46
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b33c2e41069fbd80800000000000000
+      internalID: -8232696661459323977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_7
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 246
+        width: 174
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cba3c57314e9b5d0800000000000000
+      internalID: -3046152900708160576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_8
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 265
+        width: 29
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0af4424f586cfd840800000000000000
+      internalID: 5251133969166258080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_9
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 271
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d9f742706c3c96a0800000000000000
+      internalID: -6441206982114805288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_10
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 281
+        width: 35
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16dfb7a8e230bff50800000000000000
+      internalID: 6916125151184289121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_11
+      rect:
+        serializedVersion: 2
+        x: 737
+        y: 244
+        width: 34
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62ee2943094620cf0800000000000000
+      internalID: -287556855678177754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_12
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 265
+        width: 33
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7f35ba918e652450800000000000000
+      internalID: 6063373976249646973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_13
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 252
+        width: 21
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a99307ae38335cd0800000000000000
+      internalID: -2570649120557262426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_14
+      rect:
+        serializedVersion: 2
+        x: 890
+        y: 261
+        width: 30
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2860cd870ad738fd0800000000000000
+      internalID: -2340889253126601086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_15
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 241
+        width: 53
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e51a57ab498a17d30800000000000000
+      internalID: 4427505265418805598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_16
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 184
+        width: 54
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e58cf3b55ab92b70800000000000000
+      internalID: 8874829417964930529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_17
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 247
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a28d6a7175059050800000000000000
+      internalID: 5806553279507563168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_18
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 251
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a60b8fd820e48bfa0800000000000000
+      internalID: -5784787948478615446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_19
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 248
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0948e4ae6925213c0800000000000000
+      internalID: -4390355878603225968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_20
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 0
+        width: 224
+        height: 276
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c5d6f67424e61810800000000000000
+      internalID: 1735825551663748549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_21
+      rect:
+        serializedVersion: 2
+        x: 459
+        y: 251
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5c07455280eda4b0800000000000000
+      internalID: -5427435125530489763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_22
+      rect:
+        serializedVersion: 2
+        x: 657
+        y: 255
+        width: 12
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3e7300bd0ac47b50800000000000000
+      internalID: 6590114314886282811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_23
+      rect:
+        serializedVersion: 2
+        x: 669
+        y: 256
+        width: 17
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8b3b1a5c191dc5c0800000000000000
+      internalID: -4193668068450550899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_24
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 251
+        width: 38
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42e3ca70f2298b1a0800000000000000
+      internalID: -6793519307198546396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_25
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 253
+        width: 29
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a3065198941af980800000000000000
+      internalID: -8504462300829842527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_26
+      rect:
+        serializedVersion: 2
+        x: 887
+        y: 244
+        width: 17
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d32f7d7b3bf4fa950800000000000000
+      internalID: 6462471623602074173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_27
+      rect:
+        serializedVersion: 2
+        x: 931
+        y: 232
+        width: 26
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 811073c8acce60fb0800000000000000
+      internalID: -4681794407925087976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_28
+      rect:
+        serializedVersion: 2
+        x: 1016
+        y: 223
+        width: 97
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e8c1e474d5c3b2a0800000000000000
+      internalID: -6722812302449325851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_29
+      rect:
+        serializedVersion: 2
+        x: 1090
+        y: 252
+        width: 25
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a16f699c3db2dec40800000000000000
+      internalID: 5543134904983156250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_30
+      rect:
+        serializedVersion: 2
+        x: 1117
+        y: 251
+        width: 13
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00180482cf15dc560800000000000000
+      internalID: 7335609511505330432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_31
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 14
+        width: 292
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f71619d1bd9128430800000000000000
+      internalID: 3783615065829237119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_32
+      rect:
+        serializedVersion: 2
+        x: 636
+        y: 5
+        width: 239
+        height: 235
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cf3cc33110ac56a0800000000000000
+      internalID: -6459111769812222008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_33
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 235
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33624b2eca1ff50f0800000000000000
+      internalID: -1125915656979208653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_34
+      rect:
+        serializedVersion: 2
+        x: 1069
+        y: 235
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ca0a5ceab6b713f0800000000000000
+      internalID: -930073884083221818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_35
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 223
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fee2d816fda40e50800000000000000
+      internalID: 6774731011962105590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_36
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 51
+        width: 177
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d5012905cc2180a0800000000000000
+      internalID: -6881169530872068655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_37
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 82
+        width: 143
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cd6f08f4f1403d80800000000000000
+      internalID: -8273039995090014779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_38
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 128
+        width: 87
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dcae193c99b97ca0800000000000000
+      internalID: -6018575346379608876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_39
+      rect:
+        serializedVersion: 2
+        x: 1079
+        y: 202
+        width: 20
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71a48282e7c335630800000000000000
+      internalID: 3914539013652367895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_40
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 174
+        width: 21
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c35374eb1bc63f1e0800000000000000
+      internalID: -2165267485177727684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_41
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 101
+        width: 83
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 910bf69e3c207d410800000000000000
+      internalID: 1501672041209638937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_42
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 150
+        width: 55
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 165953c38093c09d0800000000000000
+      internalID: -2806805760225995423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_43
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 174
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 025baa80e77f79880800000000000000
+      internalID: -8604136442384698080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_44
+      rect:
+        serializedVersion: 2
+        x: 1065
+        y: 174
+        width: 19
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35de9cde7b781bf70800000000000000
+      internalID: 9201284737732832595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_45
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 150
+        width: 31
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd28359b6b1124de0800000000000000
+      internalID: -1350497461766749473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_46
+      rect:
+        serializedVersion: 2
+        x: 1068
+        y: 150
+        width: 36
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ad573884141fdc20800000000000000
+      internalID: 3233325135892536744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_47
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 128
+        width: 18
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51c60a68060895df0800000000000000
+      internalID: -190980357122659307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_48
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 128
+        width: 17
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53e60d8443dd62280800000000000000
+      internalID: -9068317583034257867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_49
+      rect:
+        serializedVersion: 2
+        x: 1071
+        y: 128
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fa5b4073c65d92e0800000000000000
+      internalID: -2117440852391666957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_50
+      rect:
+        serializedVersion: 2
+        x: 873
+        y: 111
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d733fac9f9822f240800000000000000
+      internalID: 4823962816860861309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_51
+      rect:
+        serializedVersion: 2
+        x: 875
+        y: 104
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2643e7258fcaf2770800000000000000
+      internalID: 8588273196954694754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_52
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 88
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 852f16cc6c62d1000800000000000000
+      internalID: 8205409598960216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_53
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 96
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7083deb6a48deea30800000000000000
+      internalID: 4246569312806844423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_54
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 47
+        width: 44
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0d75347640827b10800000000000000
+      internalID: 1977784226454797578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_55
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 80
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d478eeaf80065030800000000000000
+      internalID: 3482971978932450512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_56
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 25
+        width: 34
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 608ac3cea81b84080800000000000000
+      internalID: -9202910628304607226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_57
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 51
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23f6e07686f1f0be0800000000000000
+      internalID: -1508952816879767758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_58
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 40
+        width: 13
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6494adc3cc2eaea70800000000000000
+      internalID: 8857140983999646022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_59
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 54
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 131f915a428f46df0800000000000000
+      internalID: -187752448170266319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_60
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 25
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2c7c3e2f021fced0800000000000000
+      internalID: -2391673020700918740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_61
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 33
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc637ec511f2db0d0800000000000000
+      internalID: -3405513991602620724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_62
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 46
+        width: 12
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c4764c5d546f5a50800000000000000
+      internalID: 6512033938343883974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_63
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 31
+        width: 91
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a81f66addf92c1770800000000000000
+      internalID: 8582781160128967050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_64
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 16
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54b4218cee13c38a0800000000000000
+      internalID: -6324124875106399419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_65
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 29
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97af761a21495fa40800000000000000
+      internalID: 5401386135839046265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_66
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 45
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1688a49733f4ecc70800000000000000
+      internalID: 8993212588402313313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_67
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 52
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de4dc50ad89c5f800800000000000000
+      internalID: 645643731715544301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_68
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 33
+        width: 9
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e43897405405810a0800000000000000
+      internalID: -6910685370841988274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_69
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 43
+        width: 13
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbbe12f7b00633da0800000000000000
+      internalID: -5966319478841939013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_70
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 42
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ae870a01bfc86040800000000000000
+      internalID: 4641187775289724579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_71
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 24
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76a39e277c6edf160800000000000000
+      internalID: 7061053535087573607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_72
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 50
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f518df34d31a22fc0800000000000000
+      internalID: -3521074674144542369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_73
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 50
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58fd8340dbe8f7ae0800000000000000
+      internalID: -1549362804321362043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_74
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 31
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7a0e97002e183d50800000000000000
+      internalID: 6717151967138679423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_75
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 32
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5966e636e48d27c0800000000000000
+      internalID: -4094470361911498403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_76
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 45
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f61e240153d56870800000000000000
+      internalID: 8675572602115069689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_77
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 42
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ba1ef9bd3124c920800000000000000
+      internalID: 3009566999987493556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_78
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 39
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95a2bdaf92f825960800000000000000
+      internalID: 7589285732537805401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_79
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 41
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 470639f381ba889a0800000000000000
+      internalID: -6230541963832893324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_80
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 23
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8254da580a97c4890800000000000000
+      internalID: -7472463951370042072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_81
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 49
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06b477c10984e5a70800000000000000
+      internalID: 8817564904228080480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_82
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 42
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8edc8a4b7e18e8550800000000000000
+      internalID: 6165007772085177832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_83
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 55
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1755ff8876d80f350800000000000000
+      internalID: 6048489775378158961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_84
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 27
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6ae3ed0a81e6c710800000000000000
+      internalID: 1713304691315829356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_85
+      rect:
+        serializedVersion: 2
+        x: 661
+        y: 40
+        width: 19
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 049f50de56a99cca0800000000000000
+      internalID: -5996091666308138688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_86
+      rect:
+        serializedVersion: 2
+        x: 674
+        y: 37
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1ed993d839052170800000000000000
+      internalID: 8152932840097046047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_87
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 25
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7837db521d4f66ca0800000000000000
+      internalID: -6023858272442944633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_88
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 28
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cabaf573c5877e50800000000000000
+      internalID: 6807056436338277062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_89
+      rect:
+        serializedVersion: 2
+        x: 703
+        y: 51
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3003a5a44b1e6d3e0800000000000000
+      internalID: -2029186417626042365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_90
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 23
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 568becc0727ec3370800000000000000
+      internalID: 8303765967868967013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_91
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 58
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66f9a9ef1b6df9260800000000000000
+      internalID: 7106634796983033702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_92
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 45
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bbe879d06e2fe9f0800000000000000
+      internalID: -437079645331330124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_93
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 33
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29e6aa2dc3b2a0830800000000000000
+      internalID: 4038087556123487890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_94
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 54
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63263bf6980e44e30800000000000000
+      internalID: 4486958009657025078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_95
+      rect:
+        serializedVersion: 2
+        x: 794
+        y: 30
+        width: 20
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02075878a4336b5d0800000000000000
+      internalID: -3047191702675296224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_96
+      rect:
+        serializedVersion: 2
+        x: 866
+        y: 27
+        width: 28
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af04e481276e73d80800000000000000
+      internalID: -8270888812934184710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_97
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 59
+        width: 15
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8739231c81d1140c0800000000000000
+      internalID: -4593358152783457416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_98
+      rect:
+        serializedVersion: 2
+        x: 882
+        y: 42
+        width: 44
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75bb4eda3556be850800000000000000
+      internalID: 6407326304938802007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_99
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 35
+        width: 8
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c73d05120693d060800000000000000
+      internalID: 6977085183414319043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_100
+      rect:
+        serializedVersion: 2
+        x: 993
+        y: 43
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da7f7123de08f96a0800000000000000
+      internalID: -6440287185880483923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_101
+      rect:
+        serializedVersion: 2
+        x: 1008
+        y: 5
+        width: 25
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1a008a63e21e75d0800000000000000
+      internalID: -3062989928611706338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_102
+      rect:
+        serializedVersion: 2
+        x: 1069
+        y: 27
+        width: 31
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66fd405fc47d8c3a0800000000000000
+      internalID: -6644824524656943258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_103
+      rect:
+        serializedVersion: 2
+        x: 1070
+        y: 59
+        width: 18
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a1dd602e7dc39b40800000000000000
+      internalID: 5445922316014703012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_104
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 60
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 660e3f9e2db1cf060800000000000000
+      internalID: 6988491314454323302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_105
+      rect:
+        serializedVersion: 2
+        x: 1099
+        y: 43
+        width: 15
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44d84a2b8de65a630800000000000000
+      internalID: 3937675326194486596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_106
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 52
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 191d8defc61e51f00800000000000000
+      internalID: 1087022743328182673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_107
+      rect:
+        serializedVersion: 2
+        x: 1103
+        y: 64
+        width: 18
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea7ae741eb8187b10800000000000000
+      internalID: 1979359240896030638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_108
+      rect:
+        serializedVersion: 2
+        x: 1117
+        y: 65
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a3553748a6a4cf80800000000000000
+      internalID: -8087155789171174491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_109
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 13
+        width: 43
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39f76ee99f2bc7a60800000000000000
+      internalID: 7673204650314989459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_110
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 21
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1019226147c396d0800000000000000
+      internalID: -2984823044382846950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_111
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 13
+        width: 21
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ae69417f256252c0800000000000000
+      internalID: -4444378627822752091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_112
+      rect:
+        serializedVersion: 2
+        x: 691
+        y: 14
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bbb939443d72e4c0800000000000000
+      internalID: -4259704634018776135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_113
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 23
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f3a27f4f3a2f4a70800000000000000
+      internalID: 8813309447191569397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_114
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 13
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1018848c7ee1d7f80800000000000000
+      internalID: -8107289773350551295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_115
+      rect:
+        serializedVersion: 2
+        x: 636
+        y: 7
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36f599b74e9324230800000000000000
+      internalID: 3621520703848275811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_116
+      rect:
+        serializedVersion: 2
+        x: 654
+        y: 0
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdae14fac6ccff060800000000000000
+      internalID: 6989529913871166175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_117
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 5
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8d48cc8d71355a60800000000000000
+      internalID: 7662084756343377290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Fin_118
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 0
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e8d1496df4e9dd40800000000000000
+      internalID: 5609766587910445289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Emblem_Fin_0: 2698070794720709368
+      Emblem_Fin_1: -6677969482649830669
+      Emblem_Fin_10: 6916125151184289121
+      Emblem_Fin_100: -6440287185880483923
+      Emblem_Fin_101: -3062989928611706338
+      Emblem_Fin_102: -6644824524656943258
+      Emblem_Fin_103: 5445922316014703012
+      Emblem_Fin_104: 6988491314454323302
+      Emblem_Fin_105: 3937675326194486596
+      Emblem_Fin_106: 1087022743328182673
+      Emblem_Fin_107: 1979359240896030638
+      Emblem_Fin_108: -8087155789171174491
+      Emblem_Fin_109: 7673204650314989459
+      Emblem_Fin_11: -287556855678177754
+      Emblem_Fin_110: -2984823044382846950
+      Emblem_Fin_111: -4444378627822752091
+      Emblem_Fin_112: -4259704634018776135
+      Emblem_Fin_113: 8813309447191569397
+      Emblem_Fin_114: -8107289773350551295
+      Emblem_Fin_115: 3621520703848275811
+      Emblem_Fin_116: 6989529913871166175
+      Emblem_Fin_117: 7662084756343377290
+      Emblem_Fin_118: 5609766587910445289
+      Emblem_Fin_12: 6063373976249646973
+      Emblem_Fin_13: -2570649120557262426
+      Emblem_Fin_14: -2340889253126601086
+      Emblem_Fin_15: 4427505265418805598
+      Emblem_Fin_16: 8874829417964930529
+      Emblem_Fin_17: 5806553279507563168
+      Emblem_Fin_18: -5784787948478615446
+      Emblem_Fin_19: -4390355878603225968
+      Emblem_Fin_2: -6328789599113415720
+      Emblem_Fin_20: 1735825551663748549
+      Emblem_Fin_21: -5427435125530489763
+      Emblem_Fin_22: 6590114314886282811
+      Emblem_Fin_23: -4193668068450550899
+      Emblem_Fin_24: -6793519307198546396
+      Emblem_Fin_25: -8504462300829842527
+      Emblem_Fin_26: 6462471623602074173
+      Emblem_Fin_27: -4681794407925087976
+      Emblem_Fin_28: -6722812302449325851
+      Emblem_Fin_29: 5543134904983156250
+      Emblem_Fin_3: 1541813564336977562
+      Emblem_Fin_30: 7335609511505330432
+      Emblem_Fin_31: 3783615065829237119
+      Emblem_Fin_32: -6459111769812222008
+      Emblem_Fin_33: -1125915656979208653
+      Emblem_Fin_34: -930073884083221818
+      Emblem_Fin_35: 6774731011962105590
+      Emblem_Fin_36: -6881169530872068655
+      Emblem_Fin_37: -8273039995090014779
+      Emblem_Fin_38: -6018575346379608876
+      Emblem_Fin_39: 3914539013652367895
+      Emblem_Fin_4: -2155322126092567458
+      Emblem_Fin_40: -2165267485177727684
+      Emblem_Fin_41: 1501672041209638937
+      Emblem_Fin_42: -2806805760225995423
+      Emblem_Fin_43: -8604136442384698080
+      Emblem_Fin_44: 9201284737732832595
+      Emblem_Fin_45: -1350497461766749473
+      Emblem_Fin_46: 3233325135892536744
+      Emblem_Fin_47: -190980357122659307
+      Emblem_Fin_48: -9068317583034257867
+      Emblem_Fin_49: -2117440852391666957
+      Emblem_Fin_5: -2940991435425289578
+      Emblem_Fin_50: 4823962816860861309
+      Emblem_Fin_51: 8588273196954694754
+      Emblem_Fin_52: 8205409598960216
+      Emblem_Fin_53: 4246569312806844423
+      Emblem_Fin_54: 1977784226454797578
+      Emblem_Fin_55: 3482971978932450512
+      Emblem_Fin_56: -9202910628304607226
+      Emblem_Fin_57: -1508952816879767758
+      Emblem_Fin_58: 8857140983999646022
+      Emblem_Fin_59: -187752448170266319
+      Emblem_Fin_6: -8232696661459323977
+      Emblem_Fin_60: -2391673020700918740
+      Emblem_Fin_61: -3405513991602620724
+      Emblem_Fin_62: 6512033938343883974
+      Emblem_Fin_63: 8582781160128967050
+      Emblem_Fin_64: -6324124875106399419
+      Emblem_Fin_65: 5401386135839046265
+      Emblem_Fin_66: 8993212588402313313
+      Emblem_Fin_67: 645643731715544301
+      Emblem_Fin_68: -6910685370841988274
+      Emblem_Fin_69: -5966319478841939013
+      Emblem_Fin_7: -3046152900708160576
+      Emblem_Fin_70: 4641187775289724579
+      Emblem_Fin_71: 7061053535087573607
+      Emblem_Fin_72: -3521074674144542369
+      Emblem_Fin_73: -1549362804321362043
+      Emblem_Fin_74: 6717151967138679423
+      Emblem_Fin_75: -4094470361911498403
+      Emblem_Fin_76: 8675572602115069689
+      Emblem_Fin_77: 3009566999987493556
+      Emblem_Fin_78: 7589285732537805401
+      Emblem_Fin_79: -6230541963832893324
+      Emblem_Fin_8: 5251133969166258080
+      Emblem_Fin_80: -7472463951370042072
+      Emblem_Fin_81: 8817564904228080480
+      Emblem_Fin_82: 6165007772085177832
+      Emblem_Fin_83: 6048489775378158961
+      Emblem_Fin_84: 1713304691315829356
+      Emblem_Fin_85: -5996091666308138688
+      Emblem_Fin_86: 8152932840097046047
+      Emblem_Fin_87: -6023858272442944633
+      Emblem_Fin_88: 6807056436338277062
+      Emblem_Fin_89: -2029186417626042365
+      Emblem_Fin_9: -6441206982114805288
+      Emblem_Fin_90: 8303765967868967013
+      Emblem_Fin_91: 7106634796983033702
+      Emblem_Fin_92: -437079645331330124
+      Emblem_Fin_93: 4038087556123487890
+      Emblem_Fin_94: 4486958009657025078
+      Emblem_Fin_95: -3047191702675296224
+      Emblem_Fin_96: -8270888812934184710
+      Emblem_Fin_97: -4593358152783457416
+      Emblem_Fin_98: 6407326304938802007
+      Emblem_Fin_99: 6977085183414319043
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

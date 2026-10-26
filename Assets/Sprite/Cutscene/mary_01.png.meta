@@ -1,0 +1,585 @@
+fileFormatVersion: 2
+guid: 211c9a9c6911c5d418c7dc488f55eb74
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1887707049064702600
+    second: mary_01_0
+  - first:
+      213: -602810808388155243
+    second: mary_01_1
+  - first:
+      213: 4525695594124233789
+    second: mary_01_2
+  - first:
+      213: 1868624287449968464
+    second: mary_01_3
+  - first:
+      213: 2720837231861030397
+    second: mary_01_4
+  - first:
+      213: 3389656474969448617
+    second: mary_01_5
+  - first:
+      213: -4062419177344006671
+    second: mary_01_6
+  - first:
+      213: -9004622448835737706
+    second: mary_01_7
+  - first:
+      213: 2119360035533901749
+    second: mary_01_8
+  - first:
+      213: -7982150305993376113
+    second: mary_01_9
+  - first:
+      213: 2460789688145547153
+    second: mary_01_10
+  - first:
+      213: -2004805390895986601
+    second: mary_01_11
+  - first:
+      213: 8432809776688390236
+    second: mary_01_12
+  - first:
+      213: 8654603596588349224
+    second: mary_01_13
+  - first:
+      213: 1183271446450625059
+    second: mary_01_14
+  - first:
+      213: -3432670752902501358
+    second: mary_01_15
+  - first:
+      213: -4668233805320787835
+    second: mary_01_16
+  - first:
+      213: 6672454283927964548
+    second: mary_01_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: mary_01_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 0
+        width: 1493
+        height: 1020
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87d5f7cb0748dc5e0800000000000000
+      internalID: -1887707049064702600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mary_01_1
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 1011
+        width: 44
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 598024b73c262a7f0800000000000000
+      internalID: -602810808388155243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mary_01_2
+      rect:
+        serializedVersion: 2
+        x: 1436
+        y: 853
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3c43592a208ece30800000000000000
+      internalID: 4525695594124233789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mary_01_3
+      rect:
+        serializedVersion: 2
+        x: 1410
+        y: 807
+        width: 38
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05f6f1893efaee910800000000000000
+      internalID: 1868624287449968464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mary_01_4
+      rect:
+        serializedVersion: 2
+        x: 1418
+        y: 771
+        width: 17
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfddbb8fb0b52c520800000000000000
+      internalID: 2720837231861030397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mary_01_5
+      rect:
+        serializedVersion: 2
+        x: 1420
+        y: 576
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a02825da9a7a0f20800000000000000
+      internalID: 3389656474969448617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mary_01_6
+      rect:
+        serializedVersion: 2
+        x: 1430
+        y: 582
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f50da528436f97c0800000000000000
+      internalID: -4062419177344006671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mary_01_7
+      rect:
+        serializedVersion: 2
+        x: 1459
+        y: 401
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69743a06797290380800000000000000
+      internalID: -9004622448835737706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mary_01_8
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 309
+        width: 27
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bf482539ba796d10800000000000000
+      internalID: 2119360035533901749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mary_01_9
+      rect:
+        serializedVersion: 2
+        x: 1447
+        y: 292
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8e3d738694b93190800000000000000
+      internalID: -7982150305993376113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mary_01_10
+      rect:
+        serializedVersion: 2
+        x: 1409
+        y: 244
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19f0cdcfe2b762220800000000000000
+      internalID: 2460789688145547153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mary_01_11
+      rect:
+        serializedVersion: 2
+        x: 1409
+        y: 171
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7584bdf6e108d24e0800000000000000
+      internalID: -2004805390895986601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mary_01_12
+      rect:
+        serializedVersion: 2
+        x: 1394
+        y: 122
+        width: 36
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c50e3fd10db570570800000000000000
+      internalID: 8432809776688390236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mary_01_13
+      rect:
+        serializedVersion: 2
+        x: 1447
+        y: 56
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8277776fd145b1870800000000000000
+      internalID: 8654603596588349224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mary_01_14
+      rect:
+        serializedVersion: 2
+        x: 1458
+        y: 43
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32a5d8e7c13db6010800000000000000
+      internalID: 1183271446450625059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mary_01_15
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 42
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21caf562324bc50d0800000000000000
+      internalID: -3432670752902501358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mary_01_16
+      rect:
+        serializedVersion: 2
+        x: 1426
+        y: 29
+        width: 22
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5886261661a173fb0800000000000000
+      internalID: -4668233805320787835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mary_01_17
+      rect:
+        serializedVersion: 2
+        x: 1504
+        y: 13
+        width: 17
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48b4f8da1d1599c50800000000000000
+      internalID: 6672454283927964548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      mary_01_0: -1887707049064702600
+      mary_01_1: -602810808388155243
+      mary_01_10: 2460789688145547153
+      mary_01_11: -2004805390895986601
+      mary_01_12: 8432809776688390236
+      mary_01_13: 8654603596588349224
+      mary_01_14: 1183271446450625059
+      mary_01_15: -3432670752902501358
+      mary_01_16: -4668233805320787835
+      mary_01_17: 6672454283927964548
+      mary_01_2: 4525695594124233789
+      mary_01_3: 1868624287449968464
+      mary_01_4: 2720837231861030397
+      mary_01_5: 3389656474969448617
+      mary_01_6: -4062419177344006671
+      mary_01_7: -9004622448835737706
+      mary_01_8: 2119360035533901749
+      mary_01_9: -7982150305993376113
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

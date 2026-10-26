@@ -1,0 +1,3341 @@
+fileFormatVersion: 2
+guid: dbc60e0308516274d8ac7ceda810fe71
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4773904763107532857
+    second: Emblem_0
+  - first:
+      213: 7418302204324452239
+    second: Emblem_1
+  - first:
+      213: 4404968086992096463
+    second: Emblem_2
+  - first:
+      213: 4013230131320864379
+    second: Emblem_3
+  - first:
+      213: -7066019627867986534
+    second: Emblem_4
+  - first:
+      213: 8418344688229945025
+    second: Emblem_5
+  - first:
+      213: 129444742917942505
+    second: Emblem_6
+  - first:
+      213: -5821826162918418794
+    second: Emblem_7
+  - first:
+      213: -3244385787911140742
+    second: Emblem_8
+  - first:
+      213: -1310531859283187645
+    second: Emblem_9
+  - first:
+      213: -3466295204817345187
+    second: Emblem_10
+  - first:
+      213: -1058470661580904097
+    second: Emblem_11
+  - first:
+      213: 9055299848435295098
+    second: Emblem_12
+  - first:
+      213: -1931092171762180027
+    second: Emblem_13
+  - first:
+      213: -2871724219296351074
+    second: Emblem_14
+  - first:
+      213: -3929020151716137448
+    second: Emblem_15
+  - first:
+      213: -2345840992187940499
+    second: Emblem_16
+  - first:
+      213: -1966931828031915209
+    second: Emblem_17
+  - first:
+      213: -6520297851463555344
+    second: Emblem_18
+  - first:
+      213: -3408132619937163699
+    second: Emblem_19
+  - first:
+      213: 6780593578160209343
+    second: Emblem_20
+  - first:
+      213: 3808532451140975584
+    second: Emblem_21
+  - first:
+      213: 2713030678991666581
+    second: Emblem_22
+  - first:
+      213: 535478406219341884
+    second: Emblem_23
+  - first:
+      213: -4909786050078963609
+    second: Emblem_24
+  - first:
+      213: -8768607868741285071
+    second: Emblem_25
+  - first:
+      213: 5900282622804327405
+    second: Emblem_26
+  - first:
+      213: -6327092308974824877
+    second: Emblem_27
+  - first:
+      213: -3895620369492845329
+    second: Emblem_28
+  - first:
+      213: 8154611490429733222
+    second: Emblem_29
+  - first:
+      213: 3790902672156883899
+    second: Emblem_30
+  - first:
+      213: -6972894347900727967
+    second: Emblem_31
+  - first:
+      213: -7891947586246147455
+    second: Emblem_32
+  - first:
+      213: -4193280874203246282
+    second: Emblem_33
+  - first:
+      213: -4036573785110498313
+    second: Emblem_34
+  - first:
+      213: -1248376977662443351
+    second: Emblem_35
+  - first:
+      213: 1225501198277039568
+    second: Emblem_36
+  - first:
+      213: 536426108236961482
+    second: Emblem_37
+  - first:
+      213: 289455196286110466
+    second: Emblem_38
+  - first:
+      213: -8787532945871558851
+    second: Emblem_39
+  - first:
+      213: 8321951832640164120
+    second: Emblem_40
+  - first:
+      213: -1554364391286211378
+    second: Emblem_41
+  - first:
+      213: -8156117464051428656
+    second: Emblem_42
+  - first:
+      213: 7951807542213956684
+    second: Emblem_43
+  - first:
+      213: -1185180772485735571
+    second: Emblem_44
+  - first:
+      213: -1922022759825558915
+    second: Emblem_45
+  - first:
+      213: -5626492052819056026
+    second: Emblem_46
+  - first:
+      213: -6457732579271930910
+    second: Emblem_47
+  - first:
+      213: 1820575113270236817
+    second: Emblem_48
+  - first:
+      213: 5501084320881558486
+    second: Emblem_49
+  - first:
+      213: -5598397420711206211
+    second: Emblem_50
+  - first:
+      213: -6489890552757470510
+    second: Emblem_51
+  - first:
+      213: 3114394520944795297
+    second: Emblem_52
+  - first:
+      213: 6914348704766805397
+    second: Emblem_53
+  - first:
+      213: -5667191624142286413
+    second: Emblem_54
+  - first:
+      213: 1548038260842384752
+    second: Emblem_55
+  - first:
+      213: -1748559925993438316
+    second: Emblem_56
+  - first:
+      213: -2475766480325874183
+    second: Emblem_57
+  - first:
+      213: -4284309595265228032
+    second: Emblem_58
+  - first:
+      213: -1318898130828004161
+    second: Emblem_59
+  - first:
+      213: 1806284424923261653
+    second: Emblem_60
+  - first:
+      213: 6366197076383694571
+    second: Emblem_61
+  - first:
+      213: 7834487623050603783
+    second: Emblem_62
+  - first:
+      213: -2697203021788036818
+    second: Emblem_63
+  - first:
+      213: 1061889061538868862
+    second: Emblem_64
+  - first:
+      213: -9061305460330091184
+    second: Emblem_65
+  - first:
+      213: 249570919477238596
+    second: Emblem_66
+  - first:
+      213: 5719060158978656778
+    second: Emblem_67
+  - first:
+      213: -8108364433015974024
+    second: Emblem_68
+  - first:
+      213: 7183868831140654038
+    second: Emblem_69
+  - first:
+      213: 2205630716167445069
+    second: Emblem_70
+  - first:
+      213: -6241592360412427767
+    second: Emblem_71
+  - first:
+      213: -368348310137912204
+    second: Emblem_72
+  - first:
+      213: -45328318271673950
+    second: Emblem_73
+  - first:
+      213: -1637686992496048722
+    second: Emblem_74
+  - first:
+      213: -1316279040064516064
+    second: Emblem_75
+  - first:
+      213: 5663682401071626402
+    second: Emblem_76
+  - first:
+      213: 7977044767099596153
+    second: Emblem_77
+  - first:
+      213: 7372688709673255480
+    second: Emblem_78
+  - first:
+      213: -7909205188706142489
+    second: Emblem_79
+  - first:
+      213: 2943273996067372741
+    second: Emblem_80
+  - first:
+      213: 4330118830569985398
+    second: Emblem_81
+  - first:
+      213: -9158317904239420215
+    second: Emblem_82
+  - first:
+      213: -3398585073032192158
+    second: Emblem_83
+  - first:
+      213: 6671314411571163188
+    second: Emblem_84
+  - first:
+      213: -1078946441663820177
+    second: Emblem_85
+  - first:
+      213: 8038386671441129448
+    second: Emblem_86
+  - first:
+      213: 2989439863567839425
+    second: Emblem_87
+  - first:
+      213: 1580328371732195746
+    second: Emblem_88
+  - first:
+      213: 487717598493013017
+    second: Emblem_89
+  - first:
+      213: -6889550355319206660
+    second: Emblem_90
+  - first:
+      213: 4071716576233865485
+    second: Emblem_91
+  - first:
+      213: 2659187908989615748
+    second: Emblem_92
+  - first:
+      213: -473960062505975140
+    second: Emblem_93
+  - first:
+      213: 8968697057304952935
+    second: Emblem_94
+  - first:
+      213: 1777931742471524568
+    second: Emblem_95
+  - first:
+      213: 5417878933923643367
+    second: Emblem_96
+  - first:
+      213: 899095460165996456
+    second: Emblem_97
+  - first:
+      213: -6820728572711532457
+    second: Emblem_98
+  - first:
+      213: 2096589556457435148
+    second: Emblem_99
+  - first:
+      213: -2203360477150834849
+    second: Emblem_100
+  - first:
+      213: 4499179142116414601
+    second: Emblem_101
+  - first:
+      213: 5361288759258273164
+    second: Emblem_102
+  - first:
+      213: 2211134370664261217
+    second: Emblem_103
+  - first:
+      213: 8228083973434914562
+    second: Emblem_104
+  - first:
+      213: -3548834623504440104
+    second: Emblem_105
+  - first:
+      213: 4110619659557035893
+    second: Emblem_106
+  - first:
+      213: 4472960717613411092
+    second: Emblem_107
+  - first:
+      213: 2069897096953011709
+    second: Emblem_108
+  - first:
+      213: 3964068815003455324
+    second: Emblem_109
+  - first:
+      213: 4837972659996111193
+    second: Emblem_110
+  - first:
+      213: 6271938316762245330
+    second: Emblem_111
+  - first:
+      213: 8605578557284175860
+    second: Emblem_112
+  - first:
+      213: 3482340886103412212
+    second: Emblem_113
+  - first:
+      213: -8852837718485107497
+    second: Emblem_114
+  - first:
+      213: -3949335710553524331
+    second: Emblem_115
+  - first:
+      213: 2855547511271982749
+    second: Emblem_116
+  - first:
+      213: -6098599224567076283
+    second: Emblem_117
+  - first:
+      213: 1462436481164954329
+    second: Emblem_118
+  - first:
+      213: -766729920704871781
+    second: Emblem_119
+  - first:
+      213: 7189986887273598181
+    second: Emblem_120
+  - first:
+      213: 4493627232002969829
+    second: Emblem_121
+  - first:
+      213: 5802505540682069777
+    second: Emblem_122
+  - first:
+      213: -2574146444617523278
+    second: Emblem_123
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Emblem_0
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 305
+        width: 22
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cf1e6349eeafbdb0800000000000000
+      internalID: -4773904763107532857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_1
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 321
+        width: 18
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f87914d0d8a13f660800000000000000
+      internalID: 7418302204324452239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_2
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 329
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcc8818f227912d30800000000000000
+      internalID: 4404968086992096463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_3
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 317
+        width: 14
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7e364b9a8bd1b730800000000000000
+      internalID: 4013230131320864379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_4
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 326
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a95adf8f59470fd90800000000000000
+      internalID: -7066019627867986534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_5
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 286
+        width: 41
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ce0eb244e7f3d470800000000000000
+      internalID: 8418344688229945025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_6
+      rect:
+        serializedVersion: 2
+        x: 1078
+        y: 318
+        width: 49
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ec6aafce41ebc100800000000000000
+      internalID: 129444742917942505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_7
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 195
+        width: 59
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6961c2f33f7b43fa0800000000000000
+      internalID: -5821826162918418794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_8
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 256
+        width: 106
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7a0b3db050a9f2d0800000000000000
+      internalID: -3244385787911140742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_9
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 228
+        width: 263
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 348e79ca73e00dde0800000000000000
+      internalID: -1310531859283187645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_10
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 265
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d55e83e50ee35efc0800000000000000
+      internalID: -3466295204817345187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_11
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 261
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f592c439a8e8f41f0800000000000000
+      internalID: -1058470661580904097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_12
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 257
+        width: 33
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7362a03c33eaad70800000000000000
+      internalID: 9055299848435295098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_13
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 263
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 540e391b6e16335e0800000000000000
+      internalID: -1931092171762180027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_14
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 281
+        width: 30
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9c74ff99069528d0800000000000000
+      internalID: -2871724219296351074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_15
+      rect:
+        serializedVersion: 2
+        x: 476
+        y: 267
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 816bb952df05979c0800000000000000
+      internalID: -3929020151716137448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_16
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 266
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d618611eb06e17fd0800000000000000
+      internalID: -2345840992187940499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_17
+      rect:
+        serializedVersion: 2
+        x: 501
+        y: 0
+        width: 199
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73b7fb47ced04b4e0800000000000000
+      internalID: -1966931828031915209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_18
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 291
+        width: 35
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f6a5cd66af3385a0800000000000000
+      internalID: -6520297851463555344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_19
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 287
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4659317071e3b0d0800000000000000
+      internalID: -3408132619937163699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_20
+      rect:
+        serializedVersion: 2
+        x: 521
+        y: 300
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbdb8882fe1891e50800000000000000
+      internalID: 6780593578160209343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_21
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 298
+        width: 37
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0eb3ec9f510aad430800000000000000
+      internalID: 3808532451140975584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_22
+      rect:
+        serializedVersion: 2
+        x: 679
+        y: 278
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59df80e370f96a520800000000000000
+      internalID: 2713030678991666581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_23
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 275
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c30a89bf5c66e6700800000000000000
+      internalID: 535478406219341884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_24
+      rect:
+        serializedVersion: 2
+        x: 698
+        y: 252
+        width: 12
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76800e1c99fecdbb0800000000000000
+      internalID: -4909786050078963609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_25
+      rect:
+        serializedVersion: 2
+        x: 702
+        y: 269
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13b0bf8f995af4680800000000000000
+      internalID: -8768607868741285071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_26
+      rect:
+        serializedVersion: 2
+        x: 709
+        y: 270
+        width: 17
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: deb79aec8c302e150800000000000000
+      internalID: 5900282622804327405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_27
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 276
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 352137e3117a138a0800000000000000
+      internalID: -6327092308974824877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_28
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 269
+        width: 32
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fec5a90f9e9ffe9c0800000000000000
+      internalID: -3895620369492845329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_29
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 266
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 669026012fffa2170800000000000000
+      internalID: 8154611490429733222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_30
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 261
+        width: 121
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbb7dff25edfb9430800000000000000
+      internalID: 3790902672156883899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_31
+      rect:
+        serializedVersion: 2
+        x: 799
+        y: 260
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16d4c09d88d4b3f90800000000000000
+      internalID: -6972894347900727967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_32
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 264
+        width: 61
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1820ccfcb7b2a7290800000000000000
+      internalID: -7891947586246147455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_33
+      rect:
+        serializedVersion: 2
+        x: 941
+        y: 265
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6311da903497ec5c0800000000000000
+      internalID: -4193280874203246282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_34
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 259
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f3b5d477853bf7c0800000000000000
+      internalID: -4036573785110498313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_35
+      rect:
+        serializedVersion: 2
+        x: 978
+        y: 249
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a087a4c0cfdcaee0800000000000000
+      internalID: -1248376977662443351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_36
+      rect:
+        serializedVersion: 2
+        x: 986
+        y: 242
+        width: 30
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d55e1bc8dad10110800000000000000
+      internalID: 1225501198277039568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_37
+      rect:
+        serializedVersion: 2
+        x: 1013
+        y: 266
+        width: 33
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac695bd04b4c17700800000000000000
+      internalID: 536426108236961482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_38
+      rect:
+        serializedVersion: 2
+        x: 1043
+        y: 265
+        width: 27
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20b4609a7f9540400800000000000000
+      internalID: 289455196286110466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_39
+      rect:
+        serializedVersion: 2
+        x: 1077
+        y: 231
+        width: 102
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d37a84518596c0680800000000000000
+      internalID: -8787532945871558851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_40
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 249
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8119d66a9138d7370800000000000000
+      internalID: 8321951832640164120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_41
+      rect:
+        serializedVersion: 2
+        x: 1178
+        y: 266
+        width: 19
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecc7edd42d9cd6ae0800000000000000
+      internalID: -1554364391286211378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_42
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 236
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d2dad02166afce80800000000000000
+      internalID: -8156117464051428656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_43
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 6
+        width: 307
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c445fe344de7a5e60800000000000000
+      internalID: 7951807542213956684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_44
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 5
+        width: 273
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6b5d55ed546d8fe0800000000000000
+      internalID: -1185180772485735571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_45
+      rect:
+        serializedVersion: 2
+        x: 1001
+        y: 45
+        width: 133
+        height: 191
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d72b166bb7a9355e0800000000000000
+      internalID: -1922022759825558915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_46
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 31
+        width: 154
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66a6924d94faae1b0800000000000000
+      internalID: -5626492052819056026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_47
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 136
+        width: 90
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2eb87060f668166a0800000000000000
+      internalID: -6457732579271930910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_48
+      rect:
+        serializedVersion: 2
+        x: 1139
+        y: 209
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19693617b6bf34910800000000000000
+      internalID: 1820575113270236817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_49
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 184
+        width: 22
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d3cd993b07c75c40800000000000000
+      internalID: 5501084320881558486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_50
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 147
+        width: 14
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db2ab0b153f7e42b0800000000000000
+      internalID: -5598397420711206211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_51
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 106
+        width: 75
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2da3abb5de64fe5a0800000000000000
+      internalID: -6489890552757470510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_52
+      rect:
+        serializedVersion: 2
+        x: 1127
+        y: 184
+        width: 22
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ae5657e05d883b20800000000000000
+      internalID: 3114394520944795297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_53
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 159
+        width: 33
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 595cec06383b4ff50800000000000000
+      internalID: 6914348704766805397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_54
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 159
+        width: 36
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b11ee07e371a51b0800000000000000
+      internalID: -5667191624142286413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_55
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 136
+        width: 19
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07d493ca89cbb7510800000000000000
+      internalID: 1548038260842384752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_56
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 150
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4938da6f20edbb7e0800000000000000
+      internalID: -1748559925993438316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_57
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 75
+        width: 45
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fd6b59d08f44add0800000000000000
+      internalID: -2475766480325874183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_58
+      rect:
+        serializedVersion: 2
+        x: 925
+        y: 118
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0032b625f131b84c0800000000000000
+      internalID: -4284309595265228032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_59
+      rect:
+        serializedVersion: 2
+        x: 930
+        y: 114
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb4f119432552bde0800000000000000
+      internalID: -1318898130828004161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_60
+      rect:
+        serializedVersion: 2
+        x: 926
+        y: 110
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5da2fd64d16311910800000000000000
+      internalID: 1806284424923261653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_61
+      rect:
+        serializedVersion: 2
+        x: 931
+        y: 102
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: beefafbe286495850800000000000000
+      internalID: 6366197076383694571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_62
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 94
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70d2029fbf0b9bc60800000000000000
+      internalID: 7834487623050603783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_63
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 52
+        width: 46
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e21c63f542c919ad0800000000000000
+      internalID: -2697203021788036818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_64
+      rect:
+        serializedVersion: 2
+        x: 1163
+        y: 84
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7ea5efa9769cbe00800000000000000
+      internalID: 1061889061538868862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_65
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 84
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05da7b351b6cf3280800000000000000
+      internalID: -9061305460330091184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_66
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 54
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44b55b1dd67a67300800000000000000
+      internalID: 249570919477238596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_67
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 63
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0a0309e9ee2e5f40800000000000000
+      internalID: 5719060158978656778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_68
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 42
+        width: 14
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 877dba4128d497f80800000000000000
+      internalID: -8108364433015974024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_69
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 58
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dba321e3aa32b360800000000000000
+      internalID: 7183868831140654038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_70
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 56
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4ad9de4379fb9e10800000000000000
+      internalID: 2205630716167445069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_71
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 54
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90a43dc41d86169a0800000000000000
+      internalID: -6241592360412427767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_72
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 44
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4744d9cd92d53eaf0800000000000000
+      internalID: -368348310137912204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_73
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 47
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a9a62b7226fe5ff0800000000000000
+      internalID: -45328318271673950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_74
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 35
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea5cefe6b54c549e0800000000000000
+      internalID: -1637686992496048722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_75
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 46
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02099afdf23abbde0800000000000000
+      internalID: -1316279040064516064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_76
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 59
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a87184e221799e40800000000000000
+      internalID: 5663682401071626402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_77
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 45
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97d2c5493f724be60800000000000000
+      internalID: 7977044767099596153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_78
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 45
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8328b9bb15d015660800000000000000
+      internalID: 7372688709673255480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_79
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 44
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e67e7f19cbdc3290800000000000000
+      internalID: -7909205188706142489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_80
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 33
+        width: 17
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ce7d34fa1c98d820800000000000000
+      internalID: 2943273996067372741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_81
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 53
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6759a5b622ca71c30800000000000000
+      internalID: 4330118830569985398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_82
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 45
+        width: 22
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cc95b1936e17e080800000000000000
+      internalID: -9158317904239420215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_83
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 53
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26f98fee1ecc5d0d0800000000000000
+      internalID: -3398585073032192158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_84
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 42
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 430b4a67c15459c50800000000000000
+      internalID: 6671314411571163188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_85
+      rect:
+        serializedVersion: 2
+        x: 459
+        y: 44
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6ec4f48defc601f0800000000000000
+      internalID: -1078946441663820177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_86
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 56
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8efab76a6161e8f60800000000000000
+      internalID: 8038386671441129448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_87
+      rect:
+        serializedVersion: 2
+        x: 491
+        y: 62
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c07a5997bf9c7920800000000000000
+      internalID: 2989439863567839425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_88
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 35
+        width: 17
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a9a199f7447ee510800000000000000
+      internalID: 1580328371732195746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_89
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 43
+        width: 23
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 914f1e06298b4c600800000000000000
+      internalID: 487717598493013017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_90
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 39
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfc480944766360a0800000000000000
+      internalID: -6889550355319206660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_91
+      rect:
+        serializedVersion: 2
+        x: 740
+        y: 42
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d014d7837a4a18830800000000000000
+      internalID: 4071716576233865485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_92
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 54
+        width: 24
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48ef652705557e420800000000000000
+      internalID: 2659187908989615748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_93
+      rect:
+        serializedVersion: 2
+        x: 789
+        y: 62
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c920c9495d72c69f0800000000000000
+      internalID: -473960062505975140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_94
+      rect:
+        serializedVersion: 2
+        x: 794
+        y: 48
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 760c0c69476377c70800000000000000
+      internalID: 8968697057304952935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_95
+      rect:
+        serializedVersion: 2
+        x: 837
+        y: 32
+        width: 25
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d018e8ff7b7ca810800000000000000
+      internalID: 1777931742471524568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_96
+      rect:
+        serializedVersion: 2
+        x: 918
+        y: 26
+        width: 28
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ef379c6f2c203b40800000000000000
+      internalID: 5417878933923643367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_97
+      rect:
+        serializedVersion: 2
+        x: 924
+        y: 62
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8af4c52be8a3a7c00800000000000000
+      internalID: 899095460165996456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_98
+      rect:
+        serializedVersion: 2
+        x: 934
+        y: 45
+        width: 40
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7580c2a3087e751a0800000000000000
+      internalID: -6820728572711532457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_99
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 35
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c007078e715981d10800000000000000
+      internalID: 2096589556457435148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_100
+      rect:
+        serializedVersion: 2
+        x: 1048
+        y: 53
+        width: 13
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5f0a47e1571c61e0800000000000000
+      internalID: -2203360477150834849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_101
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 42
+        width: 37
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98412b2979b407e30800000000000000
+      internalID: 4499179142116414601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_102
+      rect:
+        serializedVersion: 2
+        x: 1134
+        y: 67
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8552e1a8bf176a40800000000000000
+      internalID: 5361288759258273164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_103
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 66
+        width: 19
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 166a91abef68fae10800000000000000
+      internalID: 2211134370664261217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_104
+      rect:
+        serializedVersion: 2
+        x: 1163
+        y: 57
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2073ca297c6003270800000000000000
+      internalID: 8228083973434914562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_105
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 46
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d4296366b100cec0800000000000000
+      internalID: -3548834623504440104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_106
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 14
+        width: 52
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57f52a62dcadb0930800000000000000
+      internalID: 4110619659557035893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_107
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 30
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41baf9be216231e30800000000000000
+      internalID: 4472960717613411092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_108
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 36
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfd1f716170c9bc10800000000000000
+      internalID: 2069897096953011709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_109
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 32
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5f0c7fa593330730800000000000000
+      internalID: 3964068815003455324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_110
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 18
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 951be18608ee32340800000000000000
+      internalID: 4837972659996111193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_111
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 27
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d866cf3ba66a0750800000000000000
+      internalID: 6271938316762245330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_112
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 35
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ff44a18a182d6770800000000000000
+      internalID: 8605578557284175860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_113
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 14
+        width: 43
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fd430fe592c35030800000000000000
+      internalID: 3482340886103412212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_114
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 14
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7dcf387dff6642580800000000000000
+      internalID: -8852837718485107497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_115
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 24
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59731b188142139c0800000000000000
+      internalID: -3949335710553524331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_116
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 13
+        width: 19
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d960e980551f0a720800000000000000
+      internalID: 2855547511271982749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_117
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 24
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54ae438215c6d5ba0800000000000000
+      internalID: -6098599224567076283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_118
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 0
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9dac8663b3e9b4410800000000000000
+      internalID: 1462436481164954329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_119
+      rect:
+        serializedVersion: 2
+        x: 674
+        y: 8
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9209bd03370c55f0800000000000000
+      internalID: -766729920704871781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_120
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 2
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ecc8a3daf6f7c360800000000000000
+      internalID: 7189986887273598181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_121
+      rect:
+        serializedVersion: 2
+        x: 713
+        y: 7
+        width: 17
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e01f84c8229c5e30800000000000000
+      internalID: 4493627232002969829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_122
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 25
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1173797db04a68050800000000000000
+      internalID: 5802505540682069777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_123
+      rect:
+        serializedVersion: 2
+        x: 1068
+        y: 5
+        width: 26
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bfdcb0727bc64cd0800000000000000
+      internalID: -2574146444617523278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Emblem_0: -4773904763107532857
+      Emblem_1: 7418302204324452239
+      Emblem_10: -3466295204817345187
+      Emblem_100: -2203360477150834849
+      Emblem_101: 4499179142116414601
+      Emblem_102: 5361288759258273164
+      Emblem_103: 2211134370664261217
+      Emblem_104: 8228083973434914562
+      Emblem_105: -3548834623504440104
+      Emblem_106: 4110619659557035893
+      Emblem_107: 4472960717613411092
+      Emblem_108: 2069897096953011709
+      Emblem_109: 3964068815003455324
+      Emblem_11: -1058470661580904097
+      Emblem_110: 4837972659996111193
+      Emblem_111: 6271938316762245330
+      Emblem_112: 8605578557284175860
+      Emblem_113: 3482340886103412212
+      Emblem_114: -8852837718485107497
+      Emblem_115: -3949335710553524331
+      Emblem_116: 2855547511271982749
+      Emblem_117: -6098599224567076283
+      Emblem_118: 1462436481164954329
+      Emblem_119: -766729920704871781
+      Emblem_12: 9055299848435295098
+      Emblem_120: 7189986887273598181
+      Emblem_121: 4493627232002969829
+      Emblem_122: 5802505540682069777
+      Emblem_123: -2574146444617523278
+      Emblem_13: -1931092171762180027
+      Emblem_14: -2871724219296351074
+      Emblem_15: -3929020151716137448
+      Emblem_16: -2345840992187940499
+      Emblem_17: -1966931828031915209
+      Emblem_18: -6520297851463555344
+      Emblem_19: -3408132619937163699
+      Emblem_2: 4404968086992096463
+      Emblem_20: 6780593578160209343
+      Emblem_21: 3808532451140975584
+      Emblem_22: 2713030678991666581
+      Emblem_23: 535478406219341884
+      Emblem_24: -4909786050078963609
+      Emblem_25: -8768607868741285071
+      Emblem_26: 5900282622804327405
+      Emblem_27: -6327092308974824877
+      Emblem_28: -3895620369492845329
+      Emblem_29: 8154611490429733222
+      Emblem_3: 4013230131320864379
+      Emblem_30: 3790902672156883899
+      Emblem_31: -6972894347900727967
+      Emblem_32: -7891947586246147455
+      Emblem_33: -4193280874203246282
+      Emblem_34: -4036573785110498313
+      Emblem_35: -1248376977662443351
+      Emblem_36: 1225501198277039568
+      Emblem_37: 536426108236961482
+      Emblem_38: 289455196286110466
+      Emblem_39: -8787532945871558851
+      Emblem_4: -7066019627867986534
+      Emblem_40: 8321951832640164120
+      Emblem_41: -1554364391286211378
+      Emblem_42: -8156117464051428656
+      Emblem_43: 7951807542213956684
+      Emblem_44: -1185180772485735571
+      Emblem_45: -1922022759825558915
+      Emblem_46: -5626492052819056026
+      Emblem_47: -6457732579271930910
+      Emblem_48: 1820575113270236817
+      Emblem_49: 5501084320881558486
+      Emblem_5: 8418344688229945025
+      Emblem_50: -5598397420711206211
+      Emblem_51: -6489890552757470510
+      Emblem_52: 3114394520944795297
+      Emblem_53: 6914348704766805397
+      Emblem_54: -5667191624142286413
+      Emblem_55: 1548038260842384752
+      Emblem_56: -1748559925993438316
+      Emblem_57: -2475766480325874183
+      Emblem_58: -4284309595265228032
+      Emblem_59: -1318898130828004161
+      Emblem_6: 129444742917942505
+      Emblem_60: 1806284424923261653
+      Emblem_61: 6366197076383694571
+      Emblem_62: 7834487623050603783
+      Emblem_63: -2697203021788036818
+      Emblem_64: 1061889061538868862
+      Emblem_65: -9061305460330091184
+      Emblem_66: 249570919477238596
+      Emblem_67: 5719060158978656778
+      Emblem_68: -8108364433015974024
+      Emblem_69: 7183868831140654038
+      Emblem_7: -5821826162918418794
+      Emblem_70: 2205630716167445069
+      Emblem_71: -6241592360412427767
+      Emblem_72: -368348310137912204
+      Emblem_73: -45328318271673950
+      Emblem_74: -1637686992496048722
+      Emblem_75: -1316279040064516064
+      Emblem_76: 5663682401071626402
+      Emblem_77: 7977044767099596153
+      Emblem_78: 7372688709673255480
+      Emblem_79: -7909205188706142489
+      Emblem_8: -3244385787911140742
+      Emblem_80: 2943273996067372741
+      Emblem_81: 4330118830569985398
+      Emblem_82: -9158317904239420215
+      Emblem_83: -3398585073032192158
+      Emblem_84: 6671314411571163188
+      Emblem_85: -1078946441663820177
+      Emblem_86: 8038386671441129448
+      Emblem_87: 2989439863567839425
+      Emblem_88: 1580328371732195746
+      Emblem_89: 487717598493013017
+      Emblem_9: -1310531859283187645
+      Emblem_90: -6889550355319206660
+      Emblem_91: 4071716576233865485
+      Emblem_92: 2659187908989615748
+      Emblem_93: -473960062505975140
+      Emblem_94: 8968697057304952935
+      Emblem_95: 1777931742471524568
+      Emblem_96: 5417878933923643367
+      Emblem_97: 899095460165996456
+      Emblem_98: -6820728572711532457
+      Emblem_99: 2096589556457435148
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
