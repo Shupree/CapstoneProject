@@ -8,6 +8,8 @@ Shader "CyberExorcist/SealingPixel"
         _RevealFromRight ("Reveal from right", Float) = 0
         _Dissolve ("Pixel dissolve", Range(0,1)) = 0
         _Brightness ("Brightness", Float) = 1
+        _WhiteAmount ("White silhouette", Range(0,1)) = 0
+        _Opacity ("Opacity", Range(0,1)) = 1
         _PixelGrid ("Pixel grid", Vector) = (150,100,0,0)
         _StencilComp ("Stencil Comparison", Float) = 8
         _Stencil ("Stencil ID", Float) = 0
@@ -35,7 +37,7 @@ Shader "CyberExorcist/SealingPixel"
             struct v2f { float4 vertex : SV_POSITION; float4 color : COLOR; float2 uv : TEXCOORD0; float4 world : TEXCOORD1; };
             sampler2D _MainTex;
             float4 _Color, _ClipRect, _PixelGrid, _TextureSampleAdd;
-            float _Reveal, _Dissolve, _Brightness, _RevealFromRight;
+            float _Reveal, _Dissolve, _Brightness, _RevealFromRight, _WhiteAmount, _Opacity;
             v2f vert(appdata v)
             {
                 v2f o;
@@ -52,6 +54,8 @@ Shader "CyberExorcist/SealingPixel"
                 if (_Dissolve > 0) clip(noise - _Dissolve - 0.000001);
                 float4 c = (tex2D(_MainTex, i.uv) + _TextureSampleAdd) * i.color;
                 c.rgb *= _Brightness;
+                c.rgb = lerp(c.rgb, float3(1,1,1), _WhiteAmount);
+                c.a *= _Opacity;
                 #ifdef UNITY_UI_CLIP_RECT
                 c.a *= UnityGet2DClipping(i.world.xy, _ClipRect);
                 #endif

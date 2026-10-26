@@ -10,7 +10,7 @@ public sealed class SealingVisual : MonoBehaviour
     public bool revealFromRight;
     Material instance;
 
-    public void Set(float reveal = 1f, float dissolve = 0f, float brightness = 1f)
+    public void Set(float reveal = 1f, float dissolve = 0f, float brightness = 1f, float white = 0f, float opacity = 1f)
     {
         if (!instance)
         {
@@ -20,6 +20,8 @@ public sealed class SealingVisual : MonoBehaviour
         instance.SetFloat("_Reveal", Mathf.Clamp01(reveal));
         instance.SetFloat("_Dissolve", Mathf.Clamp01(dissolve));
         instance.SetFloat("_Brightness", brightness);
+        instance.SetFloat("_WhiteAmount", Mathf.Clamp01(white));
+        instance.SetFloat("_Opacity", Mathf.Clamp01(opacity));
         instance.SetFloat("_RevealFromRight", revealFromRight ? 1 : 0);
         instance.SetVector("_PixelGrid", new Vector4(pixelGrid.x, pixelGrid.y, 0, 0));
     }

@@ -27,9 +27,14 @@ public sealed class BattleSealingController : MonoBehaviour
     public GameObject[] desktopButtons, windowsToHide;
     public UnityEngine.UI.Button activateButton;
     public SealingVisual mary, calmMary;
+    public SealingVisual sdMary;
+    public RectTransform leftRope, rightRope;
     public Texture2D[] maryFrames, minaFrames, effectFrames;
     public UnityEngine.UI.RawImage mina;
     public RectTransform heroineGroup;
+    public CanvasGroup sealingScreen;
+    public UnityEngine.UI.RectMask2D screenRevealMask;
+    public GameObject keyNote;
     public CanvasGroup talismanGroup;
     public RectTransform talisman;
     public SealingVisual emblem;
@@ -39,13 +44,20 @@ public sealed class BattleSealingController : MonoBehaviour
     public RopeTalisman[] smallTalismans;
 
     [Header("입력 / 프레임")]
-    [Min(1)] public int requiredPresses = 20;
+    [Min(1)] public int requiredPresses = 30;
+    [Tooltip("입력 가능 상태에서 진행도가 1 감소하는 간격. 입력해도 주기는 초기화되지 않는다.")]
+    [Min(.01f)] public float progressDecaySeconds = .3f;
     [Min(.01f)] public float frameSeconds = .2f;
     [Min(0f)] public float minaActiveSeconds = .5f;
     [Header("연출 시간 (초)")]
     [Min(0f)] public float completedHoldSeconds = 1.5f;
     [Min(0f)] public float unfoldSeconds = .35f;
-    [Min(0f)] public float heroineRiseSeconds = .2f;
+    [Min(0f)] public float heroineDelaySeconds = 1f;
+    [Min(0f)] public float horizontalRevealSeconds = .35f;
+    [Min(0f)] public float eyeOpenHoldSeconds = .75f;
+    [Min(0f)] public float inputDelaySeconds = .5f;
+    [Range(0f, 1f)] public float stripCenter = .45f;
+    [Range(.01f, 1f)] public float stripHeight = .1f;
     [Min(0f)] public float heroineExitSeconds = .2f;
     [Min(0f)] public float effectDissolveSeconds = .5f;
     [Min(0f)] public float brightenSeconds = 1.5f;
@@ -55,14 +67,21 @@ public sealed class BattleSealingController : MonoBehaviour
     [Min(0f)] public float smallTalismanGrowSeconds = .35f;
     [Min(0f)] public float calmDelaySeconds = .75f;
     [Min(0f)] public float calmDissolveSeconds = 1f;
+    [Header("SD 메리 전환 (초)")]
+    [Min(0f)] public float maryWhiteSeconds = 1f;
+    [Min(0f)] public float sdWhiteHoldSeconds = 1f;
+    [Min(0f)] public float maryShrinkSeconds = 1.5f;
+    [Min(0f)] public float sdColorDelaySeconds = 1f;
+    [Min(0f)] public float sdColorRestoreSeconds = 1f;
+    [Min(0f)] public float ropeExitSeconds = 1f;
 
     enum Stage { Idle, Waiting, Button, Opening, Input, Finishing, Complete }
     Stage stage;
-    int presses, minaFrame;
+    int presses, minaFrame, effectSequence;
+    double nextDecayTime;
     float maryClock, minaClock, lastInput = float.NegativeInfinity;
     bool animateMary;
     Vector2 heroinePosition;
-    Vector3 talismanScale;
     Vector2[] ropePositions;
     float[] effectStarted;
     public int PressCount => presses;
@@ -72,7 +91,6 @@ public sealed class BattleSealingController : MonoBehaviour
         if (root) root.SetActive(false);
         if (!Configured()) { Debug.LogError("봉인 연출의 씬 참조와 이미지 배열을 확인하세요.", this); enabled = false; return; }
         heroinePosition = heroineGroup.anchoredPosition;
-        talismanScale = talisman.localScale;
         ropePositions = new Vector2[ropePieces.Length];
         for (int i = 0; i < ropePieces.Length; i++) ropePositions[i] = ropePieces[i].rect.anchoredPosition;
         effectStarted = new float[effectSlots.Length];
@@ -84,11 +102,12 @@ public sealed class BattleSealingController : MonoBehaviour
     bool Configured()
     {
         if (!phaseTwo || !root || !activateButton || !mary || !calmMary || !mina || !heroineGroup ||
+            !sealingScreen || !screenRevealMask || !keyNote ||
             !talismanGroup || !talisman || !emblem || !finishedEmblem ||
             !Frames(maryFrames, 5) || !Frames(minaFrames, 4) || !Frames(effectFrames, 2) ||
             effectSlots == null || effectSlots.Length < 2 || ropePieces == null || ropePieces.Length == 0 ||
             smallTalismans == null || smallTalismans.Length == 0 || desktopButtons == null || windowsToHide == null) return false;
-        if (!Visual(mary) || !Visual(calmMary) || !Visual(emblem)) return false;
+        if (!Visual(mary) || !Visual(calmMary) || !Visual(emblem) || !Visual(sdMary) || !leftRope || !rightRope) return false;
         foreach (var slot in effectSlots) if (!Visual(slot)) return false;
         foreach (var piece in ropePieces) if (piece == null || !piece.rect) return false;
         foreach (var small in smallTalismans)
@@ -111,8 +130,10 @@ public sealed class BattleSealingController : MonoBehaviour
         foreach (var window in windowsToHide) if (window) window.SetActive(false);
         foreach (var button in desktopButtons) if (button) button.SetActive(false);
         talismanGroup.gameObject.SetActive(false);
+        sealingScreen.gameObject.SetActive(false);
         heroineGroup.gameObject.SetActive(false);
         calmMary.gameObject.SetActive(false);
+        sdMary.gameObject.SetActive(false);
         foreach (var effect in effectSlots) effect.gameObject.SetActive(false);
         foreach (var piece in ropePieces) piece.rect.gameObject.SetActive(false);
         foreach (var small in smallTalismans) small.visual.gameObject.SetActive(false);
@@ -134,15 +155,35 @@ public sealed class BattleSealingController : MonoBehaviour
     }
     IEnumerator OpenTalisman()
     {
+        sealingScreen.alpha = 1;
+        sealingScreen.gameObject.SetActive(true);
         talismanGroup.gameObject.SetActive(true);
         talismanGroup.alpha = 1;
         emblem.Set(0f);
-        yield return Tween(unfoldSeconds, t => talisman.localScale = Vector3.Scale(talismanScale, new Vector3(t, 1, 1)));
         mina.texture = minaFrames[0];
+        heroineGroup.anchoredPosition = heroinePosition;
         heroineGroup.gameObject.SetActive(true);
-        Vector2 below = BelowScreen();
-        yield return Tween(heroineRiseSeconds, t => heroineGroup.anchoredPosition = Vector2.Lerp(below, heroinePosition, t));
+        keyNote.SetActive(false);
+        screenRevealMask.enabled = true;
+        yield return Tween(horizontalRevealSeconds, t => SetScreenReveal(t, 0));
+        yield return new WaitForSecondsRealtime(heroineDelaySeconds);
+        minaFrame = 1;
+        mina.texture = minaFrames[minaFrame];
+        yield return new WaitForSecondsRealtime(eyeOpenHoldSeconds);
+        yield return Tween(unfoldSeconds, t => SetScreenReveal(1, t));
+        yield return new WaitForSecondsRealtime(inputDelaySeconds);
+        keyNote.SetActive(true);
+        nextDecayTime = Time.unscaledTimeAsDouble + Mathf.Max(.01f, progressDecaySeconds);
         stage = Stage.Input;
+    }
+    void SetScreenReveal(float horizontal, float vertical)
+    {
+        // 전체 UI의 배치를 고정하고 마스크의 공개 범위만 넓힌다.
+        var size = ((RectTransform)screenRevealMask.transform).rect.size;
+        float bottom = Mathf.Clamp01(stripCenter - stripHeight * .5f);
+        float top = 1 - Mathf.Clamp01(stripCenter + stripHeight * .5f);
+        screenRevealMask.padding = new Vector4(0, size.y * bottom * (1 - vertical),
+            size.x * (1 - horizontal), size.y * top * (1 - vertical));
     }
     Vector2 BelowScreen()
     {
@@ -159,6 +200,7 @@ public sealed class BattleSealingController : MonoBehaviour
         }
         UpdateEffects();
         if (stage != Stage.Input) return;
+        DecayProgress();
         var keyboard = Keyboard.current;
         if (keyboard != null)
         {
@@ -172,10 +214,20 @@ public sealed class BattleSealingController : MonoBehaviour
             while (minaClock >= Mathf.Max(.01f, frameSeconds))
             {
                 minaClock -= Mathf.Max(.01f, frameSeconds);
-                minaFrame = (minaFrame + 1) % minaFrames.Length;
+                minaFrame = 1 + minaFrame % (minaFrames.Length - 1);
             }
             mina.texture = minaFrames[minaFrame];
         }
+    }
+    void DecayProgress()
+    {
+        double now = Time.unscaledTimeAsDouble;
+        if (now < nextDecayTime) return;
+        double interval = Mathf.Max(.01f, progressDecaySeconds);
+        double ticks = Math.Floor((now - nextDecayTime) / interval) + 1;
+        nextDecayTime += ticks * interval;
+        presses = (int)Math.Max(0, presses - ticks);
+        emblem.Set((float)presses / Mathf.Max(1, requiredPresses));
     }
     void Press()
     {
@@ -192,8 +244,9 @@ public sealed class BattleSealingController : MonoBehaviour
     {
         // 두 슬롯을 한 쌍으로 사용하며 풀은 씬에 미리 저장되어 있다.
         int pairCount = effectSlots.Length / 2;
-        int first = ((presses - 1) % pairCount) * 2;
-        int textureIndex = (presses - 1) % effectFrames.Length;
+        int first = (effectSequence % pairCount) * 2;
+        int textureIndex = effectSequence % effectFrames.Length;
+        effectSequence = (effectSequence + 1) % (pairCount * effectFrames.Length);
         var r = emblem.image.rectTransform.rect;
         for (int i = 0; i < 2; i++)
         {
@@ -230,8 +283,9 @@ public sealed class BattleSealingController : MonoBehaviour
             emblem.Set(1, 0, 1 + brightnessIncrease * Mathf.Clamp01(elapsed / Mathf.Max(.001f, brightenSeconds)));
         });
         heroineGroup.gameObject.SetActive(false);
-        yield return Tween(talismanFadeSeconds, t => talismanGroup.alpha = 1 - t);
+        yield return Tween(talismanFadeSeconds, t => sealingScreen.alpha = 1 - t);
         talismanGroup.gameObject.SetActive(false);
+        sealingScreen.gameObject.SetActive(false);
         yield return AssembleRopes();
         yield return new WaitForSecondsRealtime(calmDelaySeconds);
         animateMary = false;
@@ -240,7 +294,42 @@ public sealed class BattleSealingController : MonoBehaviour
         // 진정된 메리를 뒤에 두고 픽셀 단위로 기존 메리를 걷어낸다.
         yield return Tween(calmDissolveSeconds, t => { mary.Set(1, t); calmMary.Set(1, 1 - t); });
         mary.gameObject.SetActive(false);
+        yield return TransformToSDMary();
         stage = Stage.Complete;
+    }
+    IEnumerator TransformToSDMary()
+    {
+        yield return Tween(maryWhiteSeconds, t => calmMary.Set(white: t));
+        sdMary.Set(white: 1);
+        sdMary.gameObject.SetActive(true);
+        yield return new WaitForSecondsRealtime(sdWhiteHoldSeconds);
+        var large = calmMary.image.rectTransform;
+        var small = sdMary.image.rectTransform;
+        Vector3 fromScale = large.localScale;
+        Vector3 fromPosition = large.position;
+        float ratio = small.rect.height * small.lossyScale.y / Mathf.Max(.001f, large.rect.height * large.lossyScale.y);
+        yield return Tween(maryShrinkSeconds, t =>
+        {
+            large.localScale = fromScale * Mathf.Lerp(1, ratio, t);
+            large.position = Vector3.Lerp(fromPosition, small.position, t);
+            calmMary.Set(white: 1, opacity: 1 - Mathf.InverseLerp(.75f, 1, t));
+        });
+        calmMary.gameObject.SetActive(false);
+        yield return new WaitForSecondsRealtime(sdColorDelaySeconds);
+        yield return Tween(sdColorRestoreSeconds, t => sdMary.Set(white: 1 - t));
+        Vector2 leftStart = leftRope.anchoredPosition, rightStart = rightRope.anchoredPosition;
+        var area = ((RectTransform)leftRope.parent).rect.size;
+        var leftBounds = RectTransformUtility.CalculateRelativeRectTransformBounds(leftRope.parent, leftRope);
+        var rightBounds = RectTransformUtility.CalculateRelativeRectTransformBounds(rightRope.parent, rightRope);
+        Vector2 leftOffset = new(-area.x - leftBounds.size.x, area.y + leftBounds.size.y);
+        Vector2 rightOffset = new(area.x + rightBounds.size.x, area.y + rightBounds.size.y);
+        yield return Tween(ropeExitSeconds, t =>
+        {
+            leftRope.anchoredPosition = leftStart + leftOffset * t;
+            rightRope.anchoredPosition = rightStart + rightOffset * t;
+        });
+        leftRope.gameObject.SetActive(false);
+        rightRope.gameObject.SetActive(false);
     }
     IEnumerator AssembleRopes()
     {
