@@ -12917,6 +12917,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2920969350808358801, guid: e5c5e5f930f34c141934d23c3499cd10, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 410
+      objectReference: {fileID: 0}
     - target: {fileID: 8778511031597041149, guid: e5c5e5f930f34c141934d23c3499cd10, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -16792,7 +16796,7 @@ GameObject:
   - component: {fileID: 879746849}
   - component: {fileID: 879746848}
   m_Layer: 0
-  m_Name: Button_More
+  m_Name: Button_Memo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16814,7 +16818,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1116.1, y: -1695}
+  m_AnchoredPosition: {x: 1116, y: -1695}
   m_SizeDelta: {x: 210, y: 210}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &879746848
@@ -30485,7 +30489,7 @@ GameObject:
   - component: {fileID: 1432343729}
   - component: {fileID: 1432343728}
   m_Layer: 0
-  m_Name: Button_Messenger
+  m_Name: Button_Email
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45817,7 +45821,7 @@ GameObject:
   - component: {fileID: 2102576613}
   - component: {fileID: 2102576612}
   m_Layer: 0
-  m_Name: Button_Emoji
+  m_Name: Button_Messenger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
