@@ -42,3 +42,20 @@
 `AgentScripts/AuthorBattleSealing.cs`는 최초 UI 추가용, `AgentScripts/ReframeBattleSealing.cs`는 기존 UI의 전체화면 전환용이며 이미 구성된 씬에서 재실행하지 않는다. 이후 변경은 저장된 씬과 컴포넌트에서 한다.
 
 SD 전환 시간은 Battle Sealing Controller의 `SD 메리 전환 (초)` 항목에서 조정한다. SDMary 위치·크기는 `BattleSealingRoot/DesktopVisuals/SDMary`에서 편집한다. 최초 추가 도구 `AgentScripts/AddSDMaryEnding.cs`는 이미 구성된 씬에서 재실행하지 않는다.
+
+## 메리 파일 저장과 통화 복귀
+
+전체화면 A/D 연출이 사라지면 Internet·Email·Messenger·Memo 버튼을 다시 표시한다. 저장 연출 도중에는 클릭을 잠그고 통화 복귀 후 원래 입력 상태로 되돌린다.
+
+SDMary 전환과 로프 퇴장이 끝나면 SDMary 아래의 `mary.exe`를 한 글자씩 표시한다. `MaryFileGroup`에 SDMary와 파일명이 함께 들어 있으므로 그룹을 이동하면 같이 움직인다. 하단에서 폴더가 올라온 뒤 메리 파일이 포물선으로 튕겨 올라 폴더로 떨어진다. 폴더는 아래로 눌렸다가 반동하며 복귀하고, 1초 대기 후 아래로 퇴장한다.
+
+이후 중앙의 `mary.exe(이)가 저장되었다.` 팝업에서 확인을 누르면 픽셀 디졸브로 기존 두 사람의 화상통화 화면과 초기 테마를 복원한다. 기존 도입 대사·연결음·배틀 시작은 재실행하지 않는다. 이 팝업은 게임 내 봉인 완료 연출이며 디스크 저장·불러오기 기능을 추가하지 않는다.
+
+`ExploreProtoMessenger → Battle Mary Storage Sequence`에서 타이핑 간격, 폴더 등장·퇴장 시간, 점프 높이·시간, 충격 깊이·시간, 대기 시간, 통화 전환 시간을 조정한다.
+
+- `BattleSealingRoot/DesktopVisuals/MaryFileGroup`: SDMary와 FileName의 배치.
+- `BattleSealingRoot/MaryFolder`: 폴더의 올라온 위치·크기.
+- `ExploreProtoCanvas/MarySavedPopup/Panel`: 팝업 문구와 확인 버튼.
+- `ExploreProtoCanvas/MaryReturnPixelTransition`: 전체화면 픽셀 전환 이미지.
+
+팝업과 전환 이미지는 평소 비활성 상태로 유지한다. `AgentScripts/AddMaryStorage.cs`는 최초 연결용이며 이미 구성된 씬에서 재실행하지 않는다.

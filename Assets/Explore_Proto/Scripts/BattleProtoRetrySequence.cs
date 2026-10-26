@@ -20,6 +20,25 @@ public sealed class BattleProtoRetrySequence : MonoBehaviour
     public bool IsThemeApplied { get; private set; }
     public event Action ThemeApplied;
     Vector3[] checkpointWindowPositions;
+    Sprite initialBackground;
+    Sprite[] initialSprites;
+
+    void Awake()
+    {
+        initialBackground = backgroundChange.image ? backgroundChange.image.sprite : null;
+        initialSprites = new Sprite[spriteChanges == null ? 0 : spriteChanges.Length];
+        for (int i = 0; i < initialSprites.Length; i++)
+            initialSprites[i] = spriteChanges[i].image ? spriteChanges[i].image.sprite : null;
+    }
+
+    // 완료 상태를 보존한 채 통화 복귀용 화면 테마만 되돌린다.
+    public void RestoreInitialVisuals()
+    {
+        if (backgroundChange.image) backgroundChange.image.sprite = initialBackground;
+        if (initialSprites == null || spriteChanges == null) return;
+        for (int i = 0; i < Mathf.Min(initialSprites.Length, spriteChanges.Length); i++)
+            if (spriteChanges[i].image) spriteChanges[i].image.sprite = initialSprites[i];
+    }
 
     public bool BeginThemeTransition()
     {

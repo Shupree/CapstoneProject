@@ -29,6 +29,7 @@ public sealed class BattleSealingController : MonoBehaviour
     public SealingVisual mary, calmMary;
     public SealingVisual sdMary;
     public RectTransform leftRope, rightRope;
+    public BattleMaryStorageSequence storageSequence;
     public Texture2D[] maryFrames, minaFrames, effectFrames;
     public UnityEngine.UI.RawImage mina;
     public RectTransform heroineGroup;
@@ -107,7 +108,7 @@ public sealed class BattleSealingController : MonoBehaviour
             !Frames(maryFrames, 5) || !Frames(minaFrames, 4) || !Frames(effectFrames, 2) ||
             effectSlots == null || effectSlots.Length < 2 || ropePieces == null || ropePieces.Length == 0 ||
             smallTalismans == null || smallTalismans.Length == 0 || desktopButtons == null || windowsToHide == null) return false;
-        if (!Visual(mary) || !Visual(calmMary) || !Visual(emblem) || !Visual(sdMary) || !leftRope || !rightRope) return false;
+        if (!Visual(mary) || !Visual(calmMary) || !Visual(emblem) || !Visual(sdMary) || !leftRope || !rightRope || !storageSequence || !storageSequence.IsConfigured) return false;
         foreach (var slot in effectSlots) if (!Visual(slot)) return false;
         foreach (var piece in ropePieces) if (piece == null || !piece.rect) return false;
         foreach (var small in smallTalismans)
@@ -286,6 +287,7 @@ public sealed class BattleSealingController : MonoBehaviour
         yield return Tween(talismanFadeSeconds, t => sealingScreen.alpha = 1 - t);
         talismanGroup.gameObject.SetActive(false);
         sealingScreen.gameObject.SetActive(false);
+        storageSequence.RestoreDesktopButtons();
         yield return AssembleRopes();
         yield return new WaitForSecondsRealtime(calmDelaySeconds);
         animateMary = false;
@@ -295,6 +297,7 @@ public sealed class BattleSealingController : MonoBehaviour
         yield return Tween(calmDissolveSeconds, t => { mary.Set(1, t); calmMary.Set(1, 1 - t); });
         mary.gameObject.SetActive(false);
         yield return TransformToSDMary();
+        yield return storageSequence.StoreMary();
         stage = Stage.Complete;
     }
     IEnumerator TransformToSDMary()

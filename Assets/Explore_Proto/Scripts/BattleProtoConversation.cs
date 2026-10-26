@@ -92,6 +92,30 @@ public sealed class BattleProtoConversation : MonoBehaviour
         else { callIndex++; ShowLine(); }
     }
 
+    // 완료된 배틀을 다시 시작하지 않고 초기 2인 통화 UI만 복원한다.
+    public void ShowAfterSealing()
+    {
+        StopAllCoroutines();
+        waitingForSound = false;
+        if (programmingAudio) programmingAudio.Stop();
+        if (callConnection) callConnection.Cancel();
+        if (retrySequence)
+        {
+            retrySequence.StopBattleMusic();
+            retrySequence.RestoreInitialVisuals();
+        }
+        messenger.CloseMessenger();
+        groupCallWindow.SetActive(true);
+        groupCallWindow.transform.SetAsLastSibling();
+        if (callPortraits) callPortraits.ResetToDefaults();
+        if (callDialogueView) callDialogueView.SetVisible(false);
+        callSpeaker.text = string.Empty;
+        callSpeaker.gameObject.SetActive(false);
+        callText.text = string.Empty;
+        nextButton.interactable = false;
+        nextButton.gameObject.SetActive(false);
+    }
+
     IEnumerator PlayProgrammingThenContinue()
     {
         waitingForSound = true;
