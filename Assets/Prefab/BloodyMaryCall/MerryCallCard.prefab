@@ -11,10 +11,18 @@ PrefabInstance:
     - target: {fileID: 584516777045275267, guid: 230c1d9cdc3913a4ca4189d76ac23d5f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -6056032025662338228, guid: 232971951fb82fe428de38c5d57440f5, type: 3}
+      objectReference: {fileID: 6334074471869975238, guid: b9ae1d5a61ffa384cb346618afa8bf7b, type: 3}
     - target: {fileID: 584516777045275267, guid: 230c1d9cdc3913a4ca4189d76ac23d5f, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548533360144578087, guid: 230c1d9cdc3913a4ca4189d76ac23d5f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -157.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548533360144578087, guid: 230c1d9cdc3913a4ca4189d76ac23d5f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -185.42
       objectReference: {fileID: 0}
     - target: {fileID: 1548533360144578087, guid: 230c1d9cdc3913a4ca4189d76ac23d5f, type: 3}
       propertyPath: m_LocalScale.x
@@ -24,13 +32,29 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1.3913044
       objectReference: {fileID: 0}
+    - target: {fileID: 1548533360144578087, guid: 230c1d9cdc3913a4ca4189d76ac23d5f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548533360144578087, guid: 230c1d9cdc3913a4ca4189d76ac23d5f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -31.01
+      objectReference: {fileID: 0}
     - target: {fileID: 1716808025768064414, guid: 230c1d9cdc3913a4ca4189d76ac23d5f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 82.8
+      value: 117.84
       objectReference: {fileID: 0}
     - target: {fileID: 1716808025768064414, guid: 230c1d9cdc3913a4ca4189d76ac23d5f, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 82.8
+      value: 117.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 1716808025768064414, guid: 230c1d9cdc3913a4ca4189d76ac23d5f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.0000038146973
+      objectReference: {fileID: 0}
+    - target: {fileID: 1716808025768064414, guid: 230c1d9cdc3913a4ca4189d76ac23d5f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.7799988
       objectReference: {fileID: 0}
     - target: {fileID: 2511320836174021765, guid: 230c1d9cdc3913a4ca4189d76ac23d5f, type: 3}
       propertyPath: m_SizeDelta.x
@@ -40,6 +64,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 69
       objectReference: {fileID: 0}
+    - target: {fileID: 5309366183811287413, guid: 230c1d9cdc3913a4ca4189d76ac23d5f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6281502022508019178, guid: 02899affd6c74d64c8eec336478fdb46, type: 3}
     - target: {fileID: 5445543384149438225, guid: 230c1d9cdc3913a4ca4189d76ac23d5f, type: 3}
       propertyPath: m_Name
       value: MerryCallCard
@@ -128,6 +156,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9163969665445236512, guid: 230c1d9cdc3913a4ca4189d76ac23d5f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -5803692863123555660, guid: 9d3234f538a21724bb59539a1bc94523, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

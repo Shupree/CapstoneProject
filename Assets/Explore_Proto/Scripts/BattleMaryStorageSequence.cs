@@ -102,16 +102,36 @@ public sealed class BattleMaryStorageSequence : MonoBehaviour
     }
     IEnumerator ReturnToCall()
     {
-        transitionCover.Set(dissolve: 1);
-        transitionCover.gameObject.SetActive(true);
-        transitionCover.transform.SetAsLastSibling();
-        yield return Animate(returnDissolveSeconds, t => transitionCover.Set(dissolve: 1 - t));
-        savedPopup.SetActive(false);
-        sealing.root.SetActive(false);
-        conversation.ShowAfterSealing();
-        transitionCover.transform.SetAsLastSibling();
-        yield return Animate(returnDissolveSeconds, t => transitionCover.Set(dissolve: t));
+        // Dissolve the outgoing screen itself, revealing the restored theme underneath.
+        // Reuse the scene-authored cover; only a temporary screen texture is created.
         transitionCover.gameObject.SetActive(false);
+        yield return new WaitForEndOfFrame();
+        var snapshot = ScreenCapture.CaptureScreenshotAsTexture();
+        var image = transitionCover.image;
+        var previousTexture = image.texture;
+        var previousColor = image.color;
+        bool previousRaycast = image.raycastTarget;
+        try
+        {
+            image.texture = snapshot;
+            image.color = Color.white;
+            image.raycastTarget = true;
+            transitionCover.Set(dissolve: 0);
+            savedPopup.SetActive(false);
+            sealing.root.SetActive(false);
+            conversation.ShowAfterSealing();
+            transitionCover.gameObject.SetActive(true);
+            transitionCover.transform.SetAsLastSibling();
+            yield return Animate(returnDissolveSeconds, t => transitionCover.Set(dissolve: t));
+        }
+        finally
+        {
+            transitionCover.gameObject.SetActive(false);
+            image.texture = previousTexture;
+            image.color = previousColor;
+            image.raycastTarget = previousRaycast;
+            if (snapshot) Destroy(snapshot);
+        }
         if (buttons != null)
             for (int i = 0; i < buttons.Length; i++) if (buttons[i]) buttons[i].interactable = buttonStates[i];
     }

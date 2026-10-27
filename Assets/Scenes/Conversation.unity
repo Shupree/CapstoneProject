@@ -2095,11 +2095,11 @@ MonoBehaviour:
       showPortrait: 0
     - speaker: "\uC720\uBBF8\uB098"
       text: "\uC74C! \uADF8\uB7FC \uC624\uB298\uB3C4 \uD798\uCC28\uAC8C \uC2DC\uC791\uD574\uBCFC\uAE4C?"
-      showPortrait: 1
+      showPortrait: 0
     - speaker: "\uB098\uB808\uC774\uC158"
       text: "\uB098\uB294 \uC758\uC790\uB97C \uB2F9\uACA8 \uC549\uACE0, \uBAA8\uB2C8\uD130\uB97C
         \uCF30\uB2E4."
-      showPortrait: 1
+      showPortrait: 0
     useDialogueBox: 1
     fadeThroughBlackAfter: 0
   backgroundImage: {fileID: 1928182295}
