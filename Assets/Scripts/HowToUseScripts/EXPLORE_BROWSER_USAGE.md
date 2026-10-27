@@ -15,6 +15,9 @@
 
 ## 편집 위치
 
+- 괴담레스토랑 사이트의 작성자 아래에는 `Site_Banner_Basic` 배너가 본문과 함께 스크롤된다. 퇴마프로그램을 켜면 눈 기준 커서 방향에 따라 Left/Right/Top/Bottom 이미지를 표시한다. 가로·세로 거리는 배너 크기로 정규화해 비교하며, 눈과 정확히 일치하면 Top을 사용한다.
+- `ArticleScroll/Viewport/Content`의 `ExploreArticleBanner`에서 스프라이트와 `Eye Position`을 조정한다. 눈 위치는 이미지 좌하단 (0,0), 우상단 (1,1) 기준이다. `SiteAuthor`, `SiteBannerSlot/SiteBanner`는 씬에 저장된 UI이며 다른 사이트에서는 숨겨진다. 원본 사이트 본문 데이터의 작성자 줄은 유지하고 표시할 때만 분리한다. 배너는 원본 Basic 비율로 본문 너비에 맞춘다.
+
 - `ExploreProtoCanvas/InternetWindow/BrowserNavigation`: 상단 버튼과 아이콘. 클릭 영역과 아이콘 크기는 별도로 조절할 수 있다.
 - `InternetWindow/SearchChrome`: 검색 화면에서만 표시하는 검색창·키워드·검색 안내 묶음.
 - `InternetWindow/SiteDetailPanel`: 카테고리·제목·ArticleScroll 배치. 본문 스크롤의 Viewport, Content, Mask, Layout 구성은 유지한다.

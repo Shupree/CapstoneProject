@@ -12,6 +12,7 @@ public sealed class ExploreProtoArticleLinks : MonoBehaviour, IPointerEnterHandl
     public UnityEngine.UI.ScrollRect articleScroll;
     public ExploreProtoInvestigation investigation;
     public ExploreProtoExorcismVision exorcismVision;
+    public ExploreArticleBanner siteBanner;
     string source = string.Empty, hoveredId, rendered;
     bool pointerInside;
     Vector2 pointerPosition;
@@ -117,6 +118,7 @@ public sealed class ExploreProtoArticleLinks : MonoBehaviour, IPointerEnterHandl
                     "<color=#C31D1D><link=\"mary_curse\">메리가    당신을    붙잡습니다.</link></color>");
             return match.Groups[2].Value;
         });
+        if (siteBanner) visibleSource = siteBanner.PrepareArticle(visibleSource);
         string next = DecorateLinks(visibleSource);
         if (rendered == next) return;
         rendered = next; article.text = next;
