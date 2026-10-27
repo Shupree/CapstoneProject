@@ -36,6 +36,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     public ScrollRect conversationScroll;
     public ExploreProtoInvestigation investigation;
     public ExploreProtoArticleLinks articleLinks;
+    public ExploreBrowserNavigation browserNavigation;
     [Tooltip("Assigned only in Battle_Proto; exploration retains its original app behavior.")]
     public BloodyMaryPhaseController bloodyMaryPhase;
     public Button addKeywordButton, keywordFieldButton, popupCloseButton, popupKeywordButton, findButton, clearKeywordButton, siteBackButton;
@@ -188,7 +189,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         popupKeywordButton.onClick.AddListener(SelectBloodyMaryKeyword);
         findButton.onClick.AddListener(Search);
         clearKeywordButton.onClick.AddListener(ClearSearchKeyword);
-        siteBackButton.onClick.AddListener(BackToResults);
+        if (siteBackButton) siteBackButton.onClick.AddListener(BackToResults);
         for (int i = 0; i < siteEntries.Length; i++)
         {
             int index = i;
@@ -272,7 +273,12 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     public void ToggleInternet()
     {
         if (IsBloodyMaryPhase) bloodyMaryPhase.ToggleInternet();
-        else ToggleWindow(internetWindow);
+        else
+        {
+            if (browserNavigation && internetWindow.activeSelf) browserNavigation.RememberCurrentPage();
+            ToggleWindow(internetWindow);
+            if (browserNavigation && internetWindow.activeSelf) browserNavigation.OnWindowOpened();
+        }
     }
     private static void ToggleWindow(GameObject window)
     {
@@ -289,7 +295,11 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     public void CloseInternet()
     {
         if (IsBloodyMaryPhase) bloodyMaryPhase.CloseInternet();
-        else { internetWindow.SetActive(false); keywordPopup.SetActive(false); }
+        else
+        {
+            if (browserNavigation) browserNavigation.RememberCurrentPage();
+            internetWindow.SetActive(false); keywordPopup.SetActive(false);
+        }
     }
 
     public void StartCall()
@@ -552,6 +562,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         findButton.interactable = true;
         searchHint.text = "선택한 키워드로 검색할 준비가 되었어요.";
         keywordPopup.SetActive(false);
+        if (browserNavigation) browserNavigation.SearchChanged();
     }
     public void ClearSearchKeyword()
     {
@@ -566,6 +577,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         searchResults.SetActive(false);
         siteDetailPanel.SetActive(false);
         searchHint.text = "획득한 키워드를 선택해 검색하세요.";
+        if (browserNavigation) browserNavigation.SearchChanged();
     }
     public void Search()
     {
@@ -574,11 +586,17 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         keywordPopup.SetActive(false); siteDetailPanel.SetActive(false);
         searchResults.SetActive(true); searchHint.text = "‘블러디 메리’ 검색 결과";
         ResetScroll(searchResults.GetComponent<ScrollRect>());
+        if (browserNavigation) browserNavigation.SearchChanged();
     }
     private void OpenSite(int index)
     {
         if (IsBloodyMaryPhase) return;
         if (index < 0 || index >= siteEntries.Length) return;
+        if (browserNavigation) { browserNavigation.OpenSite(index); return; }
+        ShowBrowserSite(index);
+    }
+    private void ShowBrowserSite(int index)
+    {
         var site = siteEntries[index];
         currentSiteIndex = index;
         siteCategoryText.text = site.category;
@@ -600,7 +618,42 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     public void BackToResults()
     {
         if (IsBloodyMaryPhase) return;
+        if (browserNavigation) { browserNavigation.GoHome(); return; }
         siteDetailPanel.SetActive(false);
         searchResults.SetActive(true);
+    }
+
+    internal ExploreBrowserNavigation.Page CaptureBrowserPage()
+    {
+        bool detail = siteDetailPanel.activeSelf;
+        var scroll = detail ? siteArticleScroll : searchResults.GetComponent<ScrollRect>();
+        return new ExploreBrowserNavigation.Page
+        {
+            siteIndex = detail ? currentSiteIndex : -1,
+            keywordSelected = bloodyMarySelected,
+            resultsVisible = searchResults.activeSelf,
+            hint = searchHint.text,
+            scroll = scroll ? scroll.verticalNormalizedPosition : 1f
+        };
+    }
+
+    internal void ApplyBrowserPage(ExploreBrowserNavigation.Page page)
+    {
+        keywordPopup.SetActive(false);
+        bloodyMarySelected = page.keywordSelected;
+        searchKeywordText.text = bloodyMarySelected ? "블러디 메리" : "키워드를 선택하세요";
+        searchKeywordChip.SetActive(bloodyMarySelected);
+        searchKeywordText.gameObject.SetActive(bloodyMarySelected);
+        searchKeywordPlaceholder.SetActive(!bloodyMarySelected);
+        clearKeywordButton.gameObject.SetActive(bloodyMarySelected);
+        findButton.interactable = bloodyMarySelected;
+        searchHint.text = page.hint;
+        if (page.siteIndex >= 0) ShowBrowserSite(page.siteIndex);
+        else
+        {
+            currentSiteIndex = -1;
+            siteDetailPanel.SetActive(false);
+            searchResults.SetActive(page.resultsVisible);
+        }
     }
 }
