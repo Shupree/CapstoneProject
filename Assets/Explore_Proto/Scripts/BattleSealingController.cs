@@ -23,6 +23,7 @@ public sealed class BattleSealingController : MonoBehaviour
 
     [Header("완료 연결 / 저장된 씬 UI")]
     public BloodyMaryPhaseTwoController phaseTwo;
+    public CanvasGroup completedWindowFade;
     public GameObject root;
     public GameObject[] desktopButtons, windowsToHide;
     public UnityEngine.UI.Button activateButton;
@@ -52,6 +53,7 @@ public sealed class BattleSealingController : MonoBehaviour
     [Min(0f)] public float minaActiveSeconds = .5f;
     [Header("연출 시간 (초)")]
     [Min(0f)] public float completedHoldSeconds = 1.5f;
+    [Min(0f)] public float completedWindowFadeSeconds = .75f;
     [Min(0f)] public float unfoldSeconds = .35f;
     [Min(0f)] public float heroineDelaySeconds = 1f;
     [Min(0f)] public float horizontalRevealSeconds = .35f;
@@ -102,7 +104,7 @@ public sealed class BattleSealingController : MonoBehaviour
 
     bool Configured()
     {
-        if (!phaseTwo || !root || !activateButton || !mary || !calmMary || !mina || !heroineGroup ||
+        if (!phaseTwo || !completedWindowFade || !root || !activateButton || !mary || !calmMary || !mina || !heroineGroup ||
             !sealingScreen || !screenRevealMask || !keyNote ||
             !talismanGroup || !talisman || !emblem || !finishedEmblem ||
             !Frames(maryFrames, 5) || !Frames(minaFrames, 4) || !Frames(effectFrames, 2) ||
@@ -127,7 +129,21 @@ public sealed class BattleSealingController : MonoBehaviour
     IEnumerator ShowMary()
     {
         yield return new WaitForSecondsRealtime(completedHoldSeconds);
-        phaseTwo.window.gameObject.SetActive(false);
+        float originalAlpha = completedWindowFade.alpha;
+        bool originalInteractable = completedWindowFade.interactable;
+        completedWindowFade.interactable = false;
+        try
+        {
+            yield return Tween(completedWindowFadeSeconds,
+                t => completedWindowFade.alpha = Mathf.Lerp(originalAlpha, 0f, t));
+            phaseTwo.window.gameObject.SetActive(false);
+        }
+        finally
+        {
+            // Restore the saved appearance while hidden for any later reuse of this window.
+            completedWindowFade.alpha = originalAlpha;
+            completedWindowFade.interactable = originalInteractable;
+        }
         foreach (var window in windowsToHide) if (window) window.SetActive(false);
         foreach (var button in desktopButtons) if (button) button.SetActive(false);
         talismanGroup.gameObject.SetActive(false);

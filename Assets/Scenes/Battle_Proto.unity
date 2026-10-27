@@ -1329,6 +1329,7 @@ GameObject:
   - component: {fileID: 53786316}
   - component: {fileID: 53786318}
   - component: {fileID: 53786317}
+  - component: {fileID: 53786319}
   m_Layer: 0
   m_Name: BattleCallWindow
   m_TagString: Untagged
@@ -1394,6 +1395,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 53786315}
   m_CullTransparentMesh: 1
+--- !u!225 &53786319
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53786315}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &54900476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25949,6 +25962,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleSealingController
   phaseTwo: {fileID: 952980681}
+  completedWindowFade: {fileID: 53786319}
   root: {fileID: 2056532510}
   desktopButtons:
   - {fileID: 1045001778}
@@ -26204,6 +26218,7 @@ MonoBehaviour:
   frameSeconds: 0.2
   minaActiveSeconds: 0.5
   completedHoldSeconds: 1.5
+  completedWindowFadeSeconds: 0.75
   unfoldSeconds: 0.35
   heroineDelaySeconds: 1
   horizontalRevealSeconds: 0.35

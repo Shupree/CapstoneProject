@@ -325,7 +325,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
             embeddedCallPanel.SetActive(true);
             embeddedCallPanel.transform.SetAsLastSibling();
             embeddedClientCard.SetActive(true);
-            connectedControls.SetActive(true);
+            if (connectedControls) connectedControls.SetActive(true);
             if (callPortraits) callPortraits.ResetToDefaults();
             if (!callConnection || !callConnection.TryBegin(
                     VideoCallConnectionSequence.ConnectionMode.Outgoing, CompleteEmbeddedCallConnection))
@@ -356,7 +356,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         embeddedCallPanel.SetActive(true);
         embeddedCallPanel.transform.SetAsLastSibling();
         embeddedClientCard.SetActive(true);
-        connectedControls.SetActive(true);
+        if (connectedControls) connectedControls.SetActive(true);
         if (callPortraits) callPortraits.ResetToDefaults();
         if (!callConnection || !callConnection.TryBegin(mode, CompleteEmbeddedCallConnection))
         {
@@ -387,7 +387,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     {
         if (!embeddedCallActive) return;
         // 조작 버튼은 카드 아래에 두고 하단 대화 바가 열린 동안에는 바 뒤에 표시한다.
-        connectedControls.SetActive(true);
+        if (connectedControls) connectedControls.SetActive(true);
         if (embeddedWindowDrag) embeddedWindowDrag.enabled = false;
         if (!callBottomDialogue.StartDialogue(activeEmbeddedSceneId, activeEmbeddedReader))
         {
@@ -400,7 +400,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     {
         if (callConnection) callConnection.Cancel();
         if (callPortraits) callPortraits.HighlightSpeaker(null);
-        connectedControls.SetActive(false);
+        if (connectedControls) connectedControls.SetActive(false);
         embeddedCallActive = false;
         if (embeddedWindowDrag) embeddedWindowDrag.enabled = dragWasEnabled;
         embeddedCallPanel.SetActive(false);

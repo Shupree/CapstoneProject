@@ -5,7 +5,7 @@
 `Explore_Proto`와 `Battle_Proto`의 통화 화면은 `ExploreProtoCanvas` 바로 아래에 저장된 uGUI 오브젝트를 사용한다. `RectTransform`의 앵커는 `(0, 0)`부터 `(1, 1)`까지, 좌우·상단 여백은 `0`, 하단 여백은 `190`이다. 이 범위는 좌측 앱 아이콘까지 덮고 하단 작업 표시줄은 남긴다. 새 통화 창에도 같은 앵커와 여백을 적용한다. 실행 중에 창 UI를 생성하거나 크기를 다시 설정하지 않는다.
 
 - 탐색 통화: `EmbeddedVideoCall`. 메신저 창의 자식이 아니라 Canvas의 자식이다. 첫 통화와 진실 확인 통화가 공유한다. 배틀 시작 통화와 같은 어두운 창 배경과 헤더를 사용한다.
-- 탐색 `EmbeddedVideoCall`과 배틀 시작 `VideoCallWindow`의 `ConnectedControls`는 같은 앵커·위치에 저장되어 있다. 화면·음소거·종료·카메라·채팅 버튼은 캐릭터 카드 아래, 창 하단 테두리 안쪽에 놓인 임시 UI이며 통화 중 표시된다. 현재 클릭 기능은 연결되어 있지 않고 하단 대화 바에 가릴 수 있다.
+- `ConnectedControls`는 선택적인 임시 조작 UI다. 현재 탐색 `EmbeddedVideoCall`에서는 제거되어 있으며, 참조가 없어도 통화 연결·대화 시작·종료를 진행한다. 배틀의 기존 조작 UI와 연결은 별도로 유지한다.
 - 탐색 씬의 기존 `VideoCallWindow`, 배틀 대화용 `VideoCallWindow`, 배틀 기믹용 `BattleCallWindow`도 같은 화면 범위를 사용한다.
 - 탐색과 배틀 시작 통화는 같은 크기와 위치의 인물 카드 및 `BottomDialogueSystem` 하단 대화 바를 사용한다. 배틀 씬의 기존 `DialogueBox`는 비활성화되어 있다. `VideoCallPortraits`의 화자 테두리 참조와 화자 ID를 연결하면 현재 화자의 카드에 초록색 테두리가 표시된다. 쉼표로 구분한 공동 화자는 두 카드 모두 강조한다.
 
