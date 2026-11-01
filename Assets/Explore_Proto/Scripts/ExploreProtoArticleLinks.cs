@@ -113,7 +113,8 @@ public sealed class ExploreProtoArticleLinks : MonoBehaviour, IPointerEnterHandl
         {
             string normal = match.Groups[1].Value;
             if (!reveal) return normal;
-            if (match.Groups[2].Value.Contains("mary_curse"))
+            if (match.Groups[2].Value.Contains("mary_curse") &&
+                normal.Contains("이상한 화면과 소리가 나오니 주의하세요."))
                 return normal.Replace("이상한 화면과 소리가 나오니 주의하세요.",
                     "<color=#C31D1D><link=\"mary_curse\">메리가    당신을    붙잡습니다.</link></color>");
             return match.Groups[2].Value;

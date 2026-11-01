@@ -18,7 +18,16 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         [InspectorName("친구 스프라이트"), Tooltip("친구 영상이 있는 통화에서 사용합니다. 비워두면 이전 이미지를 유지합니다.")]
         public Sprite friendSprite;
     }
-    [Serializable] public struct SiteEntry { public string category, title, summary; [TextArea] public string article; public Button button; }
+    [Serializable] public struct SiteEntry
+    {
+        public string category, title, summary;
+        [TextArea] public string article;
+        [Tooltip("이 글을 표시할 검색어. 공백과 영문 대소문자를 무시하고 전체 일치로 비교합니다.")]
+        public string[] searchTerms;
+        [Tooltip("첫 방문 때 표시할 독백 SceneID. 비워두면 입장 독백 없음.")]
+        public string openDialogueSceneId;
+        public Button button;
+    }
 
     public GameObject messengerWindow, callWindow, transcriptWindow, memoWindow, internetWindow;
     public GameObject unreadBadge, linkButtonObject, keywordPopup, searchResults, siteDetailPanel, searchKeywordChip;
@@ -136,6 +145,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
             string query = state?.searchQuery;
             if (string.IsNullOrEmpty(query) && bloodyMarySelected) query = "블러디 메리";
             searchInput.SetTextWithoutNotify(query ?? string.Empty);
+            FilterSearchResults(query);
             searchKeywordChip.SetActive(false);
             searchKeywordText.gameObject.SetActive(false);
             clearKeywordButton.gameObject.SetActive(!string.IsNullOrEmpty(query));
@@ -668,7 +678,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
             searchInput.DeactivateInputField();
             keywordPopup.SetActive(false);
             siteDetailPanel.SetActive(false);
-            bloodyMarySelected = MatchesSearchTerm(searchInput.text);
+            bloodyMarySelected = FilterSearchResults(searchInput.text);
             searchResults.SetActive(bloodyMarySelected);
             searchHint.text = bloodyMarySelected
                 ? $"‘{searchInput.text.Trim()}’ 검색 결과"
@@ -699,6 +709,24 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     }
 
     private void OnSearchSubmitted(string _) => Search();
+
+    // 검색 결과 UI는 씬에 저장된 버튼을 사용한다. 검색/기록 복원 시 생성하지 않는다.
+    private bool FilterSearchResults(string query)
+    {
+        string normalized = NormalizeSearchTerm(query);
+        bool any = false;
+        bool legacyMatch = MatchesSearchTerm(query);
+        foreach (var site in siteEntries)
+        {
+            bool matches = site.searchTerms == null || site.searchTerms.Length == 0
+                ? legacyMatch
+                : normalized.Length > 0 && Array.Exists(site.searchTerms, term =>
+                    string.Equals(normalized, NormalizeSearchTerm(term), StringComparison.OrdinalIgnoreCase));
+            if (site.button) site.button.gameObject.SetActive(matches);
+            any |= matches && site.button;
+        }
+        return any;
+    }
 
     /// <summary>공백을 뺀 입력값을 이 결과 목록에 등록된 검색어와 비교한다.</summary>
     private bool MatchesSearchTerm(string query)
@@ -735,6 +763,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         else siteArticleText.text = site.article;
         searchResults.SetActive(false); siteDetailPanel.SetActive(true);
         ResetScroll(siteArticleScroll);
+        if (investigation) investigation.OnArticleOpened(site.openDialogueSceneId);
     }
     private static void ResetScroll(ScrollRect scroll)
     {
@@ -775,6 +804,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         if (searchInput)
         {
             searchInput.SetTextWithoutNotify(page.searchQuery ?? string.Empty);
+            FilterSearchResults(page.searchQuery);
             searchKeywordChip.SetActive(false);
             searchKeywordText.gameObject.SetActive(false);
             clearKeywordButton.gameObject.SetActive(!string.IsNullOrEmpty(page.searchQuery));

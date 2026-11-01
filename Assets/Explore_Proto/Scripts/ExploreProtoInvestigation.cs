@@ -28,10 +28,13 @@ public sealed class ExploreProtoInvestigation : MonoBehaviour
     public bool stopAfterResearch;
     public ExploreResearchQuestions researchQuestions;
     public string nicknameDialogueSceneId = "Explore_FamiliarNickname";
+    [Tooltip("의뢰인 증거 클릭 독백. 비워두면 기존 닉네임 독백을 사용한다.")]
+    public string evidenceDialogueSceneId;
     public string memoryDialogueSceneId = "Explore_ClueMemory";
     public string completionDialogueSceneId = "Explore_ResearchComplete";
 
     readonly HashSet<string> collected = new HashSet<string>();
+    readonly HashSet<string> openedArticleDialogues = new HashSet<string>();
     readonly List<string> collectionOrder = new List<string>();
     readonly Queue<string> pendingMonologues = new Queue<string>();
     bool completionShown, followUpDelivered, followUpRead;
@@ -39,7 +42,7 @@ public sealed class ExploreProtoInvestigation : MonoBehaviour
 
     void Awake()
     {
-        collected.Clear(); collectionOrder.Clear();
+        collected.Clear(); collectionOrder.Clear(); openedArticleDialogues.Clear();
         memoNotes.text = string.Empty;
         monologueWindow.SetActive(false);
         replyButton.gameObject.SetActive(false);
@@ -91,7 +94,8 @@ public sealed class ExploreProtoInvestigation : MonoBehaviour
         var collectedClue = Array.Find(clues, clue => clue.id == id);
         if (stopAfterResearch && !collectedClue.optional && !collectedClue.excludeFromMemo)
             QueueMonologue("Explore_RequiredMemoUpdated");
-        if (researchQuestions && id == "mary_comment") QueueMonologue(nicknameDialogueSceneId);
+        if (researchQuestions && id == "mary_comment")
+            QueueMonologue(string.IsNullOrEmpty(evidenceDialogueSceneId) ? nicknameDialogueSceneId : evidenceDialogueSceneId);
         if (researchQuestions) researchQuestions.RefreshChoices();
         if (!researchQuestions && RequiredCollectedCount == RequiredClueCount && !completionShown)
         {
@@ -104,6 +108,14 @@ public sealed class ExploreProtoInvestigation : MonoBehaviour
             }
         }
         return true;
+    }
+
+    // 방문은 단서 수집과 분리한다. 기록으로 재방문해도 같은 씬에서는 한 번만 표시한다.
+    public void OnArticleOpened(string sceneId)
+    {
+        if (!messenger.HasBloodyMaryKeyword || completionShown || !bottomDialogue ||
+            string.IsNullOrEmpty(sceneId) || !openedArticleDialogues.Add(sceneId)) return;
+        QueueMonologue(sceneId);
     }
 
     private void QueueMonologue(string sceneId)
