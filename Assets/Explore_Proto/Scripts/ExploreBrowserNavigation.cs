@@ -22,6 +22,7 @@ public sealed class ExploreBrowserNavigation : MonoBehaviour
     {
         public int siteIndex = -1;
         public bool keywordSelected, resultsVisible;
+        public string searchQuery;
         public string hint;
         public float scroll = 1f;
         public Page Copy() => (Page)MemberwiseClone();

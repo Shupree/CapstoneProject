@@ -40,6 +40,14 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     [Tooltip("Assigned only in Battle_Proto; exploration retains its original app behavior.")]
     public BloodyMaryPhaseController bloodyMaryPhase;
     public Button addKeywordButton, keywordFieldButton, popupCloseButton, popupKeywordButton, findButton, clearKeywordButton, siteBackButton;
+    [Header("직접 입력 검색")]
+    public TMP_InputField searchInput;
+    [SerializeField] private string[] searchableTerms = { "블러디 메리" };
+    [Header("플레이어 메모")]
+    public Button playerMemoModeButton;
+    public TMP_Text playerMemoModeLabel;
+    public TMP_InputField playerMemoInput;
+    private bool playerMemoEditing;
     public TMP_Text linkMessage;
     [Header("첫 화상통화 CSV")]
     public DialogueCsvReader callDialogueReader;
@@ -81,6 +89,9 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         {
             clueIds = investigation.CollectedClueIds,
             keywordSelected = bloodyMarySelected,
+            searchQuery = searchInput ? searchInput.text : searchKeywordText.text,
+            playerMemoText = playerMemoInput ? playerMemoInput.text : null,
+            playerMemoEditing = playerMemoEditing,
             resultsVisible = searchResults.activeSelf,
             detailVisible = siteDetailPanel.activeSelf,
             siteIndex = currentSiteIndex,
@@ -120,12 +131,25 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         transcriptText.text = transcript.ToString();
 
         bloodyMarySelected = state == null || state.keywordSelected;
-        searchKeywordText.text = bloodyMarySelected ? "블러디 메리" : "키워드를 선택하세요";
-        searchKeywordChip.SetActive(bloodyMarySelected);
-        searchKeywordText.gameObject.SetActive(bloodyMarySelected);
-        searchKeywordPlaceholder.SetActive(!bloodyMarySelected);
-        clearKeywordButton.gameObject.SetActive(bloodyMarySelected);
-        findButton.interactable = bloodyMarySelected;
+        if (searchInput)
+        {
+            string query = state?.searchQuery;
+            if (string.IsNullOrEmpty(query) && bloodyMarySelected) query = "블러디 메리";
+            searchInput.SetTextWithoutNotify(query ?? string.Empty);
+            searchKeywordChip.SetActive(false);
+            searchKeywordText.gameObject.SetActive(false);
+            clearKeywordButton.gameObject.SetActive(!string.IsNullOrEmpty(query));
+            findButton.interactable = !string.IsNullOrWhiteSpace(query);
+        }
+        else
+        {
+            searchKeywordText.text = bloodyMarySelected ? "블러디 메리" : "키워드를 선택하세요";
+            searchKeywordChip.SetActive(bloodyMarySelected);
+            searchKeywordText.gameObject.SetActive(bloodyMarySelected);
+            searchKeywordPlaceholder.SetActive(!bloodyMarySelected);
+            clearKeywordButton.gameObject.SetActive(bloodyMarySelected);
+            findButton.interactable = bloodyMarySelected;
+        }
         searchHint.text = state?.searchHint ?? "‘블러디 메리’ 검색 결과";
         currentSiteIndex = state?.siteIndex ?? -1;
         if (currentSiteIndex >= 0 && currentSiteIndex < siteEntries.Length)
@@ -145,6 +169,11 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
             ScrollConversationToLatest();
         }
         else ExploreProtoSceneTransfer.RestoreWindows(DesktopWindows, state.windows);
+        if (playerMemoInput)
+        {
+            playerMemoInput.SetTextWithoutNotify(state?.playerMemoText ?? string.Empty);
+            SetPlayerMemoMode(state?.playerMemoEditing ?? false, false);
+        }
     }
 
     private void Awake()
@@ -176,6 +205,11 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         internetButton.onClick.AddListener(ToggleInternet);
         messengerCloseButton.onClick.AddListener(CloseMessenger);
         memoCloseButton.onClick.AddListener(CloseMemo);
+        if (playerMemoModeButton && playerMemoInput && investigation && investigation.memoNotes)
+        {
+            playerMemoModeButton.onClick.AddListener(TogglePlayerMemoMode);
+            SetPlayerMemoMode(false, false);
+        }
         internetCloseButton.onClick.AddListener(CloseInternet);
         callButton.onClick.AddListener(StartCall);
         callCloseButton.onClick.AddListener(CloseCall);
@@ -185,6 +219,11 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         if (transcriptTitleCloseButton) transcriptTitleCloseButton.onClick.AddListener(CloseTranscript);
         addKeywordButton.onClick.AddListener(AddBloodyMaryKeyword);
         keywordFieldButton.onClick.AddListener(ToggleKeywordPopup);
+        if (searchInput)
+        {
+            searchInput.onValueChanged.AddListener(OnSearchInputChanged);
+            searchInput.onSubmit.AddListener(OnSearchSubmitted);
+        }
         popupCloseButton.onClick.AddListener(() => keywordPopup.SetActive(false));
         popupKeywordButton.onClick.AddListener(SelectBloodyMaryKeyword);
         findButton.onClick.AddListener(Search);
@@ -200,7 +239,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         memoKeyword.gameObject.SetActive(false);
         searchKeywordChip.SetActive(false);
         searchKeywordText.gameObject.SetActive(false);
-        searchKeywordPlaceholder.SetActive(true);
+        if (!searchInput) searchKeywordPlaceholder.SetActive(true);
         clearKeywordButton.gameObject.SetActive(false);
         keywordPopup.SetActive(false);
         searchResults.SetActive(false);
@@ -209,7 +248,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         findButton.interactable = false;
         popupKeywordButton.gameObject.SetActive(false);
         searchKeywordText.text = "키워드를 선택하세요";
-        searchHint.text = "획득한 키워드를 선택해 검색하세요.";
+        searchHint.text = searchInput ? "검색어를 입력하세요." : "획득한 키워드를 선택해 검색하세요.";
     }
 
     public void ToggleMessenger()
@@ -269,7 +308,33 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         unreadBadge.SetActive(false);
         unreadCount.text = "0";
     }
-    public void ToggleMemo() => ToggleWindow(memoWindow);
+    public void ToggleMemo()
+    {
+        if (memoWindow.activeSelf && playerMemoInput) playerMemoInput.DeactivateInputField();
+        ToggleWindow(memoWindow);
+        if (memoWindow.activeSelf && playerMemoEditing && playerMemoInput)
+            FocusPlayerMemoAtEnd();
+    }
+    private void TogglePlayerMemoMode() => SetPlayerMemoMode(!playerMemoEditing, true);
+
+    private void SetPlayerMemoMode(bool editing, bool focus)
+    {
+        if (!playerMemoInput || !investigation || !investigation.memoNotes) return;
+        playerMemoEditing = editing;
+        if (!editing) playerMemoInput.DeactivateInputField();
+        investigation.memoNotes.gameObject.SetActive(!editing);
+        playerMemoInput.gameObject.SetActive(editing);
+        if (playerMemoModeLabel) playerMemoModeLabel.text = editing ? "정보" : "메모";
+        if (editing && focus && memoWindow.activeInHierarchy) FocusPlayerMemoAtEnd();
+    }
+
+    private void FocusPlayerMemoAtEnd()
+    {
+        if (!playerMemoInput || !playerMemoInput.isActiveAndEnabled) return;
+        playerMemoInput.ForceLabelUpdate();
+        playerMemoInput.ActivateInputField();
+        playerMemoInput.MoveTextEnd(false);
+    }
     public void ToggleInternet()
     {
         if (IsBloodyMaryPhase) bloodyMaryPhase.ToggleInternet();
@@ -291,7 +356,11 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         if (embeddedCallActive) return;
         messengerWindow.SetActive(false);
     }
-    public void CloseMemo() => memoWindow.SetActive(false);
+    public void CloseMemo()
+    {
+        if (playerMemoInput) playerMemoInput.DeactivateInputField();
+        memoWindow.SetActive(false);
+    }
     public void CloseInternet()
     {
         if (IsBloodyMaryPhase) bloodyMaryPhase.CloseInternet();
@@ -522,10 +591,15 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         var label = addKeywordButton.GetComponentInChildren<TMP_Text>();
         if (label) label.text = "'블러디 메리' 키워드 추가";
         addKeywordButton.interactable = false;
-        popupKeywordButton.gameObject.SetActive(true);
+        if (!searchInput) popupKeywordButton.gameObject.SetActive(true);
     }
     public void ToggleKeywordPopup()
     {
+        if (searchInput)
+        {
+            searchInput.ActivateInputField();
+            return;
+        }
         if (IsBloodyMaryPhase) return;
         keywordPopup.SetActive(!keywordPopup.activeSelf);
         if (keywordPopup.activeSelf)
@@ -567,6 +641,12 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     public void ClearSearchKeyword()
     {
         if (IsBloodyMaryPhase) return;
+        if (searchInput)
+        {
+            searchInput.text = string.Empty;
+            searchInput.ActivateInputField();
+            return;
+        }
         bloodyMarySelected = false;
         searchKeywordText.text = "키워드를 선택하세요";
         searchKeywordChip.SetActive(false);
@@ -582,11 +662,61 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     public void Search()
     {
         if (IsBloodyMaryPhase) return;
+        if (searchInput)
+        {
+            if (string.IsNullOrWhiteSpace(searchInput.text)) return;
+            searchInput.DeactivateInputField();
+            keywordPopup.SetActive(false);
+            siteDetailPanel.SetActive(false);
+            bloodyMarySelected = MatchesSearchTerm(searchInput.text);
+            searchResults.SetActive(bloodyMarySelected);
+            searchHint.text = bloodyMarySelected
+                ? $"‘{searchInput.text.Trim()}’ 검색 결과"
+                : $"'{searchInput.text.Trim()}'에 대한 검색 결과가 없습니다.\n단어의 철자가 정확한지 확인해주세요.";
+            if (bloodyMarySelected) ResetScroll(searchResults.GetComponent<ScrollRect>());
+            if (browserNavigation) browserNavigation.SearchChanged();
+            return;
+        }
         if (!bloodyMarySelected) return;
         keywordPopup.SetActive(false); siteDetailPanel.SetActive(false);
         searchResults.SetActive(true); searchHint.text = "‘블러디 메리’ 검색 결과";
         ResetScroll(searchResults.GetComponent<ScrollRect>());
         if (browserNavigation) browserNavigation.SearchChanged();
+    }
+
+    /// <summary>입력이 바뀌면 오래된 결과를 숨기고 현재 검색 홈을 방문 기록에 반영한다.</summary>
+    private void OnSearchInputChanged(string value)
+    {
+        bloodyMarySelected = false;
+        findButton.interactable = !string.IsNullOrWhiteSpace(value);
+        clearKeywordButton.gameObject.SetActive(!string.IsNullOrEmpty(value));
+        searchResults.SetActive(false);
+        siteDetailPanel.SetActive(false);
+        searchHint.text = string.IsNullOrWhiteSpace(value)
+            ? "검색어를 입력하세요."
+            : "검색 버튼을 눌러주세요.";
+        if (browserNavigation) browserNavigation.SearchChanged();
+    }
+
+    private void OnSearchSubmitted(string _) => Search();
+
+    /// <summary>공백을 뺀 입력값을 이 결과 목록에 등록된 검색어와 비교한다.</summary>
+    private bool MatchesSearchTerm(string query)
+    {
+        string normalized = NormalizeSearchTerm(query);
+        if (normalized.Length == 0 || searchableTerms == null) return false;
+        foreach (string term in searchableTerms)
+            if (string.Equals(normalized, NormalizeSearchTerm(term), StringComparison.OrdinalIgnoreCase)) return true;
+        return false;
+    }
+
+    private static string NormalizeSearchTerm(string value)
+    {
+        if (string.IsNullOrEmpty(value)) return string.Empty;
+        var result = new StringBuilder(value.Length);
+        foreach (char c in value)
+            if (!char.IsWhiteSpace(c)) result.Append(c);
+        return result.ToString();
     }
     private void OpenSite(int index)
     {
@@ -631,6 +761,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         {
             siteIndex = detail ? currentSiteIndex : -1,
             keywordSelected = bloodyMarySelected,
+            searchQuery = searchInput ? searchInput.text : searchKeywordText.text,
             resultsVisible = searchResults.activeSelf,
             hint = searchHint.text,
             scroll = scroll ? scroll.verticalNormalizedPosition : 1f
@@ -641,12 +772,23 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     {
         keywordPopup.SetActive(false);
         bloodyMarySelected = page.keywordSelected;
-        searchKeywordText.text = bloodyMarySelected ? "블러디 메리" : "키워드를 선택하세요";
-        searchKeywordChip.SetActive(bloodyMarySelected);
-        searchKeywordText.gameObject.SetActive(bloodyMarySelected);
-        searchKeywordPlaceholder.SetActive(!bloodyMarySelected);
-        clearKeywordButton.gameObject.SetActive(bloodyMarySelected);
-        findButton.interactable = bloodyMarySelected;
+        if (searchInput)
+        {
+            searchInput.SetTextWithoutNotify(page.searchQuery ?? string.Empty);
+            searchKeywordChip.SetActive(false);
+            searchKeywordText.gameObject.SetActive(false);
+            clearKeywordButton.gameObject.SetActive(!string.IsNullOrEmpty(page.searchQuery));
+            findButton.interactable = !string.IsNullOrWhiteSpace(page.searchQuery);
+        }
+        else
+        {
+            searchKeywordText.text = bloodyMarySelected ? "블러디 메리" : "키워드를 선택하세요";
+            searchKeywordChip.SetActive(bloodyMarySelected);
+            searchKeywordText.gameObject.SetActive(bloodyMarySelected);
+            searchKeywordPlaceholder.SetActive(!bloodyMarySelected);
+            clearKeywordButton.gameObject.SetActive(bloodyMarySelected);
+            findButton.interactable = bloodyMarySelected;
+        }
         searchHint.text = page.hint;
         if (page.siteIndex >= 0) ShowBrowserSite(page.siteIndex);
         else

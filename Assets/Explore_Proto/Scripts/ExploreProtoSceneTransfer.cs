@@ -15,6 +15,9 @@ public static class ExploreProtoSceneTransfer
     {
         public string[] clueIds;
         public bool keywordSelected, resultsVisible, detailVisible;
+        public string searchQuery;
+        public string playerMemoText;
+        public bool playerMemoEditing;
         public int siteIndex;
         public string searchHint;
         public WindowState[] windows;

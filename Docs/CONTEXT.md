@@ -32,7 +32,7 @@
 
 - 탐색 메신저는 ‘말을 건다.’ 선택 → 인사 3개 → ‘화상통화를 연결한다.’ 선택으로 진행한다. 통화는 좌측 아이콘까지 덮는 전체화면 `EmbeddedVideoCall`에서 진행되며 하단 작업 표시줄은 남는다. 탐색·배틀 시작 통화는 어두운 창 배경, 같은 인물 배치와 하단 `BottomDialogueSystem` 대화 바를 사용하고 현재 화자 카드에 초록색 테두리를 표시한다. Explore_Proto의 EmbeddedVideoCall과 Battle_Proto의 VideoCallWindow는 같은 배경·카드·초상화·이름표·하단 버튼 디자인을 사용한다. 두 창의 PlayerSpeakingBorder·SiyulSpeakingBorder는 테두리가 지정된 기본 UI Sprite를 Sliced로 표시하며 Fill Center와 Raycast Target을 끈다. 통화의 Connected Controls는 선택 사항이며, Explore_Proto에서는 제거된 상태다. 해당 UI가 없어도 연결 연출·대화 시작·통화 종료가 진행된다. 첫 통화와 두 번째 통화 모두 EnterCall → WaitCall 2.5초 → EnterCall 순서로 연결하고, 두 번째 EnterCall이 시작할 때 이서연의 이미지를 표시한다. 효과음 종료 뒤 `BottomDialogueSystem`의 대화를 시작한다. `Explore_FirstCall.csv`의 `AcquireBloodyMary` 이벤트 줄에서 키워드를 자동 획득하며, 종료 후 별도 획득 버튼 없이 메신저로 복귀한다. 나레이션은 화자 이름을 비운다. 연결 연출은 `VideoCallConnectionSequence`를 사용한다.
 
-- 탐색 인터넷은 검색 홈과 사이트 본문을 구분한다. 본문에서는 검색 UI를 숨기고 스크롤 영역을 넓게 사용한다. `ExploreBrowserNavigation`이 홈·뒤로·앞으로 기록과 페이지별 스크롤을 관리하며, 이동 불가 버튼은 회색으로 비활성화한다. 창을 닫아도 같은 씬의 기록을 유지한다. 본문 하단 목표 안내와 기존 검색 결과 복귀 버튼은 표시하지 않는다. [인터넷 창 사용 안내](../Assets/Scripts/HowToUseScripts/EXPLORE_BROWSER_USAGE.md).
+- 탐색 인터넷은 검색 홈과 사이트 본문을 구분한다. 검색 홈에서는 직접 입력한 검색어를 띄어쓰기 없이 등록된 검색어와 대조하고, 입력값을 방문 기록에 보존한다. 결과가 없으면 입력어와 철자 확인 안내를 표시한다. 본문에서는 검색 UI를 숨기고 스크롤 영역을 넓게 사용한다. `ExploreBrowserNavigation`이 홈·뒤로·앞으로 기록과 페이지별 스크롤을 관리하며, 이동 불가 버튼은 회색으로 비활성화한다. 창을 닫아도 같은 씬의 기록을 유지한다. 메모 창은 단서 정보와 플레이어 자유 메모 입력을 같은 본문 영역에서 전환한다. 본문 하단 목표 안내와 기존 검색 결과 복귀 버튼은 표시하지 않는다. [인터넷 창 사용 안내](../Assets/Scripts/HowToUseScripts/EXPLORE_BROWSER_USAGE.md).
 
 ## 필요한 작업에서만 읽을 문서
 
