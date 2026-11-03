@@ -46,6 +46,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     public ExploreProtoInvestigation investigation;
     public ExploreProtoArticleLinks articleLinks;
     public ExploreBrowserNavigation browserNavigation;
+    public ExploreForumArticlePage forumArticlePage;
     [Tooltip("Assigned only in Battle_Proto; exploration retains its original app behavior.")]
     public BloodyMaryPhaseController bloodyMaryPhase;
     public Button addKeywordButton, keywordFieldButton, popupCloseButton, popupKeywordButton, findButton, clearKeywordButton, siteBackButton;
@@ -169,6 +170,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
             siteTitleText.text = site.title;
             if (articleLinks) articleLinks.SetArticle(site.article);
             else siteArticleText.text = site.article;
+            if (forumArticlePage) forumArticlePage.ShowSite(currentSiteIndex, site);
         }
         searchResults.SetActive(state == null || state.resultsVisible);
         siteDetailPanel.SetActive(state != null && state.detailVisible);
@@ -761,6 +763,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         siteTitleText.text = site.title;
         if (articleLinks) articleLinks.SetArticle(site.article);
         else siteArticleText.text = site.article;
+        if (forumArticlePage) forumArticlePage.ShowSite(index, site);
         searchResults.SetActive(false); siteDetailPanel.SetActive(true);
         ResetScroll(siteArticleScroll);
         if (investigation) investigation.OnArticleOpened(site.openDialogueSceneId);
