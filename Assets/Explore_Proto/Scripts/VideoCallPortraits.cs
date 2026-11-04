@@ -10,6 +10,10 @@ public sealed class VideoCallPortraits : MonoBehaviour
     [Header("현재 화자 테두리")]
     public GameObject heroineHighlight;
     public GameObject clientHighlight;
+    public UnityEngine.UI.Image heroineFrame;
+    public UnityEngine.UI.Image clientFrame;
+    public Color idleFrameTint = Color.black;
+    public Color speakingFrameTint = Color.white;
     public string heroineSpeakerId = "유미나";
     public string clientSpeakerId = "이서연";
     Sprite defaultHeroine, defaultClient, defaultFriend;
@@ -47,10 +51,12 @@ public sealed class VideoCallPortraits : MonoBehaviour
     /// <summary>현재 화자의 카드 테두리를 켠다. 쉼표로 묶인 공동 대사는 두 카드를 모두 강조한다.</summary>
     public void HighlightSpeaker(string speakerId)
     {
+        if (heroineFrame) heroineFrame.color = HasSpeaker(speakerId, heroineSpeakerId) ? speakingFrameTint : idleFrameTint;
+        if (clientFrame) clientFrame.color = HasSpeaker(speakerId, clientSpeakerId) ? speakingFrameTint : idleFrameTint;
         if (heroineHighlight)
-            heroineHighlight.SetActive(HasSpeaker(speakerId, heroineSpeakerId));
+            heroineHighlight.SetActive(!heroineFrame && HasSpeaker(speakerId, heroineSpeakerId));
         if (clientHighlight)
-            clientHighlight.SetActive(HasSpeaker(speakerId, clientSpeakerId));
+            clientHighlight.SetActive(!clientFrame && HasSpeaker(speakerId, clientSpeakerId));
     }
 
     static bool HasSpeaker(string speakerIds, string target)

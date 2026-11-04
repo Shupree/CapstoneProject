@@ -7,7 +7,7 @@
 - 탐색 통화: `EmbeddedVideoCall`. 메신저 창의 자식이 아니라 Canvas의 자식이다. 첫 통화와 진실 확인 통화가 공유한다. 배틀 시작 통화와 같은 어두운 창 배경과 헤더를 사용한다.
 - `ConnectedControls`는 선택적인 임시 조작 UI다. 현재 탐색 `EmbeddedVideoCall`에서는 제거되어 있으며, 참조가 없어도 통화 연결·대화 시작·종료를 진행한다. 배틀의 기존 조작 UI와 연결은 별도로 유지한다.
 - 탐색 씬의 기존 `VideoCallWindow`, 배틀 대화용 `VideoCallWindow`, 배틀 기믹용 `BattleCallWindow`도 같은 화면 범위를 사용한다.
-- 탐색과 배틀 시작 통화는 같은 크기와 위치의 인물 카드 및 `BottomDialogueSystem` 하단 대화 바를 사용한다. 배틀 씬의 기존 `DialogueBox`는 비활성화되어 있다. `VideoCallPortraits`의 화자 테두리 참조와 화자 ID를 연결하면 현재 화자의 카드에 초록색 테두리가 표시된다. 쉼표로 구분한 공동 화자는 두 카드 모두 강조한다.
+- 탐색 통화는 CallChat_Card_0 프레임을 사용한다. VideoCallPortraits의 Heroine Frame/Client Frame에 카드 Image를 연결하며, 기본 Tint는 검정이고 현재 화자는 흰 Tint로 원본 초록색을 표시한다. 쉼표로 구분한 공동 화자는 두 카드 모두 강조한다. 탐색의 기존 SpeakingBorder 오브젝트는 사용하지 않는다. 배틀은 기존 하이라이트 참조 방식이 유지된다. 두 화면은 BottomDialogueSystem 하단 대화 바를 사용하며 배틀의 기존 DialogueBox는 비활성화되어 있다.
 
 ## 연결 효과음
 
@@ -25,3 +25,5 @@
 
 현재 탐색 호출부는 `ExploreProtoMessenger`, 배틀 호출부는 `BattleProtoConversation`이다. 씬에 새 통화 화면을 추가할 때에는 위 컴포넌트의 참조와 대화 시작 콜백을 함께 연결한다.
 탐색에서 추가 통화를 시작할 때는 `StartAdditionalCall(sceneId, reader, mode)`로 연결 방식을 선택할 수 있으며, 모드를 생략하면 `Outgoing`을 사용한다.
+
+탐색 EmbeddedVideoCall의 CallEndIcon은 Uncall_Icon_0을 표시하는 장식 UI다. 통화 중단 이벤트는 연결하지 않는다. 프레임·초상화·이름표 배치는 씬에서 편집한다.
