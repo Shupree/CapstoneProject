@@ -47,7 +47,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     public ExploreProtoArticleLinks articleLinks;
     public ExploreBrowserNavigation browserNavigation;
     public ExploreForumArticlePage forumArticlePage;
-    [Tooltip("Assigned only in Battle_Proto; exploration retains its original app behavior.")]
+    [Tooltip("배틀 씬에서만 연결합니다. 탐색 씬은 기존 앱 동작을 유지합니다.")]
     public BloodyMaryPhaseController bloodyMaryPhase;
     public Button addKeywordButton, keywordFieldButton, popupCloseButton, popupKeywordButton, findButton, clearKeywordButton, siteBackButton;
     [Header("직접 입력 검색")]
@@ -210,9 +210,12 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         }
         else
         {
-            // 배틀 씬에 저장된 데스크톱 연결은 그대로 둔다.
+            // Battle02에서는 메신저 아이콘을 새 어두운 창에 연결한다.
             messengerButton.onClick.AddListener(ToggleMessenger);
-            emojiButton.onClick.AddListener(ToggleMemo);
+            var battle02 = GetComponent<Battle02RitualController>();
+            if (battle02 && gameObject.scene.name == "Battle02_Proto")
+                emojiButton.onClick.AddListener(battle02.ToggleDarkMessenger);
+            else emojiButton.onClick.AddListener(ToggleMemo);
         }
         internetButton.onClick.AddListener(ToggleInternet);
         messengerCloseButton.onClick.AddListener(CloseMessenger);

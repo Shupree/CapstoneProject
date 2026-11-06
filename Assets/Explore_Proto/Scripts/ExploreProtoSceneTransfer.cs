@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public static class ExploreProtoSceneTransfer
 {
     const string ExploreScene = "Explore_Proto";
-    const string BattleScene = "Battle_Proto";
-    const string BattlePath = "Assets/Scenes/Battle_Proto.unity";
+    const string BattleScene = "Battle02_Proto";
+    const string BattlePath = "Assets/Scenes/Battle02_Proto.unity";
     static DesktopState pending;
     static bool loading;
 
@@ -68,7 +68,7 @@ public static class ExploreProtoSceneTransfer
         if (loading || desktop.gameObject.scene.name != ExploreScene) return;
         if (!Application.CanStreamedLevelBeLoaded(BattlePath))
         {
-            ShowLoadFailure(desktop, "Battle_Proto 씬이 빌드 씬 목록에 등록되어 있지 않습니다.");
+            ShowLoadFailure(desktop, "Battle02_Proto 씬이 빌드 씬 목록에 등록되어 있지 않습니다.");
             return;
         }
         pending = desktop.CaptureDesktop();
@@ -77,7 +77,7 @@ public static class ExploreProtoSceneTransfer
         {
             // Keep the existing desktop visible while the next scene loads.
             var operation = SceneManager.LoadSceneAsync(BattlePath, LoadSceneMode.Single);
-            if (operation == null) ShowLoadFailure(desktop, "Battle_Proto 씬을 불러오지 못했습니다.");
+            if (operation == null) ShowLoadFailure(desktop, "Battle02_Proto 씬을 불러오지 못했습니다.");
         }
         catch (Exception error)
         {

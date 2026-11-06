@@ -8,6 +8,8 @@ public sealed class BloodyMaryGameOverController : MonoBehaviour
     public enum GameOverState { Idle, PhaseFailure, Hands, SignalLost }
     public BloodyMaryPhaseController phaseOne;
     public BloodyMaryPhaseTwoController phaseTwo;
+    [Tooltip("Battle02_Proto에서만 연결하는 새 단어 기믹")]
+    public Battle02RitualController battle02;
     public BattleProtoRetrySequence retrySequence;
     public GameObject overlayRoot, dimScreen, centeredAttack, blackout, signalLostScreen;
     public GameObject phaseTwoWarning;
@@ -57,6 +59,13 @@ public sealed class BloodyMaryGameOverController : MonoBehaviour
     {
         if (!configured || IsBlocking || phaseTwo.State != BloodyMaryPhaseTwoController.PhaseState.Running) return;
         BeginFailure(true);
+    }
+
+    public void FailBattle02()
+    {
+        if (!configured || IsBlocking || !battle02 || !battle02.IsRunning) return;
+        battle02.StopForGameOver();
+        BeginFailure(false);
     }
 
     void BeginFailure(bool secondPhase)
@@ -122,7 +131,8 @@ public sealed class BloodyMaryGameOverController : MonoBehaviour
         StopGameOverAudio();
         if (EventSystem.current) EventSystem.current.SetSelectedGameObject(null);
         retrySequence.RestoreBattleCheckpoint();
-        phaseOne.RestartAfterGameOver();
+        if (battle02 && battle02.HasStarted) battle02.RestartAfterGameOver();
+        else phaseOne.RestartAfterGameOver();
         HidePresentation();
         State = GameOverState.Idle;
     }

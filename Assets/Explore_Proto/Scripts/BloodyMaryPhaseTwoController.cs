@@ -235,6 +235,15 @@ public sealed class BloodyMaryPhaseTwoController : MonoBehaviour
         onPhaseTwoCompleted.Invoke();
     }
 
+    /// <summary>Battle02의 새 단어 기믹이 끝났을 때 기존 봉인 연출의 완료 이벤트를 재사용한다.</summary>
+    public bool CompleteFromExternal()
+    {
+        if (State != PhaseState.NotStarted) return false;
+        State = PhaseState.Completed;
+        onPhaseTwoCompleted.Invoke();
+        return true;
+    }
+
     void RefreshSelection()
     {
         for (int i = 0; i < selectedSlots.Length; i++)

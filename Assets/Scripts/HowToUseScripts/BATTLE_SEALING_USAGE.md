@@ -1,6 +1,6 @@
 # 배틀 완료 후 봉인 연출
 
-`Assets/Scenes/Battle_Proto.unity`의 `ExploreProtoMessenger`에 있는 `BattleSealingController`가 2페이즈 완료 이벤트를 받아 진행한다. 기존 완료 문구는 유지하며, 완료 화면을 1.5초 유지한 뒤 창 전체를 0.75초 동안 페이드 아웃하고 창을 닫은 다음 봉인 화면을 표시한다. BattleCallWindow의 CanvasGroup을 Completed Window Fade에 연결하며, 시간은 Completed Window Fade Seconds에서 조절한다.
+`Assets/Scenes/Battle02_Proto.unity`에서는 `Battle02RitualController`가 다섯 번째 문장 완료 시 `BloodyMaryPhaseTwoController.CompleteFromExternal()`을 호출하고, `ExploreProtoMessenger`의 `BattleSealingController`가 완료 이벤트를 받아 기존 봉인 연출을 진행한다. 기존 `Battle_Proto`에서는 이전 2페이즈 완료 이벤트가 이 연출을 시작한다. 완료 화면을 1.5초 유지한 뒤 창 전체를 0.75초 동안 페이드 아웃하고, 창을 닫은 다음 봉인 화면을 표시한다. BattleCallWindow의 CanvasGroup을 Completed Window Fade에 연결하며, 시간은 Completed Window Fade Seconds에서 조절한다.
 
 ## 진행과 입력
 

@@ -7,6 +7,8 @@ public sealed class BattleMaryIntroController : MonoBehaviour
     [Header("씬에 저장된 연출 UI")]
     public BattleProtoRetrySequence retrySequence;
     public BloodyMaryPhaseController phaseOne;
+    [Tooltip("Battle02_Proto에서만 연결한다. 두 인물과 메리의 첫 조우 이후 기존 카드 기믹 대신 시작한다.")]
+    public Battle02RitualController battle02;
     public GameObject blackoutRoot;
     public UnityEngine.UI.Image blackoutImage;
     public GameObject introRoot;
@@ -99,8 +101,8 @@ public sealed class BattleMaryIntroController : MonoBehaviour
     public bool IsReady => retrySequence && phaseOne && blackoutRoot && blackoutImage && introRoot &&
         heroineCard && maryCard && knifeRoot && ambienceSource && ambienceClip && bellClip && appearanceClip &&
         maryVoiceClip && babyCryClip && maryArtwork && knifeFadeGroup && screenInterference &&
-        knifeCardIndex >= 0 && knifeCardIndex < phaseOne.IntroCardCount &&
-        phaseOne.stages[0].cards[knifeCardIndex].isKnife;
+        (battle02 || (knifeCardIndex >= 0 && knifeCardIndex < phaseOne.IntroCardCount &&
+            phaseOne.stages[0].cards[knifeCardIndex].isKnife));
 
     void Awake()
     {
@@ -161,6 +163,7 @@ public sealed class BattleMaryIntroController : MonoBehaviour
         introRoot.SetActive(true);
         heroineCard.SetActive(true);
         maryCard.SetActive(true); // Both frames appear with the heroine; Mary's artwork comes later.
+        if (battle02) battle02.ShowIntroHangup();
         maryArtwork.enabled = false;
         knifeRoot.SetActive(false);
         knifeFadeGroup.alpha = 1f;
@@ -176,6 +179,17 @@ public sealed class BattleMaryIntroController : MonoBehaviour
         PlayEffect(appearanceClip, .7f);
         PlayEffect(maryVoiceClip, .5f);
         yield return Wait(marySeconds);
+
+        if (battle02)
+        {
+            // 새 전투는 두 사람과 메리의 첫 조우까지만 기존 연출을 공유한다.
+            blackoutRoot.SetActive(false);
+            ambienceSource.Stop();
+            retrySequence.effectsAudio.Stop();
+            if (!battle02.BeginAfterIntro())
+                Debug.LogError("메리 조우 연출 후 Battle02 기믹을 시작하지 못했습니다.", this);
+            yield break;
+        }
 
         // 카드 틀을 하나씩 배치한 뒤, 칼 연출 후 같은 카드에 메리 이미지를 공개한다.
         if (!phaseOne.PrepareIntroCards())
