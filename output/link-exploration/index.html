@@ -12,8 +12,11 @@
 #inspectHint{position:fixed;z-index:5;pointer-events:none;background:#202c2a;color:white;padding:4px 9px;border-radius:4px;font-size:12px}
 #observation:not([hidden]){display:flex;gap:12px;align-items:center;background:#24332f;color:white;padding:12px 16px}
 #speech{flex:1}#dismissSpeech{padding:3px 8px}.memo-tabs{display:flex;gap:8px}.memo-tabs [aria-pressed=true]{background:#376453}
-.record{margin-top:16px;background:white;border-left:3px solid #81a393;padding:12px 18px}.record p{margin:5px 0}.record small{color:#68736e}
+
 @media(max-width:760px){.objective{flex-basis:100%}}
+.memo-tabs{flex-wrap:wrap;gap:6px}.keyword-notes{list-style:disc;padding:0 0 0 1.4em;line-height:1.8}
+.keyword-notes li{margin:12px 0}.keyword-notes li::marker{font-size:.75em}
+.keyword-notes .superseded,.keyword-notes .superseded a{color:#727972;text-decoration:line-through}
 </style>
 <header class="desktop"><div class="brand"><b>CYBER EXORCIST</b> / 조사 데스크톱</div><span class="tag">링크 탐색 · 로컬 HTML 프로토타입</span><button id="reset">처음부터</button></header>
 <div class="workspace"><aside class="dock"><button data-app="mail">✉ 의뢰 메일</button><button data-app="browser">◉ 인터넷</button><button data-app="chat">▤ 메신저 <span id="unread" class="badge" hidden>1</span></button><button data-app="memo">▧ 메모장</button><section class="objective"><small>현재 목표</small><strong id="objectiveText" aria-live="polite"></strong></section><p class="hint">의뢰 메일에서 서연의<br>연락처를 추가하세요.<br><br>밑줄 친 글을 클릭해<br>연결된 페이지를 여세요.</p><details><summary>제작용 흐름 안내</summary><p>연락처 추가 → 메신저에서 주소 받기 → 의뢰 글 → 작성자 최신/이전 글 → 블로그 PC 소개 → SNS 프로필 → 최신 번호 확인 → Bloody687.org 직접 입력 → 유의사항 조사 → 서연에게 질문 → 질문 글 본문으로 추궁 → 인터넷의 만료 페이지</p><p>모든 사이트와 메시지는 이 HTML 안에서 동작합니다. 새로고침 시 진행은 초기화됩니다.</p></details></aside>
@@ -90,6 +93,7 @@ function remember(){if(app==='browser'&&cursor>=0)history[cursor].scroll=$('view
 function go(id,url){const firstVisit=!visited.has(id);remember();app='browser';history.splice(cursor+1);history.push({id,url:url||urls[id]||'unknown.local',scroll:0});cursor=history.length-1;if(id==='core')connected=true;
   const firstFailure = id==='old' && !oldFailed;
   if(firstFailure)oldFailed=true;
+  if(firstVisit) updatePageNotes(id);
   render();
   if(firstFailure)investigate('oldAddress');
   if(firstVisit && pageThoughts[id])speak(pageThoughts[id]);
@@ -147,6 +151,8 @@ document.addEventListener('click',event=>{
     const key=choice.dataset.question;
     if(!linksReceived || askedQuestions.has(key) || askedQuestions.has('confront') || !questions[key]?.available())return;
     askedQuestions.add(key);
+    if(key==='taboo') enterNote('caseUnknown');
+    if(key==='confront') enterNote('caseSolved');
     if(key==='confront')expired=true;
     render();
     $('view').scrollTop=$('view').scrollHeight;
@@ -159,11 +165,13 @@ document.addEventListener('click',event=>{
     case 'addContact':
       if(contactAdded)return;
       contactAdded=true;
+      enterNote('mary');
       switchApp('chat');
       break;
     case 'askAddress':
       if(!contactAdded || linksReceived)return;
       linksReceived=true;
+      enterNote('addressReceived');
       render();
       speak('이게 그날 서연이 접속한 주소구나. 직접 열어 보자.');
       break;
@@ -172,7 +180,7 @@ document.addEventListener('click',event=>{
 });
 $('addressform').onsubmit=e=>{e.preventDefault();const raw=$('address').value.trim(),norm=raw.replace(/^https?:\/\//i,'').replace(/\/$/,'').toLowerCase();const id=Object.keys(urls).find(k=>urls[k].toLowerCase()===norm);go(id||'unknown',raw)};
 $('back').onclick=()=>{if(cursor>0){remember();cursor--;render()}};$('forward').onclick=()=>{if(cursor<history.length-1){remember();cursor++;render()}};$('home').onclick=()=>go('landing');
-$('reset').onclick=()=>{if(confirm('진행과 메모를 지우고 처음부터 시작할까요?')){app='mail';history=[];cursor=-1;visited.clear();connected=expired=false;askedQuestions.clear();memo='';reactions.clear();findings.clear();oldFailed=false;contactAdded=false;linksReceived=false;expirationSeen=false;memoTab="records";closeSide();$('unread').hidden=true;$('toast').hidden=true;clearTimeout(notify.timer);render()}};
+$('reset').onclick=()=>{if(confirm('진행과 메모를 지우고 처음부터 시작할까요?')){app='mail';history=[];cursor=-1;visited.clear();connected=expired=false;askedQuestions.clear();memo='';reactions.clear();findings.clear();oldFailed=false;contactAdded=false;linksReceived=false;expirationSeen=false;notebook.clear();memoTab=null;closeSide();$('unread').hidden=true;$('toast').hidden=true;clearTimeout(notify.timer);render()}};
 Object.assign(urls,{food:'community.local/thread/fridge',monitor:'community.local/thread/monitor',evidence:'community.local/thread/question',client:'community.local/user/seoyeon041',foodauthor:'community.local/user/food',blogfail:'blog.local/bloodymary/photo',blogrules:'blog.local/bloodymary/notes',socialfood:'sns.local/onebite',socialnight:'sns.local/tomorrow','tag-night':'sns.local/tag/night'});
 const sideDialog=document.createElement('dialog');sideDialog.id='sideDialog';sideDialog.setAttribute('aria-label','광고 체험');document.body.append(sideDialog);
 let deck=[],revealed=[],matched=new Set(),moves=0,cardTimer=null;
@@ -216,8 +224,49 @@ const pageThoughts = {
   profile:'같은 그림이 계속 올라와. 그런데 밑에 붙은 숫자는 매번 다르네.',
   core:'열렸다. 서연이 읽었다던 유의사항도 여기 있어. 뭐라고 쓰여 있는지 확인하자.'
 };
-let memoTab = 'records';
-const findings = new Map();
+let memoTab = null;
+const findings = new Set();
+const notebook = new Map();
+const siteTopic = '블러디메리 사이트';
+const maryTopic = '블러디메리';
+const effectTopic = '강령술 부작용';
+// 같은 키워드와 항목 이름을 쓰는 문장은 단계가 높아질 때만 교체한다.
+const noteTexts = {
+  addressReceived: [siteTopic,'address',1,'의뢰인이 접속한 사이트이다. 주소는 Bloody467.org'],
+  addressFailed: [siteTopic,'address',2,'의뢰인이 접속한 사이트이다. 주소는 Bloody467.org, 현재는 접속되지 않는다.'],
+  addressFound: [siteTopic,'address',3,'의뢰인이 접속한 사이트이다. 최근 주소는 Bloody687.org.'],
+  communitySource: [siteTopic,'source',1,`의뢰인은 ${link('start','커뮤니티 글')}에서 해당 사이트 링크를 알았다.`],
+  blogSource: [siteTopic,'source',2,`의뢰인은 ${link('start','커뮤니티 글')}에서 해당 사이트 링크를 알았다. 해당 글은 ${link('bloghome','어떤 블로그')}에서 링크를 알았다고 했다.`],
+  profile: [siteTopic,'numbers',1,"'잔상'이라는 SNS계정에 BloodyXXX.org 라는 설명이 쓰여있다. 해당 계정의 게시글은 모두 의문의 아이콘과 숫자 3자리만 쓰여있다."],
+  decoded: [siteTopic,'numbers',2,"'잔상'이라는 SNS계정에 BloodyXXX.org 라는 설명이 쓰여있다. XXX에 최신 게시물의 3자리 수를 넣으면 블러디메리 사이트로 이동할 수 있다."],
+  mary: [maryTopic,'name',1,"'블러디메리' 강령술에 등장하는 귀신의 이름이다."],
+  knife: [maryTopic,'knife',1,'칼을 든 메리가 나타난다면 통화를 즉시 종료해야한다.'],
+  hope: [maryTopic,'hope',1,"'네 아기는 죽지 않았어'라는 말을 들으면 메리의 힘이 약해진다."],
+  taboo: [effectTopic,'warning',1,"'네 아이는 내가 죽였어'라는 말을 하면 강령술의 부작용이 발생한다."],
+  caseUnknown: [effectTopic,'cause',1,'이서연의 친구가 강령술을 진행할 때, 누군가 부작용을 유발시켰다.'],
+  caseSolved: [effectTopic,'cause',2,'이서연의 친구가 강령술을 진행할 때, 이서연이 부작용을 유발시켰다.']
+};
+
+function enterNote(event) {
+  const [topic, slot, stage, html] = noteTexts[event];
+  if (!notebook.has(topic)) notebook.set(topic,new Map());
+  const notes = notebook.get(topic);
+  if (notes.has(slot) && notes.get(slot).stage >= stage) return;
+  notes.delete(slot);
+  notes.set(slot,{stage,html});
+  if (memoTab !== 'free') memoTab = topic;
+}
+
+function updatePageNotes(id) {
+  if (id === 'old') enterNote('addressFailed');
+  if (id === 'start') enterNote('communitySource');
+  if (pages[id]?.theme === 'blog') enterNote('blogSource');
+  if (id === 'profile') enterNote('profile');
+  if (id === 'core') {
+    enterNote('addressFound');
+    enterNote('decoded');
+  }
+}
 const observations = {
   oldAddress: {title:'응답이 없는 옛 주소', line:'여기서는 열리지 않네. 서연에게 이 주소를 어디서 찾았는지 물어보자.'},
   question: {title:'서연의 부작용 질문', line:'음.. 오히려 강령술보다 부작용에 더 관심이 있어보이네..?'},
@@ -253,17 +302,17 @@ function speak(line) {
 
 function investigate(key) {
   const item = observations[key];
-  const entry = history[cursor];
-  if (item.title && !findings.has(key)) {
-    findings.set(key, {title:item.title, line:item.line, source:entry.url});
-  }
+  if (item.title) findings.add(key);
+  if (['knife','hope','taboo'].includes(key)) enterNote(key);
   updateObjective();
   speak(item.line);
 }
 
 function renderMemo(view) {
   view.classList.add('mail');
-  view.innerHTML = '<div class="appcontent"><h1>개인 메모</h1><nav class="memo-tabs" aria-label="메모 분류"><button data-memo-tab="records">조사 기록</button><button data-memo-tab="free">자유 메모</button></nav><section id="memoPanel"></section></div>';
+  const tabs = [...notebook.keys()].map(topic =>
+    `<button data-memo-tab="${topic}">${topic}</button>`).join('');
+  view.innerHTML = `<div class="appcontent"><h1>개인 메모</h1><nav class="memo-tabs" aria-label="메모 분류">${tabs}<button data-memo-tab="free">자유 메모</button></nav><section id="memoPanel"></section></div>`;
   const panel = $('memoPanel');
   view.querySelectorAll('[data-memo-tab]').forEach(button => {
     button.setAttribute('aria-pressed', String(button.dataset.memoTab === memoTab));
@@ -272,19 +321,14 @@ function renderMemo(view) {
     panel.innerHTML = '<textarea id="memoText" class="note" aria-label="자유 메모" placeholder="직접 메모를 남기세요…"></textarea>';
     $('memoText').value = memo;
     $('memoText').oninput = event => { memo = event.target.value; };
-  } else {
-    if (!findings.size) panel.textContent = '중요한 정보를 조사하면 이곳에 기록됩니다.';
-    for (const item of findings.values()) {
-      const record = document.createElement('article');
-      record.className = 'record';
-      record.innerHTML = '<b></b><p></p><small></small>';
-      record.firstChild.textContent = item.title;
-      record.querySelector('p').textContent = '유미나　“' + item.line + '”';
-      record.lastChild.textContent = item.source;
-      panel.append(record);
-    }
+  } else if (notebook.has(memoTab)) {
+    const notes = [...notebook.get(memoTab)].reverse();
+    panel.innerHTML = '<ul class="keyword-notes">' + notes.map(([slot,note]) => {
+      const faded = memoTab === siteTopic && slot === 'source' && visited.has('profile');
+      return `<li${faded?' class="superseded"':''}>${note.html}</li>`;
+    }).join('') + '</ul>';
   }
-  $('status').textContent = memoTab === 'free' ? '자유 메모' : '조사 기록 · ' + findings.size + '건';
+  $('status').textContent = memoTab === 'free' ? '자유 메모' : memoTab || '개인 메모';
 }
 
 function positionHint(x,y) {
