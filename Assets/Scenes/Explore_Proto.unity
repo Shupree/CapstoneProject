@@ -4560,7 +4560,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &173415721
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4718,7 +4718,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &185736576
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29998,6 +29998,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BottomDialogueSystem
       objectReference: {fileID: 0}
+    - target: {fileID: 685767891247802683, guid: e5c5e5f930f34c141934d23c3499cd10, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 922082744530797509, guid: e5c5e5f930f34c141934d23c3499cd10, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -45256,7 +45260,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1903956075
 RectTransform:
   m_ObjectHideFlags: 0

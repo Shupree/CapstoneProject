@@ -28,6 +28,11 @@ public sealed class Battle02RitualController : MonoBehaviour
     public GameObject introRoot;
     public Image maryArtwork;
     public Sprite normalMary, knifeMary;
+    public Sprite knifeMaryB, knifeMaryC;
+    [Header("칼 든 메리 단계별 표시 시간 (합계가 게임오버 제한 시간)")]
+    [InspectorName("모습 A 표시 시간 (초)"), Min(.01f)] public float knifeASeconds = 1.6f;
+    [InspectorName("모습 B 표시 시간 (초)"), Min(.01f)] public float knifeBSeconds = 1.2f;
+    [InspectorName("모습 C 표시 시간 (초)"), Min(.01f)] public float knifeCSeconds = 1.2f;
     public RawImage maryGlitch;
     public AudioSource noiseSource;
     public AudioClip noiseClip;
@@ -49,7 +54,7 @@ public sealed class Battle02RitualController : MonoBehaviour
     [Min(.1f)] public float callGlitchSeconds = 1f;
     [Min(.1f)] public float firstKnifeMinSeconds = 8f;
     [Min(.1f)] public float firstKnifeMaxSeconds = 14f;
-    [Min(.1f)] public float knifeFailureSeconds = 4f;
+    public float knifeFailureSeconds => knifeASeconds + knifeBSeconds + knifeCSeconds;
     [Min(.1f)] public float wordGlitchMinSeconds = 3f;
     [Min(.1f)] public float wordGlitchMaxSeconds = 4f;
     [Min(.1f)] public float wordGlitchSeconds = .5f;
@@ -63,6 +68,7 @@ public sealed class Battle02RitualController : MonoBehaviour
     int roundIndex;
     bool knifeVisible, wordGlitchRunning, inputResetting;
     double knifeDeadline, nextKnifeAt, nextCallGlitchAt, nextWordGlitchAt, noiseStopAt, nextHangupAt;
+    double knifeBAt, knifeCAt;
     Coroutine inputResetRoutine, wordGlitchRoutine;
     Vector2 maryPosition;
     Vector2 hangupNormalPosition;
@@ -76,6 +82,8 @@ public sealed class Battle02RitualController : MonoBehaviour
 
     void Awake()
     {
+        // Preserve authored placement even when another required reference is missing.
+        if (hangupButton) hangupNormalPosition = ((RectTransform)hangupButton.transform).anchoredPosition;
         if (!Configured())
         {
             Debug.LogError("Battle02 기믹의 씬 UI, 단어 또는 이미지 참조를 확인하세요.", this);
@@ -103,6 +111,15 @@ public sealed class Battle02RitualController : MonoBehaviour
 
     bool Configured()
     {
+        if (!normalMary || !knifeMary || !knifeMaryB || !knifeMaryC)
+        {
+            Debug.LogError("Battle02 메리 Sprite 참조 누락: Normal Mary / Knife Mary(A) / Knife Mary B / Knife Mary C를 확인하세요.", this);
+            return false;
+        }
+        if (!knifeMaryB || !knifeMaryC ||
+            !float.IsFinite(knifeASeconds) || knifeASeconds <= 0f ||
+            !float.IsFinite(knifeBSeconds) || knifeBSeconds <= 0f ||
+            !float.IsFinite(knifeCSeconds) || knifeCSeconds <= 0f) return false;
         if (!retrySequence || !gameOver || !completionBridge || !callWindow || !introRoot ||
             !maryArtwork || !normalMary || !knifeMary || !maryGlitch || !noiseSource || !noiseClip ||
             !hangupButton || !dockMessengerButton || !darkMessengerWindow || !darkMessengerCloseButton ||
@@ -177,7 +194,8 @@ public sealed class Battle02RitualController : MonoBehaviour
         ((RectTransform)hangupButton.transform).anchoredPosition = hangupNormalPosition;
         nextHangupAt = 0;
         RefreshSelection();
-        ScheduleKnife();
+        // Only the first attack of a fresh attempt uses the fixed tutorial-like delay.
+        nextKnifeAt = Time.unscaledTimeAsDouble + 1d;
         nextCallGlitchAt = Time.unscaledTimeAsDouble + callGlitchInterval;
     }
 
@@ -196,8 +214,13 @@ public sealed class Battle02RitualController : MonoBehaviour
         {
             knifeVisible = true;
             maryArtwork.sprite = knifeMary;
+            // Capture all boundaries together; Inspector edits apply to the next attack.
+            knifeBAt = now + knifeASeconds;
+            knifeCAt = knifeBAt + knifeBSeconds;
             knifeDeadline = now + knifeFailureSeconds;
         }
+        if (knifeVisible)
+            maryArtwork.sprite = now >= knifeCAt ? knifeMaryC : now >= knifeBAt ? knifeMaryB : knifeMary;
         if (now >= nextCallGlitchAt)
         {
             nextCallGlitchAt = now + callGlitchInterval;
