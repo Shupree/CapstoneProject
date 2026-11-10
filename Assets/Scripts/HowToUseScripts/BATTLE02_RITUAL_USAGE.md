@@ -13,6 +13,12 @@
 
 글리치는 현재 회차의 `glitchTargets`에 연결된 문구 위치와 크기를 따라가며, 1회부터 5회까지 동시에 영향을 받는 문구 수와 발생 빈도가 증가한다. 메리의 일반·칼 스프라이트와 Noise는 컨트롤러 Inspector 참조로 교체할 수 있다. 창·얼굴 이미지도 씬의 `RawImage` 참조를 바꾸면 된다. 타이밍은 같은 컴포넌트의 `시간` 항목에서 조절한다. 다섯 번째 완료는 `BloodyMaryPhaseTwoController.CompleteFromExternal()`을 통해 기존 봉인 연출에 연결된다.
 
+## 글리치 이미지
+
+`Mary Glitch Frames`는 `Assets/Sprite/Effect/Glitch_Sheet.png`의 5종, `Word Glitch Frames`는 `Glitch_R_Sheet.png`의 5종을 사용한다. 효과가 발생할 때 순서를 섞고 `Glitch Frame Seconds`(기본 0.06초)마다 교대한다. 동시에 나타나는 문구 글리치는 서로 다른 프레임부터 시작한다. 기존 RawImage가 각 Sprite의 분할 영역을 표시하므로 이 두 시트는 Sprite Atlas에 넣지 않고 사용한다. 문구 선택 제한과 회차별 발생 빈도, 메리의 5초 주기·1초 지속시간은 그대로 유지한다. 평상시 통화 종료 버튼으로 선택 문장을 지우는 입력란 효과는 기존 이미지를 사용한다.
+
+문구 글리치는 Sprite의 투명 여백을 제외한 영역을 표시한다. `Word Glitch Size Multiplier`의 X/Y로 문구 대비 가로·세로 배율(기본 1.15/1.2)을, `Word Glitch Padding`으로 추가 크기(기본 24/12)를 조절한다. 크기는 `문구 RectTransform 크기 × 배율 + 추가 크기`다. 영구 적용하려면 Play를 종료하고 Inspector에서 값을 편집한 뒤 씬을 저장한다. 메리 글리치의 크기는 이 설정에 영향을 받지 않는다.
+
 ## 메리 공격 이미지와 시간
 Battle02_Proto의 ExploreProtoMessenger 오브젝트 > Battle02RitualController에서 모습 A/B/C 표시 시간(초)을 조절한다. 기본값은 1.6 / 1.2 / 1.2초이며 합계 4초가 게임오버 제한 시간이다. 공격 시작 때 세 시간을 확정하므로 Play 중 변경한 값은 다음 공격부터 적용된다. Normal Mary는 시트 _0, Knife Mary는 _1(A), Knife Mary B는 _2(B), Knife Mary C는 _3(C)에 연결한다. 통화 종료로 공격을 막거나 회차가 끝나면 평상시로 복귀하며 다음 공격은 A부터 시작한다.
 

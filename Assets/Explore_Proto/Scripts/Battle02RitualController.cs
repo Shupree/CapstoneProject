@@ -49,6 +49,14 @@ public sealed class Battle02RitualController : MonoBehaviour
     public Button[] selectedWordButtons;
     public Round[] rounds;
 
+    [Header("글리치 스프라이트 (시트에서 분할한 5종)")]
+    public Sprite[] maryGlitchFrames;
+    public Sprite[] wordGlitchFrames;
+    [Min(.01f)] public float glitchFrameSeconds = .06f;
+    [Tooltip("투명 여백을 제외한 문구 글리치의 가로·세로 배율")]
+    public Vector2 wordGlitchSizeMultiplier = new(1.15f, 1.2f);
+    public Vector2 wordGlitchPadding = new(24f, 12f);
+
     [Header("시간")]
     [Min(.1f)] public float callGlitchInterval = 5f;
     [Min(.1f)] public float callGlitchSeconds = 1f;
@@ -261,11 +269,19 @@ public sealed class Battle02RitualController : MonoBehaviour
 
     IEnumerator GlitchMary()
     {
+        var frames = ShuffleGlitchFrames(maryGlitchFrames);
+        int previousFrame = -1;
         PlayNoise(callGlitchSeconds);
         maryGlitch.gameObject.SetActive(true);
         for (float elapsed = 0f; elapsed < callGlitchSeconds && state == RitualState.Running;
              elapsed += Time.unscaledDeltaTime)
         {
+            int frame = Mathf.FloorToInt(elapsed / Mathf.Max(.01f, glitchFrameSeconds));
+            if (frame != previousFrame)
+            {
+                ApplyGlitchFrame(maryGlitch, frames, frame);
+                previousFrame = frame;
+            }
             maryArtwork.rectTransform.anchoredPosition = maryPosition +
                 new Vector2(UnityEngine.Random.Range(-13f, 13f), UnityEngine.Random.Range(-5f, 5f));
             float brightness = UnityEngine.Random.Range(.35f, 1f);
@@ -412,6 +428,7 @@ public sealed class Battle02RitualController : MonoBehaviour
 
     IEnumerator GlitchWords()
     {
+        var frames = ShuffleGlitchFrames(wordGlitchFrames);
         wordGlitchRunning = true;
         var targets = rounds[roundIndex].glitchTargets;
         var genuine = rounds[roundIndex].words[
@@ -425,12 +442,52 @@ public sealed class Battle02RitualController : MonoBehaviour
         {
             var graphic = WordGlitchAt(overlay++);
             graphic.rectTransform.anchoredPosition = target.anchoredPosition;
-            graphic.rectTransform.sizeDelta = target.sizeDelta + new Vector2(24f, 12f);
+            graphic.rectTransform.sizeDelta = Vector2.Scale(target.rect.size,
+                new Vector2(Mathf.Max(.01f, wordGlitchSizeMultiplier.x),
+                    Mathf.Max(.01f, wordGlitchSizeMultiplier.y))) + wordGlitchPadding;
             graphic.gameObject.SetActive(true);
         }
-        yield return new WaitForSecondsRealtime(wordGlitchSeconds + .1f * roundIndex);
+        int previousFrame = -1;
+        float duration = wordGlitchSeconds + .1f * roundIndex;
+        for (float elapsed = 0f; elapsed < duration; elapsed += Time.unscaledDeltaTime)
+        {
+            int frame = Mathf.FloorToInt(elapsed / Mathf.Max(.01f, glitchFrameSeconds));
+            if (frame != previousFrame)
+            {
+                for (int i = 0; i < overlay; i++)
+                    ApplyGlitchFrame(WordGlitchAt(i), frames, frame + i, true);
+                previousFrame = frame;
+            }
+            yield return null;
+        }
         HideWordGlitches();
         wordGlitchRoutine = null;
+    }
+
+    static Sprite[] ShuffleGlitchFrames(Sprite[] source)
+    {
+        if (source == null || source.Length == 0) return source;
+        var frames = (Sprite[])source.Clone();
+        for (int i = frames.Length - 1; i > 0; i--)
+        {
+            int other = UnityEngine.Random.Range(0, i + 1);
+            (frames[i], frames[other]) = (frames[other], frames[i]);
+        }
+        return frames;
+    }
+
+    static void ApplyGlitchFrame(UnityEngine.UI.RawImage graphic, Sprite[] frames, int index,
+        bool trimTransparentPadding = false)
+    {
+        if (frames == null || frames.Length == 0) return;
+        var sprite = frames[index % frames.Length];
+        if (!sprite) return;
+        // Keep the scene-authored RawImage and sample only the sliced sprite, not the entire sheet.
+        var rect = trimTransparentPadding ? sprite.textureRect : sprite.rect;
+        var texture = sprite.texture;
+        graphic.texture = texture;
+        graphic.uvRect = new Rect(rect.x / texture.width, rect.y / texture.height,
+            rect.width / texture.width, rect.height / texture.height);
     }
 
     void CompleteRound()

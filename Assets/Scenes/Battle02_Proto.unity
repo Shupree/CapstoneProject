@@ -1653,7 +1653,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5640644586291980787, guid: 594778e6fec81f8428eb004f4b296764, type: 3}
+  m_Sprite: {fileID: 567978868, guid: b4a82c2867d5d8a4b8fdc3ed8b044395, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16302,12 +16302,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 7ed3c765b7277d244a6b56385e3e8072, type: 3}
+  m_Texture: {fileID: 2800000, guid: b80dd9ad6aecc984e990476d038af1fd, type: 3}
   m_UVRect:
     serializedVersion: 2
-    x: 0
+    x: 0.4
     y: 0
-    width: 1
+    width: 0.2
     height: 1
 --- !u!222 &401178244
 CanvasRenderer:
@@ -19602,36 +19602,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82f6cb6c727ccfa4ebbf25d686874339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Battle02MaryArtworkLayout
-  artwork: {fileID: 497897265}
-  card: {fileID: 1681599169}
-  sprites:
-  - {fileID: -1831498093258001608, guid: bf438533357e0bf4790261b13acf6739, type: 3}
-  - {fileID: -3210381629752208212, guid: bf438533357e0bf4790261b13acf6739, type: 3}
-  - {fileID: -6510623983408383649, guid: bf438533357e0bf4790261b13acf6739, type: 3}
-  - {fileID: -2182764944219596124, guid: bf438533357e0bf4790261b13acf6739, type: 3}
-  visibleBounds:
-  - x: 4
-    y: 73
-    width: 189
-    height: 203
-  - x: 8
-    y: 73
-    width: 199
-    height: 219
-  - x: 11
-    y: 73
-    width: 211
-    height: 244
-  - x: 14
-    y: 73
-    width: 225
-    height: 342
-  cardHeightRatios:
-  - 1
-  - 1
-  - 1
-  - 1
-  bottomInset: 12
 --- !u!1 &499882740
 GameObject:
   m_ObjectHideFlags: 0
@@ -23831,7 +23801,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -811.6157, y: 0}
+  m_SizeDelta: {x: -811.21313, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &607615673
 MonoBehaviour:
@@ -30091,12 +30061,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 7ed3c765b7277d244a6b56385e3e8072, type: 3}
+  m_Texture: {fileID: 2800000, guid: b80dd9ad6aecc984e990476d038af1fd, type: 3}
   m_UVRect:
     serializedVersion: 2
-    x: 0
+    x: 0.8
     y: 0
-    width: 1
+    width: 0.2
     height: 1
 --- !u!222 &766324576
 CanvasRenderer:
@@ -30656,12 +30626,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 7ed3c765b7277d244a6b56385e3e8072, type: 3}
+  m_Texture: {fileID: 2800000, guid: b80dd9ad6aecc984e990476d038af1fd, type: 3}
   m_UVRect:
     serializedVersion: 2
-    x: 0
+    x: 0.2
     y: 0
-    width: 1
+    width: 0.2
     height: 1
 --- !u!222 &776628588
 CanvasRenderer:
@@ -34950,7 +34920,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &878428651
 RectTransform:
   m_ObjectHideFlags: 0
@@ -40312,6 +40282,21 @@ MonoBehaviour:
     - {fileID: 1775975200}
     - {fileID: 424703473}
     - {fileID: 955065816}
+  maryGlitchFrames:
+  - {fileID: -1457632552836756881, guid: 4b9c211c8dd713e4baba336104f11728, type: 3}
+  - {fileID: -8148539083546716987, guid: 4b9c211c8dd713e4baba336104f11728, type: 3}
+  - {fileID: 8163648993338946682, guid: 4b9c211c8dd713e4baba336104f11728, type: 3}
+  - {fileID: -6407109633069477107, guid: 4b9c211c8dd713e4baba336104f11728, type: 3}
+  - {fileID: -2355594894283838159, guid: 4b9c211c8dd713e4baba336104f11728, type: 3}
+  wordGlitchFrames:
+  - {fileID: -249020904346325746, guid: b80dd9ad6aecc984e990476d038af1fd, type: 3}
+  - {fileID: 2155368012594071511, guid: b80dd9ad6aecc984e990476d038af1fd, type: 3}
+  - {fileID: -3639050535471541030, guid: b80dd9ad6aecc984e990476d038af1fd, type: 3}
+  - {fileID: -7341838106080167049, guid: b80dd9ad6aecc984e990476d038af1fd, type: 3}
+  - {fileID: 2236828441553913634, guid: b80dd9ad6aecc984e990476d038af1fd, type: 3}
+  glitchFrameSeconds: 0.06
+  wordGlitchSizeMultiplier: {x: 1.15, y: 1.2}
+  wordGlitchPadding: {x: 24, y: 12}
   callGlitchInterval: 5
   callGlitchSeconds: 1
   firstKnifeMinSeconds: 8
@@ -61255,7 +61240,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1431235506
 RectTransform:
   m_ObjectHideFlags: 0
@@ -66601,8 +66586,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 680, y: 105}
+  m_AnchoredPosition: {x: -8, y: 13}
+  m_SizeDelta: {x: 860.38, y: 132.85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1549259835
 MonoBehaviour:
@@ -66624,12 +66609,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 7ed3c765b7277d244a6b56385e3e8072, type: 3}
+  m_Texture: {fileID: 2800000, guid: 4b9c211c8dd713e4baba336104f11728, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1
+    width: 0.2
     height: 1
 --- !u!222 &1549259836
 CanvasRenderer:
@@ -73993,12 +73978,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 7ed3c765b7277d244a6b56385e3e8072, type: 3}
+  m_Texture: {fileID: 2800000, guid: b80dd9ad6aecc984e990476d038af1fd, type: 3}
   m_UVRect:
     serializedVersion: 2
-    x: 0
+    x: 0.6
     y: 0
-    width: 1
+    width: 0.2
     height: 1
 --- !u!222 &1727431175
 CanvasRenderer:
@@ -81569,12 +81554,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 7ed3c765b7277d244a6b56385e3e8072, type: 3}
+  m_Texture: {fileID: 2800000, guid: b80dd9ad6aecc984e990476d038af1fd, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1
+    width: 0.2
     height: 1
 --- !u!222 &1905476785
 CanvasRenderer:
