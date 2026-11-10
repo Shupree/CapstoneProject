@@ -49,6 +49,22 @@ public sealed class Battle02RitualController : MonoBehaviour
     public Button[] selectedWordButtons;
     public Round[] rounds;
 
+    [Header("잘못된 통화 종료: 전체 화면 노이즈")]
+    public UnityEngine.UI.Image resetNoise;
+    public UnityEngine.UI.Image resetNoiseDots;
+    public UnityEngine.UI.Image resetNoiseNextDots;
+    public CanvasGroup resetNoiseOpacity;
+    [Range(0f, 1f)] public float resetMaxOpacity = 1f;
+    [Tooltip("초당 위로 이동하는 화면 높이 비율")]
+    [Min(0f)] public float resetScrollSpeed = .8f;
+    public Sprite[] resetNoiseFrames;
+    public CanvasGroup resetInputGroup;
+    [Min(.01f)] public float resetFadeInSeconds = .8f;
+    [Min(.01f)] public float resetFadeOutSeconds = .8f;
+    bool resetInputLocked, previousInteractable, previousNavigation;
+    UnityEngine.EventSystems.EventSystem resetEventSystem;
+    float resetAnimationElapsed;
+
     [Header("글리치 스프라이트 (시트에서 분할한 5종)")]
     public Sprite[] maryGlitchFrames;
     public Sprite[] wordGlitchFrames;
@@ -74,10 +90,10 @@ public sealed class Battle02RitualController : MonoBehaviour
     RitualState state;
     readonly List<Battle02WordSource> selected = new(Answer.Length);
     int roundIndex;
-    bool knifeVisible, wordGlitchRunning, inputResetting;
+    bool knifeVisible, wordGlitchRunning;
     double knifeDeadline, nextKnifeAt, nextCallGlitchAt, nextWordGlitchAt, noiseStopAt, nextHangupAt;
     double knifeBAt, knifeCAt;
-    Coroutine inputResetRoutine, wordGlitchRoutine;
+    Coroutine wordGlitchRoutine;
     Vector2 maryPosition;
     Vector2 hangupNormalPosition;
     Color maryColor;
@@ -101,6 +117,7 @@ public sealed class Battle02RitualController : MonoBehaviour
         maryPosition = maryArtwork.rectTransform.anchoredPosition;
         hangupNormalPosition = ((RectTransform)hangupButton.transform).anchoredPosition;
         maryColor = maryArtwork.color;
+        resetNoise.gameObject.SetActive(false);
         darkMessengerWindow.SetActive(false);
         hangupButton.gameObject.SetActive(false);
         maryGlitch.gameObject.SetActive(false);
@@ -119,6 +136,8 @@ public sealed class Battle02RitualController : MonoBehaviour
 
     bool Configured()
     {
+        if (!resetNoise || !resetNoiseDots || !resetNoiseNextDots || !resetNoiseOpacity || !resetInputGroup || resetNoiseFrames == null || resetNoiseFrames.Length < 2 ||
+            Array.Exists(resetNoiseFrames, frame => !frame)) return false;
         if (!normalMary || !knifeMary || !knifeMaryB || !knifeMaryC)
         {
             Debug.LogError("Battle02 메리 Sprite 참조 누락: Normal Mary / Knife Mary(A) / Knife Mary B / Knife Mary C를 확인하세요.", this);
@@ -170,12 +189,11 @@ public sealed class Battle02RitualController : MonoBehaviour
         hangupButton.interactable = false;
     }
 
-    void ResetGameplay()
+    void ResetGameplay(bool duringNoise = false)
     {
-        StopAllCoroutines();
-        inputResetRoutine = null;
+        if (!duringNoise) StopAllCoroutines();
         wordGlitchRoutine = null;
-        state = RitualState.Running;
+        state = duringNoise ? RitualState.Transition : RitualState.Running;
         roundIndex = 0;
         selected.Clear();
         foreach (var round in rounds)
@@ -193,12 +211,12 @@ public sealed class Battle02RitualController : MonoBehaviour
         HideWordGlitches();
         inputGlitch.gameObject.SetActive(false);
         roundWordsGroup.interactable = true;
-        wordGlitchRunning = inputResetting = knifeVisible = false;
+        wordGlitchRunning = knifeVisible = false;
         darkMessengerWindow.SetActive(false);
         callWindow.gameObject.SetActive(true);
         introRoot.SetActive(true);
         hangupButton.gameObject.SetActive(true);
-        hangupButton.interactable = true;
+        hangupButton.interactable = !duringNoise;
         ((RectTransform)hangupButton.transform).anchoredPosition = hangupNormalPosition;
         nextHangupAt = 0;
         RefreshSelection();
@@ -335,7 +353,7 @@ public sealed class Battle02RitualController : MonoBehaviour
     public void SelectWord(Battle02WordSource source)
     {
         if (state != RitualState.Running || !darkMessengerWindow.activeSelf ||
-            inputResetting || selected.Count >= Answer.Length ||
+            selected.Count >= Answer.Length ||
             !source || source.IsConsumed ||
             Array.IndexOf(rounds[roundIndex].words, source) < 0) return;
         if (glitchedPhrases.Contains(source.transform.parent as RectTransform)) return;
@@ -352,7 +370,7 @@ public sealed class Battle02RitualController : MonoBehaviour
 
     void RemoveSelectedWord(int index)
     {
-        if (state != RitualState.Running || inputResetting || index < 0 || index >= selected.Count) return;
+        if (state != RitualState.Running || index < 0 || index >= selected.Count) return;
         selected[index].SetConsumed(false);
         selected.RemoveAt(index);
         RefreshSelection();
@@ -404,8 +422,10 @@ public sealed class Battle02RitualController : MonoBehaviour
             ScheduleKnife();
             return;
         }
-        if (inputResetRoutine != null) StopCoroutine(inputResetRoutine);
-        inputResetRoutine = StartCoroutine(ResetInputWithGlitch());
+        StopAllCoroutines();
+        wordGlitchRoutine = null;
+        state = RitualState.Transition;
+        StartCoroutine(ResetBattleWithNoise());
     }
 
     IEnumerator ReenableHangup()
@@ -414,16 +434,79 @@ public sealed class Battle02RitualController : MonoBehaviour
         if (state == RitualState.Running) hangupButton.interactable = true;
     }
 
-    IEnumerator ResetInputWithGlitch()
+    IEnumerator ResetBattleWithNoise()
     {
-        inputResetting = true;
-        PlayNoise(wordGlitchSeconds);
-        inputGlitch.gameObject.SetActive(true);
-        yield return new WaitForSecondsRealtime(wordGlitchSeconds);
-        ClearSelection();
+        previousInteractable = resetInputGroup.interactable;
+        resetInputGroup.interactable = false;
+        resetEventSystem = UnityEngine.EventSystems.EventSystem.current;
+        if (resetEventSystem)
+        {
+            previousNavigation = resetEventSystem.sendNavigationEvents;
+            resetEventSystem.SetSelectedGameObject(null);
+            resetEventSystem.sendNavigationEvents = false;
+        }
+        resetInputLocked = true;
+        HideWordGlitches();
+        maryGlitch.gameObject.SetActive(false);
         inputGlitch.gameObject.SetActive(false);
-        inputResetting = false;
-        inputResetRoutine = null;
+        maryArtwork.rectTransform.anchoredPosition = maryPosition;
+        maryArtwork.color = maryColor;
+        resetNoiseOpacity.alpha = 0f;
+        resetAnimationElapsed = 0f;
+        resetNoise.sprite = resetNoiseFrames[0];
+        resetNoiseDots.rectTransform.anchoredPosition = Vector2.zero;
+        resetNoise.gameObject.SetActive(true);
+        PlayNoise(resetFadeInSeconds + resetFadeOutSeconds);
+        float peak = Mathf.Clamp01(resetMaxOpacity);
+        yield return FadeResetNoise(0f, peak, resetFadeInSeconds);
+        ResetGameplay(true);
+        PlayNoise(resetFadeOutSeconds);
+        yield return FadeResetNoise(peak, 0f, resetFadeOutSeconds);
+        RestoreResetInput();
+        noiseSource.Stop();
+        state = RitualState.Running;
+        hangupButton.interactable = true;
+        nextKnifeAt = Time.unscaledTimeAsDouble + 1d;
+        nextCallGlitchAt = Time.unscaledTimeAsDouble + callGlitchInterval;
+        ScheduleWordGlitch();
+    }
+
+    IEnumerator FadeResetNoise(float from, float to, float seconds)
+    {
+        float duration = Mathf.Max(.01f, seconds);
+        for (float elapsed = 0f; elapsed < duration; elapsed += Time.unscaledDeltaTime)
+        {
+            // Two adjacent panels scroll upward. Only replace a panel after it leaves the screen.
+            float progress = resetAnimationElapsed * Mathf.Max(0f, resetScrollSpeed);
+            int frame = Mathf.FloorToInt(progress);
+            float height = resetNoise.rectTransform.rect.height;
+            float offset = (progress - frame) * height;
+            int count = resetNoiseFrames.Length - 1;
+            resetNoiseDots.sprite = resetNoiseFrames[1 + frame % count];
+            resetNoiseNextDots.sprite = resetNoiseFrames[1 + (frame + 1) % count];
+            resetNoiseDots.rectTransform.anchoredPosition = new Vector2(0f, offset);
+            resetNoiseNextDots.rectTransform.anchoredPosition = new Vector2(0f, offset - height);
+            resetNoiseOpacity.alpha = Mathf.SmoothStep(from, to, elapsed / duration);
+            resetAnimationElapsed += Time.unscaledDeltaTime;
+            yield return null;
+        }
+        resetNoiseOpacity.alpha = to;
+    }
+
+    void RestoreResetInput()
+    {
+        if (resetNoiseOpacity) resetNoiseOpacity.alpha = 0f;
+        if (resetNoise) resetNoise.gameObject.SetActive(false);
+        if (!resetInputLocked) return;
+        if (resetInputGroup) resetInputGroup.interactable = previousInteractable;
+        if (resetEventSystem) resetEventSystem.sendNavigationEvents = previousNavigation;
+        resetInputLocked = false;
+    }
+
+    void OnDisable()
+    {
+        StopAllCoroutines();
+        RestoreResetInput();
     }
 
     IEnumerator GlitchWords()
@@ -494,9 +577,7 @@ public sealed class Battle02RitualController : MonoBehaviour
     {
         state = RitualState.Transition;
         StopAllCoroutines();
-        inputResetRoutine = null;
         wordGlitchRoutine = null;
-        inputResetting = false;
         HideWordGlitches();
         maryGlitch.gameObject.SetActive(false);
         noiseSource.Stop();
@@ -542,9 +623,7 @@ public sealed class Battle02RitualController : MonoBehaviour
         if (state != RitualState.Running) return;
         state = RitualState.Failed;
         StopAllCoroutines();
-        inputResetRoutine = null;
         wordGlitchRoutine = null;
-        inputResetting = false;
         HideWordGlitches();
         maryGlitch.gameObject.SetActive(false);
         noiseSource.Stop();

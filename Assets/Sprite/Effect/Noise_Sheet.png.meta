@@ -1,0 +1,333 @@
+fileFormatVersion: 2
+guid: 3d1c73c81dc25c0469e16fc107491726
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6840028459548587203
+    second: Noise_Sheet_0
+  - first:
+      213: 4235971722442909597
+    second: Noise_Sheet_1
+  - first:
+      213: 7393185235862323595
+    second: Noise_Sheet_2
+  - first:
+      213: -6978188813566109897
+    second: Noise_Sheet_3
+  - first:
+      213: -2703051281963230689
+    second: Noise_Sheet_4
+  - first:
+      213: 7301870258902818366
+    second: Noise_Sheet_5
+  - first:
+      213: 7408892467597769856
+    second: Noise_Sheet_6
+  - first:
+      213: 9050726959885303680
+    second: Noise_Sheet_7
+  - first:
+      213: 3976951833292493515
+    second: Noise_Sheet_8
+  - first:
+      213: 1102265329798335627
+    second: Noise_Sheet_9
+  - first:
+      213: -5690904661967121270
+    second: Noise_Sheet_10
+  - first:
+      213: 5047126841897294748
+    second: Noise_Sheet_11
+  - first:
+      213: -5298363741242334184
+    second: Noise_Sheet_12
+  - first:
+      213: 3694524588429533451
+    second: Noise_Sheet_13
+  - first:
+      213: 3717492892054488368
+    second: Noise_Sheet_14
+  - first:
+      213: -1508251620637409916
+    second: Noise_Sheet_15
+  - first:
+      213: 6880404465888693259
+    second: Noise_Sheet_16
+  - first:
+      213: 1120760492711216993
+    second: Noise_Sheet_17
+  - first:
+      213: -5111831272234929603
+    second: Noise_Sheet_18
+  - first:
+      213: -6248426779748419464
+    second: Noise_Sheet_19
+  - first:
+      213: 6280174482063093812
+    second: Noise_Sheet_20
+  - first:
+      213: 7920486040750079985
+    second: Noise_Sheet_21
+  - first:
+      213: 8258785051404482701
+    second: Noise_Sheet_22
+  - first:
+      213: -1675426129168464602
+    second: Noise_Sheet_23
+  - first:
+      213: 8413804077681553506
+    second: Noise_Sheet_24
+  - first:
+      213: -8853307522173228077
+    second: Noise_Sheet_25
+  - first:
+      213: 295884880956083067
+    second: Noise_Sheet_26
+  - first:
+      213: 447757775657127236
+    second: Noise_Sheet_27
+  - first:
+      213: 7755371877618628429
+    second: Noise_Sheet_28
+  - first:
+      213: -2716354802782152104
+    second: Noise_Sheet_29
+  - first:
+      213: -9000993859535271090
+    second: Noise_Sheet_30
+  - first:
+      213: -8555955550376435538
+    second: Noise_Sheet_31
+  - first:
+      213: -5280666806963304410
+    second: Noise_Sheet_32
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Noise_Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1024
+        height: 800
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3b4b072b565311a0800000000000000
+      internalID: -6840028459548587203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Noise_Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 1024
+        height: 800
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d972fc2a6d139ca30800000000000000
+      internalID: 4235971722442909597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Noise_Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 1024
+        height: 800
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b818c3e1dced99660800000000000000
+      internalID: 7393185235862323595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Noise_Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 0
+        width: 1024
+        height: 800
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73799cffe3e782f90800000000000000
+      internalID: -6978188813566109897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Noise_Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 0
+        width: 1024
+        height: 800
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1adae03e25dc7ad0800000000000000
+      internalID: -2703051281963230689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: ae65aa11f80eda1488e71122bffa8c90
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":5.0,"y":1.0},"gridSpriteSize":{"x":1024.0,"y":800.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Noise_Sheet_0: -6840028459548587203
+      Noise_Sheet_1: 4235971722442909597
+      Noise_Sheet_2: 7393185235862323595
+      Noise_Sheet_3: -6978188813566109897
+      Noise_Sheet_4: -2703051281963230689
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
