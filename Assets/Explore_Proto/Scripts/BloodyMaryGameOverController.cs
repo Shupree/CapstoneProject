@@ -14,6 +14,8 @@ public sealed class BloodyMaryGameOverController : MonoBehaviour
     public GameObject overlayRoot, dimScreen, centeredAttack, blackout, signalLostScreen;
     public GameObject phaseTwoWarning;
     public GameObject[] hands;
+    [Tooltip("연결하면 기존 검은 배경·손바닥 대신 게임 화면 중앙에서 재생합니다.")]
+    public AsepriteGameOverAnimation handAnimation;
     public UnityEngine.UI.Button retryButton, exitButton;
     public AudioSource handsAudio, signalLostAudio;
     [Range(0f, 5f)] public float handsVolumeMultiplier = 1f;
@@ -31,10 +33,11 @@ public sealed class BloodyMaryGameOverController : MonoBehaviour
     {
         configured = phaseOne && phaseTwo && retrySequence && overlayRoot && dimScreen &&
             centeredAttack && blackout && signalLostScreen && phaseTwoWarning && retryButton && exitButton &&
-            handsAudio && handsAudio.clip && signalLostAudio && signalLostAudio.clip && handsAudio != signalLostAudio &&
+            signalLostAudio && signalLostAudio.clip &&
+            (handAnimation || (handsAudio && handsAudio.clip && handsAudio != signalLostAudio)) &&
             signalFadeSeconds > 0f && !float.IsInfinity(signalFadeSeconds) &&
-            hands != null && hands.Length == 12;
-        if (configured)
+            (handAnimation ? handAnimation.IsConfigured : hands != null && hands.Length == 12);
+        if (configured && !handAnimation)
         {
             var unique = new System.Collections.Generic.HashSet<GameObject>();
             foreach (var hand in hands)
@@ -42,7 +45,7 @@ public sealed class BloodyMaryGameOverController : MonoBehaviour
         }
         if (!configured)
         {
-            Debug.LogError("게임 오버 씬 참조, 효과음 또는 손 이미지 12개를 확인하세요.", this);
+            Debug.LogError("게임 오버 씬 참조, 효과음 또는 손 애니메이션/기존 손 이미지 참조를 확인하세요.", this);
             return;
         }
         HidePresentation();
@@ -78,7 +81,11 @@ public sealed class BloodyMaryGameOverController : MonoBehaviour
         retryButton.interactable = false;
         exitButton.interactable = false;
         if (phaseOne.imageScroll) phaseOne.imageScroll.StopMovement();
-        if (secondPhase)
+        if (handAnimation)
+        {
+            if (secondPhase) phaseTwo.StopForGameOver();
+        }
+        else if (secondPhase)
         {
             phaseTwo.StopForGameOver();
             phaseTwo.window.gameObject.SetActive(true);
@@ -96,24 +103,32 @@ public sealed class BloodyMaryGameOverController : MonoBehaviour
 
     IEnumerator PresentGameOver()
     {
-        yield return new WaitForSecondsRealtime(failureHoldSeconds);
-        blackout.SetActive(true); // Higher canvas order also covers every desktop window and button.
-        dimScreen.SetActive(false);
-        centeredAttack.SetActive(false);
-        phaseTwoWarning.SetActive(false);
-        State = GameOverState.Hands;
-        yield return new WaitForSecondsRealtime(handInterval);
-        double handsStarted = Time.unscaledTimeAsDouble;
-        for (int i = 0; i < hands.Length; i++)
+        if (handAnimation)
         {
-            // Use one timeline so frame rounding does not accumulate between the twelve images.
-            while (Time.unscaledTimeAsDouble < handsStarted + i * (double)handInterval) yield return null;
-            hands[i].SetActive(true); // Position, size, rotation and opacity remain as authored in the scene.
-            if (i == 0) handsAudio.PlayOneShot(handsAudio.clip, Mathf.Clamp(handsVolumeMultiplier, 0f, 5f));
+            State = GameOverState.Hands;
+            yield return handAnimation.PlayOnce();
         }
-        double redAt = handsStarted + (hands.Length - 1) * (double)handInterval + handsHoldSeconds;
-        while (Time.unscaledTimeAsDouble < redAt) yield return null;
-        handsAudio.Stop();
+        else
+        {
+            yield return new WaitForSecondsRealtime(failureHoldSeconds);
+            blackout.SetActive(true); // Higher canvas order also covers every desktop window and button.
+            dimScreen.SetActive(false);
+            centeredAttack.SetActive(false);
+            phaseTwoWarning.SetActive(false);
+            State = GameOverState.Hands;
+            yield return new WaitForSecondsRealtime(handInterval);
+            double handsStarted = Time.unscaledTimeAsDouble;
+            for (int i = 0; i < hands.Length; i++)
+            {
+                // Use one timeline so frame rounding does not accumulate between the twelve images.
+                while (Time.unscaledTimeAsDouble < handsStarted + i * (double)handInterval) yield return null;
+                hands[i].SetActive(true); // Position, size, rotation and opacity remain as authored in the scene.
+                if (i == 0) handsAudio.PlayOneShot(handsAudio.clip, Mathf.Clamp(handsVolumeMultiplier, 0f, 5f));
+            }
+            double redAt = handsStarted + (hands.Length - 1) * (double)handInterval + handsHoldSeconds;
+            while (Time.unscaledTimeAsDouble < redAt) yield return null;
+        }
+        if (handsAudio) handsAudio.Stop();
         signalLostScreen.SetActive(true);
         signalStartVolume = signalLostAudio.volume;
         signalVolumeCaptured = true;
@@ -174,11 +189,13 @@ public sealed class BloodyMaryGameOverController : MonoBehaviour
     {
         StopAllCoroutines();
         StopGameOverAudio();
+        if (handAnimation) handAnimation.gameObject.SetActive(false);
     }
 
     void HidePresentation()
     {
-        foreach (var hand in hands) hand.SetActive(false);
+        if (hands != null) foreach (var hand in hands) if (hand) hand.SetActive(false);
+        if (handAnimation) handAnimation.gameObject.SetActive(false);
         dimScreen.SetActive(false);
         centeredAttack.SetActive(false);
         blackout.SetActive(false);

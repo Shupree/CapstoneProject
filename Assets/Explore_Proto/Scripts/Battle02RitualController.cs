@@ -49,21 +49,12 @@ public sealed class Battle02RitualController : MonoBehaviour
     public Button[] selectedWordButtons;
     public Round[] rounds;
 
-    [Header("잘못된 통화 종료: 전체 화면 노이즈")]
-    public UnityEngine.UI.Image resetNoise;
-    public UnityEngine.UI.Image resetNoiseDots;
-    public UnityEngine.UI.Image resetNoiseNextDots;
-    public CanvasGroup resetNoiseOpacity;
-    [Range(0f, 1f)] public float resetMaxOpacity = 1f;
-    [Tooltip("초당 위로 이동하는 화면 높이 비율")]
-    [Min(0f)] public float resetScrollSpeed = .8f;
-    public Sprite[] resetNoiseFrames;
-    public CanvasGroup resetInputGroup;
-    [Min(.01f)] public float resetFadeInSeconds = .8f;
-    [Min(.01f)] public float resetFadeOutSeconds = .8f;
-    bool resetInputLocked, previousInteractable, previousNavigation;
-    UnityEngine.EventSystems.EventSystem resetEventSystem;
-    float resetAnimationElapsed;
+    [Header("잘못된 통화 종료: 창 파손 3단계")]
+    public UnityEngine.UI.Image brokenWindow;
+    public Sprite[] brokenWindowStages;
+    int wrongHangupCount;
+    public int WrongHangupCount => wrongHangupCount;
+    public bool HangupLocked => wrongHangupCount >= 3;
 
     [Header("글리치 스프라이트 (시트에서 분할한 5종)")]
     public Sprite[] maryGlitchFrames;
@@ -117,7 +108,7 @@ public sealed class Battle02RitualController : MonoBehaviour
         maryPosition = maryArtwork.rectTransform.anchoredPosition;
         hangupNormalPosition = ((RectTransform)hangupButton.transform).anchoredPosition;
         maryColor = maryArtwork.color;
-        resetNoise.gameObject.SetActive(false);
+        brokenWindow.gameObject.SetActive(false);
         darkMessengerWindow.SetActive(false);
         hangupButton.gameObject.SetActive(false);
         maryGlitch.gameObject.SetActive(false);
@@ -136,8 +127,8 @@ public sealed class Battle02RitualController : MonoBehaviour
 
     bool Configured()
     {
-        if (!resetNoise || !resetNoiseDots || !resetNoiseNextDots || !resetNoiseOpacity || !resetInputGroup || resetNoiseFrames == null || resetNoiseFrames.Length < 2 ||
-            Array.Exists(resetNoiseFrames, frame => !frame)) return false;
+        if (!brokenWindow || brokenWindowStages == null || brokenWindowStages.Length != 3 ||
+            Array.Exists(brokenWindowStages, sprite => !sprite)) return false;
         if (!normalMary || !knifeMary || !knifeMaryB || !knifeMaryC)
         {
             Debug.LogError("Battle02 메리 Sprite 참조 누락: Normal Mary / Knife Mary(A) / Knife Mary B / Knife Mary C를 확인하세요.", this);
@@ -189,11 +180,13 @@ public sealed class Battle02RitualController : MonoBehaviour
         hangupButton.interactable = false;
     }
 
-    void ResetGameplay(bool duringNoise = false)
+    void ResetGameplay()
     {
-        if (!duringNoise) StopAllCoroutines();
+        StopAllCoroutines();
+        wrongHangupCount = 0;
+        brokenWindow.gameObject.SetActive(false);
         wordGlitchRoutine = null;
-        state = duringNoise ? RitualState.Transition : RitualState.Running;
+        state = RitualState.Running;
         roundIndex = 0;
         selected.Clear();
         foreach (var round in rounds)
@@ -216,7 +209,7 @@ public sealed class Battle02RitualController : MonoBehaviour
         callWindow.gameObject.SetActive(true);
         introRoot.SetActive(true);
         hangupButton.gameObject.SetActive(true);
-        hangupButton.interactable = !duringNoise;
+        hangupButton.interactable = true;
         ((RectTransform)hangupButton.transform).anchoredPosition = hangupNormalPosition;
         nextHangupAt = 0;
         RefreshSelection();
@@ -330,7 +323,7 @@ public sealed class Battle02RitualController : MonoBehaviour
     /// <summary>메신저 창은 통화 화면 앞에 열고, 닫아도 현재 선택 단어를 유지한다.</summary>
     public void ToggleDarkMessenger()
     {
-        if (state != RitualState.Running || gameOver.IsBlocking) return;
+        if (state != RitualState.Running || gameOver.IsBlocking || HangupLocked) return;
         if (darkMessengerWindow.activeSelf) { CloseDarkMessenger(); return; }
         foreach (var round in rounds) round.root.SetActive(false);
         rounds[roundIndex].root.SetActive(true);
@@ -352,7 +345,7 @@ public sealed class Battle02RitualController : MonoBehaviour
 
     public void SelectWord(Battle02WordSource source)
     {
-        if (state != RitualState.Running || !darkMessengerWindow.activeSelf ||
+        if (state != RitualState.Running || HangupLocked || !darkMessengerWindow.activeSelf ||
             selected.Count >= Answer.Length ||
             !source || source.IsConsumed ||
             Array.IndexOf(rounds[roundIndex].words, source) < 0) return;
@@ -404,7 +397,7 @@ public sealed class Battle02RitualController : MonoBehaviour
 
     void HangUp()
     {
-        if (state != RitualState.Running || gameOver.IsBlocking) return;
+        if (state != RitualState.Running || gameOver.IsBlocking || HangupLocked) return;
         double now = Time.unscaledTimeAsDouble;
         if (knifeVisible && now >= knifeDeadline)
         {
@@ -414,99 +407,37 @@ public sealed class Battle02RitualController : MonoBehaviour
         if (now < nextHangupAt) return;
         nextHangupAt = now + hangupCooldownSeconds;
         hangupButton.interactable = false;
-        StartCoroutine(ReenableHangup());
         if (knifeVisible)
         {
             knifeVisible = false;
             maryArtwork.sprite = normalMary;
             ScheduleKnife();
-            return;
         }
-        StopAllCoroutines();
-        wordGlitchRoutine = null;
-        state = RitualState.Transition;
-        StartCoroutine(ResetBattleWithNoise());
+        else
+        {
+            wrongHangupCount++;
+            brokenWindow.sprite = brokenWindowStages[wrongHangupCount - 1];
+            brokenWindow.gameObject.SetActive(true);
+            if (HangupLocked)
+            {
+                // Keep the attack clock running; ritual completion cannot bypass the final penalty.
+                CloseDarkMessenger();
+                roundWordsGroup.interactable = false;
+                return;
+            }
+        }
+        StartCoroutine(ReenableHangup());
     }
 
     IEnumerator ReenableHangup()
     {
         yield return new WaitForSecondsRealtime(hangupCooldownSeconds);
-        if (state == RitualState.Running) hangupButton.interactable = true;
-    }
-
-    IEnumerator ResetBattleWithNoise()
-    {
-        previousInteractable = resetInputGroup.interactable;
-        resetInputGroup.interactable = false;
-        resetEventSystem = UnityEngine.EventSystems.EventSystem.current;
-        if (resetEventSystem)
-        {
-            previousNavigation = resetEventSystem.sendNavigationEvents;
-            resetEventSystem.SetSelectedGameObject(null);
-            resetEventSystem.sendNavigationEvents = false;
-        }
-        resetInputLocked = true;
-        HideWordGlitches();
-        maryGlitch.gameObject.SetActive(false);
-        inputGlitch.gameObject.SetActive(false);
-        maryArtwork.rectTransform.anchoredPosition = maryPosition;
-        maryArtwork.color = maryColor;
-        resetNoiseOpacity.alpha = 0f;
-        resetAnimationElapsed = 0f;
-        resetNoise.sprite = resetNoiseFrames[0];
-        resetNoiseDots.rectTransform.anchoredPosition = Vector2.zero;
-        resetNoise.gameObject.SetActive(true);
-        PlayNoise(resetFadeInSeconds + resetFadeOutSeconds);
-        float peak = Mathf.Clamp01(resetMaxOpacity);
-        yield return FadeResetNoise(0f, peak, resetFadeInSeconds);
-        ResetGameplay(true);
-        PlayNoise(resetFadeOutSeconds);
-        yield return FadeResetNoise(peak, 0f, resetFadeOutSeconds);
-        RestoreResetInput();
-        noiseSource.Stop();
-        state = RitualState.Running;
-        hangupButton.interactable = true;
-        nextKnifeAt = Time.unscaledTimeAsDouble + 1d;
-        nextCallGlitchAt = Time.unscaledTimeAsDouble + callGlitchInterval;
-        ScheduleWordGlitch();
-    }
-
-    IEnumerator FadeResetNoise(float from, float to, float seconds)
-    {
-        float duration = Mathf.Max(.01f, seconds);
-        for (float elapsed = 0f; elapsed < duration; elapsed += Time.unscaledDeltaTime)
-        {
-            // Two adjacent panels scroll upward. Only replace a panel after it leaves the screen.
-            float progress = resetAnimationElapsed * Mathf.Max(0f, resetScrollSpeed);
-            int frame = Mathf.FloorToInt(progress);
-            float height = resetNoise.rectTransform.rect.height;
-            float offset = (progress - frame) * height;
-            int count = resetNoiseFrames.Length - 1;
-            resetNoiseDots.sprite = resetNoiseFrames[1 + frame % count];
-            resetNoiseNextDots.sprite = resetNoiseFrames[1 + (frame + 1) % count];
-            resetNoiseDots.rectTransform.anchoredPosition = new Vector2(0f, offset);
-            resetNoiseNextDots.rectTransform.anchoredPosition = new Vector2(0f, offset - height);
-            resetNoiseOpacity.alpha = Mathf.SmoothStep(from, to, elapsed / duration);
-            resetAnimationElapsed += Time.unscaledDeltaTime;
-            yield return null;
-        }
-        resetNoiseOpacity.alpha = to;
-    }
-
-    void RestoreResetInput()
-    {
-        if (resetNoiseOpacity) resetNoiseOpacity.alpha = 0f;
-        if (resetNoise) resetNoise.gameObject.SetActive(false);
-        if (!resetInputLocked) return;
-        if (resetInputGroup) resetInputGroup.interactable = previousInteractable;
-        if (resetEventSystem) resetEventSystem.sendNavigationEvents = previousNavigation;
-        resetInputLocked = false;
+        if (state == RitualState.Running && !HangupLocked) hangupButton.interactable = true;
     }
 
     void OnDisable()
     {
         StopAllCoroutines();
-        RestoreResetInput();
     }
 
     IEnumerator GlitchWords()
@@ -605,6 +536,7 @@ public sealed class Battle02RitualController : MonoBehaviour
         if (roundIndex == rounds.Length - 1)
         {
             state = RitualState.Completed;
+            brokenWindow.gameObject.SetActive(false);
             hangupButton.gameObject.SetActive(false);
             retrySequence.StopBattleMusic();
             if (!completionBridge.CompleteFromExternal())

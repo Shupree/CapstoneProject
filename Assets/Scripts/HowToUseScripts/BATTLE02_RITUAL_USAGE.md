@@ -4,7 +4,7 @@
 
 ## 씬 구성
 
-- `BattleCallWindow/Battle02HangupButton`: 첫 조우부터 스프라이트 아래에 표시되며, 기믹 시작 전에는 누를 수 없다. 칼을 든 메리가 보일 때 누르면 모습과 4초 제한시간을 초기화한다. 평소에 누르면 전체 화면 노이즈와 `Noise` 효과음이 나오며 기믹 회차와 모든 선택·소비 단어가 1회차 시작 상태로 초기화된다. 노이즈가 걷히기 전까지 입력과 공격 타이머가 멈춘다. 클릭 후 0.5초 동안 다시 누를 수 없다. 메신저가 열리면 창 아래의 접근 가능한 자리로 이동하고 닫히면 원래 위치로 돌아온다.
+- `BattleCallWindow/Battle02HangupButton`: 첫 조우부터 스프라이트 아래에 표시되며, 기믹 시작 전에는 누를 수 없다. 칼을 든 메리가 보일 때 누르면 모습과 4초 제한시간을 초기화한다. 칼을 들지 않았을 때 누르면 통화창 균열이 1→2→3단계로 진행한다. 오입력은 회차를 넘어 누적되며 회차·선택 단어는 초기화하지 않는다. 3회째에는 통화 종료와 문구 선택이 잠기고 메신저가 닫히며, 다음 메리 공격을 막을 수 없어 게임오버로 이어진다. 재시도하면 횟수와 균열이 초기화된다. 오입력 노이즈 화면과 효과음은 사용하지 않는다. 클릭 후 0.5초 동안 다시 누를 수 없다. 메신저가 열리면 창 아래의 접근 가능한 자리로 이동하고 닫히면 원래 위치로 돌아온다.
 - `Battle02DarkMessenger`: 하단 `Button_Messenger`나 창의 X로 열고 닫는다. 닫았다 다시 열어도 선택한 단어는 남는다.
 - `RoundWordsGroup/Round_1`~`Round_5`: 각 회차의 고정 문구와 클릭 가능한 단어 오브젝트다. `FakePhrase_*`는 눌러도 아무 일도 일어나지 않는 문구다. 4·5회에는 각각 `TextBabyImage`, `TextFaceImage`를 사용하며, 선택 문구와 페이크 문구에는 이미지와 같은 색의 불투명한 배경을 둔다. 이미지 안에 없는 정답 단어는 그 위에 배치된 붉은 텍스트 버튼으로 선택한다.
 - `SelectedWords`: 고른 단어 네 개를 순서대로 보여준다. 잘못 고른 단어는 붉은색이며, 누르면 제거할 수 있다.
@@ -15,7 +15,7 @@
 
 ## 글리치 이미지
 
-`Mary Glitch Frames`는 `Assets/Sprite/Effect/Glitch_Sheet.png`의 5종, `Word Glitch Frames`는 `Glitch_R_Sheet.png`의 5종을 사용한다. 효과가 발생할 때 순서를 섞고 `Glitch Frame Seconds`(기본 0.06초)마다 교대한다. 동시에 나타나는 문구 글리치는 서로 다른 프레임부터 시작한다. 기존 RawImage가 각 Sprite의 분할 영역을 표시하므로 이 두 시트는 Sprite Atlas에 넣지 않고 사용한다. 문구 선택 제한과 회차별 발생 빈도, 메리의 5초 주기·1초 지속시간은 그대로 유지한다. 평상시 통화 종료는 `ExploreProtoCanvas/Battle02ResetNoise`에 저장된 전체 화면 Image와 `Noise_Sheet.png`의 5개 프레임을 사용한다. `Reset Fade In Seconds`와 `Reset Fade Out Seconds`는 각각 기본 0.8초, 점 노이즈는 `MovingNoiseDots`와 `NextNoiseDots` 두 패널을 세로로 붙여 아래에서 위로 이동한다. 시트 _0은 고정 가로줄 배경이며 _1~_4는 화면 밖으로 나간 패널을 교체할 때 순서대로 사용한다. 좌우 흔들림과 화면 안에서의 즉시 이미지 교체는 없다. `Reset Scroll Speed`는 초당 화면 높이 이동 비율이며 기본 0.8이다. 두 Image의 회색 Tint는 RGB 0.55, 배경 Alpha는 1, 점 Alpha는 0.5다. `Reset Noise Opacity` CanvasGroup은 0 → `Reset Max Opacity`(기본 1) → 0으로 변하고, 가장 짙어져 게임 화면을 완전히 덮을 때 진척을 초기화한다. 창은 닫힌 상태로 복귀하며 메신저 버튼으로 1회차를 다시 열 수 있다. 탐색 단서와 도입 대화는 초기화하지 않는다. 화면이 걷힌 뒤 첫 칼 공격은 1초 후 시작한다. 노이즈 UI는 씬에서 편집하고, 컨트롤러의 Reset Noise / Reset Noise Dots / Reset Noise Next Dots / Reset Noise Opacity / Reset Noise Frames / Reset Input Group 참조를 유지한다.
+`Mary Glitch Frames`는 `Assets/Sprite/Effect/Glitch_Sheet.png`의 5종, `Word Glitch Frames`는 `Glitch_R_Sheet.png`의 5종을 사용한다. 효과가 발생할 때 순서를 섞고 `Glitch Frame Seconds`(기본 0.06초)마다 교대한다. 동시에 나타나는 문구 글리치는 서로 다른 프레임부터 시작한다. 기존 RawImage가 각 Sprite의 분할 영역을 표시하므로 이 두 시트는 Sprite Atlas에 넣지 않고 사용한다. 문구 선택 제한과 회차별 발생 빈도, 메리의 5초 주기·1초 지속시간은 그대로 유지한다. 통화 종료 오입력은 아래 창 파손 설정을 사용한다.
 
 문구 글리치는 Sprite의 투명 여백을 제외한 영역을 표시한다. `Word Glitch Size Multiplier`의 X/Y로 문구 대비 가로·세로 배율(기본 1.15/1.2)을, `Word Glitch Padding`으로 추가 크기(기본 24/12)를 조절한다. 크기는 `문구 RectTransform 크기 × 배율 + 추가 크기`다. 영구 적용하려면 Play를 종료하고 Inspector에서 값을 편집한 뒤 씬을 저장한다. 메리 글리치의 크기는 이 설정에 영향을 받지 않는다.
 
@@ -23,3 +23,15 @@
 Battle02_Proto의 ExploreProtoMessenger 오브젝트 > Battle02RitualController에서 모습 A/B/C 표시 시간(초)을 조절한다. 기본값은 1.6 / 1.2 / 1.2초이며 합계 4초가 게임오버 제한 시간이다. 공격 시작 때 세 시간을 확정하므로 Play 중 변경한 값은 다음 공격부터 적용된다. Normal Mary는 시트 _0, Knife Mary는 _1(A), Knife Mary B는 _2(B), Knife Mary C는 _3(C)에 연결한다. 통화 종료로 공격을 막거나 회차가 끝나면 평상시로 복귀하며 다음 공격은 A부터 시작한다.
 
 메리 Artwork는 씬에서 편집한 RectTransform 크기와 배치를 그대로 사용하고 Sprite만 교체한다. 첫 공격은 기믹 시작 1초 뒤에 등장하며, 이후에는 기존 무작위 등장 간격을 사용한다. 게임오버 재시도 시에도 첫 공격은 1초 뒤에 등장한다.
+
+## 게임오버 손 애니메이션
+
+`Battle02_Proto`는 게임오버 즉시 현재 게임 화면 전체에 맞춰 `Assets/Animation/Hand_Animation.aseprite`를 한 번 재생하고, 클립 종료 시 SignalLost 화면과 재시도 버튼을 표시한다. 재생 중 게임 입력을 차단하며 기존 손바닥 효과음은 재생하지 않는다. SignalLost 전환 시에는 해당 화면의 효과음을 재생한다. 기존 검은 배경·12개 손바닥 연출은 이 씬에서 사용하지 않는다.
+
+`BattleGameOverCanvas/HandAnimation`은 화면 전체 Stretch, 여백 0, Scale (1, 1, 1)로 설정한다. 원본 캔버스 전체를 이 영역의 가로·세로에 각각 맞춰 표시하므로 화면 비율이 달라도 원본 가장자리를 자르지 않는다. 표시 영역을 조절하려면 부모 HandAnimation의 RectTransform 여백·Scale을 편집한다. 자식 `Artwork`의 크기·위치는 매 프레임 갱신된다. `Source Canvas Size`는 원본 Aseprite 캔버스 크기이며 현재 512×300이다. Aseprite에서 캔버스 크기 자체를 변경하면 이 값도 맞춘다. 프레임 그림이나 재생 시간만 바꿀 때는 수정할 필요 없다.
+
+`HandAnimation`의 Animator는 스프라이트 애니메이션 적용에 필요하므로 유지한다. `AsepriteGameOverAnimation`은 Aseprite Importer가 만든 `Hand_Animation_Clip`을 직접 참조한다. 같은 원본 파일을 Aseprite에서 편집·저장하고 Unity 임포트가 끝나면 프레임·빈 프레임·타이밍과 SignalLost 전환 시점에 반영된다. 별도 PNG 추출이나 고정 시간 수정은 필요 없다. Importer의 레이어 병합과 Pivot Space=Canvas, Pivot Alignment=Center 설정을 유지한다. 애니메이션 태그를 추가하거나 클립 이름을 바꿔 클립 구성을 변경하면 `Clip` 참조도 확인한다. 기존 `Battle_Proto`는 이전 연출을 유지한다.
+
+## 통화창 파손
+
+BattleCallWindow/BrokenCallWindow는 통화창 내부에 여백 40으로 늘려 배치한 Image다. RectTransform 여백으로 균열 영역을 조정하며 Raycast Target은 끈다. Broken Window Stages에는 Broken_Window_Sheet.png의 _0, _1, _2를 순서대로 연결한다. 회차 완료나 정상 방어로 균열은 회복되지 않으며 재시도 시 초기화된다. 3회째 오입력 후에도 메리 공격 시간은 계속 흐르며, 문장 완성으로 게임오버를 회피할 수 없다.
