@@ -16,7 +16,7 @@ public sealed class Battle02RitualController : MonoBehaviour
         public RectTransform[] glitchTargets;
     }
 
-    static readonly string[] Answer = { "네", "아기는", "죽지", "않았어" };
+    static readonly string[] Answer = { "네", "아", "기", "는", "죽", "지", "않", "았", "어" };
     static readonly Color CorrectColor = Color.white;
     static readonly Color WrongColor = new(1f, .22f, .24f, 1f);
 
@@ -48,6 +48,18 @@ public sealed class Battle02RitualController : MonoBehaviour
     public TMP_Text[] selectedWordLabels;
     public Button[] selectedWordButtons;
     public Round[] rounds;
+    [Header("음절 이동")]
+    [Min(.01f)] public float syllableMoveSeconds = .3f;
+    [Min(0f)] public float syllableMoveArc = 40f;
+    readonly bool[] flying = new bool[Answer.Length];
+    readonly Vector3[] slotPositions = new Vector3[Answer.Length];
+    readonly Vector3[] flightStarts = new Vector3[Answer.Length];
+    readonly float[] slotFontSizes = new float[Answer.Length];
+    readonly float[] flightFontSizes = new float[Answer.Length];
+    readonly Color[] flightColors = new Color[Answer.Length];
+    readonly float[] flightElapsed = new float[Answer.Length];
+    bool selectionLayoutCaptured;
+    bool HasFlyingSyllables => Array.Exists(flying, value => value);
 
     [Header("잘못된 통화 종료: 창 파손 3단계")]
     public UnityEngine.UI.Image brokenWindow;
@@ -120,9 +132,12 @@ public sealed class Battle02RitualController : MonoBehaviour
         darkMessengerCloseButton.onClick.AddListener(CloseDarkMessenger);
         for (int i = 0; i < selectedWordButtons.Length; i++)
         {
+            slotPositions[i] = selectedWordLabels[i].rectTransform.localPosition;
+            slotFontSizes[i] = selectedWordLabels[i].fontSize;
             int index = i;
             selectedWordButtons[i].onClick.AddListener(() => RemoveSelectedWord(index));
         }
+        selectionLayoutCaptured = true;
     }
 
     bool Configured()
@@ -154,7 +169,8 @@ public sealed class Battle02RitualController : MonoBehaviour
             if (round == null || !round.root || round.words == null || round.words.Length < Answer.Length ||
                 round.glitchTargets == null || round.glitchTargets.Length < 4) return false;
             foreach (var word in round.words)
-                if (!word || word.controller != this || !word.label || !word.button || string.IsNullOrEmpty(word.word)) return false;
+                if (!word || word.controller != this || !word.label || !word.button ||
+                    string.IsNullOrEmpty(word.word) || word.word.Length != 1) return false;
             foreach (var target in round.glitchTargets) if (!target) return false;
             foreach (string answer in Answer)
                 if (!Array.Exists(round.words, word => word.word == answer)) return false;
@@ -183,6 +199,7 @@ public sealed class Battle02RitualController : MonoBehaviour
     void ResetGameplay()
     {
         StopAllCoroutines();
+        CancelFlyingSyllables();
         wrongHangupCount = 0;
         brokenWindow.gameObject.SetActive(false);
         wordGlitchRoutine = null;
@@ -240,6 +257,8 @@ public sealed class Battle02RitualController : MonoBehaviour
         }
         if (knifeVisible)
             maryArtwork.sprite = now >= knifeCAt ? knifeMaryC : now >= knifeBAt ? knifeMaryB : knifeMary;
+        UpdateSyllableFlights();
+        if (state != RitualState.Running) return;
         if (now >= nextCallGlitchAt)
         {
             nextCallGlitchAt = now + callGlitchInterval;
@@ -335,6 +354,7 @@ public sealed class Battle02RitualController : MonoBehaviour
 
     public void CloseDarkMessenger()
     {
+        CancelFlyingSyllables();
         darkMessengerWindow.SetActive(false);
         if (wordGlitchRoutine != null) StopCoroutine(wordGlitchRoutine);
         wordGlitchRoutine = null;
@@ -355,15 +375,25 @@ public sealed class Battle02RitualController : MonoBehaviour
             gameOver.FailBattle02();
             return;
         }
+        int slot = selected.Count;
+        var label = selectedWordLabels[slot];
+        flightStarts[slot] = label.transform.parent.InverseTransformPoint(source.label.transform.position);
+        flightFontSizes[slot] = source.label.fontSize;
+        flightColors[slot] = source.label.color;
+        flightElapsed[slot] = 0f;
+        flying[slot] = true;
         source.SetConsumed(true);
         selected.Add(source);
         RefreshSelection();
-        if (selected.Count == Answer.Length && MatchesAnswer()) CompleteRound();
+        label.rectTransform.localPosition = flightStarts[slot];
+        label.fontSize = flightFontSizes[slot];
+        label.color = flightColors[slot];
     }
 
     void RemoveSelectedWord(int index)
     {
-        if (state != RitualState.Running || index < 0 || index >= selected.Count) return;
+        if (state != RitualState.Running || HangupLocked || HasFlyingSyllables ||
+            index < 0 || index >= selected.Count) return;
         selected[index].SetConsumed(false);
         selected.RemoveAt(index);
         RefreshSelection();
@@ -383,9 +413,53 @@ public sealed class Battle02RitualController : MonoBehaviour
         {
             bool filled = i < selected.Count;
             selectedWordLabels[i].text = filled ? selected[i].word : string.Empty;
-            selectedWordLabels[i].color = filled && selected[i].word != Answer[i] ? WrongColor : CorrectColor;
-            selectedWordButtons[i].interactable = filled;
+            if (!flying[i])
+                selectedWordLabels[i].color = filled && selected[i].word != Answer[i] ? WrongColor : CorrectColor;
+            selectedWordButtons[i].interactable = filled && !HasFlyingSyllables && !HangupLocked;
+            selectedWordLabels[i].raycastTarget = selectedWordButtons[i].interactable;
         }
+    }
+
+    void UpdateSyllableFlights()
+    {
+        if (!HasFlyingSyllables) return;
+        for (int i = 0; i < selected.Count; i++)
+        {
+            if (!flying[i]) continue;
+            flightElapsed[i] += Time.unscaledDeltaTime;
+            float t = Mathf.Clamp01(flightElapsed[i] / Mathf.Max(.01f, syllableMoveSeconds));
+            float eased = Mathf.SmoothStep(0f, 1f, t);
+            var label = selectedWordLabels[i];
+            label.rectTransform.localPosition = Vector3.Lerp(flightStarts[i], slotPositions[i], eased)
+                + Vector3.up * (Mathf.Sin(t * Mathf.PI) * syllableMoveArc);
+            label.fontSize = Mathf.Lerp(flightFontSizes[i], slotFontSizes[i], eased);
+            label.color = Color.Lerp(flightColors[i], selected[i].word == Answer[i] ? CorrectColor : WrongColor, eased);
+            if (t < 1f) continue;
+            flying[i] = false;
+            label.rectTransform.localPosition = slotPositions[i];
+        }
+        RefreshSelection();
+        if (!HasFlyingSyllables && !HangupLocked && selected.Count == Answer.Length && MatchesAnswer())
+            CompleteRound();
+    }
+
+    void CancelFlyingSyllables()
+    {
+        if (!selectionLayoutCaptured) return;
+        // Remove in reverse order so simultaneous arrivals retain their selection order.
+        for (int i = selected.Count - 1; i >= 0; i--)
+        {
+            if (!flying[i]) continue;
+            selected[i].SetConsumed(false);
+            selected.RemoveAt(i);
+        }
+        for (int i = 0; i < flying.Length; i++)
+        {
+            flying[i] = false;
+            selectedWordLabels[i].rectTransform.localPosition = slotPositions[i];
+            selectedWordLabels[i].fontSize = slotFontSizes[i];
+        }
+        RefreshSelection();
     }
 
     void ClearSelection()
@@ -438,6 +512,7 @@ public sealed class Battle02RitualController : MonoBehaviour
     void OnDisable()
     {
         StopAllCoroutines();
+        CancelFlyingSyllables();
     }
 
     IEnumerator GlitchWords()

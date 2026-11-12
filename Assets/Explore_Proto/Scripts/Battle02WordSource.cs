@@ -2,12 +2,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>씬에 배치한 붉은 단어 한 개의 클릭과 소모 상태를 관리한다.</summary>
+/// <summary>씬에 배치한 붉은 음절 한 개의 클릭과 소모 상태를 관리한다.</summary>
 public sealed class Battle02WordSource : MonoBehaviour
 {
     public Battle02RitualController controller;
     public TMP_Text label;
     public Button button;
+    [Tooltip("클릭으로 선택할 한 음절")]
     public string word;
 
     public bool IsConsumed { get; private set; }
