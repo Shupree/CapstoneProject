@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>Battle02_Proto 전용 통화 위협과 다섯 차례의 단어 수집을 진행한다. UI는 씬에 저장한다.</summary>
+/// <summary>Battle02_Proto 전용 통화 위협과 세 차례의 음절 수집을 진행한다. UI는 씬에 저장한다.</summary>
 public sealed class Battle02RitualController : MonoBehaviour
 {
     [Serializable]
@@ -16,7 +16,7 @@ public sealed class Battle02RitualController : MonoBehaviour
         public RectTransform[] glitchTargets;
     }
 
-    static readonly string[] Answer = { "네", "아", "기", "는", "죽", "지", "않", "았", "어" };
+    static readonly string[] Answer = { "네", "아", "이", "가", "기", "다", "리", "고", "있", "어" };
     static readonly Color CorrectColor = Color.white;
     static readonly Color WrongColor = new(1f, .22f, .24f, 1f);
 
@@ -36,6 +36,9 @@ public sealed class Battle02RitualController : MonoBehaviour
     public RawImage maryGlitch;
     public AudioSource noiseSource;
     public AudioClip noiseClip;
+    [Header("기믹 효과음")]
+    public AudioSource interactionAudio;
+    public AudioClip glassBreakClip, syllableClickClip;
 
     [Header("씬에 저장된 조작 UI")]
     public Button hangupButton;
@@ -86,7 +89,6 @@ public sealed class Battle02RitualController : MonoBehaviour
     [Min(.1f)] public float wordGlitchMaxSeconds = 4f;
     [Min(.1f)] public float wordGlitchSeconds = .5f;
     [Min(0f)] public float hangupCooldownSeconds = .5f;
-    public Vector2 hangupMessengerPosition = new(0f, -700f);
     [Min(.1f)] public float painSeconds = .85f;
 
     enum RitualState { Idle, Running, Transition, Failed, Completed }
@@ -160,7 +162,7 @@ public sealed class Battle02RitualController : MonoBehaviour
             extraWordGlitches == null || extraWordGlitches.Length != 4 ||
             selectedWordLabels == null || selectedWordLabels.Length != Answer.Length ||
             selectedWordButtons == null || selectedWordButtons.Length != Answer.Length ||
-            rounds == null || rounds.Length != 5) return false;
+            rounds == null || rounds.Length != 3 || !interactionAudio || !glassBreakClip || !syllableClickClip) return false;
         for (int i = 0; i < Answer.Length; i++)
             if (!selectedWordLabels[i] || !selectedWordButtons[i]) return false;
         foreach (var glitch in extraWordGlitches) if (!glitch) return false;
@@ -348,7 +350,7 @@ public sealed class Battle02RitualController : MonoBehaviour
         rounds[roundIndex].root.SetActive(true);
         darkMessengerWindow.SetActive(true);
         darkMessengerWindow.transform.SetAsLastSibling();
-        ((RectTransform)hangupButton.transform).anchoredPosition = hangupMessengerPosition;
+        ((RectTransform)hangupButton.transform).anchoredPosition = hangupNormalPosition;
         ScheduleWordGlitch();
     }
 
@@ -383,6 +385,7 @@ public sealed class Battle02RitualController : MonoBehaviour
         flightElapsed[slot] = 0f;
         flying[slot] = true;
         source.SetConsumed(true);
+        interactionAudio.PlayOneShot(syllableClickClip);
         selected.Add(source);
         RefreshSelection();
         label.rectTransform.localPosition = flightStarts[slot];
@@ -490,6 +493,7 @@ public sealed class Battle02RitualController : MonoBehaviour
         else
         {
             wrongHangupCount++;
+            interactionAudio.PlayOneShot(glassBreakClip);
             brokenWindow.sprite = brokenWindowStages[wrongHangupCount - 1];
             brokenWindow.gameObject.SetActive(true);
             if (HangupLocked)
