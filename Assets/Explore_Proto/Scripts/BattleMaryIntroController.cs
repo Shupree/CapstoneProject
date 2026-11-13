@@ -25,6 +25,8 @@ public sealed class BattleMaryIntroController : MonoBehaviour
     public AudioSource ambienceSource;
     public AudioClip ambienceClip;
     public AudioClip bellClip;
+    [Tooltip("Battle02에서 메리 카메라가 켜지는 순간 한 번 재생하는 효과음")]
+    public AudioClip battle02CameraNoiseClip;
     public AudioClip appearanceClip;
     public AudioClip maryVoiceClip;
     public AudioClip babyCryClip;
@@ -170,12 +172,17 @@ public sealed class BattleMaryIntroController : MonoBehaviour
         blackoutRoot.transform.SetAsLastSibling();
         if (battle02)
         {
-            // Battle02 skips the Number Station ambience and its staged reveal/wait section.
+            // Keep the bell and camera reveal, but skip the Number Station waiting section.
             screenInterference.Clear();
             ambienceSource.Stop();
             retrySequence.effectsAudio.Stop();
-            maryArtwork.enabled = true;
             blackoutRoot.SetActive(false);
+            PlayEffect(bellClip, .65f);
+            yield return Wait(heroineSeconds);
+            maryArtwork.enabled = true;
+            PlayEffect(battle02CameraNoiseClip, .7f);
+            FlashPhoto(maryArtwork);
+            while (photoFlashes.Count > 0) yield return null;
             if (!battle02.BeginAfterIntro())
                 Debug.LogError("메리 등장 후 Battle02 기믹을 시작하지 못했습니다.", this);
             yield break;

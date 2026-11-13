@@ -29,7 +29,12 @@ public sealed class Battle02RitualController : MonoBehaviour
     public Image maryArtwork;
     public Sprite normalMary, knifeMary;
     public Sprite knifeMaryB, knifeMaryC;
-    [Header("칼 든 메리 단계별 표시 시간 (합계가 게임오버 제한 시간)")]
+    public Sprite attackSuccessMary, hurtMary;
+    [Header("메리 이미지 전환")]
+    [InspectorName("이미지 전환 암전 시간 (초)"), Min(0f)] public float maryBlackoutSeconds = .5f;
+    Coroutine maryTransition;
+    Sprite requestedMary;
+    [Header("칼 든 메리 단계별 표시 시간 (암전 시간은 별도 추가)")]
     [InspectorName("모습 A 표시 시간 (초)"), Min(.01f)] public float knifeASeconds = 1.6f;
     [InspectorName("모습 B 표시 시간 (초)"), Min(.01f)] public float knifeBSeconds = 1.2f;
     [InspectorName("모습 C 표시 시간 (초)"), Min(.01f)] public float knifeCSeconds = 1.2f;
@@ -52,7 +57,7 @@ public sealed class Battle02RitualController : MonoBehaviour
     public Button[] selectedWordButtons;
     public Round[] rounds;
     [Header("음절 이동")]
-    [Min(.01f)] public float syllableMoveSeconds = .3f;
+    [Min(.01f)] public float syllableMoveSeconds = .2f;
     [Min(0f)] public float syllableMoveArc = 40f;
     readonly bool[] flying = new bool[Answer.Length];
     readonly Vector3[] slotPositions = new Vector3[Answer.Length];
@@ -84,7 +89,7 @@ public sealed class Battle02RitualController : MonoBehaviour
     [Min(.1f)] public float callGlitchSeconds = 1f;
     [Min(.1f)] public float firstKnifeMinSeconds = 8f;
     [Min(.1f)] public float firstKnifeMaxSeconds = 14f;
-    public float knifeFailureSeconds => knifeASeconds + knifeBSeconds + knifeCSeconds;
+    public float knifeFailureSeconds => knifeASeconds + knifeBSeconds + knifeCSeconds + 3f * Mathf.Max(0f, maryBlackoutSeconds);
     [Min(.1f)] public float wordGlitchMinSeconds = 3f;
     [Min(.1f)] public float wordGlitchMaxSeconds = 4f;
     [Min(.1f)] public float wordGlitchSeconds = .5f;
@@ -146,9 +151,9 @@ public sealed class Battle02RitualController : MonoBehaviour
     {
         if (!brokenWindow || brokenWindowStages == null || brokenWindowStages.Length != 3 ||
             Array.Exists(brokenWindowStages, sprite => !sprite)) return false;
-        if (!normalMary || !knifeMary || !knifeMaryB || !knifeMaryC)
+        if (!normalMary || !knifeMary || !knifeMaryB || !knifeMaryC || !attackSuccessMary || !hurtMary)
         {
-            Debug.LogError("Battle02 메리 Sprite 참조 누락: Normal Mary / Knife Mary(A) / Knife Mary B / Knife Mary C를 확인하세요.", this);
+            Debug.LogError("Battle02 메리 Sprite 참조 누락: Normal Mary / Knife Mary(A) / Knife Mary B / Knife Mary C / Attack Success Mary / Hurt Mary를 확인하세요.", this);
             return false;
         }
         if (!knifeMaryB || !knifeMaryC ||
@@ -201,6 +206,8 @@ public sealed class Battle02RitualController : MonoBehaviour
     void ResetGameplay()
     {
         StopAllCoroutines();
+        maryTransition = null;
+        requestedMary = normalMary;
         CancelFlyingSyllables();
         wrongHangupCount = 0;
         brokenWindow.gameObject.SetActive(false);
@@ -251,14 +258,15 @@ public sealed class Battle02RitualController : MonoBehaviour
         if (!knifeVisible && now >= nextKnifeAt)
         {
             knifeVisible = true;
-            maryArtwork.sprite = knifeMary;
+            RequestMary(knifeMary);
             // Capture all boundaries together; Inspector edits apply to the next attack.
-            knifeBAt = now + knifeASeconds;
-            knifeCAt = knifeBAt + knifeBSeconds;
-            knifeDeadline = now + knifeFailureSeconds;
+            float gap = Mathf.Max(0f, maryBlackoutSeconds);
+            knifeBAt = now + gap + knifeASeconds;
+            knifeCAt = knifeBAt + gap + knifeBSeconds;
+            knifeDeadline = knifeCAt + gap + knifeCSeconds;
         }
         if (knifeVisible)
-            maryArtwork.sprite = now >= knifeCAt ? knifeMaryC : now >= knifeBAt ? knifeMaryB : knifeMary;
+            RequestMary(now >= knifeCAt ? knifeMaryC : now >= knifeBAt ? knifeMaryB : knifeMary);
         UpdateSyllableFlights();
         if (state != RitualState.Running) return;
         if (now >= nextCallGlitchAt)
@@ -278,6 +286,29 @@ public sealed class Battle02RitualController : MonoBehaviour
         float min = Mathf.Max(.1f, firstKnifeMinSeconds - roundIndex);
         float max = Mathf.Max(min, firstKnifeMaxSeconds - roundIndex);
         nextKnifeAt = Time.unscaledTimeAsDouble + UnityEngine.Random.Range(min, max);
+    }
+
+    void RequestMary(Sprite sprite)
+    {
+        if (requestedMary == sprite) return;
+        if (maryTransition != null) StopCoroutine(maryTransition);
+        maryTransition = StartCoroutine(ChangeMary(sprite));
+    }
+
+    IEnumerator ChangeMary(Sprite sprite)
+    {
+        requestedMary = sprite;
+        maryArtwork.enabled = false;
+        if (maryBlackoutSeconds > 0f)
+            yield return new WaitForSecondsRealtime(maryBlackoutSeconds);
+        maryArtwork.sprite = sprite;
+        maryArtwork.enabled = true;
+        maryTransition = null;
+    }
+
+    public IEnumerator ShowAttackSuccess()
+    {
+        yield return ChangeMary(attackSuccessMary);
     }
 
     void ScheduleWordGlitch()
@@ -344,7 +375,7 @@ public sealed class Battle02RitualController : MonoBehaviour
     /// <summary>메신저 창은 통화 화면 앞에 열고, 닫아도 현재 선택 단어를 유지한다.</summary>
     public void ToggleDarkMessenger()
     {
-        if (state != RitualState.Running || gameOver.IsBlocking || HangupLocked) return;
+        if (state != RitualState.Running || gameOver.IsBlocking) return;
         if (darkMessengerWindow.activeSelf) { CloseDarkMessenger(); return; }
         foreach (var round in rounds) round.root.SetActive(false);
         rounds[roundIndex].root.SetActive(true);
@@ -367,7 +398,7 @@ public sealed class Battle02RitualController : MonoBehaviour
 
     public void SelectWord(Battle02WordSource source)
     {
-        if (state != RitualState.Running || HangupLocked || !darkMessengerWindow.activeSelf ||
+        if (state != RitualState.Running || !darkMessengerWindow.activeSelf ||
             selected.Count >= Answer.Length ||
             !source || source.IsConsumed ||
             Array.IndexOf(rounds[roundIndex].words, source) < 0) return;
@@ -395,7 +426,7 @@ public sealed class Battle02RitualController : MonoBehaviour
 
     void RemoveSelectedWord(int index)
     {
-        if (state != RitualState.Running || HangupLocked || HasFlyingSyllables ||
+        if (state != RitualState.Running || HasFlyingSyllables ||
             index < 0 || index >= selected.Count) return;
         selected[index].SetConsumed(false);
         selected.RemoveAt(index);
@@ -418,7 +449,7 @@ public sealed class Battle02RitualController : MonoBehaviour
             selectedWordLabels[i].text = filled ? selected[i].word : string.Empty;
             if (!flying[i])
                 selectedWordLabels[i].color = filled && selected[i].word != Answer[i] ? WrongColor : CorrectColor;
-            selectedWordButtons[i].interactable = filled && !HasFlyingSyllables && !HangupLocked;
+            selectedWordButtons[i].interactable = filled && !HasFlyingSyllables;
             selectedWordLabels[i].raycastTarget = selectedWordButtons[i].interactable;
         }
     }
@@ -442,7 +473,7 @@ public sealed class Battle02RitualController : MonoBehaviour
             label.rectTransform.localPosition = slotPositions[i];
         }
         RefreshSelection();
-        if (!HasFlyingSyllables && !HangupLocked && selected.Count == Answer.Length && MatchesAnswer())
+        if (!HasFlyingSyllables && selected.Count == Answer.Length && MatchesAnswer())
             CompleteRound();
     }
 
@@ -487,7 +518,7 @@ public sealed class Battle02RitualController : MonoBehaviour
         if (knifeVisible)
         {
             knifeVisible = false;
-            maryArtwork.sprite = normalMary;
+            RequestMary(normalMary);
             ScheduleKnife();
         }
         else
@@ -498,9 +529,7 @@ public sealed class Battle02RitualController : MonoBehaviour
             brokenWindow.gameObject.SetActive(true);
             if (HangupLocked)
             {
-                // Keep the attack clock running; ritual completion cannot bypass the final penalty.
-                CloseDarkMessenger();
-                roundWordsGroup.interactable = false;
+                // Only hangup stays locked; messenger interaction and sentence completion continue.
                 return;
             }
         }
@@ -587,6 +616,7 @@ public sealed class Battle02RitualController : MonoBehaviour
     {
         state = RitualState.Transition;
         StopAllCoroutines();
+        maryTransition = null;
         wordGlitchRoutine = null;
         HideWordGlitches();
         maryGlitch.gameObject.SetActive(false);
@@ -594,14 +624,13 @@ public sealed class Battle02RitualController : MonoBehaviour
         maryArtwork.rectTransform.anchoredPosition = maryPosition;
         maryArtwork.color = maryColor;
         knifeVisible = false;
-        maryArtwork.sprite = normalMary;
         CloseDarkMessenger();
         StartCoroutine(PainThenContinue());
     }
 
     IEnumerator PainThenContinue()
     {
-        // 전용 고통 스프라이트가 추가되기 전까지 기존 메리 이미지에 짧은 흔들림을 준다.
+        yield return ChangeMary(hurtMary);
         for (float elapsed = 0f; elapsed < painSeconds; elapsed += Time.unscaledDeltaTime)
         {
             maryArtwork.rectTransform.anchoredPosition =
@@ -612,6 +641,7 @@ public sealed class Battle02RitualController : MonoBehaviour
         }
         maryArtwork.rectTransform.anchoredPosition = maryPosition;
         maryArtwork.color = maryColor;
+        yield return ChangeMary(normalMary);
         if (roundIndex == rounds.Length - 1)
         {
             state = RitualState.Completed;
@@ -625,7 +655,7 @@ public sealed class Battle02RitualController : MonoBehaviour
         ClearSelection();
         roundIndex++;
         state = RitualState.Running;
-        hangupButton.interactable = true;
+        hangupButton.interactable = !HangupLocked;
         ScheduleKnife();
     }
 
@@ -634,6 +664,7 @@ public sealed class Battle02RitualController : MonoBehaviour
         if (state != RitualState.Running) return;
         state = RitualState.Failed;
         StopAllCoroutines();
+        maryTransition = null;
         wordGlitchRoutine = null;
         HideWordGlitches();
         maryGlitch.gameObject.SetActive(false);

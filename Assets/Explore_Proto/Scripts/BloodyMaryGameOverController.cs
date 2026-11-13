@@ -105,6 +105,7 @@ public sealed class BloodyMaryGameOverController : MonoBehaviour
     {
         if (handAnimation)
         {
+            if (battle02 && battle02.HasStarted) yield return battle02.ShowAttackSuccess();
             State = GameOverState.Hands;
             yield return handAnimation.PlayOnce();
         }

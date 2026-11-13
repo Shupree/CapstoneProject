@@ -18553,7 +18553,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1831498093258001608, guid: bf438533357e0bf4790261b13acf6739, type: 3}
+  m_Sprite: {fileID: -6832447353021989651, guid: db5ba271302bf1c41815b38e2fb22360, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -40863,6 +40863,7 @@ MonoBehaviour:
   ambienceSource: {fileID: 952980686}
   ambienceClip: {fileID: 8300000, guid: ba558eba3c5f1e84786f08772bddd063, type: 3}
   bellClip: {fileID: 8300000, guid: 908a800d295fc494bafeeb54e23afcab, type: 3}
+  battle02CameraNoiseClip: {fileID: 8300000, guid: abd20835b23c8ba4b8d480ab1a47b471, type: 3}
   appearanceClip: {fileID: 8300000, guid: 61cf196cccb7be84ab9f293a74d32061, type: 3}
   maryVoiceClip: {fileID: 0}
   babyCryClip: {fileID: 8300000, guid: f01c3bf381bfc9e4298ce474170a2d46, type: 3}
@@ -41538,13 +41539,16 @@ MonoBehaviour:
   callWindow: {fileID: 53786316}
   introRoot: {fileID: 862683958}
   maryArtwork: {fileID: 497897265}
-  normalMary: {fileID: -1831498093258001608, guid: bf438533357e0bf4790261b13acf6739, type: 3}
-  knifeMary: {fileID: -3210381629752208212, guid: bf438533357e0bf4790261b13acf6739, type: 3}
-  knifeMaryB: {fileID: -6510623983408383649, guid: bf438533357e0bf4790261b13acf6739, type: 3}
-  knifeMaryC: {fileID: -2182764944219596124, guid: bf438533357e0bf4790261b13acf6739, type: 3}
-  knifeASeconds: 1.6
-  knifeBSeconds: 1.2
-  knifeCSeconds: 1.2
+  normalMary: {fileID: -6832447353021989651, guid: db5ba271302bf1c41815b38e2fb22360, type: 3}
+  knifeMary: {fileID: 5582901765728673741, guid: db5ba271302bf1c41815b38e2fb22360, type: 3}
+  knifeMaryB: {fileID: 4565794569651622307, guid: db5ba271302bf1c41815b38e2fb22360, type: 3}
+  knifeMaryC: {fileID: -6918054562168588509, guid: db5ba271302bf1c41815b38e2fb22360, type: 3}
+  attackSuccessMary: {fileID: 3112922446138868291, guid: db5ba271302bf1c41815b38e2fb22360, type: 3}
+  hurtMary: {fileID: -367844171443137960, guid: db5ba271302bf1c41815b38e2fb22360, type: 3}
+  maryBlackoutSeconds: 0.3
+  knifeASeconds: 1.8
+  knifeBSeconds: 1.4
+  knifeCSeconds: 1.4
   maryGlitch: {fileID: 1549259835}
   noiseSource: {fileID: 952980693}
   noiseClip: {fileID: 8300000, guid: 83250179ec6d98649aedd6b2dd855ec7, type: 3}
@@ -41742,7 +41746,7 @@ MonoBehaviour:
     - {fileID: 316324235}
     - {fileID: 2086113911}
     - {fileID: 231622243}
-  syllableMoveSeconds: 0.3
+  syllableMoveSeconds: 0.2
   syllableMoveArc: 40
   brokenWindow: {fileID: 506006896}
   brokenWindowStages:
@@ -41772,7 +41776,6 @@ MonoBehaviour:
   wordGlitchMaxSeconds: 4
   wordGlitchSeconds: 0.5
   hangupCooldownSeconds: 0.5
-  hangupMessengerPosition: {x: 0, y: -700}
   painSeconds: 0.85
 --- !u!82 &952980693
 AudioSource:
@@ -77920,7 +77923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.045, g: 0.045, b: 0.055, a: 1}
+  m_Color: {r: 0.045, g: 0.045, b: 0.055, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
