@@ -10730,6 +10730,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 227c3a3b727046e4cbbe086082bc7991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BloodyMaryCallCard
+--- !u!1 &414752984
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 414752986}
+  - component: {fileID: 414752985}
+  m_Layer: 0
+  m_Name: GameCursor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &414752985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414752984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3336d6b9ef93936408ff856849b04f94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameCursorController
+  defaultCursor: {fileID: 2800000, guid: 62840ae48ec3fc7489cc0e74425cbadf, type: 3}
+  pointerCursor: {fileID: 2800000, guid: 6b1f9a6816d829e45b075b9c2e2ed029, type: 3}
+  defaultHotspot: {x: 5, y: 0}
+  pointerHotspot: {x: 6, y: 0}
+--- !u!4 &414752986
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414752984}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &417901378
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26007,6 +26055,7 @@ MonoBehaviour:
   - {fileID: 1746687197}
   - {fileID: 1427496654}
   - {fileID: 337730593}
+  handAnimation: {fileID: 0}
   retryButton: {fileID: 1114024678}
   exitButton: {fileID: 769492256}
   handsAudio: {fileID: 924984688}
@@ -26081,6 +26130,7 @@ MonoBehaviour:
   ambienceSource: {fileID: 952980686}
   ambienceClip: {fileID: 8300000, guid: ba558eba3c5f1e84786f08772bddd063, type: 3}
   bellClip: {fileID: 8300000, guid: 908a800d295fc494bafeeb54e23afcab, type: 3}
+  battle02CameraNoiseClip: {fileID: 0}
   appearanceClip: {fileID: 8300000, guid: 61cf196cccb7be84ab9f293a74d32061, type: 3}
   maryVoiceClip: {fileID: 8300000, guid: 225a70812d7ae9848beb613e63dbc18b, type: 3}
   babyCryClip: {fileID: 8300000, guid: f01c3bf381bfc9e4298ce474170a2d46, type: 3}
@@ -61525,3 +61575,4 @@ SceneRoots:
   - {fileID: 952980674}
   - {fileID: 617824235}
   - {fileID: 430726186}
+  - {fileID: 414752986}

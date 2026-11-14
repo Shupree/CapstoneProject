@@ -37,6 +37,8 @@
 
 ## 필요한 작업에서만 읽을 문서
 
+- 게임 커서: 각 씬의 `GameCursor`에 기본 화살표·상호작용 손가락 이미지를 연결한다. 일반 버튼에는 손가락 커서, 클릭 가능한 텍스트·음절에는 기본 커서를 사용한다. [커서 편집 안내](../Assets/Scripts/HowToUseScripts/GAME_CURSOR_USAGE.md).
+
 - 배경 대화·이미지 추가: [Conversation 씬 사용 안내](../Assets/Scripts/HowToUseScripts/CONVERSATION_SCENE_USAGE.md). 배경별 대사 묶음을 클릭으로 진행하고 마지막에는 탐색 씬으로 이동한다.
 - 배틀 봉인 연출·시간·배치: [봉인 연출 사용 안내](../Assets/Scripts/HowToUseScripts/BATTLE_SEALING_USAGE.md).
 
