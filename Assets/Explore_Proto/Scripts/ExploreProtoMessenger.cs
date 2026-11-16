@@ -1,5 +1,8 @@
 using System;
 using System.Text;
+using System.Collections.Generic;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -188,8 +191,34 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         }
     }
 
+    private readonly HashSet<Transform> focusWindows = new HashSet<Transform>();
+    private readonly List<RaycastResult> pointerHits = new List<RaycastResult>();
+
+    private void Update()
+    {
+        var mouse = Mouse.current;
+        if (focusWindows.Count == 0 || mouse == null || !mouse.leftButton.wasPressedThisFrame) return;
+        var events = EventSystem.current;
+        if (!events) return;
+
+        var pointer = new PointerEventData(events) { position = mouse.position.ReadValue() };
+        events.RaycastAll(pointer, pointerHits);
+        if (pointerHits.Count == 0) return;
+        for (var target = pointerHits[0].gameObject.transform; target; target = target.parent)
+        {
+            if (!focusWindows.Contains(target)) continue;
+            target.SetAsLastSibling();
+            break;
+        }
+    }
+
     private void Awake()
     {
+        if (gameObject.scene.name == "Explore_Proto")
+        {
+            foreach (var drag in messengerWindow.GetComponentInParent<Canvas>(true).GetComponentsInChildren<ExploreProtoWindowDrag>(true))
+                if (drag.window) focusWindows.Add(drag.window);
+        }
         if (callBottomDialogue) callBottomDialogue.DialogueCompleted += OnEmbeddedCallCompleted;
         if (callBottomDialogue) callBottomDialogue.LineShown += OnEmbeddedCallLine;
         var callDataReady = LoadCallLinesFromCsv();
@@ -234,7 +263,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         if (transcriptTitleCloseButton) transcriptTitleCloseButton.onClick.AddListener(CloseTranscript);
         addKeywordButton.onClick.AddListener(AddBloodyMaryKeyword);
         keywordFieldButton.onClick.AddListener(ToggleKeywordPopup);
-        if (searchInput)
+        if (searchInput && !GetComponent<ExploreLinkCase>())
         {
             searchInput.onValueChanged.AddListener(OnSearchInputChanged);
             searchInput.onSubmit.AddListener(OnSearchSubmitted);
@@ -352,7 +381,8 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     }
     public void ToggleInternet()
     {
-        if (IsBloodyMaryPhase) bloodyMaryPhase.ToggleInternet();
+        if (GetComponent<ExploreLinkCase>()) ToggleWindow(internetWindow);
+        else if (IsBloodyMaryPhase) bloodyMaryPhase.ToggleInternet();
         else
         {
             if (browserNavigation && internetWindow.activeSelf) browserNavigation.RememberCurrentPage();

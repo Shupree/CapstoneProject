@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-/// <summary>Uses the foremost UI hit to choose a native cursor without creating UI.</summary>
+/// <summary>Draws the cursor in game coordinates and uses the foremost UI hit to select its texture.</summary>
 [DisallowMultipleComponent]
 public sealed class GameCursorController : MonoBehaviour
 {
@@ -19,9 +19,12 @@ public sealed class GameCursorController : MonoBehaviour
     PointerEventData pointer;
     Texture2D appliedTexture;
     Vector2 appliedHotspot;
+    [Tooltip("최대화한 Game 뷰에서 게임 영역의 기준 높이(화면 픽셀)")]
+    [Min(1f)] public float referenceHeight = 835f;
     bool applied;
+    bool previousVisibility;
 
-    void OnEnable() => Apply(false);
+
 
     void LateUpdate()
     {
@@ -80,17 +83,34 @@ public sealed class GameCursorController : MonoBehaviour
     {
         var texture = showPointer && pointerCursor ? pointerCursor : defaultCursor;
         var hotspot = showPointer && pointerCursor ? pointerHotspot : defaultHotspot;
-        if (applied && appliedTexture == texture && appliedHotspot == hotspot) return;
-        Cursor.SetCursor(texture, hotspot, CursorMode.Auto);
+        if (!texture)
+        {
+            RestoreCursor();
+            return;
+        }
+        if (!applied) previousVisibility = Cursor.visible;
+        Cursor.visible = false;
         appliedTexture = texture;
         appliedHotspot = hotspot;
         applied = true;
     }
 
+    void OnGUI()
+    {
+        if (!applied || Event.current.type != EventType.Repaint || Mouse.current == null) return;
+        Vector2 point = Mouse.current.position.ReadValue();
+        float scale = 2f * Screen.height / Mathf.Max(1f, referenceHeight);
+        var rect = new Rect(point.x - appliedHotspot.x * scale,
+            Screen.height - point.y - appliedHotspot.y * scale,
+            appliedTexture.width * scale, appliedTexture.height * scale);
+        GUI.depth = -10000;
+        GUI.DrawTexture(rect, appliedTexture);
+    }
+
     void RestoreCursor()
     {
         if (!applied) return;
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        Cursor.visible = previousVisibility;
         applied = false;
     }
 

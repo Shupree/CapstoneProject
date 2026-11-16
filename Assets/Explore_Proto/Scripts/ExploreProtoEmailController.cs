@@ -61,5 +61,6 @@ public sealed class ExploreProtoEmailController : MonoBehaviour
         addContactButton.interactable = false;
         addContactLabel.text = "메신저에 추가됨";
         messenger.SetContactRegistered(true);
+        if (messenger.GetComponent<ExploreLinkCase>()) messenger.ShowMessenger();
     }
 }
