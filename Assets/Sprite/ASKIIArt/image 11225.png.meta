@@ -1,0 +1,784 @@
+fileFormatVersion: 2
+guid: 11f5890af9d24f24f97e1ecb32061005
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6798644511172485550
+    second: image 11225_0
+  - first:
+      213: -4114048589542915509
+    second: image 11225_1
+  - first:
+      213: 4272721212168060446
+    second: image 11225_2
+  - first:
+      213: -6865059988412529092
+    second: image 11225_3
+  - first:
+      213: -3439380942896166734
+    second: image 11225_4
+  - first:
+      213: -4426805746568316885
+    second: image 11225_5
+  - first:
+      213: -7392653379132816488
+    second: image 11225_6
+  - first:
+      213: -7449036635632323962
+    second: image 11225_7
+  - first:
+      213: -3723023483339925239
+    second: image 11225_8
+  - first:
+      213: 5738833270444351576
+    second: image 11225_9
+  - first:
+      213: 3472737061165465329
+    second: image 11225_10
+  - first:
+      213: -9061912242644531589
+    second: image 11225_11
+  - first:
+      213: 4934888419996056109
+    second: image 11225_12
+  - first:
+      213: -4622424307617098636
+    second: image 11225_13
+  - first:
+      213: 6743138418218081007
+    second: image 11225_14
+  - first:
+      213: 3468708582513213842
+    second: image 11225_15
+  - first:
+      213: -5313864707774707826
+    second: image 11225_16
+  - first:
+      213: -5277115788718890738
+    second: image 11225_17
+  - first:
+      213: -8207531270233221646
+    second: image 11225_18
+  - first:
+      213: -376608093532842750
+    second: image 11225_19
+  - first:
+      213: -2070793982896773459
+    second: image 11225_20
+  - first:
+      213: -2639541159517583836
+    second: image 11225_21
+  - first:
+      213: -4012807648087654853
+    second: image 11225_22
+  - first:
+      213: 4243953096256088861
+    second: image 11225_23
+  - first:
+      213: -346163990282464150
+    second: image 11225_24
+  - first:
+      213: -7774615829976179798
+    second: image 11225_25
+  - first:
+      213: 4280412708262924905
+    second: image 11225_26
+  - first:
+      213: 7324128689319739927
+    second: image 11225_27
+  - first:
+      213: 3205077088380439132
+    second: image 11225_28
+  - first:
+      213: 8648116281461521382
+    second: image 11225_29
+  - first:
+      213: 678342144914664896
+    second: image 11225_30
+  - first:
+      213: -6798583385638007952
+    second: image 11225_31
+  - first:
+      213: 5772173951039866082
+    second: image 11225_32
+  - first:
+      213: 3833307484282157494
+    second: image 11225_33
+  - first:
+      213: 3338337059921482207
+    second: image 11225_34
+  - first:
+      213: 2045145793462512672
+    second: image 11225_35
+  - first:
+      213: -1133885849283453357
+    second: image 11225_36
+  - first:
+      213: -2704238345496541464
+    second: image 11225_37
+  - first:
+      213: -6046286160799703999
+    second: image 11225_38
+  - first:
+      213: 524796253983402371
+    second: image 11225_39
+  - first:
+      213: 6972368470051181816
+    second: image 11225_40
+  - first:
+      213: 7250417791428964741
+    second: image 11225_41
+  - first:
+      213: -3383077193832960686
+    second: image 11225_42
+  - first:
+      213: -1547642170010385904
+    second: image 11225_43
+  - first:
+      213: -6797975662097098499
+    second: image 11225_44
+  - first:
+      213: -7423030402280816794
+    second: image 11225_45
+  - first:
+      213: -3167976712642175845
+    second: image 11225_46
+  - first:
+      213: 3084622807216649078
+    second: image 11225_47
+  - first:
+      213: 5414759440019656940
+    second: image 11225_48
+  - first:
+      213: -4239918620928136688
+    second: image 11225_49
+  - first:
+      213: 4864362484452259041
+    second: image 11225_50
+  - first:
+      213: 5101188093178388529
+    second: image 11225_51
+  - first:
+      213: -1945357636358646108
+    second: image 11225_52
+  - first:
+      213: 4984269510324696700
+    second: image 11225_53
+  - first:
+      213: 8618334449768323516
+    second: image 11225_54
+  - first:
+      213: 8718151729881351251
+    second: image 11225_55
+  - first:
+      213: -7130171639646481971
+    second: image 11225_56
+  - first:
+      213: 8881164242518667189
+    second: image 11225_57
+  - first:
+      213: 6603937453912842175
+    second: image 11225_58
+  - first:
+      213: 7082445199063805124
+    second: image 11225_59
+  - first:
+      213: 4395690882591556335
+    second: image 11225_60
+  - first:
+      213: 3186553321566798532
+    second: image 11225_61
+  - first:
+      213: 7549440365738345920
+    second: image 11225_62
+  - first:
+      213: 903351285751415870
+    second: image 11225_63
+  - first:
+      213: -6204826916180773862
+    second: image 11225_64
+  - first:
+      213: -5327932675685604832
+    second: image 11225_65
+  - first:
+      213: -1967071048466863444
+    second: image 11225_66
+  - first:
+      213: 5625888335902684843
+    second: image 11225_67
+  - first:
+      213: 722306065905641221
+    second: image 11225_68
+  - first:
+      213: -7333881238332098243
+    second: image 11225_69
+  - first:
+      213: 2176674971845463889
+    second: image 11225_70
+  - first:
+      213: 8585828288849237425
+    second: image 11225_71
+  - first:
+      213: 2083104414949139000
+    second: image 11225_72
+  - first:
+      213: 1917214119391441195
+    second: image 11225_73
+  - first:
+      213: -3495592922966717714
+    second: image 11225_74
+  - first:
+      213: -129503078148027701
+    second: image 11225_75
+  - first:
+      213: -4641306191957085957
+    second: image 11225_76
+  - first:
+      213: 2640815174210032982
+    second: image 11225_77
+  - first:
+      213: 2427180286355906106
+    second: image 11225_78
+  - first:
+      213: 5473061851825332765
+    second: image 11225_79
+  - first:
+      213: 6969594914413331296
+    second: image 11225_80
+  - first:
+      213: 8118931800557446559
+    second: image 11225_81
+  - first:
+      213: -4010160970321618083
+    second: image 11225_82
+  - first:
+      213: -7816728309915718414
+    second: image 11225_83
+  - first:
+      213: 6602103037338121331
+    second: image 11225_84
+  - first:
+      213: -4084690759862875894
+    second: image 11225_85
+  - first:
+      213: 2417908415161403151
+    second: image 11225_86
+  - first:
+      213: 4973063424859887445
+    second: image 11225_87
+  - first:
+      213: 1806046731547420635
+    second: image 11225_88
+  - first:
+      213: -8280743322555053270
+    second: image 11225_89
+  - first:
+      213: -604192507937762117
+    second: image 11225_90
+  - first:
+      213: 7169761640957718344
+    second: image 11225_91
+  - first:
+      213: 5268982504270665022
+    second: image 11225_92
+  - first:
+      213: 6961868064428824768
+    second: image 11225_93
+  - first:
+      213: 7922843792043371176
+    second: image 11225_94
+  - first:
+      213: 74960333669045680
+    second: image 11225_95
+  - first:
+      213: -5625161994554804566
+    second: image 11225_96
+  - first:
+      213: 4075534852750144369
+    second: image 11225_97
+  - first:
+      213: -486686745774559961
+    second: image 11225_98
+  - first:
+      213: 5166600082567126565
+    second: image 11225_99
+  - first:
+      213: 4497267586286605461
+    second: image 11225_100
+  - first:
+      213: -7856645765382965673
+    second: image 11225_101
+  - first:
+      213: -8460221824009471952
+    second: image 11225_102
+  - first:
+      213: -4110934430104139533
+    second: image 11225_103
+  - first:
+      213: 1664197191495157561
+    second: image 11225_104
+  - first:
+      213: 9156940888875907947
+    second: image 11225_105
+  - first:
+      213: 8175293389857453922
+    second: image 11225_106
+  - first:
+      213: 8046455803926837385
+    second: image 11225_107
+  - first:
+      213: 286751068638631731
+    second: image 11225_108
+  - first:
+      213: -668607814822635952
+    second: image 11225_109
+  - first:
+      213: -528135437011007101
+    second: image 11225_110
+  - first:
+      213: -5577273429395400231
+    second: image 11225_111
+  - first:
+      213: 6080108792171398578
+    second: image 11225_112
+  - first:
+      213: -4916497847686569505
+    second: image 11225_113
+  - first:
+      213: -7247675676026848106
+    second: image 11225_114
+  - first:
+      213: -3043587463456819343
+    second: image 11225_115
+  - first:
+      213: 1579709941930470202
+    second: image 11225_116
+  - first:
+      213: 7268461482045388758
+    second: image 11225_117
+  - first:
+      213: 4291072613622010191
+    second: image 11225_118
+  - first:
+      213: 3881726500463508447
+    second: image 11225_119
+  - first:
+      213: -1504333900024812068
+    second: image 11225_120
+  - first:
+      213: -4536621779974254283
+    second: image 11225_121
+  - first:
+      213: 6932244204644295935
+    second: image 11225_122
+  - first:
+      213: 4552133881809498316
+    second: image 11225_123
+  - first:
+      213: 7660286919935893173
+    second: image 11225_124
+  - first:
+      213: 4848908070552061847
+    second: image 11225_125
+  - first:
+      213: 5751433635728994839
+    second: image 11225_126
+  - first:
+      213: -6634283342979464079
+    second: image 11225_127
+  - first:
+      213: 4747461416034560254
+    second: image 11225_128
+  - first:
+      213: 978205657559037969
+    second: image 11225_129
+  - first:
+      213: -194201752527122702
+    second: image 11225_130
+  - first:
+      213: 4644594969053380906
+    second: image 11225_131
+  - first:
+      213: -4710260370581763724
+    second: image 11225_132
+  - first:
+      213: -3655582927176134035
+    second: image 11225_133
+  - first:
+      213: 2550646155486102237
+    second: image 11225_134
+  - first:
+      213: 8245978956154624545
+    second: image 11225_135
+  - first:
+      213: -8481651070760760582
+    second: image 11225_136
+  - first:
+      213: 6975146602966659529
+    second: image 11225_137
+  - first:
+      213: -3504631751866911297
+    second: image 11225_138
+  - first:
+      213: 5400181833483082396
+    second: image 11225_139
+  - first:
+      213: -5417839743980131727
+    second: image 11225_140
+  - first:
+      213: -6597527928410194826
+    second: image 11225_141
+  - first:
+      213: 6545240295239651910
+    second: image 11225_142
+  - first:
+      213: 8648732693236403579
+    second: image 11225_143
+  - first:
+      213: -258610064875207579
+    second: image 11225_144
+  - first:
+      213: 1606506441573871471
+    second: image 11225_145
+  - first:
+      213: 212066961078623438
+    second: image 11225_146
+  - first:
+      213: 6396496080312683193
+    second: image 11225_147
+  - first:
+      213: 7151437223634494684
+    second: image 11225_148
+  - first:
+      213: -4230276097810205334
+    second: image 11225_149
+  - first:
+      213: -8066082460746715720
+    second: image 11225_150
+  - first:
+      213: 6434339991994983916
+    second: image 11225_151
+  - first:
+      213: 3079186504843892457
+    second: image 11225_152
+  - first:
+      213: 6417173888235555302
+    second: image 11225_153
+  - first:
+      213: -3494999409214475529
+    second: image 11225_154
+  - first:
+      213: 1195050815773621011
+    second: image 11225_155
+  - first:
+      213: 3567516554038538939
+    second: image 11225_156
+  - first:
+      213: 6488557209490898530
+    second: image 11225_157
+  - first:
+      213: -4037463662623446016
+    second: image 11225_158
+  - first:
+      213: -4509882734328035213
+    second: image 11225_159
+  - first:
+      213: -1380075793985326104
+    second: image 11225_160
+  - first:
+      213: -1754710781982942022
+    second: image 11225_161
+  - first:
+      213: -2056584170630856192
+    second: image 11225_162
+  - first:
+      213: -3031704625409292167
+    second: image 11225_163
+  - first:
+      213: 5419251660695488649
+    second: image 11225_164
+  - first:
+      213: -1117099194541176403
+    second: image 11225_165
+  - first:
+      213: 3418117501481988321
+    second: image 11225_166
+  - first:
+      213: -1339489177970501981
+    second: image 11225_167
+  - first:
+      213: 5738752220746635548
+    second: image 11225_168
+  - first:
+      213: -4822381817538155058
+    second: image 11225_169
+  - first:
+      213: -7333932918151379096
+    second: image 11225_170
+  - first:
+      213: 6039947337848992856
+    second: image 11225_171
+  - first:
+      213: -3889704519576992811
+    second: image 11225_172
+  - first:
+      213: -6982354336900693039
+    second: image 11225_173
+  - first:
+      213: -6000898941979910072
+    second: image 11225_174
+  - first:
+      213: 4961996125503990269
+    second: image 11225_175
+  - first:
+      213: -2238716934855529415
+    second: image 11225_176
+  - first:
+      213: 2226429689461505301
+    second: image 11225_177
+  - first:
+      213: -7954544881457511401
+    second: image 11225_178
+  - first:
+      213: -6851638075590219750
+    second: image 11225_179
+  - first:
+      213: -6379779032851032207
+    second: image 11225_180
+  - first:
+      213: -150945451874132083
+    second: image 11225_181
+  - first:
+      213: 1703338542872569353
+    second: image 11225_182
+  - first:
+      213: -7197404033155108681
+    second: image 11225_183
+  - first:
+      213: 37139245817739842
+    second: image 11225_184
+  - first:
+      213: 2379149359390449099
+    second: image 11225_185
+  - first:
+      213: 3491361917540046978
+    second: image 11225_186
+  - first:
+      213: 1439205805301807945
+    second: image 11225_187
+  - first:
+      213: 5808414967322819504
+    second: image 11225_188
+  - first:
+      213: -859317570935153459
+    second: image 11225_189
+  - first:
+      213: 6123157475444778433
+    second: image 11225_190
+  - first:
+      213: 6753373726748295943
+    second: image 11225_191
+  - first:
+      213: -12979910826006850
+    second: image 11225_192
+  - first:
+      213: 942191819143565977
+    second: image 11225_193
+  - first:
+      213: -584576945363403195
+    second: image 11225_194
+  - first:
+      213: 6472915704118964669
+    second: image 11225_195
+  - first:
+      213: 1162694674163188261
+    second: image 11225_196
+  - first:
+      213: 5266528605763384744
+    second: image 11225_197
+  - first:
+      213: -6518298348407662692
+    second: image 11225_198
+  - first:
+      213: 1213454604556229607
+    second: image 11225_199
+  - first:
+      213: -3141025408841922007
+    second: image 11225_200
+  - first:
+      213: -5935244189490430857
+    second: image 11225_201
+  - first:
+      213: 255652692610475278
+    second: image 11225_202
+  - first:
+      213: -1288852836921346700
+    second: image 11225_203
+  - first:
+      213: 2540090983652317371
+    second: image 11225_204
+  - first:
+      213: -8713436152091191763
+    second: image 11225_205
+  - first:
+      213: 5388329961516051287
+    second: image 11225_206
+  - first:
+      213: -2525435991513358366
+    second: image 11225_207
+  - first:
+      213: -6807810284674344868
+    second: image 11225_208
+  - first:
+      213: 521307491225812933
+    second: image 11225_209
+  - first:
+      213: -5156098428329399741
+    second: image 11225_210
+  - first:
+      213: 6754968120860186720
+    second: image 11225_211
+  - first:
+      213: -4395645655814517249
+    second: image 11225_212
+  - first:
+      213: -2873917096332729826
+    second: image 11225_213
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: image 11225_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1024
+        height: 1536
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25e976d76dc56a1a0800000000000000
+      internalID: -6798644511172485550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: c74d9cd0edfaf774c8ed8ff9140b3209
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":1024.0,"y":1536.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      image 11225_0: -6798644511172485550
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
