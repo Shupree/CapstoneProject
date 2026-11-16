@@ -161,8 +161,8 @@ public sealed class ExploreLinkCase : MonoBehaviour
     {
         string url = history[position];
         if (address) address.SetTextWithoutNotify(url);
-        toolbar.text = (position > 0 ? Link("back","←") : "←") + "   " +
-            (position + 1 < history.Count ? Link("forward","→") : "→") + "   " + Link("browser.local","홈");
+        toolbar.text = (position > 0 ? Link("back","←") : "←") + " " +
+            (position + 1 < history.Count ? Link("forward","→") : "→") + " " + Link("browser.local","홈");
         RenderConversation();
         string key = confessed && url == "bloody687.org" ? "bloody687.org/expired" : url;
         pages.TryGetValue(key, out var body);
