@@ -36,6 +36,11 @@ public sealed class ExploreBrowserNavigation : MonoBehaviour
 
     void Awake()
     {
+        if (messenger && messenger.GetComponent<ExploreLinkCase>())
+        {
+            enabled = false;
+            return;
+        }
         home.button.onClick.AddListener(GoHome);
         back.button.onClick.AddListener(GoBack);
         forward.button.onClick.AddListener(GoForward);
@@ -43,9 +48,9 @@ public sealed class ExploreBrowserNavigation : MonoBehaviour
     void Start() { EnsureHistory(); RefreshControls(); }
     void OnDestroy()
     {
-        home.button.onClick.RemoveListener(GoHome);
-        back.button.onClick.RemoveListener(GoBack);
-        forward.button.onClick.RemoveListener(GoForward);
+        if (home?.button) home.button.onClick.RemoveListener(GoHome);
+        if (back?.button) back.button.onClick.RemoveListener(GoBack);
+        if (forward?.button) forward.button.onClick.RemoveListener(GoForward);
     }
     void EnsureHistory()
     {

@@ -89,6 +89,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     private int lineIndex;
     private bool callCompleted, bloodyMaryStored, bloodyMarySelected;
     private bool contactRegistered;
+    private bool usesLinkBrowser;
     private int currentSiteIndex = -1;
     private const string FirstCallSceneId = "Explore_FirstCall";
     public bool HasBloodyMaryKeyword => bloodyMaryStored;
@@ -102,25 +103,27 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         {
             clueIds = investigation.CollectedClueIds,
             keywordSelected = bloodyMarySelected,
-            searchQuery = searchInput ? searchInput.text : searchKeywordText.text,
+            searchQuery = usesLinkBrowser ? null : searchInput ? searchInput.text : searchKeywordText.text,
             playerMemoText = playerMemoInput ? playerMemoInput.text : null,
             playerMemoEditing = playerMemoEditing,
-            resultsVisible = searchResults.activeSelf,
-            detailVisible = siteDetailPanel.activeSelf,
+            resultsVisible = !usesLinkBrowser && searchResults.activeSelf,
+            detailVisible = !usesLinkBrowser && siteDetailPanel.activeSelf,
             siteIndex = currentSiteIndex,
-            searchHint = searchHint.text,
+            searchHint = usesLinkBrowser ? null : searchHint.text,
             windows = ExploreProtoSceneTransfer.CaptureWindows(DesktopWindows),
             scrolls = ExploreProtoSceneTransfer.CaptureScrolls(DesktopScrolls)
         };
     }
 
-    internal GameObject[] DesktopWindows => new[]
+    internal GameObject[] DesktopWindows => usesLinkBrowser
+        ? new[] { messengerWindow, callWindow, transcriptWindow, memoWindow, internetWindow }
+        : new[]
     {
         messengerWindow, callWindow, transcriptWindow, memoWindow, internetWindow, keywordPopup
     };
     internal UnityEngine.UI.ScrollRect[] DesktopScrolls => new[]
     {
-        conversationScroll, transcriptScroll, siteArticleScroll, searchResults.GetComponent<UnityEngine.UI.ScrollRect>()
+        conversationScroll, transcriptScroll, siteArticleScroll, usesLinkBrowser ? null : searchResults.GetComponent<UnityEngine.UI.ScrollRect>()
     };
 
     internal void RestoreCompletedDesktop(ExploreProtoSceneTransfer.DesktopState state)
@@ -214,6 +217,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
 
     private void Awake()
     {
+        usesLinkBrowser = GetComponent<ExploreLinkCase>() != null;
         if (gameObject.scene.name == "Explore_Proto")
         {
             foreach (var drag in messengerWindow.GetComponentInParent<Canvas>(true).GetComponentsInChildren<ExploreProtoWindowDrag>(true))
@@ -227,7 +231,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         {
             foreach (var message in openingMessages) if (message) message.SetActive(false);
             callButton.GetComponentInChildren<TMP_Text>(true).text = "말을 건다.";
-            addKeywordButton.gameObject.SetActive(false);
+            if (addKeywordButton) addKeywordButton.gameObject.SetActive(false);
         }
         if (gameObject.scene.name == "Explore_Proto")
         {
@@ -261,9 +265,10 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         recordingButton.onClick.AddListener(ShowTranscript);
         transcriptCloseButton.onClick.AddListener(CloseTranscript);
         if (transcriptTitleCloseButton) transcriptTitleCloseButton.onClick.AddListener(CloseTranscript);
+        if (usesLinkBrowser) return;
         addKeywordButton.onClick.AddListener(AddBloodyMaryKeyword);
         keywordFieldButton.onClick.AddListener(ToggleKeywordPopup);
-        if (searchInput && !GetComponent<ExploreLinkCase>())
+        if (searchInput)
         {
             searchInput.onValueChanged.AddListener(OnSearchInputChanged);
             searchInput.onSubmit.AddListener(OnSearchSubmitted);
@@ -411,8 +416,9 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
         if (IsBloodyMaryPhase) bloodyMaryPhase.CloseInternet();
         else
         {
-            if (browserNavigation) browserNavigation.RememberCurrentPage();
-            internetWindow.SetActive(false); keywordPopup.SetActive(false);
+            if (!usesLinkBrowser && browserNavigation) browserNavigation.RememberCurrentPage();
+            internetWindow.SetActive(false);
+            if (!usesLinkBrowser) keywordPopup.SetActive(false);
         }
     }
 
@@ -631,6 +637,7 @@ public sealed class ExploreProtoMessenger : MonoBehaviour
     public void AddBloodyMaryKeyword()
     {
         bloodyMaryStored = true;
+        if (usesLinkBrowser) return;
         memoKeyword.text = "블러디 메리";
         memoKeyword.gameObject.SetActive(true);
         var label = addKeywordButton.GetComponentInChildren<TMP_Text>();
