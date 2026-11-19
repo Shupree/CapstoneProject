@@ -1,5 +1,18 @@
 하단 대화창 사용·확장 가이드
-갱신: 2026-10-18
+
+화상통화 텍스트 바 (Explore_Proto / Battle02_Proto)
+- Assets/Prefab/UI/TextBar.prefab이 Assets/Sprite/UI/Text_Bar.aseprite의 Text_Bar_0을 직접 사용한다.
+- 두 씬의 ExploreProtoCanvas > BottomDialogueSystem > VisualRoot > TextBar에 프리팹 인스턴스가 있다.
+- TextBar의 Image에서 배경 색·불투명도를, RectTransform에서 바 높이·위치를 편집한다.
+  기준 Canvas는 3200×1800이며 바 높이 455는 1920×1080에서 약 273px에 해당한다.
+- Name_Bar는 Name_Bar.aseprite를 사용하는 별도 Image이며, 자식 SpeakerName은 이름 칸 중앙에 배치한다. DialogueText는 본문 중앙이다.
+  각각의 RectTransform으로 위치·여백을, TextMeshPro의 Font Size·Alignment로 크기·정렬을 조절한다.
+  자동 글자 크기는 꺼져 있으며 코드는 글자 크기나 위치를 덮어쓰지 않는다.
+- 두 씬에 공통으로 반영하려면 프리팹을 편집한다. 특정 씬만 바꾸려면 해당 인스턴스를 편집한다.
+- 기존 DialogueBar와 NameBar는 비활성으로 보존한다. 표시 참조는 새 이름·대사로 연결되어 있다.
+  이름이 비어 있거나 나레이션인 줄은 Name_Bar 전체(배경과 SpeakerName)를 숨긴다. 다음 화자가 나오면 다시 표시한다.
+- Aseprite 원본을 편집하면 임포트 후 배경에 반영된다. 원본 비율이나 이름 칸 위치를 바꾸면
+  프리팹의 바 높이와 텍스트 앵커·여백도 맞춘다. 대사 진행과 화면 클릭 입력은 기존 연결을 사용한다.
 
 목적
 - 이 문서는 다른 팀원이나 AI가 기존 하단 대화창을 재사용할 때의 연결 방법과 데이터 계약을 설명한다.

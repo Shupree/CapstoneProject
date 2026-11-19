@@ -21,6 +21,7 @@
 | 탐색·통화·씬 연결·배틀 진행 | `Assets/Explore_Proto/Scripts` |
 | CSV 리더 | `Assets/Scripts/DialogueReader/DialogueCsvReader.cs` |
 | 하단 대화창 프리팹 | `Assets/Prefabs/BottomDialogueSystem.prefab` |
+| 탐색·Battle02 화상통화 텍스트 바 | `Assets/Prefab/UI/TextBar.prefab`, `Assets/Sprite/UI/Text_Bar.aseprite` (이름은 좌측 상단, 대사는 중앙) |
 | 화상통화 카드 프리팹 | `Assets/Prefab/BloodyMaryCall` |
 | 기존 민서 의뢰 프로토타입 | `Assets/Scenes/CyberExorcistPrototype.unity`, `Assets/CyberExorcist` |
 

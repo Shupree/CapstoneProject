@@ -43,9 +43,10 @@ public sealed class BottomDialogueView : MonoBehaviour
     {
         if (!IsConfigured) return;
 
-        speakerText.text = speaker ?? string.Empty;
+        bool hasSpeaker = !string.IsNullOrWhiteSpace(speaker) && speaker.Trim() != "나레이션";
+        speakerText.text = hasSpeaker ? speaker : string.Empty;
         dialogueText.text = dialogue ?? string.Empty;
-        nameBar.SetActive(!string.IsNullOrWhiteSpace(speaker));
+        nameBar.SetActive(hasSpeaker);
 
         SetPortrait(leftPortrait, barOnly ? null : leftSprite,
             speakingSide == BottomDialogueSide.Left ? speakingTint : listeningTint);
