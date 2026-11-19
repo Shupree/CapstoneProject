@@ -18,6 +18,13 @@ public sealed class ExploreLinkCase : MonoBehaviour
     public TextAsset pageCatalog;
     readonly Dictionary<string, string> pages = new Dictionary<string, string>();
     readonly HashSet<string> findings = new HashSet<string>();
+    readonly Dictionary<string, SitePageView> authored = new Dictionary<string, SitePageView>();
+    readonly Dictionary<string, string> authoredAddresses = new Dictionary<string, string>();
+
+    public void OpenAuthoredPage(string pageId)
+    {
+        if (authoredAddresses.TryGetValue(pageId, out var url)) Follow(url);
+    }
     string chatThought;
     bool receivedAddress, failed, asked, askedTaboo, confessed;
     string observation;
@@ -89,6 +96,20 @@ public sealed class ExploreLinkCase : MonoBehaviour
         if (postBody && postComments) postBody.overflowMode = postComments.overflowMode = TextOverflowModes.Page;
         article.overflowMode = TextOverflowModes.Page;
         if (address) address.onSubmit.AddListener(Submit);
+        foreach (var view in internet.GetComponentsInChildren<SitePageView>(true))
+        {
+            if (!view.source) continue;
+            view.Bind(this);
+            var page = view.Data;
+            var url = SitePageData.Normalize(page.address);
+            if (pages.ContainsKey(url) || authored.ContainsKey(url) || authoredAddresses.ContainsKey(page.id))
+            {
+                Debug.LogError("사이트 주소 또는 ID 중복: " + url, view);
+                continue;
+            }
+            authored.Add(url, view);
+            authoredAddresses.Add(page.id, url);
+        }
         Render();
     }
 
@@ -106,8 +127,10 @@ public sealed class ExploreLinkCase : MonoBehaviour
         else if (id.StartsWith("inspect/"))
         {
             string key = id.Substring(8);
-            findings.Add(key);
+            bool acquired = findings.Add(key);
             observation = Observation(key);
+            if (authored.ContainsKey(history[position]) && string.IsNullOrEmpty(observation))
+                observation = (acquired ? "단서 획득 · " : "조사한 단서 · ") + key;
         }
         else if (id == "askTaboo") askedTaboo = findings.Contains("taboo");
         else if (id == "confront") confessed = askedTaboo && findings.Contains("question");
@@ -147,11 +170,8 @@ public sealed class ExploreLinkCase : MonoBehaviour
 
     void Submit(string value)
     {
-        string url = value.Trim();
-        foreach (var prefix in new[] { "https://", "http://" })
-            if (url.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)) url = url.Substring(prefix.Length);
+        string url = SitePageData.Normalize(value);
         if (url.Length == 0) return;
-        url = url.TrimEnd('/').ToLowerInvariant();
         // Keep typed addresses separate from toolbar and conversation actions.
         if (!url.Contains(".")) url = url + ".invalid";
         Follow(url);
@@ -169,7 +189,15 @@ public sealed class ExploreLinkCase : MonoBehaviour
         article.pageToDisplay = sheet;
         bool isThread = threads.TryGetValue(key, out var thread) && communityRoot && postTitle && postMeta && postBody && postComments;
         if (communityRoot) communityRoot.SetActive(isThread);
-        article.gameObject.SetActive(!isThread);
+        bool isAuthored = authored.TryGetValue(url, out var selected);
+        foreach (var view in authored.Values)
+            if (view.gameObject.activeSelf != (view == selected)) view.gameObject.SetActive(view == selected);
+        article.gameObject.SetActive(!isThread && !isAuthored);
+        if (isAuthored)
+        {
+            selected.status.text = observation ?? "";
+            return;
+        }
         if (isThread)
         {
             postTitle.text = thread.heading;

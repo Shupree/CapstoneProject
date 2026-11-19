@@ -15,6 +15,7 @@
 | --- | --- |
 | 배경 대화 도입 씬 | `Assets/Scenes/Conversation.unity`, `Assets/Explore_Proto/Scripts/BackgroundConversationController.cs` |
 | 탐색 씬 | `Assets/Scenes/Explore_Proto.unity` |
+| 탐색 브라우저 템플릿·페이지 제작 | `Tools → 사이트 제작`, [페이지 제작 안내](../Assets/Scripts/HowToUseScripts/SITE_AUTHORING.md) |
 | 현재 탐색에서 진입하는 배틀 씬 | `Assets/Scenes/Battle02_Proto.unity` |
 | 기존 배틀 씬 | `Assets/Scenes/Battle_Proto.unity` |
 | 배틀 완료 후 봉인 연출 | `Assets/Explore_Proto/Scripts/BattleSealingController.cs`, 씬의 `BattleSealingRoot` |

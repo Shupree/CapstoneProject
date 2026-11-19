@@ -1,0 +1,31 @@
+{
+    "id": "267dddd27faf4620bfc02e31f60143b4",
+    "address": "dddd.com",
+    "templateId": "ea59773e17ae2174fac4907ea5e331a6:2039461645362857733",
+    "slots": [
+        {
+            "slotId": "476826a2b69b473e843faea4d5cb3dcd",
+            "blocks": [
+                {
+                    "kind": 0,
+                    "text": "asdf",
+                    "assetId": "",
+                    "destinationId": "",
+                    "areas": []
+                }
+            ]
+        },
+        {
+            "slotId": "1086de86ae474da8b72d03ccfeb5c9e0",
+            "blocks": [
+                {
+                    "kind": 0,
+                    "text": "asdf",
+                    "assetId": "",
+                    "destinationId": "",
+                    "areas": []
+                }
+            ]
+        }
+    ]
+}
